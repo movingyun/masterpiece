@@ -1,4 +1,4 @@
-package com.ssafy.db.entity;
+package com.ssafy.hangul.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
-public class BoardLike {
+public class UserLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false,

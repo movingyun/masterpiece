@@ -1,4 +1,4 @@
-package com.ssafy.db.entity;
+package com.ssafy.hangul.db.entity;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;

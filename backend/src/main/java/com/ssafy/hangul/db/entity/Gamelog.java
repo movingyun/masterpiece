@@ -1,10 +1,9 @@
-package com.ssafy.db.entity;
+package com.ssafy.hangul.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 import java.util.Date;
 

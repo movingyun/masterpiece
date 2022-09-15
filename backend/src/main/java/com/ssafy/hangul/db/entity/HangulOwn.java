@@ -1,12 +1,10 @@
-package com.ssafy.db.entity;
+package com.ssafy.hangul.db.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * 자/모음 보유여부 테이블
@@ -19,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
-public class BadgeOwn {
+public class HangulOwn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false,
