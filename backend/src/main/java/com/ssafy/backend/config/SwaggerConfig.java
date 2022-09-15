@@ -1,4 +1,4 @@
-package com.ssafy.hangul.config;
+package com.ssafy.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.ssafy.hangul.db.entity;
+package com.ssafy.backend.db.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;

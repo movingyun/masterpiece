@@ -1,13 +1,13 @@
-package com.ssafy.hangul;
+package com.ssafy.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HangulApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HangulApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.ssafy.hangul.db.entity;
+package com.ssafy.backend.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -28,12 +28,12 @@ public class Nft {
     private Integer id;
 
     @ManyToOne //객체관계 생성 -> 한명의 유저는 여러개의 NFT 제작 가능
-    @JoinColumn(name="createrId")
-    private User user;
+    @JoinColumn(name="creatorId")
+    private User creator;
 
     @ManyToOne //객체관계 생성 -> 한명의 유저는 여러개의 NFT 소유 가능
     @JoinColumn(name="ownerId")
-    private User user;
+    private User owner;
 
     @Column(name = "contractAddress", length = 50)
     private String contractAddress;
