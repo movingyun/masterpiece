@@ -1,4 +1,4 @@
-package com.ssafy.db.entity;
+package com.ssafy.hangul.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

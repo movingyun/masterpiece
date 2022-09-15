@@ -1,5 +1,6 @@
-package com.ssafy.db.entity;
+package com.ssafy.hangul.db.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
