@@ -6,6 +6,9 @@ export default function NFTDetail() {
     <>
       <div>NFTDetail</div>
       <div>
+        <Link to="/nftlist">NFTList</Link>
+      </div>
+      <div>
         <Link to="/">home</Link>
       </div>
     </>

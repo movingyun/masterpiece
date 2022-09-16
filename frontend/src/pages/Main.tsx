@@ -6,6 +6,9 @@ export default function Main() {
     <div>
       <div>Main</div>
       <div>
+        <Link to="/login">login</Link>
+      </div>
+      <div>
         <Link to="/composehangul">create</Link>
       </div>
       <div>

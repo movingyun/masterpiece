@@ -6,6 +6,9 @@ export default function DecorateHangul() {
     <>
       <div>DecorateHangul</div>
       <div>
+        <Link to="/createNFT">createNFT</Link>
+      </div>
+      <div>
         <Link to="/">home</Link>
       </div>
     </>

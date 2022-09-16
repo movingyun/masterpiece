@@ -6,6 +6,9 @@ export default function Login() {
     <>
       <div>Login</div>
       <div>
+        <Link to="/signup">signup</Link>
+      </div>
+      <div>
         <Link to="/">home</Link>
       </div>
     </>
