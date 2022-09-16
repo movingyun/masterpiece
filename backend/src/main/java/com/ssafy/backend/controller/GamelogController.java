@@ -27,7 +27,6 @@ public class GamelogController {
     @Autowired
     GamelogService gamelogService;
 
-    //게임 생성 및 반환(Post, /)
     @ApiOperation(value = "게임로그 생성 및 반환")
     @PostMapping(value = "")
     public ResponseEntity<Game> create(@RequestBody String userWalletAddress){
