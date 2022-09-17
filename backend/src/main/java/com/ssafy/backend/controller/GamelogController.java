@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/game")
+@RequestMapping(value = "/api/game")
 @Log4j2
 public class GamelogController {
 

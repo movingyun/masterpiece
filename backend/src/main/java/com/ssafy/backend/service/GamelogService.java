@@ -64,8 +64,8 @@ public class GamelogService {
         // 정답 무작위로 뽑기
         List<Integer> answerSet = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            // 0~4 중 랜덤으로 한장 뽑는다.
-            int thisAnswer = r.nextInt(5);
+            // 0~3 중 랜덤으로 한장 뽑는다.
+            int thisAnswer = r.nextInt(4);
             // 새로운 번호면 wordIdxSet에 넣고 다음번호 뽑는다.
             answerSet.add(thisAnswer);
         }
