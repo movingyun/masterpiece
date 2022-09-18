@@ -15,6 +15,7 @@ import NFTDetail from './pages/NFTDetail';
 import NFTList from './pages/NFTList';
 import Signup from './pages/Signup';
 import UserPage from './pages/UserPage';
+import HangulGame from './pages/HangulGame';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -27,6 +28,7 @@ root.render(
           <Route path="composehangul" element={<ComposeHangul />} />
           <Route path="createnft" element={<CreateNFT />} />
           <Route path="decoratehangul" element={<DecorateHangul />} />
+          <Route path="hangulgame" element={<HangulGame />} />
           <Route path="learnsyllables" element={<LearnSyllables />} />
           <Route path="login" element={<Login />} />
           <Route path="nftdetail" element={<NFTDetail />} />
