@@ -1,6 +1,7 @@
 package com.ssafy.backend.service;
 
 import com.ssafy.backend.db.entity.Gamelog;
+import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.db.repository.GameWordRepository;
 import com.ssafy.backend.db.repository.GamelogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class GamelogService {
     private GamelogRepository gamelogRepository;
     @Autowired
     private GameWordRepository gameWordRepository;
+    @Autowired
+    private UserService userService;
 
     @Transactional
     public Gamelog findGamelogByid(int id) {
@@ -31,9 +34,9 @@ public class GamelogService {
         gamelog.setId(0);
         gamelog.setEarnedTicket(0);
 
-        // todo : 지갑 주소로 user 찾아서 넣어주기
-//        User user = userRepository.findUserByUserWalletAddress(userWalletAddress);
-//        gamelog.setUser(user);
+        // todo : userWalletAddress로 user정보 가져오기
+        User user = userService.findByUserWalletAddress(userWalletAddress);
+        gamelog.setUser(user);
 
         //단어 Idx 무작위로 뽑아오기
         List<Integer> wordIdxSet = new ArrayList<>();

@@ -1,11 +1,11 @@
 package com.ssafy.backend.controller;
 
 import com.ssafy.backend.db.entity.Gamelog;
-import com.ssafy.backend.db.repository.GamelogRepository;
 import com.ssafy.backend.dto.Game;
 import com.ssafy.backend.dto.Question;
-import com.ssafy.backend.dto.UserSelectParam;
+import com.ssafy.backend.dto.UserSelect;
 import com.ssafy.backend.service.GamelogService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
+@Api(value = "게임로그 API", tags = {"GameLog"})
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/game")
 @Log4j2
@@ -67,18 +68,18 @@ public class GamelogController {
 
     @ApiOperation(value = "게임로그 수정")
     @PutMapping("/log")
-    public ResponseEntity<String> gamelogModify(@RequestBody UserSelectParam userSelectParam){
-        Gamelog gamelog = gamelogService.findGamelogByid(userSelectParam.getGameId());
+    public ResponseEntity<String> gamelogModify(@RequestBody UserSelect userSelect){
+        Gamelog gamelog = gamelogService.findGamelogByid(userSelect.getGameId());
         String select = "";
         String answer = gamelog.getQuestionAnswer();
         String[] answersArr = answer.split(",");
         //티켓 획득 수 = 정답 수
         int getTicket = 0;
         for(int i=0; i<5; i++){
-            if(userSelectParam.getUserSelect()[i]==Integer.parseInt(answersArr[i])){
+            if(userSelect.getUserSelect()[i]==Integer.parseInt(answersArr[i])){
                 getTicket++;
             }
-            select += userSelectParam.getUserSelect()[i];
+            select += userSelect.getUserSelect()[i];
             if(i!=4)
                 select += ",";
         }

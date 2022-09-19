@@ -5,12 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//뽑기를 할때 받을 객체
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//Client한테 게임 종료 시 받을 정보 객체
-public class UserSelectParam {
-    private int gameId;
-    private Integer[] userSelect;
+public class RandomDraw {
+    private  String userWalletAddress;
+    private  int quantity;
 }
