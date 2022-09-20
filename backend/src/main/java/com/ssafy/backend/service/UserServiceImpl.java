@@ -21,6 +21,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    HangulOwnService hangulOwnService;
+
     @Override
     public UserSigninDto signin(String wallet_address) {
         User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
@@ -36,6 +39,8 @@ public class UserServiceImpl implements UserService{
                     .ticketCount(10) //초기 티켓 수: 10개
                     .build();
             userRepository.save(user);
+            //user처음 생성 시 자/모음 주기
+            hangulOwnService.createUserHangle(wallet_address);
         }
 
         return UserSigninDto.builder()
@@ -89,7 +94,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public void plusUserTickets(User user, int drawQuantity) {
-        user.setTicketCount(user.getTicketCount()-drawQuantity);
+        user.setTicketCount(user.getTicketCount()+drawQuantity);
         userRepository.save(user);
     }
 }

@@ -4,6 +4,7 @@ import com.ssafy.backend.db.entity.Gamelog;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.db.repository.GameWordRepository;
 import com.ssafy.backend.db.repository.GamelogRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,9 @@ import java.util.List;
 import java.util.Random;
 
 @Service
+@Log4j2
 public class GamelogServiceImpl implements GamelogService{
+
     @Autowired
     private GamelogRepository gamelogRepository;
     @Autowired
@@ -37,6 +40,7 @@ public class GamelogServiceImpl implements GamelogService{
 
         // userWalletAddress로 user정보 가져오기
         User user = userService.findByUserWalletAddress(userWalletAddress);
+        System.out.println(user.getId()+"번 사람이 게임 시작");
         gamelog.setUser(user);
 
         //단어 Idx 무작위로 뽑아오기
@@ -54,7 +58,7 @@ public class GamelogServiceImpl implements GamelogService{
             }
         }
         String questionOption="";
-
+        System.out.println("여기야2 : "+wordIdxSet);
         // 단어Idx로 단어 뽑아오기
         for(int i=0; i<20; i++){
             String word = gameWordRepository.findByWordId(wordIdxSet.get(i)).getWord();

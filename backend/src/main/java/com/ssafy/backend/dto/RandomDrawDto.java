@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RandomDraw {
+public class RandomDrawDto {
     private  String userWalletAddress;
     private  int quantity;
 }

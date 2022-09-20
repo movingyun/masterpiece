@@ -11,9 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//Client한테 Game에 대한 정보 보내주기 위한 객체
-public class Game {
-    private Integer gameId;
-    private List<Question> questionOption;
-    private List<Integer> questionAnswer;
+//Game안에 들어가는 보기 객체
+public class QuestionDto {
+    private List<String> options;
 }

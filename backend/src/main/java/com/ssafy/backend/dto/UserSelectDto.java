@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 //Client한테 게임 종료 시 받을 정보 객체
-public class UserSelect {
+public class UserSelectDto {
     private int gameId;
     private Integer[] userSelect;
 }

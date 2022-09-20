@@ -2,15 +2,16 @@ package com.ssafy.backend.controller;
 
 import com.ssafy.backend.db.entity.Gamelog;
 import com.ssafy.backend.db.entity.User;
-import com.ssafy.backend.dto.Game;
-import com.ssafy.backend.dto.Question;
-import com.ssafy.backend.dto.UserSelect;
-import com.ssafy.backend.service.GamelogServiceImpl;
+import com.ssafy.backend.dto.GameDto;
+import com.ssafy.backend.dto.QuestionDto;
+import com.ssafy.backend.dto.UserSelectDto;
+import com.ssafy.backend.service.GamelogService;
 import com.ssafy.backend.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.annotations.common.util.impl.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,28 +28,29 @@ import java.util.List;
 public class GamelogController {
 
     @Autowired
-    GamelogServiceImpl gamelogService;
+    GamelogService gamelogService;
     @Autowired
     UserService userService;
 
     @ApiOperation(value = "게임로그 생성 및 반환")
     @PostMapping(value = "")
-    public ResponseEntity<Game> create(@RequestBody String userWalletAddress){
+    public ResponseEntity<GameDto> create(@RequestBody String userWalletAddress){
         log.info("# Create game, player : " + userWalletAddress);
         int gameId = gamelogService.createGamelog(userWalletAddress);
+
         Gamelog thisGamelog= gamelogService.findGamelogByid(gameId);
-        Game game = new Game();
+        GameDto game = new GameDto();
         //gameId 넣기
         game.setGameId(gameId);
 
         //game 보기 넣기(20개)
         String questionOption = thisGamelog.getQuestionOption();
         String[] optionsArr = questionOption.split(",");
-        List<Question> gameOption = new ArrayList<>();
+        List<QuestionDto> gameOption = new ArrayList<>();
 
         for(int j=0; j<5; j++){
             List<String> optionList = new ArrayList<>();
-            Question question = new Question();
+            QuestionDto question = new QuestionDto();
             for(int i=0; i<4; i++){
                 optionList.add(optionsArr[(j*4)+i]);
             }
@@ -71,7 +73,7 @@ public class GamelogController {
 
     @ApiOperation(value = "게임로그 수정")
     @PutMapping("/log")
-    public ResponseEntity<String> gamelogModify(@RequestBody UserSelect userSelect){
+    public ResponseEntity<String> gamelogModify(@RequestBody UserSelectDto userSelect){
         Gamelog gamelog = gamelogService.findGamelogByid(userSelect.getGameId());
         User user = gamelog.getUser();
         String select = "";

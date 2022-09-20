@@ -7,12 +7,13 @@ import lombok.Setter;
 
 import java.util.List;
 
-//티켓이나 단어 합성을 통해서 자/모음 증감할 때 호출되는 객체
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HangulUse {
-    private String userWalletAddress;
-    private List<String> hangul;
+//Client한테 Game에 대한 정보 보내주기 위한 객체
+public class GameDto {
+    private Integer gameId;
+    private List<QuestionDto> questionOption;
+    private List<Integer> questionAnswer;
 }

@@ -2,11 +2,9 @@ package com.ssafy.backend.controller;
 
 import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.User;
-import com.ssafy.backend.dto.HangulUse;
-import com.ssafy.backend.dto.RandomDraw;
-import com.ssafy.backend.service.HangulOwnServiceImpl;
-import com.ssafy.backend.service.HangulServiceImpl;
-import com.ssafy.backend.service.UserService;
+import com.ssafy.backend.dto.HangulUseDto;
+import com.ssafy.backend.dto.RandomDrawDto;
+import com.ssafy.backend.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +26,9 @@ import java.util.List;
 public class HangulController {
 
     @Autowired
-    private HangulServiceImpl hangulService;
+    private HangulService hangulService;
     @Autowired
-    private HangulOwnServiceImpl hangulOwnService;
+    private HangulOwnService hangulOwnService;
     @Autowired
     private UserService userService;
 
@@ -68,7 +66,7 @@ public class HangulController {
 
     @ApiOperation(value = "유저 자/모음 사용")
     @PutMapping("")
-    public ResponseEntity<String> hangulUse(@RequestBody HangulUse hangulUse){
+    public ResponseEntity<String> hangulUse(@RequestBody HangulUseDto hangulUse){
         String userWalletAddress = hangulUse.getUserWalletAddress();
         // userWalletAddress로 user정보 가져오기
         User user = userService.findByUserWalletAddress(userWalletAddress);
@@ -87,7 +85,7 @@ public class HangulController {
     //뽑기관련
     @ApiOperation(value = "자음 뽑기")
     @PutMapping("/constant")
-    public ResponseEntity<List<Hangul>> constantPick(@RequestBody RandomDraw randomDraw){
+    public ResponseEntity<List<Hangul>> constantPick(@RequestBody RandomDrawDto randomDraw){
         String userWalletAddress = randomDraw.getUserWalletAddress();
         // userWalletAddress로 user정보 가져오기
         User user = userService.findByUserWalletAddress(userWalletAddress);
@@ -99,11 +97,11 @@ public class HangulController {
 
         //티켓이 없으면 오류 ㄱㄱ
         if(userTicket<drawQuantity){
-            //todo : 내가가진 티켓수가 적으면 오류 만들기
-
+            System.out.println("티켓 더 벌어오세요");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
-        // todo : drawQuantity만큼 userTicket줄이기
+        // drawQuantity만큼 userTicket줄이기
         userService.minusUserTickets(user, drawQuantity);
 
         //quantity만큼 자음 id 랜덤으로 뽑기(중복 허용)
@@ -117,13 +115,12 @@ public class HangulController {
             //id에 해당하는 자음 user의 보유갯수 올려주기
             hangulOwnService.plusUserHangle(userId, constantId);
         }
-        //client로 넘겨주기
         return new ResponseEntity<>(constantList, HttpStatus.OK);
     }
 
     @ApiOperation(value = "모음 뽑기")
     @PutMapping("/vowel")
-    public ResponseEntity<List<Hangul>> vowelPick(@RequestBody RandomDraw randomDraw){
+    public ResponseEntity<List<Hangul>> vowelPick(@RequestBody RandomDrawDto randomDraw){
         String userWalletAddress = randomDraw.getUserWalletAddress();
         // userWalletAddress로 user정보 가져오기
         User user = userService.findByUserWalletAddress(userWalletAddress);
@@ -134,16 +131,19 @@ public class HangulController {
         int userTicket = user.getTicketCount();
 
         //티켓이 없으면 오류 ㄱㄱ
+        if(userTicket<drawQuantity){
+            System.out.println("티켓 더 벌어오세요");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
 
-
-        //있으면 ticket 줄이고
-
+        // drawQuantity만큼 userTicket줄이기
+        userService.minusUserTickets(user, drawQuantity);
 
         //quantity만큼 모음 id 랜덤으로 뽑기(중복 허용)
-        List<Integer> constantIdSet = hangulService.pickRandomVowel(drawQuantity);
+        List<Integer> Vowel = hangulService.pickRandomVowel(drawQuantity);
 
         List<Hangul> vowelList = new ArrayList<>();
-        for(int vowelId : constantIdSet){
+        for(int vowelId : Vowel){
             //id에 해당하는 모음 정보를 리스트에 넣어주기
             Hangul pickedVowel = hangulService.findHangulByid(vowelId);
             vowelList.add(pickedVowel);
