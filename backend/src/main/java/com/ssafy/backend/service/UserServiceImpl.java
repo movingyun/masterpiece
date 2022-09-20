@@ -1,5 +1,6 @@
 package com.ssafy.backend.service;
 
+import com.ssafy.backend.db.entity.Gamelog;
 import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.db.repository.UserRepository;
@@ -76,5 +77,19 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findByUserWalletAddress(String walletAddress) {
         return userRepository.findByWalletAddress(walletAddress).orElse(null);
+    }
+
+    @Transactional
+    @Override
+    public void minusUserTickets(User user, int drawQuantity) {
+        user.setTicketCount(user.getTicketCount()-drawQuantity);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void plusUserTickets(User user, int drawQuantity) {
+        user.setTicketCount(user.getTicketCount()-drawQuantity);
+        userRepository.save(user);
     }
 }

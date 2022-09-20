@@ -10,4 +10,6 @@ public interface UserService {
     UserSigninDto getUserInfo(String wallet_address);
     void updateUserInfo(UserUpdateDto dto);
     User findByUserWalletAddress(String walletAddress);
+    void minusUserTickets(User user, int drawQuantity);
+    void plusUserTickets(User user, int drawQuantity);
 }

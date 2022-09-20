@@ -106,7 +106,7 @@ public class HangulController {
         }
 
         // todo : drawQuantity만큼 userTicket줄이기
-//        userService.minusUserTicket(userId, drawQuantity);
+        userService.minusUserTickets(user, drawQuantity);
 
         //quantity만큼 자음 id 랜덤으로 뽑기(중복 허용)
         List<Integer> constantIdSet = hangulService.pickRandomConstant(drawQuantity);

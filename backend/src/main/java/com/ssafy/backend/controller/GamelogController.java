@@ -1,10 +1,12 @@
 package com.ssafy.backend.controller;
 
 import com.ssafy.backend.db.entity.Gamelog;
+import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.dto.Game;
 import com.ssafy.backend.dto.Question;
 import com.ssafy.backend.dto.UserSelect;
 import com.ssafy.backend.service.GamelogService;
+import com.ssafy.backend.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,8 @@ public class GamelogController {
 
     @Autowired
     GamelogService gamelogService;
+    @Autowired
+    UserService userService;
 
     @ApiOperation(value = "게임로그 생성 및 반환")
     @PostMapping(value = "")
@@ -70,6 +74,7 @@ public class GamelogController {
     @PutMapping("/log")
     public ResponseEntity<String> gamelogModify(@RequestBody UserSelect userSelect){
         Gamelog gamelog = gamelogService.findGamelogByid(userSelect.getGameId());
+        User user = gamelog.getUser();
         String select = "";
         String answer = gamelog.getQuestionAnswer();
         String[] answersArr = answer.split(",");
@@ -88,8 +93,8 @@ public class GamelogController {
 
         gamelogService.modifyGamelog(gamelog);
 
-        //todo : 게임에서 얻은 티켓만큼 userTicket올려주기
-
+        //게임에서 얻은 티켓만큼 userTicket올려주기
+        userService.plusUserTickets(user, getTicket);
         return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
 
