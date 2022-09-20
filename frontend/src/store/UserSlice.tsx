@@ -4,7 +4,7 @@ import api from '../api/api';
 
 const signin: any = createAsyncThunk('signin', async (payload, { rejectWithValue }) => {
   try {
-    const res = await axios.post(api.signin(), payload, {});
+    const res: any = await axios.post(api.signin(), payload, {});
     return res.data;
   } catch (err: any) {
     return rejectWithValue(err.response.data);
@@ -45,6 +45,9 @@ export const UserSlice = createSlice({
     [signin.fulfilled]: state => {
       state.isLogin = true;
       console.log(state);
+    },
+    [signin.rejected]: state => {
+      state.isLogin = false;
     },
   },
 });

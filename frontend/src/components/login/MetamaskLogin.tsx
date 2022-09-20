@@ -9,10 +9,6 @@ export default function MetamaskLogin() {
   const { chainId, account, active, activate, deactivate } = useWeb3React();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (account) dispatch(signin(account));
-  }, [account]);
-
   const handdleConnect = () => {
     if (active) {
       deactivate();
@@ -25,6 +21,16 @@ export default function MetamaskLogin() {
       }
     });
   };
+
+  useEffect(() => {
+    if (account) {
+      const payload = {
+        wallet_address: account,
+      };
+      // axios 요청
+      dispatch(signin(payload));
+    }
+  }, [account]);
 
   return (
     <>
