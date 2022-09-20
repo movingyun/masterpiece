@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useWeb3React } from '@web3-react/core';
+import { useDispatch } from 'react-redux';
 import { injected } from '../../lib/connectors';
 import { isNoEthereumObject } from '../../lib/error';
+import { signin } from '../../store/UserSlice';
 
 export default function MetamaskLogin() {
   const { chainId, account, active, activate, deactivate } = useWeb3React();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (account) dispatch(signin(account));
+  }, [account]);
 
   const handdleConnect = () => {
     if (active) {
