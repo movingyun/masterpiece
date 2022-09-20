@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:8080/api';
 // const API_BASE_URL = 'http://i7a508.p.ssafy.io:5000/api'
 
 // 경로
