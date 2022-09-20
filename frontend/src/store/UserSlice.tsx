@@ -34,17 +34,27 @@ const initialState: UserState = {
 };
 
 export const UserSlice = createSlice({
-  name: 'userSlice',
+  name: 'user',
   initialState,
   reducers: {
     checkLogin: state => {
       state.isLogin = true;
     },
+    checkLogout: state => {
+      state.isLogin = false;
+      state.currentUser = {
+        wallet_address: '',
+        nickname: '',
+        message: '',
+        joinDate: '',
+        ticket_count: 0,
+      };
+    },
   },
   extraReducers: {
-    [signin.fulfilled]: state => {
+    [signin.fulfilled]: (state, action) => {
       state.isLogin = true;
-      console.log(state);
+      state.currentUser = action.payload;
     },
     [signin.rejected]: state => {
       state.isLogin = false;
@@ -54,6 +64,6 @@ export const UserSlice = createSlice({
 
 export { signin };
 
-export const { checkLogin } = UserSlice.actions;
+export const { checkLogin, checkLogout } = UserSlice.actions;
 
 export default UserSlice.reducer;

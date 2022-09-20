@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useWeb3React } from '@web3-react/core';
 import { useDispatch } from 'react-redux';
+import { useWeb3React } from '@web3-react/core';
 import { injected } from '../../lib/connectors';
 import { isNoEthereumObject } from '../../lib/error';
-import { signin } from '../../store/UserSlice';
+import { checkLogout, signin } from '../../store/UserSlice';
 
 export default function MetamaskLogin() {
   const { chainId, account, active, activate, deactivate } = useWeb3React();
@@ -29,6 +29,8 @@ export default function MetamaskLogin() {
       };
       // axios 요청
       dispatch(signin(payload));
+    } else {
+      dispatch(checkLogout());
     }
   }, [account]);
 
