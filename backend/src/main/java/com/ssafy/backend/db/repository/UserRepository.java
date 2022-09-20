@@ -1,9 +1,7 @@
 package com.ssafy.backend.db.repository;
 
-import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
