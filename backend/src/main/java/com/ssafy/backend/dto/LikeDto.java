@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
+//좋아요 누를때 받을 객체
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//Game안에 들어가는 보기 객체
-public class Question {
-    private List<String> options;
+public class LikeDto {
+    private String userWalletAddress;
+    private String nftAddress;
 }
