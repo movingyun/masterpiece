@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,8 +23,9 @@ public class UserLikeController {
 
     @PutMapping("")
     @ApiOperation(value = "좋아요 생성 및 변환", notes = "게시물에 대한 좋아요를 생성 및 변환한다.")
-    public void nftLike(@RequestBody LikeDto like) {
+    public ResponseEntity<String> nftLike(@RequestBody LikeDto like) {
         userLikeService.clickBoardLikes(like);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
 
 }
