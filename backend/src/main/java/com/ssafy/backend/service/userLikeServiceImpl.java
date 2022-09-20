@@ -10,16 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class userLikeService {
+public class userLikeServiceImpl implements UserLikeService{
 
     @Autowired
     private UserLikeRepository userLikeRepository;
     @Autowired
     private UserService userService;
     @Autowired
-    private NftService nftService;
+    private NFTService nftService;
 
     @Transactional
+    @Override
     public void clickBoardLikes(Like like) {
         // todo : userWalletAddress로 user정보 가져오기
         String userWalletAddress = like.getUserWalletAddress();
@@ -32,12 +33,17 @@ public class userLikeService {
         int nftId = nft.getId();
 
         //좋아요 누르기
-        UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nftId);
-        // todo : 여기 해야된다~~
+        UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nftId).orElse(null);
         // userLike가 null값이면 행을 만들어주고
-
+        if(userLike == null){
+            userLike.builder()
+                    .id(0)
+                    .user(user)
+                    .nft(nft)
+                    .build();
+        }
         // null이 아니면 isCancled를 바꿔준다.
-
+        userLike.setCancle(!userLike.isCancle());
         userLikeRepository.save(userLike);
     }
 

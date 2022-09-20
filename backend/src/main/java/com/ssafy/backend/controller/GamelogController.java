@@ -5,7 +5,7 @@ import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.dto.Game;
 import com.ssafy.backend.dto.Question;
 import com.ssafy.backend.dto.UserSelect;
-import com.ssafy.backend.service.GamelogService;
+import com.ssafy.backend.service.GamelogServiceImpl;
 import com.ssafy.backend.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +14,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ import java.util.List;
 public class GamelogController {
 
     @Autowired
-    GamelogService gamelogService;
+    GamelogServiceImpl gamelogService;
     @Autowired
     UserService userService;
 

@@ -4,8 +4,8 @@ import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.dto.HangulUse;
 import com.ssafy.backend.dto.RandomDraw;
-import com.ssafy.backend.service.HangulOwnService;
-import com.ssafy.backend.service.HangulService;
+import com.ssafy.backend.service.HangulOwnServiceImpl;
+import com.ssafy.backend.service.HangulServiceImpl;
 import com.ssafy.backend.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,13 +14,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @Api(value = "한글 API", tags = {"Hangul"})
@@ -30,9 +28,9 @@ import java.util.Random;
 public class HangulController {
 
     @Autowired
-    private HangulService hangulService;
+    private HangulServiceImpl hangulService;
     @Autowired
-    private HangulOwnService hangulOwnService;
+    private HangulOwnServiceImpl hangulOwnService;
     @Autowired
     private UserService userService;
 
