@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -53,61 +54,62 @@ public class UserController {
     public ResponseEntity<UserSigninDto> getUserInfo(@RequestParam(value = "wallet-address") String wallet_address) {
         try{
             UserSigninDto dto = userService.getUserInfo(wallet_address);
-            if(dto == null) {
-                System.out.println("해당 유저가 존재하지 않습니다!");
-                return new ResponseEntity(HttpStatus.BAD_REQUEST);
-            }
             return new ResponseEntity(dto, HttpStatus.OK);
         } catch(Exception e) {
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 
     @Operation(summary = "유저 정보 수정 API", description = "해당 유저 정보 수정")
     @PutMapping
     public ResponseEntity updateUserInfo(@ModelAttribute UserUpdateDto dto) {
+        System.out.println(dto);
         try{
             userService.updateUserInfo(dto);
             return new ResponseEntity(HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Operation(summary = "티켓 수 조회 API", description = "해당 유저의 보유한 티켓 수 반환")
+    @GetMapping("/ticket")
+    public ResponseEntity getTicket(@RequestParam(value = "wallet-address") String wallet_address) {
+        Map<String, Integer> map = new HashMap<>();
+        try{
+            int cnt = userService.getTicketCount(wallet_address);
+            map.put("quantity", cnt);
+            return new ResponseEntity(map, HttpStatus.OK);
         } catch(Exception e) {
             System.out.println("헤당 유저가 존재하지 않습니다.");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 
-    @Operation(summary = "유저 프로필 사진 조회 API", description = "해당 유저 프로필 사진 반환")
-    @GetMapping("/image")
-    public ResponseEntity getUserImage(@RequestParam(value = "wallet-address") String wallet_address) {
-
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @Operation(summary = "티켓 증감 API", description = "해당 유저의 보유한 티켓 수 설정")
-    @PutMapping("/ticket")
-    public ResponseEntity setTicket(@RequestBody Map<String, String> map) {
-
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @Operation(summary = "티켓 수 조회 API", description = "해당 유저의 보유한 티켓 수 반환")
-    @GetMapping("/ticket")
-    public ResponseEntity getTicket(@RequestParam(value = "wallet-address") String wallet_address) {
-
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @Operation(summary = "보유한 자모음 조회 API", description = "해당 유저의 보유한 자모음 반환")
     @GetMapping("/hangul")
     public ResponseEntity getHangul(@RequestParam(value = "wallet-address") String wallet_address) {
-
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Map<String, Integer> map = userService.getUserHangul(wallet_address);
+            return new ResponseEntity(map, HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println("헤당 유저가 존재하지 않습니다.");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "보유한 NFT 조회 API", description = "해당 유저의 보유한 NFT 목록 반환")
     @GetMapping("/collected")
     public ResponseEntity getCollectedNFT(@RequestParam(value = "wallet-address") String wallet_address) {
-
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Map<String, Integer> map = userService.getUserHangul(wallet_address);
+            return new ResponseEntity(map, HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println("헤당 유저가 존재하지 않습니다.");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "만든 NFT 조회 API", description = "해당 유저가 민팅한 NFT 목록 반환")

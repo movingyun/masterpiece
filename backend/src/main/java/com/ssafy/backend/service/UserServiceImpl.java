@@ -7,17 +7,24 @@ import com.ssafy.backend.dto.UserUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    AwsS3Service awsS3Service;
+
     @Override
     public UserSigninDto signin(String wallet_address) {
         User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
@@ -41,6 +48,7 @@ public class UserServiceImpl implements UserService{
                 .message(user.getMessage())
                 .joinDate(user.getJoinDate().toString())
                 .ticketCount(user.getTicketCount())
+                .profileImage(user.getProfileImg())
                 .build();
     }
 
@@ -48,7 +56,7 @@ public class UserServiceImpl implements UserService{
     public UserSigninDto getUserInfo(String wallet_address) {
         User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
         if(user == null) {
-            return null;
+            throw new IllegalArgumentException("No such user");
         }
 
         return UserSigninDto.builder()
@@ -57,16 +65,38 @@ public class UserServiceImpl implements UserService{
                 .message(user.getMessage())
                 .joinDate(user.getJoinDate().toString())
                 .ticketCount(user.getTicketCount())
+                .profileImage(user.getProfileImg())
                 .build();
     }
 
     @Override
-    public void updateUserInfo(UserUpdateDto dto) throws IllegalArgumentException{
+    @Transactional
+    public void updateUserInfo(UserUpdateDto dto) {
         User user = userRepository.findByWalletAddress(dto.getWallet_address()).orElse(null);
+        if(user == null) {
+            throw new IllegalArgumentException("No such user");
+        }
+
+        MultipartFile file = dto.getProfileImage();
+        awsS3Service.uploadProfileImage(user, file);
+        user.updateUser(dto);
+    }
+
+    @Override
+    public int getTicketCount(String wallet_address) {
+        User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
         if(user == null) {
             throw new IllegalArgumentException();
         }
 
-        user.updateUser(dto);
+        return user.getTicketCount();
+    }
+
+    @Override
+    public Map<String, Integer> getUserHangul(String wallet_address) {
+        Map<String, Integer> resMap = new HashMap<>();
+
+
+        return resMap;
     }
 }

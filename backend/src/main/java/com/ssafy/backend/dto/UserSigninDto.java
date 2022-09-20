@@ -11,4 +11,5 @@ public class UserSigninDto {
     String message;
     String joinDate;
     int ticketCount;
+    String profileImage;
 }
