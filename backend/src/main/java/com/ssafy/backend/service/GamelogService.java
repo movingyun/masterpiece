@@ -32,7 +32,7 @@ public class GamelogService {
         gamelog.setEarnedTicket(0);
 
         // todo : 지갑 주소로 user 찾아서 넣어주기
-//        User user = userRepository.findUserByUserWalletAddress(userWalletAddress);
+//        User user = userRepository.findByUserWalletAddress(userWalletAddress);
 //        gamelog.setUser(user);
 
         //단어 Idx 무작위로 뽑아오기
