@@ -36,7 +36,7 @@ public class userLikeService {
         // todo : 여기 해야된다~~
         // userLike가 null값이면 행을 만들어주고
 
-        // null이 isCancled를 바꿔준다.
+        // null이 아니면 isCancled를 바꿔준다.
 
         userLikeRepository.save(userLike);
     }
