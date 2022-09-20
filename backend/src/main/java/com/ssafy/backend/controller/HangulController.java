@@ -6,6 +6,7 @@ import com.ssafy.backend.dto.HangulUse;
 import com.ssafy.backend.dto.RandomDraw;
 import com.ssafy.backend.service.HangulOwnService;
 import com.ssafy.backend.service.HangulService;
+import com.ssafy.backend.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -71,7 +72,7 @@ public class HangulController {
     @PutMapping("")
     public ResponseEntity<String> hangulUse(@RequestBody HangulUse hangulUse){
         String userWalletAddress = hangulUse.getUserWalletAddress();
-        // todo : userWalletAddress로 user정보 가져오기
+        // userWalletAddress로 user정보 가져오기
         User user = userService.findByUserWalletAddress(userWalletAddress);
         int userId = user.getId();
 
@@ -90,10 +91,9 @@ public class HangulController {
     @PutMapping("/constant")
     public ResponseEntity<List<Hangul>> constantPick(@RequestBody RandomDraw randomDraw){
         String userWalletAddress = randomDraw.getUserWalletAddress();
-        // todo : userWalletAddress로 user정보 가져오기
+        // userWalletAddress로 user정보 가져오기
         User user = userService.findByUserWalletAddress(userWalletAddress);
         int userId = user.getId();
-
         int drawQuantity = randomDraw.getQuantity();
 
         //유저의 티켓이 충분한지 확인
@@ -106,7 +106,7 @@ public class HangulController {
         }
 
         // todo : drawQuantity만큼 userTicket줄이기
-        userService.minusUserTicket(userId, drawQuantity);
+//        userService.minusUserTicket(userId, drawQuantity);
 
         //quantity만큼 자음 id 랜덤으로 뽑기(중복 허용)
         List<Integer> constantIdSet = hangulService.pickRandomConstant(drawQuantity);
@@ -127,7 +127,7 @@ public class HangulController {
     @PutMapping("/vowel")
     public ResponseEntity<List<Hangul>> vowelPick(@RequestBody RandomDraw randomDraw){
         String userWalletAddress = randomDraw.getUserWalletAddress();
-        // todo : userWalletAddress로 user정보 가져오기
+        // userWalletAddress로 user정보 가져오기
         User user = userService.findByUserWalletAddress(userWalletAddress);
         int userId = user.getId();
         int drawQuantity = randomDraw.getQuantity();

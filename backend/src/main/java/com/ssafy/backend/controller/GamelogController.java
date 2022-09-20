@@ -87,6 +87,9 @@ public class GamelogController {
         gamelog.setEarnedTicket(getTicket);
 
         gamelogService.modifyGamelog(gamelog);
+
+        //todo : 게임에서 얻은 티켓만큼 userTicket올려주기
+
         return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
 
