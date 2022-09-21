@@ -7,6 +7,7 @@ import com.ssafy.backend.db.repository.SalelogRepository;
 import com.ssafy.backend.db.repository.UserLikeRepository;
 import com.ssafy.backend.db.repository.UserRepository;
 import com.ssafy.backend.dto.NFTDto;
+import com.ssafy.backend.dto.SaleResultDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,27 @@ public class NFTServiceImpl implements NFTService {
     SalelogRepository salelogRepository;
     @Autowired
     UserLikeRepository userLikeRepository;
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public Nft findById(int id) {
+        return nftRepository.findById(id);
+    }
+
+    @Override
+    public Nft findBycontractAddress(String contract_address) {
+        return nftRepository.findByContractAddress(contract_address);
+    }
+
+    @Override
+    public void modifyNftOwner(SaleResultDto saleResultDto) {
+        int nftId = saleResultDto.getNftId();
+        String buyerWallerAddress = saleResultDto.getBuyerWalletAddress();
+        Nft nft = nftRepository.findById(nftId);
+        nft.setOwner(userService.findByUserWalletAddress(buyerWallerAddress));
+        nftRepository.save(nft);
+    }
 
     @Override
     public List<NFTDto> getCollectedNft(String wallet_address) {

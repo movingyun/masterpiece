@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//Client한테 게임 종료 시 받을 정보 객체
-public class UserSelectParam {
-    private int gameId;
-    private Integer[] userSelect;
+//Game안에 들어가는 보기 객체
+public class QuestionDto {
+    private List<String> options;
 }

@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
+//뽑기를 할때 받을 객체
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//Game안에 들어가는 보기 객체
-public class Question {
-    private List<String> options;
+public class RandomDrawDto {
+    private  String userWalletAddress;
+    private  int quantity;
 }

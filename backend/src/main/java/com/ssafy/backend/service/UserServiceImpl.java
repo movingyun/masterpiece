@@ -2,6 +2,7 @@ package com.ssafy.backend.service;
 
 import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.HangulOwn;
+import com.ssafy.backend.db.entity.Gamelog;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.db.repository.HangulRepository;
 import com.ssafy.backend.db.repository.UserRepository;
@@ -28,6 +29,8 @@ public class UserServiceImpl implements UserService {
     HangulRepository hangulRepository;
     @Autowired
     AwsS3Service awsS3Service;
+    @Autowired
+    HangulOwnService hangulOwnService;
 
     @Override
     public UserSigninDto signin(String wallet_address) {
@@ -44,6 +47,9 @@ public class UserServiceImpl implements UserService {
                     .ticketCount(10) //초기 티켓 수: 10개
                     .build();
             userRepository.save(user);
+            //user처음 생성 시 자/모음 주기
+            //todo : 31번부터 왜 번호가 안드가지?
+            hangulOwnService.createUserHangle(wallet_address);
         }
 
         return UserSigninDto.builder()
@@ -155,5 +161,25 @@ public class UserServiceImpl implements UserService {
         }
 
         return dtoList;
+    }
+
+    @Transactional
+    @Override
+    public User findByUserWalletAddress(String walletAddress) {
+        return userRepository.findByWalletAddress(walletAddress).orElse(null);
+    }
+
+    @Transactional
+    @Override
+    public void minusUserTickets(User user, int drawQuantity) {
+        user.setTicketCount(user.getTicketCount()-drawQuantity);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void plusUserTickets(User user, int drawQuantity) {
+        user.setTicketCount(user.getTicketCount()+drawQuantity);
+        userRepository.save(user);
     }
 }
