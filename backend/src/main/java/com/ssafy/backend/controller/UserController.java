@@ -1,7 +1,10 @@
 package com.ssafy.backend.controller;
 
+import com.ssafy.backend.dto.HangulInfoDto;
+import com.ssafy.backend.dto.NFTDto;
 import com.ssafy.backend.dto.UserSigninDto;
 import com.ssafy.backend.dto.UserUpdateDto;
+import com.ssafy.backend.service.NFTService;
 import com.ssafy.backend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,7 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,6 +27,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    NFTService nftService;
 
 //    @Operation(summary = "회원가입 API", description = "회원 정보를 인풋으로 받아 회원가입 처리")
 //    @PostMapping("/signup")
@@ -83,7 +90,7 @@ public class UserController {
             map.put("quantity", cnt);
             return new ResponseEntity(map, HttpStatus.OK);
         } catch(Exception e) {
-            System.out.println("헤당 유저가 존재하지 않습니다.");
+            System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
@@ -95,7 +102,7 @@ public class UserController {
             Map<String, Integer> map = userService.getUserHangul(wallet_address);
             return new ResponseEntity(map, HttpStatus.OK);
         } catch(Exception e) {
-            System.out.println("헤당 유저가 존재하지 않습니다.");
+            System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
@@ -104,10 +111,10 @@ public class UserController {
     @GetMapping("/collected")
     public ResponseEntity getCollectedNFT(@RequestParam(value = "wallet-address") String wallet_address) {
         try{
-            Map<String, Integer> map = userService.getUserHangul(wallet_address);
-            return new ResponseEntity(map, HttpStatus.OK);
+            List<NFTDto> dtoList = nftService.getCollectedNft(wallet_address);
+            return new ResponseEntity(dtoList, HttpStatus.OK);
         } catch(Exception e) {
-            System.out.println("헤당 유저가 존재하지 않습니다.");
+            System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
@@ -115,28 +122,53 @@ public class UserController {
     @Operation(summary = "만든 NFT 조회 API", description = "해당 유저가 민팅한 NFT 목록 반환")
     @GetMapping("/created")
     public ResponseEntity getCreatedNFT(@RequestParam(value = "wallet-address") String wallet_address) {
-
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            List<NFTDto> dtoList = nftService.getCreatedNft(wallet_address);
+            return new ResponseEntity(dtoList, HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "팔고있는 NFT 조회 API", description = "해당 유저가 팔고있는 NFT 목록 반환")
     @GetMapping("/onsale")
     public ResponseEntity getOnSaleNFT(@RequestParam(value = "wallet-address") String wallet_address) {
-
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            List<NFTDto> dtoList = nftService.getOnSaleNft(wallet_address);
+            return new ResponseEntity(dtoList, HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "좋아요 한 NFT 조회 API", description = "해당 유저가 찜한 NFT 목록 반환")
     @GetMapping("/favorite")
     public ResponseEntity getLikedNFT(@RequestParam(value = "wallet-address") String wallet_address) {
-
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            List<NFTDto> dtoList = nftService.getLikedNft(wallet_address);
+            return new ResponseEntity(dtoList, HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @Operation(summary = "만든 NFT 조회 API", description = "해당 유저의 자/모음 inventory 반환")
+    @Operation(summary = "보유한 자/모음 조회 API", description = "해당 유저의 자/모음 inventory 반환")
     @GetMapping("/inventory")
     public ResponseEntity getInventory(@RequestParam(value = "wallet-address") String wallet_address) {
-
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Map<String, List<HangulInfoDto>> resMap = new HashMap<>();
+            List<HangulInfoDto> consonantList = userService.getUserConsonant(wallet_address);
+            List<HangulInfoDto> vowelList = userService.getUserVowel(wallet_address);
+            resMap.put("consonant", consonantList);
+            resMap.put("vowel", vowelList);
+            List<NFTDto> dtoList = nftService.getLikedNft(wallet_address);
+            return new ResponseEntity(dtoList, HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 }

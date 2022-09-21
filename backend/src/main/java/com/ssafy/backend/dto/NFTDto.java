@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 @Builder
 public class NFTDto {
+    String imgUrl;
     String nftTitle;
     String nftPrice;
     String nftCreatorNickname;

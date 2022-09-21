@@ -42,4 +42,7 @@ public class Hangul {
 
     @Column(name = "title" )
     private String title;
+
+    @Column(name = "letter", length = 10)
+    private String letter;
 }

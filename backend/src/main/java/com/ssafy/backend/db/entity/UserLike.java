@@ -34,4 +34,6 @@ public class UserLike {
     @JoinColumn(name="nftId")
     private Nft nft;
 
+    @Column(name = "isCanceled")
+    private boolean isCanceled;
 }
