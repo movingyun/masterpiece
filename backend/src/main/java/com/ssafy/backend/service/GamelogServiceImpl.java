@@ -48,8 +48,8 @@ public class GamelogServiceImpl implements GamelogService{
         Random r = new Random();
         for (int i = 0; i < 20; i++) {
             while (true) {
-                // 0~99 중 랜덤으로 한장 뽑는다.
-                int thisNum = r.nextInt(100);
+                // 1~99 중 랜덤으로 한장 뽑는다.
+                int thisNum = r.nextInt(119)+1;
                 // 새로운 번호면 wordIdxSet에 넣고 다음번호 뽑는다.
                 if (!wordIdxSet.contains(thisNum)) {
                     wordIdxSet.add(thisNum);
@@ -58,7 +58,6 @@ public class GamelogServiceImpl implements GamelogService{
             }
         }
         String questionOption="";
-        System.out.println("여기야2 : "+wordIdxSet);
         // 단어Idx로 단어 뽑아오기
         for(int i=0; i<20; i++){
             String word = gameWordRepository.findByWordId(wordIdxSet.get(i)).getWord();
