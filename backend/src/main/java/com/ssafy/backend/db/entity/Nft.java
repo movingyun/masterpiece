@@ -59,10 +59,10 @@ public class Nft {
     @Column(name = "tokenCreatedate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date tokenCreatedate;
 
-    @Column(name = "price", columnDefinition = "INT(11)")
+    @Column(name = "price", columnDefinition = "WEI")
     private String price;
 
-    @Column(name = "imageUrl", length = 50)
+    @Column(name = "imageUrl", length = 200)
     private String imageUrl;
 
 }

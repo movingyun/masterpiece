@@ -49,7 +49,7 @@ public class User {
             columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date joinDate;
 
-    @Column(name = "profileImg" )
+    @Column(name = "profileImg")
     private String profileImg;
 
     @Column(name = "ticketCount", columnDefinition = "INT(11) DEFAULT 10")
@@ -58,6 +58,5 @@ public class User {
     public void updateUser(UserUpdateDto dto){
         this.userNickname = dto.getNickname();
         this.message = dto.getMessage();
-        //todo: img는 s3 연동 후에 이어서 작성
     }
 }

@@ -1,16 +1,22 @@
 package com.ssafy.backend.controller;
 
+import com.ssafy.backend.dto.UserUpdateDto;
+import com.ssafy.backend.service.AwsS3Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
+@CrossOrigin("*")
 public class HelloController {
+
+    private final AwsS3Service awsS3Service;
     @Operation(summary = "test hello", description = "hello api example")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "OK !!"),
@@ -21,5 +27,18 @@ public class HelloController {
     @GetMapping("/hello")
     public ResponseEntity<String> hello(@Parameter(description = "이름", required = true, example = "Park") @RequestParam String name) {
         return ResponseEntity.ok("hello " + name);
+    }
+
+    @Operation(summary = "s3 업로드 테스트", description = "s3 upload example")
+    @PostMapping("/s3test")
+    public ResponseEntity s3test(@ModelAttribute UserUpdateDto dto) {
+        System.out.println(dto);
+        try {
+            awsS3Service.uploadFile(dto.getProfileImage());
+            return new ResponseEntity(HttpStatus.OK);
+        } catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 }
