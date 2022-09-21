@@ -16,6 +16,6 @@ public interface NFTRepository extends JpaRepository<Nft, Integer> {
     List<Nft> findCreatedNfts(User user);
     @Query("select n from Nft n where n.owner = :user and n.isSale = true")
     List<Nft> findOnSaleNfts(User user);
-    @Query("select u.nft from UserLike u where u.user = :user")
+    @Query("select u.nft from UserLike u where u.user = :user and (u.isCancel is null or u.isCancel = false)")
     List<Nft> findLikedNfts(User user);
 }
