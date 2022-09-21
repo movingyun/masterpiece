@@ -99,20 +99,20 @@ public class NFTServiceImpl implements NFTService {
                 tagList.add(tags[i]);
             }
 
-            int lastPrice = salelogRepository.findFirstByNftOrderByDateDesc(nft).getPrice();
+            String lastPrice = salelogRepository.findFirstByNftOrderByDateDesc(nft).getPrice();
             int likes = userLikeRepository.getLikeCountOfNft(nft);
             dtoList.add(buildNFTDto(nft, tagList, lastPrice, likes));
         }
 
         return dtoList;
     }
-    private NFTDto buildNFTDto(Nft nft, List<String> tagList, int lastPrice, int likes){
+    private NFTDto buildNFTDto(Nft nft, List<String> tagList, String lastPrice, int likes){
         return NFTDto.builder()
                 .imgUrl(nft.getImageUrl())
                 .nftTitle(nft.getNftTitle())
                 .nftPrice(nft.getPrice())
                 .nftCreatorNickname(nft.getCreator().getUserNickname())
-                .lastPrice(String.valueOf(lastPrice))
+                .lastPrice(lastPrice)
                 .nftOwnerNickname(nft.getOwner().getUserNickname())
                 .nftTags(tagList)
                 .nftLike(likes)

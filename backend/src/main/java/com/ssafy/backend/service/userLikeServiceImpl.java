@@ -39,11 +39,11 @@ public class userLikeServiceImpl implements UserLikeService{
                     .id(0)
                     .user(user)
                     .nft(nft)
-                    .isCancle(false)
+                    .isCancel(false)
                     .build();
         }else{
             // null이 아니면 isCancled를 바꿔준다.
-            userLike.setCancle(!userLike.isCancle());
+            userLike.setCancel(!userLike.isCancel());
         }
         userLikeRepository.save(userLike);
     }
