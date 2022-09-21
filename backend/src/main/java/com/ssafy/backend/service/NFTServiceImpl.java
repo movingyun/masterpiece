@@ -1,6 +1,7 @@
 package com.ssafy.backend.service;
 
 import com.ssafy.backend.db.entity.Nft;
+import com.ssafy.backend.db.entity.Salelog;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.db.repository.NFTRepository;
 import com.ssafy.backend.db.repository.SalelogRepository;
@@ -50,7 +51,7 @@ public class NFTServiceImpl implements NFTService {
     public List<NFTDto> getCollectedNft(String wallet_address) {
         User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
         if(user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("No such User");
         }
 
         List<Nft> nftList = nftRepository.findOwnedNfts(user);
@@ -61,7 +62,7 @@ public class NFTServiceImpl implements NFTService {
     public List<NFTDto> getCreatedNft(String wallet_address) {
         User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
         if(user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("No such User");
         }
 
         List<Nft> nftList = nftRepository.findCreatedNfts(user);
@@ -72,7 +73,7 @@ public class NFTServiceImpl implements NFTService {
     public List<NFTDto> getOnSaleNft(String wallet_address) {
         User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
         if(user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("No such User");
         }
 
         List<Nft> nftList = nftRepository.findOnSaleNfts(user);
@@ -83,7 +84,7 @@ public class NFTServiceImpl implements NFTService {
     public List<NFTDto> getLikedNft(String wallet_address) {
         User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
         if(user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("No such User");
         }
 
         List<Nft> nftList = nftRepository.findLikedNfts(user);
@@ -99,7 +100,11 @@ public class NFTServiceImpl implements NFTService {
                 tagList.add(tags[i]);
             }
 
-            String lastPrice = salelogRepository.findFirstByNftOrderByDateDesc(nft).getPrice();
+            String lastPrice = null;
+            Salelog log = salelogRepository.findFirstByNftOrderByDateDesc(nft);
+            if(log != null){
+                lastPrice = salelogRepository.findFirstByNftOrderByDateDesc(nft).getPrice();
+            }
             int likes = userLikeRepository.getLikeCountOfNft(nft);
             dtoList.add(buildNFTDto(nft, tagList, lastPrice, likes));
         }

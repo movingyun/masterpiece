@@ -166,8 +166,7 @@ public class UserController {
             List<HangulInfoDto> vowelList = userService.getUserVowel(wallet_address);
             resMap.put("consonant", consonantList);
             resMap.put("vowel", vowelList);
-            List<NFTDto> dtoList = nftService.getLikedNft(wallet_address);
-            return new ResponseEntity(dtoList, HttpStatus.OK);
+            return new ResponseEntity(resMap, HttpStatus.OK);
         } catch(Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

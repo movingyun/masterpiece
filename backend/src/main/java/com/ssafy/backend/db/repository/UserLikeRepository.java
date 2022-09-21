@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface UserLikeRepository extends JpaRepository<UserLike, Integer> {
-    @Query("select count(u) from UserLike u where u.nft = :nft and (u.isCancel is null or u.isCancel = true)")
+    @Query("select count(u) from UserLike u where u.nft = :nft and (u.isCancel is null or u.isCancel = false)")
     Integer getLikeCountOfNft(Nft nft);
     @Query(value = "SELECT * FROM user_like WHERE user_id =? AND nft_id =?", nativeQuery = true)
     Optional<UserLike> findByUserAndNftId(int user_id, int nft_id);
