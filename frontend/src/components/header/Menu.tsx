@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useWeb3React } from '@web3-react/core';
+import { checkLogin, logout, getCurrentUser } from '../../store/UserSlice';
 
 const StyledMenu = styled.div`
   display: flex;
@@ -11,14 +12,29 @@ const StyledMenu = styled.div`
 `;
 
 export default function Menu() {
-  const { chainId, account, active, activate, deactivate } = useWeb3React();
+  const { deactivate } = useWeb3React();
+
+  const dispatch = useDispatch();
 
   const isLogin = useSelector((state: any) => state.user.isLogin);
+  const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
+
   const handdleLogout = () => {
-    if (active) {
+    if (isLogin) {
       deactivate();
+      dispatch(logout());
     }
   };
+
+  useEffect(() => {
+    dispatch(checkLogin());
+  }, []);
+
+  useEffect(() => {
+    if (isLogin) {
+      dispatch(getCurrentUser());
+    }
+  }, [isLogin]);
 
   return (
     <StyledMenu>
@@ -29,7 +45,7 @@ export default function Menu() {
       <div>Search</div>
       {isLogin ? (
         <div>
-          <Link to="/UserPage">Mypage</Link>
+          <Link to={`/userpage/${walletAddress}`}>Mypage</Link>
           <Link to="/login" onClick={handdleLogout}>
             Logout
           </Link>

@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useWeb3React } from '@web3-react/core';
 import { injected } from '../../lib/connectors';
 import { isNoEthereumObject } from '../../lib/error';
-import { checkLogout, signin } from '../../store/UserSlice';
+import { checkLogin, logout, signin } from '../../store/UserSlice';
 
 export default function MetamaskLogin() {
   const { chainId, account, active, activate, deactivate } = useWeb3React();
   const dispatch = useDispatch();
 
+  const isLogin = useSelector((state: any) => state.user.isLogin);
+  const currentUser = useSelector((state: any) => state.user.currentUser);
+
   const handdleConnect = () => {
-    if (active) {
+    if (active || isLogin) {
       deactivate();
+      dispatch(logout());
       return;
     }
 
@@ -23,14 +27,16 @@ export default function MetamaskLogin() {
   };
 
   useEffect(() => {
-    if (account) {
+    dispatch(checkLogin());
+  }, []);
+
+  useEffect(() => {
+    if (!isLogin && account) {
       const payload = {
         wallet_address: account,
       };
       // axios 요청
       dispatch(signin(payload));
-    } else {
-      dispatch(checkLogout());
     }
   }, [account]);
 
@@ -38,13 +44,13 @@ export default function MetamaskLogin() {
     <>
       <hr />
       <div>
-        <p>Account: {account}</p>
+        <p>Account: {currentUser.wallet_address}</p>
         <p>ChainId: {chainId}</p>
       </div>
       <hr />
       <div>
         <button type="button" onClick={handdleConnect}>
-          {active ? 'disconnect' : 'connect'}
+          {isLogin ? 'disconnect' : 'connect'}
         </button>
       </div>
     </>

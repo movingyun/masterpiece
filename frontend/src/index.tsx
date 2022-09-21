@@ -42,7 +42,7 @@ root.render(
             <Route path="nftdetail" element={<NFTDetail />} />
             <Route path="nftlist" element={<NFTList />} />
             <Route path="signup" element={<Signup />} />
-            <Route path="userpage" element={<UserPage />} />
+            <Route path="userpage/:walletAddress" element={<UserPage />} />
           </Route>
         </Routes>
       </Provider>
