@@ -45,5 +45,5 @@ public class Salelog {
     private Date date;
 
     @Column(name = "price", columnDefinition = "INT(11)")
-    private Integer price;
+    private String price;
 }

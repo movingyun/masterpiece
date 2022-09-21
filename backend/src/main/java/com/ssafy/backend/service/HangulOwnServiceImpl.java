@@ -46,6 +46,7 @@ public class HangulOwnServiceImpl implements HangulOwnService{
     @Override
     public void plusUserHangle(int userId, int hangulId) {
         HangulOwn hangulOwn = findHangulOwnByUserAndHangulId(userId, hangulId);
+        System.out.println("이거 올려줄꺼야 : " + hangulOwn.getHangul());
         hangulOwn.setHangulCount(hangulOwn.getHangulCount()+1);
         hangulOwnRepository.save(hangulOwn);
     }

@@ -27,10 +27,9 @@ public class userLikeServiceImpl implements UserLikeService{
         User user = userService.findByUserWalletAddress(userWalletAddress);
         int userId = user.getId();
 
-        // nftAddress로 nft정보 가져오기
-        String nftAddress = like.getNftAddress();
-        Nft nft = nftService.findBycontractAddress(nftAddress);
-        int nftId = nft.getId();
+        // nftId로 nft정보 가져오기
+        int nftId = like.getNftId();
+        Nft nft = nftService.findById(nftId);
 
         //좋아요 누르기
         UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nftId).orElse(null);

@@ -60,7 +60,7 @@ public class Nft {
     private Date tokenCreatedate;
 
     @Column(name = "price", columnDefinition = "INT(11)")
-    private Integer price;
+    private String price;
 
     @Column(name = "imageUrl", length = 50)
     private String imageUrl;

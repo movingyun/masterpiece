@@ -45,22 +45,31 @@ public class HangulController {
 
     @ApiOperation(value = "초성 반환하기")
     @GetMapping(value = "/first")
-    public ResponseEntity<List<String>> getFirst(){
-        List<String> firstHangul = hangul.subList(1,20);
+    public ResponseEntity<List<Hangul>> getFirst(){
+        List<Hangul> firstHangul = new ArrayList<>();
+        for(int i=1; i<20; i++){
+            firstHangul.add(hangulService.findHangulByid(i));
+        }
         return new ResponseEntity<>(firstHangul, HttpStatus.OK);
     }
 
     @ApiOperation(value = "종성 반환하기")
     @GetMapping(value = "/last")
-    public ResponseEntity<List<String>> getLast(){
-        List<String> lastHangul = hangul.subList(1,31);
+    public ResponseEntity<List<Hangul>> getLast(){
+        List<Hangul> lastHangul = new ArrayList<>();
+        for(int i=1; i<31; i++){
+            lastHangul.add(hangulService.findHangulByid(i));
+        }
         return new ResponseEntity<>(lastHangul, HttpStatus.OK);
     }
 
     @ApiOperation(value = "중성 반환하기")
     @GetMapping(value = "/middle")
-    public ResponseEntity<List<String>> getMiddle(){
-        List<String> middleHangul = hangul.subList(31,52);
+    public ResponseEntity<List<Hangul>> getMiddle(){
+        List<Hangul> middleHangul = new ArrayList<>();
+        for(int i=31; i<52; i++){
+            middleHangul.add(hangulService.findHangulByid(i));
+        }
         return new ResponseEntity<>(middleHangul, HttpStatus.OK);
     }
 
@@ -113,6 +122,8 @@ public class HangulController {
             constantList.add(pickedConstant);
 
             //id에 해당하는 자음 user의 보유갯수 올려주기
+            System.out.println(pickedConstant.getTitle());
+            System.out.println("userId : "+userId + "constantId : " + constantId);
             hangulOwnService.plusUserHangle(userId, constantId);
         }
         return new ResponseEntity<>(constantList, HttpStatus.OK);

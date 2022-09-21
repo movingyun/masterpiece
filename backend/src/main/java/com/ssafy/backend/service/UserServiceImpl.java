@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService{
                     .build();
             userRepository.save(user);
             //user처음 생성 시 자/모음 주기
+            //todo : 31번부터 왜 번호가 안드가지?
             hangulOwnService.createUserHangle(wallet_address);
         }
 
