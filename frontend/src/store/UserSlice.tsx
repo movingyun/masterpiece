@@ -10,9 +10,25 @@ const signin: any = createAsyncThunk('signin', async (payload, { rejectWithValue
     return rejectWithValue(err.response.data);
   }
 });
+const fetchUser: any = createAsyncThunk('fetchUser', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchUser(walletAddress));
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
 
 export interface UserState {
   currentUser: {
+    wallet_address: String;
+    nickname: String;
+    message: String;
+    joinDate: String;
+    ticket_count: Number;
+    imgUrl: String;
+  };
+  searchedUser: {
     wallet_address: String;
     nickname: String;
     message: String;
@@ -25,6 +41,14 @@ export interface UserState {
 
 const initialState: UserState = {
   currentUser: {
+    wallet_address: '',
+    nickname: '',
+    message: '',
+    joinDate: '',
+    ticket_count: 0,
+    imgUrl: '',
+  },
+  searchedUser: {
     wallet_address: '',
     nickname: '',
     message: '',
@@ -77,10 +101,13 @@ export const UserSlice = createSlice({
     [signin.rejected]: state => {
       state.isLogin = false;
     },
+    [fetchUser.fulfilled]: (state, action) => {
+      state.searchedUser = action.payload;
+    },
   },
 });
 
-export { signin };
+export { signin, fetchUser };
 
 export const { getCurrentUser, checkLogin, logout } = UserSlice.actions;
 

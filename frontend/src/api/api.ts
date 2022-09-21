@@ -9,6 +9,7 @@ const SIGNIN_URL = '/signin';
 
 const api = {
   signin: () => API_BASE_URL + USER_URL + SIGNIN_URL,
+  fetchUser: (walletAddress: String) => API_BASE_URL + USER_URL + `?wallet-address=${walletAddress}`,
 };
 
 export default api;
