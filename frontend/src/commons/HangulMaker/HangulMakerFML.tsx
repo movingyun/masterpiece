@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Tab, Tabs, Typography, Box, Button, } from "@mui/material";
+import CancelIcon from '@mui/icons-material/Cancel';
 import { useTabDispatch, useTabSelector } from '../../_hook/HangulMakerHook';
 import { tabAction, firstAction, middleAction, lastAction } from '../../_slice/HangulMakerSlice';
 import HangulMakerInput from "./HangulMakerInput";
@@ -59,10 +60,13 @@ export default function HangulMakerFML(){
     setSetting(true);
   }, []);
 
-  // 초성 중성 종성
+  // 초성 중성 종성 index
   const first:number = useTabSelector(state => state.first.value);
   const middle:number = useTabSelector(state => state.middle.value);
   const last:number = useTabSelector(state => state.last.value);
+
+  // 초성 중성 중성 string
+  const letter:string[] = [composeHangul(first, -1, 0), composeHangul(-1, middle, 0), composeHangul(-1, -1, last)];
 
   // 음절 미리보기
   const[syllable, setSyllable] = React.useState("");
@@ -79,32 +83,31 @@ export default function HangulMakerFML(){
     setValue(newValue);
   };
 
+  // 자모음 할당취소
+  const cancelButton = [() =>{
+    dispatch(firstAction.change(-1));
+  }, () =>{
+    dispatch(middleAction.change(-1));
+  }, () =>{
+    dispatch(lastAction.change(0));
+  }];
+
   return (
     <Grid container item xs={12}>
       <Grid item xs={9} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center">
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab style={{maxWidth: width}} label={
-              <Typography style={{fontSize:"30px"}}>
-                <Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}>
-                  {composeHangul(first, -1, 0)}
-                </Box>
-              </Typography>
-            } id={a11yProps(0).id} aria-controls={a11yProps(0)["aria-controls"]} />
-            <Tab style={{maxWidth: width}} label={
-              <Typography style={{fontSize:"30px"}}>
-                <Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}>
-                  {composeHangul(-1, middle, 0)}
-                </Box>
-              </Typography>
-            } id={a11yProps(1).id} aria-controls={a11yProps(1)["aria-controls"]} />
-            <Tab style={{maxWidth: width}} label={
-              <Typography style={{fontSize:"30px"}}>
-                <Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}>
-                  {composeHangul(-1, -1, last)}
-                </Box>
-              </Typography>
-            } id={a11yProps(2).id} aria-controls={a11yProps(2)["aria-controls"]} />
+            {[0,1,2].map((i:number)=>(
+              <Tab key={`tab${i}`} style={{maxWidth: width}} label={
+                <Typography style={{fontSize:"30px"}}>
+                  <Box sx={{width: {width}, height:{height}}} style={{position:"relative", margin:unit/2, backgroundColor:"#DDDDDD"}}>
+                    {letter[i]}
+                  </Box>
+                  <CancelIcon style={{position:"absolute", top:0, right:0, color:"red"}}
+                  onClick={cancelButton[i]}/>
+                </Typography>
+              } id={a11yProps(i).id} aria-controls={a11yProps(i)["aria-controls"]} /> 
+            ))}
           </Tabs>
         </Box>
       </Grid>
