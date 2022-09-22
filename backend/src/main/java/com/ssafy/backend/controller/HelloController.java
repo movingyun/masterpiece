@@ -28,17 +28,4 @@ public class HelloController {
     public ResponseEntity<String> hello(@Parameter(description = "이름", required = true, example = "Park") @RequestParam String name) {
         return ResponseEntity.ok("hello " + name);
     }
-
-    @Operation(summary = "s3 업로드 테스트", description = "s3 upload example")
-    @PostMapping("/s3test")
-    public ResponseEntity s3test(@ModelAttribute UserUpdateDto dto) {
-        System.out.println(dto);
-        try {
-            awsS3Service.uploadFile(dto.getProfileImage());
-            return new ResponseEntity(HttpStatus.OK);
-        } catch(Exception e){
-            e.printStackTrace();
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-    }
 }
