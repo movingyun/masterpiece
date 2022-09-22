@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button, Container } from "@mui/material";
-import { useTabSelector, firstList, middleList, lastList } from '../../_hook/HangulMakerHook';
+import { useTabDispatch, useTabSelector, firstList, middleList, lastList } from '../../_hook/HangulMakerHook';
+import { firstAction, middleAction, lastAction } from '../../_slice/HangulMakerSlice';
 
 export default function HangulMakerInput(){
   // 자모음 크기단위
@@ -11,12 +12,21 @@ export default function HangulMakerInput(){
   // 초성중성종성 리스트
   const letterList:string[][] = [firstList, middleList, lastList,];
   // 초중종성 선택
+  const selectLetter = [firstAction, middleAction, lastAction];
+  const dispatch = useTabDispatch();
+  const letterChange = (newValue: number) => {
+    dispatch(selectLetter[select].change(newValue));
+  };
   return(
     <Container>
-      {letterList[select].map((letter:string, index:Number)=>{
+      {letterList[select].map((letter:string, index:number)=>{
+        // 종성 0번째 빈값
+        if(select === FML.LAST && index===0){
+          return;
+        }
         // 현재 letter 보유수
-        // const count:Number = letterCountList[index];
-        const count:Number=0;
+        // const count:number = letterCountList[index];
+        const count:number=0;
         
         // letter Color (각 자모음 별 보유수, color 필요)
         // const color:string = (count>0) ? "letterColorList[index]" : "#AAAAAA";
@@ -24,6 +34,7 @@ export default function HangulMakerInput(){
 
         return (
           <Button key={`${letter}middleButton`} 
+            onClick={() => {letterChange(index)}}
             sx={{minWidth: unit, minHeight: unit, width: unit*5, height:unit*5}} type="button"
             style={{ margin:"10px", position:"relative",
             fontSize:unit*2.5,

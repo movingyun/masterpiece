@@ -21,7 +21,7 @@ export const selectFirst = createSlice({
     }
   }
 });
-export const firstAction = selectTab.actions;
+export const firstAction = selectFirst.actions;
 
 export const selectMiddle = createSlice({
   name: 'selectMiddle',	// key
@@ -32,7 +32,7 @@ export const selectMiddle = createSlice({
     }
   }
 });
-export const middleAction = selectTab.actions;
+export const middleAction = selectMiddle.actions;
 
 export const selectLast = createSlice({
   name: 'selectLast',	// key
@@ -43,4 +43,4 @@ export const selectLast = createSlice({
     }
   }
 });
-export const lastAction = selectTab.actions;
+export const lastAction = selectLast.actions;

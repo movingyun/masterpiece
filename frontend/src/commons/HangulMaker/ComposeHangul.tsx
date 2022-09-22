@@ -10,10 +10,10 @@ export default function composeHangul(first:number, middle:number, last:number):
     syllable = firstList[first];
   }
   else if(middle>=0){
-    syllable = middleList[first];
+    syllable = middleList[middle];
   }
   else if(last>0){
-    syllable = lastList[first];
+    syllable = lastList[last];
   }
   return syllable;
 }

@@ -38,7 +38,7 @@ public class Nft {
     @Column(name = "contractAddress", length = 50)
     private String contractAddress;
 
-    @Column(name = "nftHash", length = 50)
+    @Column(name = "nftHash", length = 255)
     private String nftHash;
 
     @Column(name = "nftTitle", length = 50)
@@ -62,7 +62,9 @@ public class Nft {
     @Column(name = "price")
     private String price;
 
-    @Column(name = "imageUrl", length = 200)
+    @Column(name = "imageUrl")
     private String imageUrl;
 
+    @Column(name = "ipfsUrl")
+    private String ipfsUrl;
 }
