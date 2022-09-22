@@ -3,6 +3,7 @@ package com.ssafy.backend.db.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.ssafy.backend.dto.UserUpdateDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -48,9 +49,14 @@ public class User {
             columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date joinDate;
 
-    @Column(name = "profileImg" )
+    @Column(name = "profileImg")
     private String profileImg;
 
     @Column(name = "ticketCount", columnDefinition = "INT(11) DEFAULT 10")
     private Integer ticketCount;
+
+    public void updateUser(UserUpdateDto dto){
+        this.userNickname = dto.getNickname();
+        this.message = dto.getMessage();
+    }
 }

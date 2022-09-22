@@ -32,7 +32,7 @@ public class HangulOwn {
     @JoinColumn(name="hangulId")
     private Hangul hangul;
 
-    @Column(name = "hangulCount", columnDefinition = "INT(11) DEFAULT 10")
+    @Column(name = "hangulCount", columnDefinition = "INT(11) DEFAULT 3")
     private Integer hangulCount;
 
 }

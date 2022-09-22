@@ -1,12 +1,11 @@
 package com.ssafy.backend.db.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * NFT 좋아요 테이블
@@ -33,5 +32,9 @@ public class UserLike {
     @ManyToOne //객체관계 생성 -> 하나의 게시글 좋아요 여러개 가능
     @JoinColumn(name="nftId")
     private Nft nft;
+
+    @ApiModelProperty(value = "좋아요취소 여부")
+    @Column(name = "isCancel", columnDefinition = "boolean DEFAULT false")
+    private boolean isCancel;
 
 }
