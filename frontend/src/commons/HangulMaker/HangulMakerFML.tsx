@@ -68,7 +68,6 @@ export default function HangulMakerFML(){
   const[syllable, setSyllable] = React.useState("");
   React.useEffect(()=>{
     setSyllable(composeHangul(first, middle, last));
-    console.log(composeHangul(0, 0, 10));
   }, [first, middle, last]);
 
   // tab Value
@@ -85,15 +84,34 @@ export default function HangulMakerFML(){
       <Grid item xs={9} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center">
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab style={{maxWidth: width}} label={<Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}/>} id={a11yProps(0).id} aria-controls={a11yProps(0)["aria-controls"]} />
-            <Tab style={{maxWidth: width}} label={<Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}/>} id={a11yProps(1).id} aria-controls={a11yProps(1)["aria-controls"]} />
-            <Tab style={{maxWidth: width}} label={<Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}/>} id={a11yProps(2).id} aria-controls={a11yProps(2)["aria-controls"]} />
+            <Tab style={{maxWidth: width}} label={
+              <Typography style={{fontSize:"30px"}}>
+                <Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}>
+                  {composeHangul(first, -1, 0)}
+                </Box>
+              </Typography>
+            } id={a11yProps(0).id} aria-controls={a11yProps(0)["aria-controls"]} />
+            <Tab style={{maxWidth: width}} label={
+              <Typography style={{fontSize:"30px"}}>
+                <Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}>
+                  {composeHangul(-1, middle, 0)}
+                </Box>
+              </Typography>
+            } id={a11yProps(1).id} aria-controls={a11yProps(1)["aria-controls"]} />
+            <Tab style={{maxWidth: width}} label={
+              <Typography style={{fontSize:"30px"}}>
+                <Box sx={{width: {width}, height:{height}}} style={{margin:unit/2, backgroundColor:"#DDDDDD"}}>
+                  {composeHangul(-1, -1, last)}
+                </Box>
+              </Typography>
+            } id={a11yProps(2).id} aria-controls={a11yProps(2)["aria-controls"]} />
           </Tabs>
         </Box>
       </Grid>
       <Grid item xs={3} justifyContent="center" alignItems="center">
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Button sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}/>
+        <Box display="flex" justifyContent="center" alignItems="center"
+        sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}>
+          <Typography style={{fontSize:"30px"}}>{syllable}</Typography>
         </Box>
       </Grid>
       <TabPanel value={value} index={0}>
