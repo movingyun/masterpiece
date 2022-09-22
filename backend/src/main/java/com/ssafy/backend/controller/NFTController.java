@@ -34,24 +34,39 @@ public class NFTController {
         }
     }
 
-    @Operation(summary = "NFT를 소유 중으로 변경 API", description = "해당 NFT를 소유 중으로 설정")
-    @PutMapping("/posession")
-    public ResponseEntity setNFTNotSale(@RequestBody Map<String, Object> map) {
-
-        return new ResponseEntity(HttpStatus.OK);
+    @Operation(summary = "NFT를 소유 중으로 변경하는 API", description = "해당 NFT를 소유 중으로 설정")
+    @PutMapping("/possession")
+    public ResponseEntity setNFTNotSale(@RequestBody Map<String, Integer> map) {
+        try{
+            nftService.updatePossessed(map.get("nftId"));
+            return new ResponseEntity(HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @Operation(summary = "NFT를 판매 중으로 변경 API", description = "해당 NFT를 판매 중으로 설정")
+    @Operation(summary = "NFT를 판매 중으로 변경하는 API", description = "해당 NFT를 판매 중으로 설정")
     @PutMapping("/sale")
     public ResponseEntity setNFTOnSale(@RequestBody Map<String, Object> map) {
-
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            nftService.updateOnSale((int)map.get("nftId"), String.valueOf(map.get("price")));
+            return new ResponseEntity(HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "NFT 전체 조회 API", description = "모든 NFT의 목록 반환")
     @GetMapping
     public ResponseEntity getAllNFTs() {
-
-        return new ResponseEntity(HttpStatus.OK);
+        try {
+            List<NFTDto> dtoList = nftService.getAllNFT();
+            return new ResponseEntity(dtoList, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 }

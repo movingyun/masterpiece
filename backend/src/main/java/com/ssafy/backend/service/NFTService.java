@@ -16,4 +16,7 @@ public interface NFTService {
     List<NFTDto> getOnSaleNft(String wallet_address);
     List<NFTDto> getLikedNft(String wallet_address);
     void postNFT(NFTCreateDto dto);
+    void updatePossessed(int nftId);
+    void updateOnSale(int nftId, String price);
+    List<NFTDto> getAllNFT();
 }
