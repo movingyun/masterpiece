@@ -19,4 +19,5 @@ public interface NFTService {
     void updatePossessed(int nftId);
     void updateOnSale(int nftId, String price);
     List<NFTDto> getAllNFT();
+    List<NFTDto> searchByCategory(String category, String keyword);
 }

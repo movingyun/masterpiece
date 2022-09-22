@@ -17,9 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class NFTServiceImpl implements NFTService {
@@ -155,7 +153,50 @@ public class NFTServiceImpl implements NFTService {
 
     @Override
     public List<NFTDto> getAllNFT() {
-        List<Nft> nftList = nftRepository.findAll();
+        List<Nft> nftList = nftRepository.findAllOnSale();
+        return makeNFTDtoList(nftList);
+    }
+
+    @Override
+    public List<NFTDto> searchByCategory(String category, String keyword) {
+        List<Nft> nftList = new ArrayList<>();
+        if(category.equals("creator")) {
+            List<User> users = userRepository.findByUserNickname(keyword);
+            if(users == null || users.isEmpty()) {
+                return new ArrayList<>();
+            }
+            for(User user : users) {
+                for(Nft nft : nftRepository.findByCreator(user)) {
+                    nftList.add(nft);
+                }
+            }
+        } else if(category.equals("seller")) {
+            List<User> users = userRepository.findByUserNickname(keyword);
+            if(users == null || users.isEmpty()) {
+                return new ArrayList<>();
+            }
+            for(User user : users) {
+                for(Nft nft : nftRepository.findByOwner(user)) {
+                    nftList.add(nft);
+                }
+            }
+        } else if(category.equals("tag")) {
+            //태그 문자열 정확히 일치하는 것만 결과 반환
+            for(Nft nft: nftRepository.findAllOnSale()) {
+                String[] tags = nft.getNftTag().split(" ");
+                for(int i=0; i<tags.length; i++){
+                    if(tags[i].equals(keyword)){
+                        nftList.add(nft);
+                        break;
+                    }
+                }
+            }
+        } else if(category.equals("titlecontent")) {
+            nftList = nftRepository.findByTitleContent(keyword);
+        } else {
+            throw new IllegalArgumentException("No such category");
+        }
+
         return makeNFTDtoList(nftList);
     }
 

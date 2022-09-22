@@ -87,7 +87,7 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     private String getFileExtension(String fileName){
         try {
             //이미지 형식의 파일이 아니면 예외 발생
-            String ext = fileName.substring(fileName.lastIndexOf("."));
+            String ext = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
             if(ext.equals(".gif") || ext.equals(".jpg") || ext.equals(".png")) {
                 return ext;
             }
