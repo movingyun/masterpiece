@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import React from 'react';
+import { createTheme, ThemeProvider } from '@mui/material';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
@@ -17,24 +18,39 @@ import Signup from './pages/Signup';
 import UserPage from './pages/UserPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const theme = createTheme({
+  components: {
+    // Name of the component
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          body1: "span",
+          body2: "span",
+        }
+      }
+    },
+  },
+});
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="" element={<Main />} />
-          <Route path="bylot" element={<ByLot />} />
-          <Route path="composehangul" element={<ComposeHangul />} />
-          <Route path="createnft" element={<CreateNFT />} />
-          <Route path="decoratehangul" element={<DecorateHangul />} />
-          <Route path="learnsyllables" element={<LearnSyllables />} />
-          <Route path="login" element={<Login />} />
-          <Route path="nftdetail" element={<NFTDetail />} />
-          <Route path="nftlist" element={<NFTList />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="userpage" element={<UserPage />} />
-        </Route>
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="" element={<Main />} />
+            <Route path="bylot" element={<ByLot />} />
+            <Route path="composehangul" element={<ComposeHangul />} />
+            <Route path="createnft" element={<CreateNFT />} />
+            <Route path="decoratehangul" element={<DecorateHangul />} />
+            <Route path="learnsyllables" element={<LearnSyllables />} />
+            <Route path="login" element={<Login />} />
+            <Route path="nftdetail" element={<NFTDetail />} />
+            <Route path="nftlist" element={<NFTList />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="userpage" element={<UserPage />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
     </Provider>
   </BrowserRouter>
 );
