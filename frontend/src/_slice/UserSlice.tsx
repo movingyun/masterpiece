@@ -73,10 +73,8 @@ export const UserSlice = createSlice({
     checkLogin: state => {
       if (window.localStorage.getItem('currentUser')) {
         state.isLogin = true;
-        console.log('t');
       } else {
         state.isLogin = false;
-        console.log('f');
       }
     },
     logout: state => {

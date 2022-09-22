@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Web3Provider } from '@ethersproject/providers';
 import { Web3ReactProvider } from '@web3-react/core';
 import App from './App';
-import store from './store';
+import store from './_store/store';
 import Main from './pages/Main';
 import ByLot from './pages/ByLot';
 import ComposeHangul from './pages/ComposeHangul';
@@ -32,10 +32,10 @@ const theme = createTheme({
     MuiTypography: {
       defaultProps: {
         variantMapping: {
-          body1: "span",
-          body2: "span",
-        }
-      }
+          body1: 'span',
+          body2: 'span',
+        },
+      },
     },
   },
 });

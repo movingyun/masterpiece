@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useWeb3React } from '@web3-react/core';
 import { injected } from '../../lib/connectors';
 import { isNoEthereumObject } from '../../lib/error';
-import { checkLogin, logout, signin } from '../../store/UserSlice';
+import { checkLogin, logout, signin } from '../../_slice/UserSlice';
 
 export default function MetamaskLogin() {
   const { chainId, account, active, activate, deactivate } = useWeb3React();
