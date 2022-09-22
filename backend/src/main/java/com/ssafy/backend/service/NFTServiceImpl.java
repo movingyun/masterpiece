@@ -7,12 +7,18 @@ import com.ssafy.backend.db.repository.NFTRepository;
 import com.ssafy.backend.db.repository.SalelogRepository;
 import com.ssafy.backend.db.repository.UserLikeRepository;
 import com.ssafy.backend.db.repository.UserRepository;
+import com.ssafy.backend.dto.NFTCreateDto;
 import com.ssafy.backend.dto.NFTDto;
 import com.ssafy.backend.dto.SaleResultDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +33,10 @@ public class NFTServiceImpl implements NFTService {
     UserLikeRepository userLikeRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AwsS3Service awsS3Service;
+
+    private final String gatewayURL = "https://gateway.pinata.cloud/ipfs/";
 
     @Override
     public Nft findById(int id) {
@@ -89,6 +99,34 @@ public class NFTServiceImpl implements NFTService {
 
         List<Nft> nftList = nftRepository.findLikedNfts(user);
         return makeNFTDtoList(nftList);
+    }
+
+    @Override
+    @Transactional
+    public void postNFT(NFTCreateDto dto) throws IllegalArgumentException{
+        System.out.println("postNFT");
+        User user = userRepository.findByWalletAddress(dto.getCreatorWalletAddress()).orElse(null);
+        if(user == null){
+            throw new IllegalArgumentException("No such user");
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        Instant instant = now.atZone(ZoneId.systemDefault()).toInstant();
+        Nft nft = Nft.builder()
+                .creator(user)
+                .owner(user)
+                .contractAddress(dto.getContractAddress())
+                .nftHash(dto.getTxHash())
+                .nftTitle(dto.getNftTitle())
+                .nftDescription(dto.getNftDescription())
+                .nftTag(dto.getNftTag())
+                .isSale(false)
+                .tokenCreatedate(Date.from(instant))
+                .ipfsUrl(gatewayURL+dto.getCid())
+                .build();
+
+        awsS3Service.uploadNFTImage(nft, dto.getImgFile());
+        nftRepository.save(nft);
     }
 
     private List<NFTDto> makeNFTDtoList(List<Nft> nftList){

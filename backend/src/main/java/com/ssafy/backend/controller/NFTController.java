@@ -1,11 +1,16 @@
 package com.ssafy.backend.controller;
 
+import com.ssafy.backend.dto.NFTCreateDto;
+import com.ssafy.backend.dto.NFTDto;
+import com.ssafy.backend.service.NFTService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -14,11 +19,19 @@ import java.util.Map;
 @Slf4j
 public class NFTController {
 
-    @Operation(summary = "NFT 생성 API", description = "해당 유저가 민팅한 NFT 정보를 db에 저장")
-    @PostMapping
-    public ResponseEntity storeNFT(@RequestParam(value = "wallet-address") String wallet_address) {
+    @Autowired
+    NFTService nftService;
 
-        return new ResponseEntity(HttpStatus.OK);
+    @Operation(summary = "NFT 생성 API", description = "민팅된 NFT 정보를 db에 저장")
+    @PostMapping
+    public ResponseEntity storeNFT(@ModelAttribute NFTCreateDto dto) {
+        try{
+            nftService.postNFT(dto);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "NFT를 소유 중으로 변경 API", description = "해당 NFT를 소유 중으로 설정")
