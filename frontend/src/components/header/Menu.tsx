@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useWeb3React } from '@web3-react/core';
-import { checkLogin, logout, getCurrentUser } from '../../store/UserSlice';
+import { checkLogin, logout, getCurrentUser } from '../../_slice/UserSlice';
 
 const StyledMenu = styled.div`
   display: flex;

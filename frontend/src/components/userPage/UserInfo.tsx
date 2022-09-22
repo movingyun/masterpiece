@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUser } from '../../store/UserSlice';
+import { fetchUser } from '../../_slice/UserSlice';
 
 interface UserInfoType {
   walletAddress: String;
