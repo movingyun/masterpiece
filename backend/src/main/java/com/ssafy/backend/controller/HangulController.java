@@ -26,6 +26,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/hangul")
 @Log4j2
+@CrossOrigin("*")
 public class HangulController {
 
     @Autowired
@@ -97,7 +98,7 @@ public class HangulController {
 
     //뽑기관련
     @ApiOperation(value = "자음 뽑기")
-    @PutMapping("/constant")
+    @PutMapping("/pick/consonant")
     public ResponseEntity<List<Hangul>> constantPick(@RequestBody RandomDrawDto randomDraw){
         String userWalletAddress = randomDraw.getUserWalletAddress();
         // userWalletAddress로 user정보 가져오기
@@ -134,7 +135,7 @@ public class HangulController {
     }
 
     @ApiOperation(value = "모음 뽑기")
-    @PutMapping("/vowel")
+    @PutMapping("/pick/vowel")
     public ResponseEntity<List<Hangul>> vowelPick(@RequestBody RandomDrawDto randomDraw){
         String userWalletAddress = randomDraw.getUserWalletAddress();
         // userWalletAddress로 user정보 가져오기
