@@ -174,4 +174,19 @@ public class HangulServiceImpl implements HangulService {
         }
         return resMap;
     }
+
+    @Override
+    public List<Hangul> getFirstConsonantsInfo() {
+        return hangulRepository.findAllFirstConsonantInfo();
+    }
+
+    @Override
+    public List<Hangul> getMiddleVowelsInfo() {
+        return hangulRepository.findAllMiddleVowelInfo();
+    }
+
+    @Override
+    public List<Hangul> getLastConsonantsInfo() {
+        return hangulRepository.findAllLastConsonantInfo();
+    }
 }
