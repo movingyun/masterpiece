@@ -13,7 +13,10 @@ public interface HangulService {
     List<String> getMiddleVowels();
     List<String> getLastConsonants();
     List<String> getAllConsonants();
-    Map<String, Integer> getFirstConsonantMap();
+    Map<String, Integer> getFirstConsonantMap(String wallet_address);
+    Map<String, Integer> getMiddleVowelMap(String wallet_address);
+    Map<String, Integer> getLastConsonantMap(String wallet_address);
+    Map<String, Integer> getConsonantMap(String wallet_address);
     List<Hangul> getFirstConsonantsInfo();
     List<Hangul> getMiddleVowelsInfo();
     List<Hangul> getLastConsonantsInfo();
