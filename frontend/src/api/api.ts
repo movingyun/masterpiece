@@ -4,6 +4,7 @@ const API_BASE_URL = 'http://localhost:8080/api';
 // 경로
 const USER_URL = '/user';
 const HANGUL_URL = '/hangul';
+const PICK_URL = '/pick';
 
 // URI
 // User
@@ -11,6 +12,9 @@ const SIGNIN_URL = '/signin';
 
 // Hangul
 const CONSONANT_URL = '/own/consonant';
+
+// Pick
+const PICK_CONSONANT_URL = '/consonant';
 
 const api = {
   // user
@@ -20,6 +24,9 @@ const api = {
   // hangul
   fetchConsonant: (walletAddress: String) =>
     API_BASE_URL + HANGUL_URL + CONSONANT_URL + `?wallet-address=${walletAddress}`,
+
+  // pick => 경로 변경 확인 필요
+  pickConsonant: () => API_BASE_URL + PICK_URL + PICK_CONSONANT_URL,
 };
 
 export default api;

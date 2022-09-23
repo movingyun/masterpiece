@@ -11,13 +11,31 @@ const fetchConsonant: any = createAsyncThunk('fetchConsonant', async (walletAddr
     return rejectWithValue(err.response.data);
   }
 });
+const pickConsonant: any = createAsyncThunk('pickConsonant', async (payload, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.put(api.pickConsonant(), payload);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
 
 export interface HangulState {
   consonant: Array<Number>;
+  pickConsonantResult: Array<{
+    id: Number;
+    description: String;
+    title: String;
+    letter: String;
+    first: Boolean;
+    last: Boolean;
+    middle: Boolean;
+  }>;
 }
 
 const initialState: HangulState = {
   consonant: [],
+  pickConsonantResult: [],
 };
 
 export const HangulSlice = createSlice({
@@ -28,10 +46,13 @@ export const HangulSlice = createSlice({
     [fetchConsonant.fulfilled]: (state, action) => {
       state.consonant = action.payload;
     },
+    [pickConsonant.fulfilled]: (state, action) => {
+      state.pickConsonantResult = action.payload;
+    },
   },
 });
 
-export { fetchConsonant };
+export { fetchConsonant, pickConsonant };
 
 export const {} = HangulSlice.actions;
 
