@@ -18,10 +18,18 @@ public interface HangulRepository extends JpaRepository<Hangul, Integer> {
     @Query("select ho.hangul, ho.hangulCount from HangulOwn ho " +
             "where ho.user = :user and (ho.hangul.isFirst = true or ho.hangul.isLast = true)")
     List<Object[]> findConsonantsOwnedByUser(User user);
-
     @Query("select ho.hangul, ho.hangulCount from HangulOwn ho " +
             "where ho.user = :user and ho.hangul.isMiddle = true")
     List<Object[]> findVowelsOwnedByUser(User user);
+    @Query("select ho.hangul, ho.hangulCount from HangulOwn ho " +
+            "where ho.user = :user and ho.hangul.isFirst = true")
+    List<Object[]> findFirstOwnedByUser(User user);
+    @Query("select ho.hangul, ho.hangulCount from HangulOwn ho " +
+            "where ho.user = :user and ho.hangul.isMiddle = true")
+    List<Object[]> findMiddleOwnedByUser(User user);
+    @Query("select ho.hangul, ho.hangulCount from HangulOwn ho " +
+            "where ho.user = :user and ho.hangul.isLast = true")
+    List<Object[]> findLastOwnedByUser(User user);
 
     @Query("select h.letter from Hangul h where h.isFirst = true")
     List<String> findAllFirstConsonant();
