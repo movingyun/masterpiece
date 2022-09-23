@@ -10,7 +10,7 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
 
   useEffect(() => {
     dispatch(fetchUser(walletAddress));
-  });
+  }, []);
 
   const searchedUser = useSelector((state: any) => state.user.searchedUser);
 
