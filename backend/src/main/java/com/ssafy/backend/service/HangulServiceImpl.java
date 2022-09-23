@@ -1,7 +1,6 @@
 package com.ssafy.backend.service;
 
 import com.ssafy.backend.db.entity.Hangul;
-import com.ssafy.backend.db.entity.HangulOwn;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.db.repository.HangulRepository;
 import com.ssafy.backend.db.repository.UserRepository;
@@ -17,6 +16,8 @@ public class HangulServiceImpl implements HangulService {
     private HangulRepository hangulRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private HangulOwnService hangulOwnService;
 
     @Transactional
     @Override
@@ -24,32 +25,57 @@ public class HangulServiceImpl implements HangulService {
         return hangulRepository.findByHangulId(id);
     }
 
+    //유저의 티켓 확인하기
+    @Transactional
+    @Override
+    public boolean checkUserTicket(User user, int drawQuantity){
+        //티켓이 적으면
+        if(user.getTicketCount()<drawQuantity){
+            return false;
+        } else return true;
+    }
+
+
     //자음 랜덤 뽑기
     @Transactional
     @Override
-    public List<Integer> pickRandomConstant(int drawQuantity) {
-        List<Integer> constantIdSet = new ArrayList<>();
+    public List<Hangul> pickRandomConstant(User user, int drawQuantity) {
         Random r = new Random();
+        List<Hangul> constantList = new ArrayList<>();
         for (int i = 0; i < drawQuantity; i++) {
             // 자음(1~30) 중 랜덤으로 한장 뽑는다.
             int thisConstantId = r.nextInt(30)+1;
-            constantIdSet.add(thisConstantId);
+
+            //id에 해당하는 자음 정보를 리스트에 넣어주기
+            Hangul pickedConstant = findHangulByid(thisConstantId);
+            constantList.add(pickedConstant);
+
+            //id에 해당하는 자음 user의 보유갯수 올려주기
+            int userId = user.getId();
+            hangulOwnService.plusUserHangle(userId, thisConstantId);
         }
-        return constantIdSet;
+        return constantList;
     }
 
     //모음 랜덤 뽑기
     @Transactional
     @Override
-    public List<Integer> pickRandomVowel(int drawQuantity) {
-        List<Integer> vowelIdSet = new ArrayList<>();
+    public List<Hangul> pickRandomVowel(User user, int drawQuantity) {
         Random r = new Random();
+        List<Hangul> vowelList = new ArrayList<>();
         for (int i = 0; i < drawQuantity; i++) {
             // 모음(31~51) 중 랜덤으로 한장 뽑는다.
             int thisVowelId = r.nextInt(21) + 31;
-            vowelIdSet.add(thisVowelId);
+
+            //id에 해당하는 모음 정보를 리스트에 넣어주기
+            Hangul pickedVowel = findHangulByid(thisVowelId);
+            vowelList.add(pickedVowel);
+
+            //id에 해당하는 자음 user의 보유갯수 올려주기
+            int userId = user.getId();
+            hangulOwnService.plusUserHangle(userId, thisVowelId);
         }
-        return vowelIdSet;
+        return vowelList;
     }
 
     @Override
