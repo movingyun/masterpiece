@@ -14,4 +14,7 @@ public interface HangulService {
     List<String> getLastConsonants();
     List<String> getAllConsonants();
     Map<String, Integer> getFirstConsonantMap();
+    List<Hangul> getFirstConsonantsInfo();
+    List<Hangul> getMiddleVowelsInfo();
+    List<Hangul> getLastConsonantsInfo();
 }

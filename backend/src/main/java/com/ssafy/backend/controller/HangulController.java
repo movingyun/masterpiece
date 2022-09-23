@@ -39,10 +39,12 @@ public class HangulController {
 
     @PostConstruct
     private void init(){
-        hangul = List.of("","ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ",
-                "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ", "ㄳ", "ㄵ", "ㄶ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ",
-                "ㅀ","ㅄ","ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ", "ㅚ",
-                "ㅟ", "ㅢ", "ㅘ", "ㅝ", "ㅙ", "ㅞ");
+        hangul = List.of("","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄸ","ㄹ"
+                ,"ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ"
+                ,"ㅄ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ"
+                ,"ㅍ","ㅎ","ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ"
+                ,"ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ"
+                ,"ㅡ","ㅢ","ㅣ");
 //
 //        num = 0;
 //        List<String> consonantList = hangulService.getAllConsonants();
@@ -57,30 +59,21 @@ public class HangulController {
     @ApiOperation(value = "초성 반환하기")
     @GetMapping(value = "/first")
     public ResponseEntity<List<Hangul>> getFirst(){
-        List<Hangul> firstHangul = new ArrayList<>();
-        for(int i=1; i<20; i++){
-            firstHangul.add(hangulService.findHangulByid(i));
-        }
+        List<Hangul> firstHangul = hangulService.getFirstConsonantsInfo();
         return new ResponseEntity<>(firstHangul, HttpStatus.OK);
     }
 
     @ApiOperation(value = "종성 반환하기")
     @GetMapping(value = "/last")
     public ResponseEntity<List<Hangul>> getLast(){
-        List<Hangul> lastHangul = new ArrayList<>();
-        for(int i=1; i<31; i++){
-            lastHangul.add(hangulService.findHangulByid(i));
-        }
+        List<Hangul> lastHangul = hangulService.getLastConsonantsInfo();
         return new ResponseEntity<>(lastHangul, HttpStatus.OK);
     }
 
     @ApiOperation(value = "중성 반환하기")
     @GetMapping(value = "/middle")
     public ResponseEntity<List<Hangul>> getMiddle(){
-        List<Hangul> middleHangul = new ArrayList<>();
-        for(int i=31; i<52; i++){
-            middleHangul.add(hangulService.findHangulByid(i));
-        }
+        List<Hangul> middleHangul = hangulService.getLastConsonantsInfo();
         return new ResponseEntity<>(middleHangul, HttpStatus.OK);
     }
 
