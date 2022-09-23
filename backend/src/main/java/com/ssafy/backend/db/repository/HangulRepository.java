@@ -31,4 +31,11 @@ public interface HangulRepository extends JpaRepository<Hangul, Integer> {
     List<String> findAllLastConsonant();
     @Query("select h.letter from Hangul h where h.isFirst = true or h.isLast = true")
     List<String> findAllConsonant();
+
+    @Query(value = "SELECT * FROM hangul WHERE is_first = true", nativeQuery = true)
+    List<Hangul> findAllFirstConsonantInfo();
+    @Query(value = "SELECT * FROM hangul WHERE is_middle = true", nativeQuery = true)
+    List<Hangul> findAllMiddleVowelInfo();
+    @Query(value = "SELECT * FROM hangul WHERE is_last = true", nativeQuery = true)
+    List<Hangul> findAllLastConsonantInfo();
 }

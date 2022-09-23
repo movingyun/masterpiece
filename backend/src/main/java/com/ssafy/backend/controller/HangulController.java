@@ -57,30 +57,21 @@ public class HangulController {
     @ApiOperation(value = "초성 반환하기")
     @GetMapping(value = "/first")
     public ResponseEntity<List<Hangul>> getFirst(){
-        List<Hangul> firstHangul = new ArrayList<>();
-        for(int i=1; i<20; i++){
-            firstHangul.add(hangulService.findHangulByid(i));
-        }
+        List<Hangul> firstHangul = hangulService.getFirstConsonantsInfo();
         return new ResponseEntity<>(firstHangul, HttpStatus.OK);
     }
 
     @ApiOperation(value = "종성 반환하기")
     @GetMapping(value = "/last")
     public ResponseEntity<List<Hangul>> getLast(){
-        List<Hangul> lastHangul = new ArrayList<>();
-        for(int i=1; i<31; i++){
-            lastHangul.add(hangulService.findHangulByid(i));
-        }
+        List<Hangul> lastHangul = hangulService.getLastConsonantsInfo();
         return new ResponseEntity<>(lastHangul, HttpStatus.OK);
     }
 
     @ApiOperation(value = "중성 반환하기")
     @GetMapping(value = "/middle")
     public ResponseEntity<List<Hangul>> getMiddle(){
-        List<Hangul> middleHangul = new ArrayList<>();
-        for(int i=31; i<52; i++){
-            middleHangul.add(hangulService.findHangulByid(i));
-        }
+        List<Hangul> middleHangul = hangulService.getLastConsonantsInfo();
         return new ResponseEntity<>(middleHangul, HttpStatus.OK);
     }
 
@@ -176,88 +167,88 @@ public class HangulController {
         //client로 넘겨주기
         return new ResponseEntity<>(vowelList, HttpStatus.OK);
     }
-
-    @Operation(summary = "보유한 초성 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 초성 목록 반환")
-    @GetMapping("/own/first")
-    public ResponseEntity getOwnedFirstConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
-        Map<String, Integer> firstMap = new HashMap<>();
-        int num = 0;
-        List<String> firstList = hangulService.getFirstConsonants();
-        System.out.println("==============firstList===============");
-        for(String s : firstList) {
-            System.out.print(s+" ");
-            firstMap.put(s, num++);
-        }
-
-        try{
-            Map<String, Integer> map = hangulService.getFirstConsonantMap();
-            return new ResponseEntity(map, HttpStatus.OK);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @Operation(summary = "보유한 초성 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 초성 목록 반환")
-    @GetMapping("/own/first")
-    public ResponseEntity getOwnedMiddleVowel(@RequestParam(value = "wallet-address") String wallet_address) {
-        Map<String, Integer> middleMap = new HashMap<>();
-        int num = 0;
-        List<String> middleList = hangulService.getMiddleVowels();
-        System.out.println("==============middleList===============");
-        for(String s : middleList) {
-            System.out.print(s+" ");
-            middleMap.put(s, num++);
-        }
-
-        try{
-            Map<String, Integer> map = new HashMap<>();
-            return new ResponseEntity(map, HttpStatus.OK);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @Operation(summary = "보유한 초성 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 초성 목록 반환")
-    @GetMapping("/own/last")
-    public ResponseEntity getOwnedLastConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
-        Map<String, Integer> lastMap = new HashMap<>();
-        int num = 0;
-        List<String> lastList = hangulService.getLastConsonants();
-        System.out.println("==============lastList===============");
-        for(String s : lastList) {
-            System.out.print(s+" ");
-            lastMap.put(s, num++);
-        }
-
-        try{
-            Map<String, Integer> map = hangulService.getFirstConsonantMap();
-            return new ResponseEntity(map, HttpStatus.OK);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @Operation(summary = "보유한 초성 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 초성 목록 반환")
-    @GetMapping("/own/first")
-    public ResponseEntity getAllOwnedConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
-        Map<String, Integer> consonantMap = new HashMap<>();
-        int num = 0;
-        List<String> firstList = hangulService.getFirstConsonants();
-        System.out.println("==============firstList===============");
-        for(String s : firstList) {
-            System.out.print(s+" ");
-            consonantMap.put(s, num++);
-        }
-
-        try{
-            Map<String, Integer> map = hangulService.getFirstConsonantMap();
-            return new ResponseEntity(map, HttpStatus.OK);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-    }
+//
+//    @Operation(summary = "보유한 초성 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 초성 목록 반환")
+//    @GetMapping("/own/first")
+//    public ResponseEntity getOwnedFirstConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
+//        Map<String, Integer> firstMap = new HashMap<>();
+//        int num = 0;
+//        List<String> firstList = hangulService.getFirstConsonants();
+//        System.out.println("==============firstList===============");
+//        for(String s : firstList) {
+//            System.out.print(s+" ");
+//            firstMap.put(s, num++);
+//        }
+//
+//        try{
+//            Map<String, Integer> map = hangulService.getFirstConsonantMap();
+//            return new ResponseEntity(map, HttpStatus.OK);
+//        } catch(Exception e) {
+//            System.out.println(e.getMessage());
+//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//        }
+//    }
+//
+//    @Operation(summary = "보유한 초성 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 초성 목록 반환")
+//    @GetMapping("/own/first")
+//    public ResponseEntity getOwnedMiddleVowel(@RequestParam(value = "wallet-address") String wallet_address) {
+//        Map<String, Integer> middleMap = new HashMap<>();
+//        int num = 0;
+//        List<String> middleList = hangulService.getMiddleVowels();
+//        System.out.println("==============middleList===============");
+//        for(String s : middleList) {
+//            System.out.print(s+" ");
+//            middleMap.put(s, num++);
+//        }
+//
+//        try{
+//            Map<String, Integer> map = new HashMap<>();
+//            return new ResponseEntity(map, HttpStatus.OK);
+//        } catch(Exception e) {
+//            System.out.println(e.getMessage());
+//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//        }
+//    }
+//
+//    @Operation(summary = "보유한 초성 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 초성 목록 반환")
+//    @GetMapping("/own/last")
+//    public ResponseEntity getOwnedLastConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
+//        Map<String, Integer> lastMap = new HashMap<>();
+//        int num = 0;
+//        List<String> lastList = hangulService.getLastConsonants();
+//        System.out.println("==============lastList===============");
+//        for(String s : lastList) {
+//            System.out.print(s+" ");
+//            lastMap.put(s, num++);
+//        }
+//
+//        try{
+//            Map<String, Integer> map = hangulService.getFirstConsonantMap();
+//            return new ResponseEntity(map, HttpStatus.OK);
+//        } catch(Exception e) {
+//            System.out.println(e.getMessage());
+//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//        }
+//    }
+//
+//    @Operation(summary = "보유한 초성 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 초성 목록 반환")
+//    @GetMapping("/own/first")
+//    public ResponseEntity getAllOwnedConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
+//        Map<String, Integer> consonantMap = new HashMap<>();
+//        int num = 0;
+//        List<String> firstList = hangulService.getFirstConsonants();
+//        System.out.println("==============firstList===============");
+//        for(String s : firstList) {
+//            System.out.print(s+" ");
+//            consonantMap.put(s, num++);
+//        }
+//
+//        try{
+//            Map<String, Integer> map = hangulService.getFirstConsonantMap();
+//            return new ResponseEntity(map, HttpStatus.OK);
+//        } catch(Exception e) {
+//            System.out.println(e.getMessage());
+//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//        }
+//    }
 }
