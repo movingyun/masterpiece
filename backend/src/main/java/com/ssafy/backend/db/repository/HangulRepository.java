@@ -22,4 +22,13 @@ public interface HangulRepository extends JpaRepository<Hangul, Integer> {
     @Query("select ho.hangul, ho.hangulCount from HangulOwn ho " +
             "where ho.user = :user and ho.hangul.isMiddle = true")
     List<Object[]> findVowelsOwnedByUser(User user);
+
+    @Query("select h.letter from Hangul h where h.isFirst = true")
+    List<String> findAllFirstConsonant();
+    @Query("select h.letter from Hangul h where h.isMiddle = true")
+    List<String> findAllMiddleVowel();
+    @Query("select h.letter from Hangul h where h.isLast = true")
+    List<String> findAllLastConsonant();
+    @Query("select h.letter from Hangul h where h.isFirst = true or h.isLast = true")
+    List<String> findAllConsonant();
 }

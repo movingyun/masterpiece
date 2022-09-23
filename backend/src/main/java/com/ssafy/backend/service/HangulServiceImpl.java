@@ -8,10 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
-public class HangulServiceImpl implements HangulService{
+public class HangulServiceImpl implements HangulService {
     @Autowired
     private HangulRepository hangulRepository;
 
@@ -47,5 +48,30 @@ public class HangulServiceImpl implements HangulService{
             vowelIdSet.add(thisVowelId);
         }
         return vowelIdSet;
+    }
+
+    @Override
+    public List<String> getFirstConsonants() {
+        return hangulRepository.findAllFirstConsonant();
+    }
+
+    @Override
+    public List<String> getMiddleVowels() {
+        return hangulRepository.findAllMiddleVowel();
+    }
+
+    @Override
+    public List<String> getLastConsonants() {
+        return hangulRepository.findAllLastConsonant();
+    }
+
+    @Override
+    public List<String> getAllConsonants() {
+        return hangulRepository.findAllConsonant();
+    }
+
+    @Override
+    public Map<String, Integer> getFirstConsonantMap() {
+        return null;
     }
 }
