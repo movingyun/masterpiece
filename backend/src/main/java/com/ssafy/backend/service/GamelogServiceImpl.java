@@ -4,6 +4,9 @@ import com.ssafy.backend.db.entity.Gamelog;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.db.repository.GameWordRepository;
 import com.ssafy.backend.db.repository.GamelogRepository;
+import com.ssafy.backend.dto.GameDto;
+import com.ssafy.backend.dto.QuestionDto;
+import com.ssafy.backend.dto.UserSelectDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,40 @@ public class GamelogServiceImpl implements GamelogService{
     @Override
     public Gamelog findGamelogByid(int id) {
         return gamelogRepository.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public GameDto createGame(Gamelog thisGamelog, int gameId) {
+        GameDto game = new GameDto();
+
+        //gameId 넣기
+        game.setGameId(gameId);
+
+        //game 보기 넣기(20개)
+        String questionOption = thisGamelog.getQuestionOption();
+        String[] optionsArr = questionOption.split(",");
+        List<QuestionDto> gameOption = new ArrayList<>();
+
+        for(int j=0; j<5; j++){
+            List<String> optionList = new ArrayList<>();
+            QuestionDto question = new QuestionDto();
+            for(int i=0; i<4; i++){
+                optionList.add(optionsArr[(j*4)+i]);
+            }
+            question.setOptions(optionList);
+            gameOption.add(question);
+        }
+        game.setQuestionOption(gameOption);
+        //game 정답 넣기
+        String questionAnswer = thisGamelog.getQuestionAnswer();
+        String[] answersArr = questionAnswer.split(",");
+        List<Integer> answer = new ArrayList<>();
+        for(int i=0; i<5; i++){
+            answer.add(Integer.parseInt(answersArr[i]));
+        }
+        game.setQuestionAnswer(answer);
+        return game;
     }
 
 
@@ -93,9 +130,32 @@ public class GamelogServiceImpl implements GamelogService{
         return gamelogRepository.findTopByOrderByIdDesc().getId();
     }
 
+
+
     @Transactional
     @Override
-    public void modifyGamelog(Gamelog gamelog) {
+    //티켓 얼마나 벌었는지 반환
+    public int modifyGamelog(UserSelectDto userSelect) {
+        Gamelog gamelog = findGamelogByid(userSelect.getGameId());
+
+        String select = "";
+        String answer = gamelog.getQuestionAnswer();
+        String[] answersArr = answer.split(",");
+        //티켓 획득 수 = 정답 수
+        int getTicket = 0;
+        for(int i=0; i<5; i++){
+            if(userSelect.getUserSelect()[i]==Integer.parseInt(answersArr[i])){
+                getTicket++;
+            }
+            select += userSelect.getUserSelect()[i];
+            if(i!=4)
+                select += ",";
+        }
+        gamelog.setUserSelect(select);
+        gamelog.setEarnedTicket(getTicket);
+
         gamelogRepository.save(gamelog);
+
+        return getTicket;
     }
 }
