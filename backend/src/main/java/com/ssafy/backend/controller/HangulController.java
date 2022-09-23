@@ -112,7 +112,7 @@ public class HangulController {
         //티켓이 없으면 오류 ㄱㄱ
         if(userTicket<drawQuantity){
             System.out.println("티켓 더 벌어오세요");
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("No Ticket",HttpStatus.OK);
         }
 
         // drawQuantity만큼 userTicket줄이기
