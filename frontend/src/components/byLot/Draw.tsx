@@ -1,15 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
+import { useDispatch, useSelector } from 'react-redux';
 import tmpImg from '../../img/tmpImg.PNG';
+import { pickConsonant } from '../../_slice/HangulSlice';
+import LetterCard from '../../commons/LetterCard';
+import SimpleDialog from './SimpleDialog';
 
 const StyledFlex = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 export default function Draw() {
+  const dispatch = useDispatch();
+
+  const pickSuccess = useSelector((state: any) => state.hangul.pickSuccess);
+  const pickConsonantResult = useSelector((state: any) => state.hangul.pickConsonantResult);
+  const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
+  const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (pickSuccess) console.log(pickConsonantResult);
+    else console.log('NO TICKETS');
+  }, [pickSuccess]);
+
+  const handlePickConsonant = () => {
+    const payload = {
+      quantity: 1,
+      userWalletAddress: walletAddress,
+    };
+    if (walletAddress) {
+      dispatch(pickConsonant(payload));
+    }
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <StyledFlex>
@@ -20,6 +51,7 @@ export default function Draw() {
         </div>
       </StyledFlex>
       <StyledFlex>
+        {/* 자음 뽑기 */}
         <div>
           <Card sx={{ maxWidth: 575 }}>
             <StyledFlex>
@@ -40,13 +72,16 @@ export default function Draw() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">Draw</Button>
+                  <Button size="small" onClick={handlePickConsonant}>
+                    Draw
+                  </Button>
                   <Button size="small">View List</Button>
                 </CardActions>
               </div>
             </StyledFlex>
           </Card>
         </div>
+        {/* 모음 뽑기 */}
         <div>
           <Card sx={{ maxWidth: 575 }}>
             <StyledFlex>
@@ -75,7 +110,8 @@ export default function Draw() {
           </Card>
         </div>
       </StyledFlex>
-      <div>inventory</div>
+      {/* 카드 뽑기 결과 Dialog */}
+      <SimpleDialog pickConsonantResult={pickConsonantResult} open={open} onClose={handleClose} />
     </>
   );
 }

@@ -8,8 +8,12 @@ interface LetterCardType {
   description: String;
   title: String;
   letter: String;
-  quantity: Number;
+  quantity?: Number;
 }
+
+LetterCard.defaultProps = {
+  quantity: null,
+};
 
 export default function LetterCard({ description, title, letter, quantity }: LetterCardType) {
   return (
@@ -20,11 +24,17 @@ export default function LetterCard({ description, title, letter, quantity }: Let
         <Typography gutterBottom variant="h5" component="div">
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Quantity : {`${quantity}`}
-          <br />
-          {description}
-        </Typography>
+        {quantity ? (
+          <Typography variant="body2" color="text.secondary">
+            Quantity : {`${quantity}`}
+            <br />
+            {description}
+          </Typography>
+        ) : (
+          <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography>
+        )}
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>

@@ -15,6 +15,7 @@ export default function Inventory() {
 
   return (
     <>
+      <div>inventory</div>
       <div>{walletAddress}</div>
       {consonant.map((one: number, idx: number) => (
         // 출력 테스트

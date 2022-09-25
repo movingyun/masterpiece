@@ -4,7 +4,7 @@ import api from '../api/api';
 
 const fetchConsonant: any = createAsyncThunk('fetchConsonant', async (walletAddress: String, { rejectWithValue }) => {
   try {
-    const res: any = await axios.get(api.fetchConsonant(walletAddress));
+    const res: any = await axios.get(api.fetchConsonant(walletAddress), {});
     console.log(res);
     return res.data;
   } catch (err: any) {
@@ -13,7 +13,7 @@ const fetchConsonant: any = createAsyncThunk('fetchConsonant', async (walletAddr
 });
 const pickConsonant: any = createAsyncThunk('pickConsonant', async (payload, { rejectWithValue }) => {
   try {
-    const res: any = await axios.put(api.pickConsonant(), payload);
+    const res: any = await axios.put(api.pickConsonant(), payload, {});
     return res.data;
   } catch (err: any) {
     return rejectWithValue(err.response.data);
@@ -22,6 +22,7 @@ const pickConsonant: any = createAsyncThunk('pickConsonant', async (payload, { r
 
 export interface HangulState {
   consonant: Array<Number>;
+  pickSuccess: Boolean;
   pickConsonantResult: Array<{
     id: Number;
     description: String;
@@ -35,6 +36,7 @@ export interface HangulState {
 
 const initialState: HangulState = {
   consonant: [],
+  pickSuccess: false,
   pickConsonantResult: [],
 };
 
@@ -47,7 +49,23 @@ export const HangulSlice = createSlice({
       state.consonant = action.payload;
     },
     [pickConsonant.fulfilled]: (state, action) => {
-      state.pickConsonantResult = action.payload;
+      if (action.payload === 'No Ticket') {
+        state.pickSuccess = false;
+        state.pickConsonantResult = [
+          {
+            id: 0,
+            description: '',
+            title: '',
+            letter: '',
+            first: false,
+            last: false,
+            middle: false,
+          },
+        ];
+      } else {
+        state.pickSuccess = true;
+        state.pickConsonantResult = action.payload;
+      }
     },
   },
 });
