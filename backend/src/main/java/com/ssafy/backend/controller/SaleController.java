@@ -20,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/sale")
 @Log4j2
+@CrossOrigin("*")
 public class SaleController {
     @Autowired
     SaleServcie saleServcie;

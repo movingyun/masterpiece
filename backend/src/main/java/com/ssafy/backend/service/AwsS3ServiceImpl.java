@@ -34,22 +34,6 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     UserRepository userRepository;
 
     @Override
-    public String uploadFile(MultipartFile file) {
-        String keyName = createKeyName(file.getOriginalFilename());
-        ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setContentLength(file.getSize());
-        objectMetadata.setContentType(file.getContentType());
-
-        try(InputStream inputStream = file.getInputStream()) {
-            amazonS3Client.putObject(new PutObjectRequest(bucket, keyName, inputStream, objectMetadata)
-                    .withCannedAcl(CannedAccessControlList.PublicRead));
-        } catch(IOException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
-        }
-        return keyName;
-    }
-
-    @Override
     @Transactional
     public String uploadProfileImage(User user, MultipartFile file) {
         String keyName = createKeyName(file.getOriginalFilename());
@@ -84,7 +68,7 @@ public class AwsS3ServiceImpl implements AwsS3Service{
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
         }
         String imagePath = amazonS3Client.getUrl(bucket, keyName).toString();
-        //todo: nft 객체의 imgUrl 갱신
+        nft.setImageUrl(imagePath);
 
         return imagePath;
     }
@@ -95,12 +79,19 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     }
 
     private String createKeyName(String fileName){
-        return UUID.randomUUID().toString().concat(getFileExtension(fileName));
+        String ext = getFileExtension(fileName);
+        if(ext == null)
+            throw new IllegalArgumentException("No proper file extension");
+        return UUID.randomUUID().toString().concat(ext);
     }
     private String getFileExtension(String fileName){
-        //todo: .gif, 이미지 형식의 파일이 아니면 예외 발생시키도록
         try {
-            return fileName.substring(fileName.lastIndexOf("."));
+            //이미지 형식의 파일이 아니면 예외 발생
+            String ext = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
+            if(ext.equals(".gif") || ext.equals(".jpg") || ext.equals(".png")) {
+                return ext;
+            }
+            return null;
         } catch (StringIndexOutOfBoundsException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
         }
