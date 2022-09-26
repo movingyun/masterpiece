@@ -1,11 +1,12 @@
 import React from "react";
 import { Grid, Tab, Tabs, Typography, Box, Button, } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useDispatchHook, useSelectorHook } from '../../_hook/HangulMakerHook';
+import { firstList, middleList, lastList, UseDispatchHook, UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { tabAction, firstAction, middleAction, lastAction } from '../../_slice/HangulMakerSlice';
-import { areaSyllableAction, areaSentenceAction } from '../../_slice/ComposeHangulSlice';
+import { areaSyllableAction, consonantCountAction, vowelCountAction  } from '../../_slice/ComposeHangulSlice';
 import HangulMakerInput from "./HangulMakerInput";
 import composeHangul from "./ComposeHangul";
+import { ConsonantOrder, VowelOrder } from "../../_store/store";
 
 interface TabPanelProps {
   children: React.ReactNode;
@@ -47,7 +48,7 @@ export default function HangulMakerFML(){
   // 초중종 버튼 세로
   const height = unit*4;
 
-  const dispatch = useDispatchHook();
+  const dispatch = UseDispatchHook();
 
   // 초기화
   const[setting, setSetting] = React.useState(false);
@@ -62,9 +63,9 @@ export default function HangulMakerFML(){
   }, []);
 
   // 초성 중성 종성 index
-  const first:number = useSelectorHook(state => state.first.value);
-  const middle:number = useSelectorHook(state => state.middle.value);
-  const last:number = useSelectorHook(state => state.last.value);
+  const first:number = UseSelectorHook(state => state.first.value);
+  const middle:number = UseSelectorHook(state => state.middle.value);
+  const last:number = UseSelectorHook(state => state.last.value);
 
   // 초성 중성 중성 string
   const letter:string[] = [composeHangul(first, -1, 0), composeHangul(-1, middle, 0), composeHangul(-1, -1, last)];
@@ -93,11 +94,45 @@ export default function HangulMakerFML(){
     dispatch(lastAction.change(0));
   }];
 
+  // 자음, 모음 보유개수
+  const consonantCount:number[]=UseSelectorHook(state => state.consonantCount.value);
+  const vowelCount:number[]=UseSelectorHook(state => state.vowelCount.value);
   // 음절 제작
   const makeSyllable = ()=>{
     console.log("MakeSyllable");
     if(first>=0 || middle>=0 || last>0){
-      console.log("do");
+      // console.log(ConsonantOrder[firstList[first] as keyof typeof ConsonantOrder],
+      //   VowelOrder[middleList[middle] as keyof typeof VowelOrder],
+      //   ConsonantOrder[lastList[last] as keyof typeof ConsonantOrder]);
+      const firstOrderIndex = ConsonantOrder[firstList[first] as keyof typeof ConsonantOrder];
+      const middleOrderIndex = VowelOrder[middleList[middle] as keyof typeof VowelOrder];
+      const lastOrderIndex = ConsonantOrder[lastList[last] as keyof typeof ConsonantOrder];
+      
+      if(consonantCount[firstOrderIndex]<=0 || vowelCount[middleOrderIndex]<=0 || consonantCount[lastOrderIndex]<=0 ){
+        console.log("alert 보유개수 부족");
+        alert("보유개수 부족");
+        return;
+      }
+
+      // 초성 count--
+      let payload:any = {
+        index: firstOrderIndex,
+      };
+      dispatch(consonantCountAction.compose(payload));
+      // 중성 count--
+      payload = {
+        index: middleOrderIndex,
+      };
+      dispatch(vowelCountAction.compose(payload));
+      // 종성 count--
+      if((first>=0 && middle >=0) || (first<0 && middle <0)){
+        payload = {
+          index: lastOrderIndex,
+        };
+        dispatch(consonantCountAction.compose(payload));
+      }
+        
+
       dispatch(areaSyllableAction.push(syllable));
       dispatch(firstAction.change(-1));
       dispatch(middleAction.change(-1));

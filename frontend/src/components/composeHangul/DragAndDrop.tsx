@@ -1,15 +1,10 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { useDispatchHook } from "../../_hook/HangulMakerHook";
+import { UseDispatchHook } from "../../_hook/HangulMakerHook";
 import { dragValueAction, areaIndexAction, elementIndexAction } from "../../_slice/ComposeHangulSlice";
 
 export default function DragAndDrop({element, value, unit, areaIndex, elementIndex}:any){ // {listIndex}:number
-  // 영역에 들어갈 HTML element
-  // const [object, setObject] = React.useState<any>(element);
-  // React.useEffect(()=>{
-  //   setObject(element);
-  // },[]);
-  const dispatch = useDispatchHook();
+  const dispatch = UseDispatchHook();
 
   // 드래그 중
   const dragFunction = (e:React.DragEvent, type:string) => {
@@ -47,8 +42,6 @@ export default function DragAndDrop({element, value, unit, areaIndex, elementInd
       border: "2px solid black"
     }}
       draggable="true"
-      // onDragEnter={event => dragFunction(event, 'enter')}
-      // onDragLeave={event => dragFunction(event, 'leave')}
       onDrag = {event => dragFunction(event, 'drag')}
       onDragStart = {event => dragStartFunction(event, 'dragStart')}
       onDragEnd = {event => dragEndFunction(event, 'dragEnd')}
@@ -58,25 +51,3 @@ export default function DragAndDrop({element, value, unit, areaIndex, elementInd
     </Button>
   );
 }
-
-// export default function DragAndDrop(props:any){
-//   // 영역에 들어갈 HTML element
-//   const [element, setElement] = React.useState(props.element);
-
-//   const dragStartHandler = (e:Event) => {
-//     const img = new Image();
-//     e.dataTransfer.setDragImage(img, 0, 0);
-//     posX = e.clientX;
-//     posY = e.clientY;
-//     originalX = e.target.offsetLeft;
-//     originalY = e.target.offsetTop;
-//   };
-//   const onDrop = (result: DropResult) =>{
-
-//   }
-//   return(
-//     <Container>
-
-//     </Container>
-//   );
-// }

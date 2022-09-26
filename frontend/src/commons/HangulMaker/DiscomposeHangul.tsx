@@ -1,29 +1,24 @@
 import React from "react";
-import { useDispatchHook, EnumConsonantOrder, EnumVowelOrder, EnumFtoL } from '../../_hook/HangulMakerHook';
-import { consonantCountAction, vowelCountAction } from '../../_slice/ComposeHangulSlice';
+import { EnumConsonantOrder, EnumVowelOrder, EnumFtoL } from '../../_hook/HangulMakerHook';
 
-export default function discomposeHangul(syllable:string):number[]{
-  // enum ConsonantOrder{'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ', 'ㄸ', 'ㅃ', 'ㅉ'};
-  // enum VowelOrder {'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'};
-  
-  const dispatch = useDispatchHook();
+export default function DiscomposeHangul(syllable:string):number[]{
+
   const syllableUnicode:number = syllable.charCodeAt(0);
   let payload = {
     index: syllableUnicode-'ㅏ'.charCodeAt(0),
   };
+  
   if(syllableUnicode<0xAC00){
     if('ㅏ'.charCodeAt(0)<=syllableUnicode && 'ㅣ'.charCodeAt(0)>=syllableUnicode){
       payload = {
         index: EnumVowelOrder[syllable as keyof typeof EnumVowelOrder],
       };
-      dispatch(vowelCountAction.discompose(payload));
-      return [EnumVowelOrder[syllable as keyof typeof EnumVowelOrder]];  // 모음
+      return [-1, EnumVowelOrder[syllable as keyof typeof EnumVowelOrder], 0];  // 모음
     }
     payload = {
       index: EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder],
     };
-    dispatch(consonantCountAction.discompose(payload));
-    return [EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder]];  // 자음
+    return [EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder], -1, 0];  // 자음
   }
   // console.log('ㅏ'.charCodeAt(0), 'ㅐ'.charCodeAt(0), 'ㅑ'.charCodeAt(0), 'ㅒ'.charCodeAt(0),
   // 'ㅓ'.charCodeAt(0), 'ㅔ'.charCodeAt(0), 'ㅕ'.charCodeAt(0), 'ㅖ'.charCodeAt(0), 'ㅗ'.charCodeAt(0),

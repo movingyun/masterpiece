@@ -3,19 +3,19 @@ import { Container, Box, Button } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SpaceBarIcon from '@mui/icons-material/SpaceBar';
 
-import { useSelectorHook, useDispatchHook } from '../../_hook/HangulMakerHook';
+import { UseSelectorHook, UseDispatchHook } from '../../_hook/HangulMakerHook';
 import { areaSentenceAction, areaSyllableAction } from "../../_slice/ComposeHangulSlice";
 import DragAndDrop from "./DragAndDrop";
 import { HangulComposeArea } from "../../_store/store";
 
 export default function AreaSyllable(){
-  const dispatch = useDispatchHook();
+  const dispatch = UseDispatchHook();
   const thisArea = HangulComposeArea.SYLLABLES;
-  const syllableList:string[]= useSelectorHook(state => state.areaSyllable.value);
+  const syllableList:string[]= UseSelectorHook(state => state.areaSyllable.value);
 
-  const dragValueState:string = useSelectorHook(state => state.dragValue.value);
-  const dragStartArea:HangulComposeArea = useSelectorHook(state => state.areaIndex.value);
-  const dragStartElement:number = useSelectorHook(state => state.elementIndex.value);
+  const dragValueState:string = UseSelectorHook(state => state.dragValue.value);
+  const dragStartArea:HangulComposeArea = UseSelectorHook(state => state.areaIndex.value);
+  const dragStartElement:number = UseSelectorHook(state => state.elementIndex.value);
 
   // 드래그 후 hover
   const dragOverFunction = (e:React.DragEvent, type:string) => {
@@ -46,8 +46,6 @@ export default function AreaSyllable(){
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}
-    // onMouseEnter={event => mouseEnterFunction(event, 'mouseEnter')}
-    // onMouseLeave={event => mouseLeaveFunction(event, 'mouseLeave')}
     >
       <Container>
         {syllableList.map((syllable:string, index:number)=>(
