@@ -20,6 +20,15 @@ const pickConsonant: any = createAsyncThunk('pickConsonant', async (payload, { r
     return rejectWithValue(err.response.data);
   }
 });
+const pickVowel: any = createAsyncThunk('pickVowel', async (payload, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.put(api.pickVowel(), payload, {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
 const fetchFirst: any = createAsyncThunk('fetchFirst', async (payload, { rejectWithValue }) => {
   try {
     const res: any = await axios.get(api.fetchFirst(), {});
@@ -33,7 +42,7 @@ const fetchFirst: any = createAsyncThunk('fetchFirst', async (payload, { rejectW
 export interface HangulState {
   consonant: Object;
   pickSuccess: Boolean;
-  pickConsonantResult: Array<{
+  pickResult: Array<{
     id: Number;
     description: String;
     title: String;
@@ -48,7 +57,7 @@ export interface HangulState {
 const initialState: HangulState = {
   consonant: [],
   pickSuccess: false,
-  pickConsonantResult: [],
+  pickResult: [],
   first: [],
 };
 
@@ -63,7 +72,7 @@ export const HangulSlice = createSlice({
     [pickConsonant.fulfilled]: (state, action) => {
       if (action.payload === 'No Ticket') {
         state.pickSuccess = false;
-        state.pickConsonantResult = [
+        state.pickResult = [
           {
             id: 0,
             description: '',
@@ -76,7 +85,26 @@ export const HangulSlice = createSlice({
         ];
       } else {
         state.pickSuccess = true;
-        state.pickConsonantResult = action.payload;
+        state.pickResult = action.payload;
+      }
+    },
+    [pickVowel.fulfilled]: (state, action) => {
+      if (action.payload === 'No Ticket') {
+        state.pickSuccess = false;
+        state.pickResult = [
+          {
+            id: 0,
+            description: '',
+            title: '',
+            letter: '',
+            first: false,
+            last: false,
+            middle: false,
+          },
+        ];
+      } else {
+        state.pickSuccess = true;
+        state.pickResult = action.payload;
       }
     },
     [fetchFirst.fulfilled]: (state, action) => {
@@ -85,7 +113,7 @@ export const HangulSlice = createSlice({
   },
 });
 
-export { fetchConsonant, pickConsonant, fetchFirst };
+export { fetchConsonant, pickConsonant, pickVowel, fetchFirst };
 
 export const {} = HangulSlice.actions;
 

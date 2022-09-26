@@ -13,6 +13,7 @@ const INVENTORY_URL = '/inventory';
 // Hangul
 const CONSONANT_URL = '/own/consonant';
 const PICK_CONSONANT_URL = '/pick/consonant';
+const PICK_VOWEL_URL = '/pick/vowel';
 const FIRST_URL = '/first';
 
 const api = {
@@ -26,6 +27,7 @@ const api = {
   fetchConsonant: (walletAddress: String) =>
     API_BASE_URL + HANGUL_URL + CONSONANT_URL + `?wallet-address=${walletAddress}`,
   pickConsonant: () => API_BASE_URL + HANGUL_URL + PICK_CONSONANT_URL,
+  pickVowel: () => API_BASE_URL + HANGUL_URL + PICK_VOWEL_URL,
   fetchFirst: () => API_BASE_URL + HANGUL_URL + FIRST_URL,
 };
 

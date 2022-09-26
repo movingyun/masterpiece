@@ -14,15 +14,15 @@ const StyledButtons = styled.div`
   justify-content: center;
 `;
 
-export interface PickConsonantType {
-  pickConsonantResult: any;
+export interface PickType {
+  pickResult: any;
   onClose: (value: string) => void;
   open: boolean;
   pickSuccess: Boolean;
 }
 
-export default function SimpleDialog(props: PickConsonantType) {
-  const { onClose, pickConsonantResult, open, pickSuccess } = props;
+export default function SimpleDialog(props: PickType) {
+  const { onClose, pickResult, open, pickSuccess } = props;
 
   const handleClose = () => {
     onClose('');
@@ -33,7 +33,7 @@ export default function SimpleDialog(props: PickConsonantType) {
       {pickSuccess ? (
         <Dialog onClose={handleClose} open={open}>
           <DialogTitle>Congratulations</DialogTitle>
-          {pickConsonantResult.map((one: any, idx: number) => (
+          {pickResult.map((one: any, idx: number) => (
             <LetterCard
               description={one.description}
               title={one.title}

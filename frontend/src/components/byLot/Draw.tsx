@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import { useDispatch, useSelector } from 'react-redux';
 import tmpImg from '../../img/tmpImg.PNG';
-import { pickConsonant } from '../../_slice/HangulSlice';
+import { pickConsonant, pickVowel } from '../../_slice/HangulSlice';
 import SimpleDialog from './SimpleDialog';
 
 const StyledFlex = styled.div`
@@ -16,12 +16,12 @@ export default function Draw() {
   const dispatch = useDispatch();
 
   const pickSuccess = useSelector((state: any) => state.hangul.pickSuccess);
-  const pickConsonantResult = useSelector((state: any) => state.hangul.pickConsonantResult);
+  const pickResult = useSelector((state: any) => state.hangul.pickResult);
   const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    if (pickSuccess) console.log(pickConsonantResult);
+    if (pickSuccess) console.log(pickResult);
     else console.log('NO TICKETS');
   }, [pickSuccess]);
 
@@ -32,6 +32,17 @@ export default function Draw() {
     };
     if (walletAddress) {
       dispatch(pickConsonant(payload));
+    }
+    setOpen(true);
+  };
+
+  const handlePickVowel = () => {
+    const payload = {
+      quantity: 1,
+      userWalletAddress: walletAddress,
+    };
+    if (walletAddress) {
+      dispatch(pickVowel(payload));
     }
     setOpen(true);
   };
@@ -101,7 +112,9 @@ export default function Draw() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">Draw</Button>
+                  <Button size="small" onClick={handlePickVowel}>
+                    Draw
+                  </Button>
                   <Button size="small">View List</Button>
                 </CardActions>
               </div>
@@ -110,12 +123,7 @@ export default function Draw() {
         </div>
       </StyledFlex>
       {/* 카드 뽑기 결과 Dialog */}
-      <SimpleDialog
-        pickSuccess={pickSuccess}
-        pickConsonantResult={pickConsonantResult}
-        open={open}
-        onClose={handleClose}
-      />
+      <SimpleDialog pickSuccess={pickSuccess} pickResult={pickResult} open={open} onClose={handleClose} />
     </>
   );
 }
