@@ -180,6 +180,13 @@ public class HangulServiceImpl implements HangulService {
         Map<String, String> consonantMap = new HashMap<>();
         int num = 1;
         List<String> consonantList = hangulRepository.findAllConsonant();
+        consonantList.remove("ㄸ"); //ㄸ
+        consonantList.remove("ㅃ"); //ㅃ
+        consonantList.remove("ㅉ"); //ㅉ
+        consonantList.add( "ㄸ");
+        consonantList.add( "ㅃ");
+        consonantList.add( "ㅉ");
+
         System.out.println("==============consonantList===============");
         for(String s : consonantList) {
             System.out.print(s+" ");
@@ -189,15 +196,15 @@ public class HangulServiceImpl implements HangulService {
 
         Map<String, Integer> resMap = new HashMap<>();
         List<Object[]> list = hangulRepository.findConsonantsOwnedByUser(user);
-        int i=0, j=0;
-        for(; i<consonantList.size(); i++){
-            if(consonantList.get(i).equals(((Hangul)list.get(j)[0]).getLetter())) {
-                resMap.put(consonantMap.get(consonantList.get(i)), (Integer)list.get(j)[1]);
-                j++;
-            } else {
-                resMap.put(consonantMap.get(consonantList.get(i)), 0);
+        for(int i=0; i<consonantList.size(); i++){
+            for(int j=0; j<list.size(); j++){
+                if(consonantList.get(i).equals(((Hangul)list.get(j)[0]).getLetter())){
+                    resMap.put(consonantMap.get(consonantList.get(i)), (Integer)list.get(j)[1]);
+                    break;
+                }
             }
         }
+
         return resMap;
     }
 
