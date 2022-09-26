@@ -1,7 +1,5 @@
 import React from "react";
 import { createSlice, Reducer } from '@reduxjs/toolkit';
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import SpaceBarIcon from '@mui/icons-material/SpaceBar';
 
 // 드래그중인 값
 export const dragValue = createSlice({
@@ -63,7 +61,7 @@ export const areaSyllableAction = areaSyllable.actions;
 // 제작중인 문장
 export const areaSentence = createSlice({
   name: 'areaSentence',	// key
-  initialState:{value:["space", "enter", "객"]},	// 초기값
+  initialState:{value:[""]},	// 초기값
   reducers:{
     reset:(state, action) =>{
       state.value = [""];

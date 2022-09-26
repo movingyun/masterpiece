@@ -1,19 +1,19 @@
 import React from "react";
 import { Box } from '@mui/material';
 import RestoreIcon from '@mui/icons-material/Restore';
-import { useSelectorHook, useDispatchHook } from "../../_hook/HangulMakerHook";
-import { areaSentenceAction, areaSyllableAction } from "../../_slice/ComposeHangulSlice";
+import { UseSelectorHook, UseDispatchHook } from "../../_hook/HangulMakerHook";
+import { areaSentenceAction, areaSyllableAction, consonantCountAction, vowelCountAction } from "../../_slice/ComposeHangulSlice";
 import { HangulComposeArea } from "../../_store/store";
-import discomposeHangul from "../../commons/HangulMaker/DiscomposeHangul";
+import DiscomposeHangul from "../../commons/HangulMaker/DiscomposeHangul";
 
 export default function AreaDiscompose(){
-  const dispatch = useDispatchHook();
-  const thisArea = HangulComposeArea.SYLLABLES;
-  const syllableList:string[]= useSelectorHook(state => state.areaSyllable.value);
+  const dispatch = UseDispatchHook();
+  const thisArea = HangulComposeArea.DISCOMPOSE;
+  const syllableList:string[]= UseSelectorHook(state => state.areaSyllable.value);
 
-  const dragValueState:string = useSelectorHook(state => state.dragValue.value);
-  const dragStartArea:HangulComposeArea = useSelectorHook(state => state.areaIndex.value);
-  const dragStartElement:number = useSelectorHook(state => state.elementIndex.value);
+  const dragValueState:string = UseSelectorHook(state => state.dragValue.value);
+  const dragStartArea:HangulComposeArea = UseSelectorHook(state => state.areaIndex.value);
+  const dragStartElement:number = UseSelectorHook(state => state.elementIndex.value);
 
   // 드래그 후 hover
   const dragOverFunction = (e:React.DragEvent, type:string) => {
@@ -30,7 +30,26 @@ export default function AreaDiscompose(){
     console.log(type);
     // 분해
     if(dragValueState!="space" && dragValueState!="enter"){
-      console.log(discomposeHangul(dragValueState));
+      const letterList = DiscomposeHangul(dragValueState);
+      let payload = {};
+      if(letterList[0]>=0){
+        payload = {
+          index: letterList[0],
+        };
+        dispatch(consonantCountAction.discompose(payload));
+      }
+      if(letterList[1]>=0){
+        payload = {
+          index: letterList[1],
+        };
+        dispatch(vowelCountAction.discompose(payload));
+      }
+      if(letterList[2]>=0){
+        payload = {
+          index: letterList[2],
+        };
+        dispatch(consonantCountAction.discompose(payload));
+      }
     }
     if(dragStartArea===HangulComposeArea.SYLLABLES){
       if(dragValueState!="space" && dragValueState!="enter"){
@@ -47,8 +66,6 @@ export default function AreaDiscompose(){
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}
-    // onMouseEnter={event => mouseEnterFunction(event, 'mouseEnter')}
-    // onMouseLeave={event => mouseLeaveFunction(event, 'mouseLeave')}
     >
       <RestoreIcon sx={{width:"15%", height:"15%"}}/>
     </Box>

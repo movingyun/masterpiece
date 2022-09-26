@@ -4,8 +4,8 @@ import type { TypedUseSelectorHook } from 'react-redux'
 import type { State, Dispatch } from '../_store/store'
 import { hangulFirst, hangulMiddle, hangulLast, ConsonantOrder, VowelOrder, FtoL } from '../_store/store'
 
-export const useDispatchHook: () => Dispatch = useDispatch;
-export const useSelectorHook: TypedUseSelectorHook<State> = useSelector;
+export const UseDispatchHook: () => Dispatch = useDispatch;
+export const UseSelectorHook: TypedUseSelectorHook<State> = useSelector;
 
 // 초성중성종성 리스트
 export const firstList:string[] = hangulFirst;

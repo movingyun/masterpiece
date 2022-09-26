@@ -2,19 +2,19 @@ import React from "react";
 import { Box, Grid } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SpaceBarIcon from '@mui/icons-material/SpaceBar';
-import { useSelectorHook, useDispatchHook } from "../../_hook/HangulMakerHook";
+import { UseSelectorHook, UseDispatchHook } from "../../_hook/HangulMakerHook";
 import { areaSentenceAction, areaSyllableAction } from "../../_slice/ComposeHangulSlice";
 import { HangulComposeArea } from "../../_store/store";
 import DragAndDrop from "./DragAndDrop";
 
 export default function AreaSentence(){
   const thisArea = HangulComposeArea.SENTENCE;
-  const sentenceList:string[]= useSelectorHook(state => state.areaSentence.value);
+  const sentenceList:string[]= UseSelectorHook(state => state.areaSentence.value);
 
-  const dragValueState:string = useSelectorHook(state => state.dragValue.value);
-  const dragStartArea:HangulComposeArea = useSelectorHook(state => state.areaIndex.value);
-  const dragStartElement:number = useSelectorHook(state => state.elementIndex.value);
-  const dispatch = useDispatchHook();
+  const dragValueState:string = UseSelectorHook(state => state.dragValue.value);
+  const dragStartArea:HangulComposeArea = UseSelectorHook(state => state.areaIndex.value);
+  const dragStartElement:number = UseSelectorHook(state => state.elementIndex.value);
+  const dispatch = UseDispatchHook();
 
   // 드래그 후 hover
   const dragOverFunction = (e:React.DragEvent, type:string) => {

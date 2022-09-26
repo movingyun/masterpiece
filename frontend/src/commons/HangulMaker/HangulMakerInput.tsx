@@ -1,23 +1,43 @@
 import React from "react";
 import { Box, Button, Container } from "@mui/material";
-import { useDispatchHook, useSelectorHook, firstList, middleList, lastList } from '../../_hook/HangulMakerHook';
+import { UseDispatchHook, UseSelectorHook, firstList, middleList, lastList } from '../../_hook/HangulMakerHook';
 import { firstAction, middleAction, lastAction } from '../../_slice/HangulMakerSlice';
-import store from '../../_store/store';
+import { ConsonantOrder, VowelOrder} from '../../_store/store';
 
 export default function HangulMakerInput(){
   // 자모음 크기단위
   const unit = 10;
   // 초성중성종성 선택 (redux로 구현해야함)
   enum FML{FIRST, MIDDLE, LAST};
-  const select = useSelectorHook(state => state.tab.value);
+  const select = UseSelectorHook(state => state.tab.value);
   // 초성중성종성 리스트
   const letterList:string[][] = [firstList, middleList, lastList,];
   // 초중종성 선택
   const selectLetter = [firstAction, middleAction, lastAction];
-  const dispatch = useDispatchHook();
+  const dispatch = UseDispatchHook();
   const letterChange = (newValue: number) => {
     dispatch(selectLetter[select].change(newValue));
   };
+
+  // 자음, 모음 보유개수
+  const consonantCount:number[]=UseSelectorHook(state => state.consonantCount.value);
+  const vowelCount:number[]=UseSelectorHook(state => state.vowelCount.value);
+
+  // select 에 따른 자/모음 보유개수
+  const count:number[] = [];
+  // colorList
+  const colorList:string[] = ['#FFD8E3', '#FFEBCD', '#FFFFE0', '#F0FFF0', '#E0FFFF', '#FFD7FF'];
+
+  if(select === FML.FIRST || select === FML.LAST){
+    letterList[select].map((letter:string)=>{
+      count.push(consonantCount[ConsonantOrder[letter as keyof typeof ConsonantOrder]]);
+    });
+  }
+  else if(select === FML.MIDDLE){
+    letterList[select].map((letter:string)=>{
+      count.push(vowelCount[VowelOrder[letter as keyof typeof VowelOrder]]);
+    });
+  }
   return(
     <Container>
       {letterList[select].map((letter:string, index:number)=>{
@@ -25,29 +45,7 @@ export default function HangulMakerInput(){
         if(select === FML.LAST && index===0){
           return;
         }
-        // 현재 letter 보유수
-        // const count:number = letterCountList[index];
-
-        const count:number = 0;
-
-        // const consonantCount:number[]=useSelectorHook(state => state.consonantCount.value);
-        // const vowelCount:number[]=useSelectorHook(state => state.vowelCount.value);
-
-        // let count:number[] = [];
-
-        // if(select === FML.FIRST){
-
-        // }
-        // else if(select === FML.MIDDLE){
-
-        // }
-        // else if(select === FML.LAST){
-
-        // }
-        
-        // letter Color (각 자모음 color 필요)
-        // const color:string = (count>0) ? "letterColorList[index]" : "#AAAAAA";
-        const color:string = (count>0) ? "blue" : "#CCCCCC";
+        const color:string = (count[index]>0) ? colorList[index%6] : "#CCCCCC";
 
         return (
           <Button key={`${letter}middleButton`} 
@@ -68,7 +66,7 @@ export default function HangulMakerInput(){
               borderRadius: "100%",
               border: "2px solid black"
             }}>
-              {count.toString()}
+              {count[index].toString()}
             </Box>
             {letter}
           </Button>
