@@ -34,7 +34,6 @@ export default function SimpleDialog(props: PickConsonantType) {
         <Dialog onClose={handleClose} open={open}>
           <DialogTitle>Congratulations</DialogTitle>
           {pickConsonantResult.map((one: any, idx: number) => (
-            // 출력 테스트
             <LetterCard
               description={one.description}
               title={one.title}
