@@ -42,7 +42,6 @@ public class SaleServiceImpl implements SaleServcie {
     public List<SalelogDto> getSaleLog(String nftAddress) {
         int nftId = nftService.findBycontractAddress(nftAddress).getId();
         List<Salelog> saleLogs = saleRepository.findAllByNftId(nftId);
-        //todo : 판사람 산사람 시간 가격만 dto에 넣어서 반환해주기
         List<SalelogDto> salelogDtos = new ArrayList<>();
         for(Salelog salelog : saleLogs){
             SalelogDto salelogDto = SalelogDto.builder()
