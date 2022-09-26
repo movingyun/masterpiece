@@ -5,7 +5,7 @@ import HangulMaker from '../commons/HangulMaker/HangulMaker';
 import DragAndDrop from '../components/composeHangul/DragAndDrop';
 import AreaDiscompose from '../components/composeHangul/AreaDiscompose';
 import AreaSyllable from '../components/composeHangul/AreaSyllable';
-import AreaCompose from '../components/composeHangul/AreaCompose';
+import AreaSentence from '../components/composeHangul/AreaSentence';
 
 export default function ComposeHangul() {
   return (
@@ -20,9 +20,8 @@ export default function ComposeHangul() {
           <Grid item xs={6}><AreaSyllable/></Grid>
         </Grid>
         <Grid item xs={12}>
-          <AreaCompose/>
+          <AreaSentence/>
         </Grid>
-        <DragAndDrop element={<Grid item xs={12} justifyContent="flex-end" alignItems="center"><Button>hihi</Button></Grid>}/>
         <div>
           <Link to="/decoratehangul">decorateHangul</Link>
         </div>

@@ -1,32 +1,61 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Button } from "@mui/material";
+import { useDispatchHook } from "../../_hook/HangulMakerHook";
+import { dragValueAction, areaIndexAction, elementIndexAction } from "../../_slice/ComposeHangulSlice";
 
-export default function DragAndDrop({element}:any){
+export default function DragAndDrop({element, value, unit, areaIndex, elementIndex}:any){ // {listIndex}:number
   // 영역에 들어갈 HTML element
-  const [object, setObject] = React.useState<any>(element);
+  // const [object, setObject] = React.useState<any>(element);
   // React.useEffect(()=>{
   //   setObject(element);
   // },[]);
+  const dispatch = useDispatchHook();
 
+  // 드래그 중
   const dragFunction = (e:React.DragEvent, type:string) => {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log(type);
+    e.preventDefault();
+    e.stopPropagation();
+    const dndObject:HTMLDivElement = (e.target as HTMLDivElement);
+  }
+  // 드래그 시작
+  const dragStartFunction = (e:React.DragEvent, type:string) => {
+    // e.preventDefault();
+    // e.stopPropagation();
+    const dndObject:HTMLDivElement = (e.target as HTMLDivElement);
+    dispatch(dragValueAction.setValue(value));
+    dispatch(areaIndexAction.setValue(areaIndex));
+    dispatch(elementIndexAction.setValue(elementIndex));
+  }
+  // 드래그 끝
+  const dragEndFunction = (e:React.DragEvent, type:string) => {
+    // e.preventDefault();
+    // e.stopPropagation();
+    const dndObject:HTMLDivElement = (e.target as HTMLDivElement);
+    dispatch(dragValueAction.setValue(""));
+    dispatch(areaIndexAction.setValue(-1));
+    dispatch(elementIndexAction.setValue(-1));
   }
 
   return (
-    <Grid
-      container
-      justifyContent="flex-end"
-      alignItems="center"
-      style={{width:100, height:100, border:"2px solid black", borderRadius:"100%"}}
+    <Button
+      // onClick={() => {}}
+      sx={{minWidth: unit*5, minHeight: unit*5, width: unit*5, height:unit*5}} type="button"
+      style={{ margin:"10px", position:"relative",
+      fontSize:unit*3,
+      backgroundColor:"#CCCCCC", color:"black",
+      borderRadius: "100%",
+      border: "2px solid black"
+    }}
       draggable="true"
-      onDrop={event => dragFunction(event, 'drop')}
-      onDragEnter={event => dragFunction(event, 'enter')}
-      onDragLeave={event => dragFunction(event, 'leave')}
+      // onDragEnter={event => dragFunction(event, 'enter')}
+      // onDragLeave={event => dragFunction(event, 'leave')}
+      onDrag = {event => dragFunction(event, 'drag')}
+      onDragStart = {event => dragStartFunction(event, 'dragStart')}
+      onDragEnd = {event => dragEndFunction(event, 'dragEnd')}
       className='dragAndDrop'
-    > {element}
-    </Grid>
+      >
+      {element}
+    </Button>
   );
 }
 

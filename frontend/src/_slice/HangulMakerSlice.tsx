@@ -1,6 +1,7 @@
 import React from "react";
 import { createSlice, Reducer } from '@reduxjs/toolkit';
 
+// 초/중/종 선택
 export const selectTab = createSlice({
   name: 'selectTab',	// key
   initialState:{value:0},	// 초기값
@@ -12,6 +13,7 @@ export const selectTab = createSlice({
 });
 export const tabAction = selectTab.actions;
 
+// 초성
 export const selectFirst = createSlice({
   name: 'selectFirst',	// key
   initialState:{value:-1},	// 초기값
@@ -23,6 +25,7 @@ export const selectFirst = createSlice({
 });
 export const firstAction = selectFirst.actions;
 
+// 중성
 export const selectMiddle = createSlice({
   name: 'selectMiddle',	// key
   initialState:{value:-1},	// 초기값
@@ -34,6 +37,7 @@ export const selectMiddle = createSlice({
 });
 export const middleAction = selectMiddle.actions;
 
+// 종성
 export const selectLast = createSlice({
   name: 'selectLast',	// key
   initialState:{value:0},	// 초기값
