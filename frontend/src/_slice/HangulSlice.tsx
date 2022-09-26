@@ -14,6 +14,7 @@ const fetchConsonant: any = createAsyncThunk('fetchConsonant', async (walletAddr
 const pickConsonant: any = createAsyncThunk('pickConsonant', async (payload, { rejectWithValue }) => {
   try {
     const res: any = await axios.put(api.pickConsonant(), payload, {});
+    console.log(res.data);
     return res.data;
   } catch (err: any) {
     return rejectWithValue(err.response.data);

@@ -36,10 +36,6 @@ export default function LetterCard({ description, title, letter, quantity }: Let
           </Typography>
         )}
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }

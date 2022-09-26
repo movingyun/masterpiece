@@ -6,7 +6,6 @@ import CardActions from '@mui/material/CardActions';
 import { useDispatch, useSelector } from 'react-redux';
 import tmpImg from '../../img/tmpImg.PNG';
 import { pickConsonant } from '../../_slice/HangulSlice';
-import LetterCard from '../../commons/LetterCard';
 import SimpleDialog from './SimpleDialog';
 
 const StyledFlex = styled.div`
@@ -111,7 +110,12 @@ export default function Draw() {
         </div>
       </StyledFlex>
       {/* 카드 뽑기 결과 Dialog */}
-      <SimpleDialog pickConsonantResult={pickConsonantResult} open={open} onClose={handleClose} />
+      <SimpleDialog
+        pickSuccess={pickSuccess}
+        pickConsonantResult={pickConsonantResult}
+        open={open}
+        onClose={handleClose}
+      />
     </>
   );
 }
