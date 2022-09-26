@@ -1,27 +1,46 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LetterCard from '../../commons/LetterCard';
-import { fetchConsonant } from '../../_slice/HangulSlice';
+import { fetchInventory, Hangul } from '../../_slice/UserSlice';
+import { ConsonantOrder, VowelOrder } from '../../_store/store';
 
 export default function Inventory() {
   const dispatch = useDispatch();
 
   const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
-  const consonant = useSelector((state: any) => state.hangul.consonant);
+  const inventory = useSelector((state: any) => state.user.inventory);
 
   useEffect(() => {
-    dispatch(fetchConsonant(walletAddress));
-  });
+    if (walletAddress) dispatch(fetchInventory(walletAddress));
+    console.log(inventory);
+  }, [walletAddress]);
 
   return (
     <>
       <div>inventory</div>
-      <div>{walletAddress}</div>
-      {consonant.map((one: number, idx: number) => (
-        // 출력 테스트
-        <LetterCard description="설명" title="제목" letter="ㄱ" quantity={one} />
-      ))}
-      <LetterCard description="설명" title="제목" letter="ㄱ" quantity={1} />
+      {Object.values<Array<Hangul>>(inventory).map((one: Array<Hangul>, idx: Number) =>
+        one.map((hangul: Hangul, index) =>
+          hangul.quantity > 0 ? (
+            hangul.hangulId <= 30 ? (
+              <LetterCard
+                description={hangul.description}
+                title={hangul.title}
+                letter={`${ConsonantOrder[index]}`}
+                quantity={hangul.quantity}
+                key={'inventory' + `${idx}` + `${index}`}
+              />
+            ) : (
+              <LetterCard
+                description={hangul.description}
+                title={hangul.title}
+                letter={VowelOrder[index]}
+                quantity={hangul.quantity}
+                key={'inventory' + `${idx}` + `${index}`}
+              />
+            )
+          ) : null
+        )
+      )}
     </>
   );
 }

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Card, CardContent, Typography, Button } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
 import tmpImg from '../img/tmpImg.PNG';
 
 interface LetterCardType {
@@ -27,6 +26,8 @@ export default function LetterCard({ description, title, letter, quantity }: Let
         {quantity ? (
           <Typography variant="body2" color="text.secondary">
             Quantity : {`${quantity}`}
+            <br />
+            Letter: {`${letter}`}
             <br />
             {description}
           </Typography>
