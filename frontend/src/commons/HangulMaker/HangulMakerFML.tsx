@@ -1,8 +1,9 @@
 import React from "react";
 import { Grid, Tab, Tabs, Typography, Box, Button, } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useTabDispatch, useTabSelector } from '../../_hook/HangulMakerHook';
+import { useDispatchHook, useSelectorHook } from '../../_hook/HangulMakerHook';
 import { tabAction, firstAction, middleAction, lastAction } from '../../_slice/HangulMakerSlice';
+import { areaSyllableAction, areaSentenceAction } from '../../_slice/ComposeHangulSlice';
 import HangulMakerInput from "./HangulMakerInput";
 import composeHangul from "./ComposeHangul";
 
@@ -46,7 +47,7 @@ export default function HangulMakerFML(){
   // 초중종 버튼 세로
   const height = unit*4;
 
-  const dispatch = useTabDispatch();
+  const dispatch = useDispatchHook();
 
   // 초기화
   const[setting, setSetting] = React.useState(false);
@@ -61,9 +62,9 @@ export default function HangulMakerFML(){
   }, []);
 
   // 초성 중성 종성 index
-  const first:number = useTabSelector(state => state.first.value);
-  const middle:number = useTabSelector(state => state.middle.value);
-  const last:number = useTabSelector(state => state.last.value);
+  const first:number = useSelectorHook(state => state.first.value);
+  const middle:number = useSelectorHook(state => state.middle.value);
+  const last:number = useSelectorHook(state => state.last.value);
 
   // 초성 중성 중성 string
   const letter:string[] = [composeHangul(first, -1, 0), composeHangul(-1, middle, 0), composeHangul(-1, -1, last)];
@@ -92,6 +93,18 @@ export default function HangulMakerFML(){
     dispatch(lastAction.change(0));
   }];
 
+  // 음절 제작
+  const makeSyllable = ()=>{
+    console.log("MakeSyllable");
+    if(first>=0 || middle>=0 || last>0){
+      console.log("do");
+      dispatch(areaSyllableAction.push(syllable));
+      dispatch(firstAction.change(-1));
+      dispatch(middleAction.change(-1));
+      dispatch(lastAction.change(0));
+    }
+  };
+
   return (
     <Grid container item xs={12}>
       <Grid item xs={9} justifyContent="center" alignItems="center">
@@ -115,6 +128,12 @@ export default function HangulMakerFML(){
         <Box display="flex" justifyContent="center" alignItems="center"
         sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}>
           <Typography style={{fontSize:"30px"}}>{syllable}</Typography>
+        </Box>
+        <Box display="flex" justifyContent="center" alignItems="center"
+        sx={{width: {width}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}>
+          <Button onClick={makeSyllable} style={{backgroundColor:"green", color:"white"}}>
+            Done
+          </Button>
         </Box>
       </Grid>
       <TabPanel value={value} index={0}>
