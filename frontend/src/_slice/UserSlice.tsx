@@ -18,6 +18,26 @@ const fetchUser: any = createAsyncThunk('fetchUser', async (walletAddress: Strin
     return rejectWithValue(err.response.data);
   }
 });
+const fetchInventory: any = createAsyncThunk('fetchInventory', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchInventory(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+export interface Hangul {
+  hangulId: Number;
+  quantity: Number;
+  description: String;
+  title: String;
+}
+export interface Inventory {
+  consonant: Array<Hangul>;
+  vowe: Array<Hangul>;
+}
 
 export interface UserState {
   currentUser: {
@@ -37,6 +57,7 @@ export interface UserState {
     imgUrl: String;
   };
   isLogin: Boolean;
+  inventory: Inventory;
 }
 
 const initialState: UserState = {
@@ -57,6 +78,10 @@ const initialState: UserState = {
     imgUrl: '',
   },
   isLogin: false,
+  inventory: {
+    consonant: [],
+    vowe: [],
+  },
 };
 
 export const UserSlice = createSlice({
@@ -102,10 +127,13 @@ export const UserSlice = createSlice({
     [fetchUser.fulfilled]: (state, action) => {
       state.searchedUser = action.payload;
     },
+    [fetchInventory.fulfilled]: (state, action) => {
+      state.inventory = action.payload;
+    },
   },
 });
 
-export { signin, fetchUser };
+export { signin, fetchUser, fetchInventory };
 
 export const { getCurrentUser, checkLogin, logout } = UserSlice.actions;
 
