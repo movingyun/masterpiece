@@ -16,3 +16,4 @@ export const lastList:string[] = hangulLast;
 export const EnumConsonantOrder = ConsonantOrder;
 export const EnumVowelOrder = VowelOrder;
 export const EnumFtoL = FtoL;
+// test
