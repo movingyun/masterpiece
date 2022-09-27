@@ -102,7 +102,6 @@ public class NFTServiceImpl implements NFTService {
     @Override
     @Transactional
     public void postNFT(NFTCreateDto dto) throws IllegalArgumentException{
-        System.out.println("postNFT");
         User user = userRepository.findByWalletAddress(dto.getCreatorWalletAddress()).orElse(null);
         if(user == null){
             throw new IllegalArgumentException("No such user");
