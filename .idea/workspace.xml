@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="aaf34904-a205-425a-a790-3a26b2058890" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/_slice/ComposeHangulSlice.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/_slice/HangulSlice.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/DiscomposeHangul.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/byLot/Draw.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/byLot/Inventory.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/byLot/SimpleDialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaSentence.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/img/tmpImg.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/shims‑png.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HangulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HangulController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/_hook/HangulMakerHook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/_hook/HangulMakerHook.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/_slice/HangulMakerSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/_slice/HangulMakerSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/_slice/UserSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/_slice/UserSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/_store/HangulMakerStore.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/_store/store.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/_store/store.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/ComposeHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/ComposeHangul.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMaker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMaker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMakerFML.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMakerFML.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMakerInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMakerInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/commons/LetterCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/LetterCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/byLot/byLot.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaCompose.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaDiscompose.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaDiscompose.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaSyllable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaSyllable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/composeHangul/DragAndDrop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/composeHangul/DragAndDrop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ByLot.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ByLot.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ComposeHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ComposeHangul.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2EtvwsfuiQitKlxJyMAYIgtvUs2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ts.external.directory.path": "C:\\Users\\SSAFY\\Desktop\\특화프로젝트_한글날\\S07P22A508\\frontend\\node_modules\\typescript\\lib"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aaf34904-a205-425a-a790-3a26b2058890" name="Changes" comment="" />
+      <created>1663427941925</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1663427941925</updated>
+      <workItem from="1663427947217" duration="3000" />
+      <workItem from="1664261707528" duration="56000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
