@@ -151,6 +151,18 @@ public class NFTServiceImpl implements NFTService {
     }
 
     @Override
+    public NFTDto getNFTDto(String nft_address) {
+        //결과는 하나겠지만 편의상 List로 반환 받음
+        List<Nft> nftList = nftRepository.findByNftHash(nft_address);
+        if(nftList == null || nftList.isEmpty()){
+            throw new IllegalArgumentException("No such NFT");
+        }
+
+        List<NFTDto> dtoList = makeNFTDtoList(nftList);
+        return dtoList.get(0);
+    }
+
+    @Override
     public List<NFTDto> getAllNFT() {
         List<Nft> nftList = nftRepository.findAllOnSale();
         return makeNFTDtoList(nftList);
