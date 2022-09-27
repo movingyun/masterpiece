@@ -34,7 +34,7 @@ public class NFTServiceImpl implements NFTService {
     @Autowired
     private AwsS3Service awsS3Service;
 
-    private final String gatewayURL = "https://gateway.pinata.cloud/ipfs/";
+    private final String gatewayURL = "https://ipfs.io/ipfs/";
 
     @Override
     public Nft findById(int id) {
