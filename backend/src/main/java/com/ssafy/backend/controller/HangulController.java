@@ -46,14 +46,6 @@ public class HangulController {
                 ,"ㅍ","ㅎ","ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ"
                 ,"ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ"
                 ,"ㅡ","ㅢ","ㅣ");
-//
-//        num = 0;
-//        List<String> consonantList = hangulService.getAllConsonants();
-//        System.out.println("==============consonantList===============");
-//        for(String s : consonantList) {
-//            System.out.print(s+" ");
-//            firstMap.put(s, num++);
-//        }
     }
 
 
