@@ -28,7 +28,7 @@ export default function NFTCardList() {
   return (
     <StyledCardList>
       {NFTAll.map((NFTInfo: NFT, idx: Number) => (
-        <Link to="/nftdetail" key={`${idx}` + NFTInfo.imgUrl}>
+        <Link to={`/nftdetail${nftAddress}`} key={`${idx}` + NFTInfo.imgUrl}>
           <NFTCard
             imgUrl={NFTInfo.imgUrl}
             nftTitle={NFTInfo.nftTitle}

@@ -11,6 +11,15 @@ const fetchAllNFT: any = createAsyncThunk('fetchAllNFT', async (payload, { rejec
     return rejectWithValue(err.response.data);
   }
 });
+const fetchNFTDetail: any = createAsyncThunk('fetchNFTDetail', async (nftAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchNFTDetail(nftAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
 
 export interface NFT {
   imgUrl: String;
@@ -25,10 +34,21 @@ export interface NFT {
 
 export interface NFTState {
   NFTAll: Array<NFT>;
+  currentNFT: NFT;
 }
 
 const initialState: NFTState = {
   NFTAll: [],
+  currentNFT: {
+    imgUrl: '',
+    nftTitle: '',
+    ntfPrice: '',
+    nftCreatorNickname: '',
+    lastPrice: '',
+    nftOwnerNickname: '',
+    nftTags: [],
+    nftLike: 0,
+  },
 };
 
 export const NFTSlice = createSlice({
@@ -39,10 +59,13 @@ export const NFTSlice = createSlice({
     [fetchAllNFT.fulfilled]: (state, action) => {
       state.NFTAll = action.payload;
     },
+    [fetchNFTDetail.fulfilled]: (state, action) => {
+      state.currentNFT = action.payload;
+    },
   },
 });
 
-export { fetchAllNFT };
+export { fetchAllNFT, fetchNFTDetail };
 
 export const {} = NFTSlice.actions;
 

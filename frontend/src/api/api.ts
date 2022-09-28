@@ -18,6 +18,7 @@ const PICK_VOWEL_URL = '/pick/vowel';
 const FIRST_URL = '/first';
 
 // NFT
+const DETAIL_URL = '/detail';
 
 const api = {
   // user
@@ -35,6 +36,7 @@ const api = {
 
   // NFT
   fetchAllNFT: () => API_BASE_URL + NFT_URL,
+  fetchNFTDetail: (nftAddress: String) => API_BASE_URL + NFT_URL + DETAIL_URL + `?nft-address=${nftAddress}`,
 };
 
 export default api;
