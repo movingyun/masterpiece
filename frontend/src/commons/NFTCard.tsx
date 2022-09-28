@@ -21,12 +21,13 @@ const StyledCardDescription = styled.div`
 export default function NFTCard({
   imgUrl,
   nftTitle,
-  ntfPrice,
+  nftPrice,
   nftCreatorNickname,
   lastPrice,
   nftOwnerNickname,
   nftTags,
   nftLike,
+  nftAddress,
 }: NFT) {
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -44,7 +45,7 @@ export default function NFTCard({
                 {nftTitle}
               </Typography>
               <Typography variant="body1" color="text.secondary" component="div">
-                Price : {ntfPrice}
+                Price : {nftPrice}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="div">
                 Last sale : {lastPrice}

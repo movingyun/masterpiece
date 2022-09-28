@@ -28,16 +28,17 @@ export default function NFTCardList() {
   return (
     <StyledCardList>
       {NFTAll.map((NFTInfo: NFT, idx: Number) => (
-        <Link to={`/nftdetail${nftAddress}`} key={`${idx}` + NFTInfo.imgUrl}>
+        <Link to={`/nftdetail/${NFTInfo.nftAddress}`} key={`${idx}` + NFTInfo.imgUrl}>
           <NFTCard
             imgUrl={NFTInfo.imgUrl}
             nftTitle={NFTInfo.nftTitle}
-            ntfPrice={NFTInfo.ntfPrice}
+            nftPrice={NFTInfo.nftPrice}
             nftCreatorNickname={NFTInfo.nftCreatorNickname}
             lastPrice={NFTInfo.lastPrice}
             nftOwnerNickname={NFTInfo.nftOwnerNickname}
             nftTags={NFTInfo.nftTags}
             nftLike={NFTInfo.nftLike}
+            nftAddress={NFTInfo.nftAddress}
           />
         </Link>
       ))}

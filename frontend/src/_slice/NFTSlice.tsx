@@ -24,12 +24,13 @@ const fetchNFTDetail: any = createAsyncThunk('fetchNFTDetail', async (nftAddress
 export interface NFT {
   imgUrl: String;
   nftTitle: String;
-  ntfPrice: String;
+  nftPrice: String;
   nftCreatorNickname: String;
   lastPrice: String;
   nftOwnerNickname: String;
   nftTags: Array<String>;
   nftLike: Number;
+  nftAddress: String;
 }
 
 export interface NFTState {
@@ -42,12 +43,13 @@ const initialState: NFTState = {
   currentNFT: {
     imgUrl: '',
     nftTitle: '',
-    ntfPrice: '',
+    nftPrice: '',
     nftCreatorNickname: '',
     lastPrice: '',
     nftOwnerNickname: '',
     nftTags: [],
     nftLike: 0,
+    nftAddress: '',
   },
 };
 
