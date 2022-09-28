@@ -36,9 +36,9 @@ public class NFTController {
 
     @Operation(summary = "NFT를 소유 중으로 변경하는 API", description = "해당 NFT를 소유 중으로 설정")
     @PutMapping("/posession")
-    public ResponseEntity setNFTNotSale(@RequestBody Map<String, Integer> map) {
+    public ResponseEntity setNFTNotSale(@RequestBody Map<String, String> map) {
         try{
-            nftService.updatePossessed(map.get("nftId"));
+            nftService.updatePossessed(map.get("nftAddress"));
             return new ResponseEntity(HttpStatus.OK);
         } catch(Exception e) {
             System.out.println(e.getMessage());
@@ -50,7 +50,7 @@ public class NFTController {
     @PutMapping("/sale")
     public ResponseEntity setNFTOnSale(@RequestBody Map<String, Object> map) {
         try{
-            nftService.updateOnSale((int)map.get("nftId"), String.valueOf(map.get("price")));
+            nftService.updateOnSale(String.valueOf(map.get("nftAddress")), String.valueOf(map.get("price")));
             return new ResponseEntity(HttpStatus.OK);
         } catch(Exception e) {
             System.out.println(e.getMessage());

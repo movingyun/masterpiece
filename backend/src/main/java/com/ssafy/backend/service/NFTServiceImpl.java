@@ -128,26 +128,26 @@ public class NFTServiceImpl implements NFTService {
 
     @Override
     @Transactional
-    public void updatePossessed(int nftId) {
-        Nft nft = nftRepository.findById(nftId);
-        if(nft == null){
+    public void updatePossessed(String nftAddress) {
+        List<Nft> nft = nftRepository.findByNftHash(nftAddress);
+        if(nft == null || nft.isEmpty()){
             throw new IllegalArgumentException("No such NFT");
         }
 
-        nft.setSale(false);
-        nft.setPrice(null);
+        nft.get(0).setSale(false);
+        nft.get(0).setPrice(null);
     }
 
     @Override
     @Transactional
-    public void updateOnSale(int nftId, String price) {
-        Nft nft = nftRepository.findById(nftId);
-        if(nft == null){
+    public void updateOnSale(String nftAddress, String price) {
+        List<Nft> nft = nftRepository.findByNftHash(nftAddress);
+        if(nft == null || nft.isEmpty()){
             throw new IllegalArgumentException("No such NFT");
         }
 
-        nft.setSale(true);
-        nft.setPrice(price);
+        nft.get(0).setSale(true);
+        nft.get(0).setPrice(price);
     }
 
     @Override
