@@ -88,7 +88,7 @@ public class AwsS3ServiceImpl implements AwsS3Service{
         try {
             //이미지 형식의 파일이 아니면 예외 발생
             String ext = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
-            if(ext.equals(".gif") || ext.equals(".jpg") || ext.equals(".png")) {
+            if(ext.equals(".gif") || ext.equals(".jpg") || ext.equals(".png") || ext.equals(".webm")) {
                 return ext;
             }
             return null;
