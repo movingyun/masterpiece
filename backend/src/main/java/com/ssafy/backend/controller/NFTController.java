@@ -69,7 +69,7 @@ public class NFTController {
         }
     }
 
-    @Operation(summary = "NFT 전체 조회 API", description = "모든 NFT의 목록 반환")
+    @Operation(summary = "판매 중인 NFT 전체 조회 API", description = "모든 NFT의 목록 반환")
     @GetMapping
     public ResponseEntity getAllNFTs() {
         try{
@@ -80,7 +80,7 @@ public class NFTController {
         }
     }
 
-    @Operation(summary = "NFT 검색 API", description = "해당 카테고리와 키워드의 NFT 목록 반환")
+    @Operation(summary = "판매 중인 NFT 검색 API", description = "해당 카테고리와 키워드의 NFT 목록 반환")
     @GetMapping("/search")
     public ResponseEntity searchNFT(@RequestParam String category, @RequestParam String keyword) {
         try{

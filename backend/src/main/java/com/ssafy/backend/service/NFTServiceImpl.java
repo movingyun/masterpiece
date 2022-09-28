@@ -42,7 +42,7 @@ public class NFTServiceImpl implements NFTService {
     }
 
     @Override
-    public Nft findBycontractAddress(String contract_address) {
+    public List<Nft> findBycontractAddress(String contract_address) {
         return nftRepository.findByContractAddress(contract_address);
     }
 
@@ -234,6 +234,7 @@ public class NFTServiceImpl implements NFTService {
     private NFTDto buildNFTDto(Nft nft, List<String> tagList, String lastPrice, int likes){
         return NFTDto.builder()
                 .imgUrl(nft.getImageUrl())
+                .nftAddress(nft.getNftHash())
                 .nftTitle(nft.getNftTitle())
                 .nftPrice(nft.getPrice())
                 .nftCreatorNickname(nft.getCreator().getUserNickname())
