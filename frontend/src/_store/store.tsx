@@ -1,6 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import HangulReducer from '../_slice/HangulSlice';
 import UserReducer from '../_slice/UserSlice';
+import DecoReducer from '../_slice/DecorateHangulSlice';
 import { selectTab, selectFirst, selectMiddle, selectLast } from '../_slice/HangulMakerSlice';
 import {
   dragValue,
@@ -176,6 +177,7 @@ export enum HangulComposeArea {
 const store = configureStore({
   reducer: {
     user: UserReducer,
+    deco: DecoReducer,
     hangul: HangulReducer,
 
     tab: selectTab.reducer, // 한글제작 초/중/종성 선택
@@ -186,8 +188,8 @@ const store = configureStore({
     dragValue: dragValue.reducer, // 드래그중인 값
     areaIndex: areaIndex.reducer, // 드래그중인 값
     elementIndex: elementIndex.reducer, // 드래그중인 값
-    areaSyllable: areaSyllable.reducer, // 한글합성
-    areaSentence: areaSentence.reducer, // 한글합성
+    areaSyllable: areaSyllable.reducer, // 한글합성 음절목록
+    areaSentence: areaSentence.reducer, // 한글합성 문장목록
 
     consonantCount: consonantCount.reducer, // 자음보유개수
     vowelCount: vowelCount.reducer, // 모음보유개수

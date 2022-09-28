@@ -46,14 +46,6 @@ public class HangulController {
                 ,"ㅍ","ㅎ","ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ"
                 ,"ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ"
                 ,"ㅡ","ㅢ","ㅣ");
-//
-//        num = 0;
-//        List<String> consonantList = hangulService.getAllConsonants();
-//        System.out.println("==============consonantList===============");
-//        for(String s : consonantList) {
-//            System.out.print(s+" ");
-//            firstMap.put(s, num++);
-//        }
     }
 
 
@@ -141,8 +133,8 @@ public class HangulController {
     @GetMapping("/own/first")
     public ResponseEntity getOwnedFirstConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
         try{
-            Map<String, Integer> map = hangulService.getFirstConsonantMap(wallet_address);
-            return new ResponseEntity(map, HttpStatus.OK);
+            List<Integer> list = hangulService.getFirstConsonantList(wallet_address);
+            return new ResponseEntity(list, HttpStatus.OK);
         } catch(Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -153,8 +145,8 @@ public class HangulController {
     @GetMapping("/own/middle")
     public ResponseEntity getOwnedMiddleVowel(@RequestParam(value = "wallet-address") String wallet_address) {
         try{
-            Map<String, Integer> map = hangulService.getMiddleVowelMap(wallet_address);
-            return new ResponseEntity(map, HttpStatus.OK);
+            List<Integer> list = hangulService.getMiddleVowelList(wallet_address);
+            return new ResponseEntity(list, HttpStatus.OK);
         } catch(Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -165,8 +157,8 @@ public class HangulController {
     @GetMapping("/own/last")
     public ResponseEntity getOwnedLastConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
         try{
-            Map<String, Integer> map = hangulService.getLastConsonantMap(wallet_address);
-            return new ResponseEntity(map, HttpStatus.OK);
+            List<Integer> list = hangulService.getLastConsonantList(wallet_address);
+            return new ResponseEntity(list, HttpStatus.OK);
         } catch(Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -177,8 +169,8 @@ public class HangulController {
     @GetMapping("/own/consonant")
     public ResponseEntity getAllOwnedConsonant(@RequestParam(value = "wallet-address") String wallet_address) {
         try{
-            Map<String, Integer> map = hangulService.getConsonantMap(wallet_address);
-            return new ResponseEntity(map, HttpStatus.OK);
+            List<Integer> list = hangulService.getConsonantList(wallet_address);
+            return new ResponseEntity(list, HttpStatus.OK);
         } catch(Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

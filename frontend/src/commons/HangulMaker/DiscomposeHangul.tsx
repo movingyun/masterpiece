@@ -1,6 +1,24 @@
 import React from "react";
 import { EnumConsonantOrder, EnumVowelOrder, EnumFtoL } from '../../_hook/HangulMakerHook';
 
+// 문장 분리 후 자모음 반환
+export function DiscomposeSentence(sentence:string):string[] {
+  const list: string[] = [];
+  for (let i = 0; i < sentence.length;i++){
+    const fml: number[] = DiscomposeHangul(sentence.charAt(i));
+    if (fml[0]>=0) {
+      list.push(EnumConsonantOrder[fml[0]]);
+    }
+    if (fml[1]>=0) {
+      list.push(EnumVowelOrder[fml[1]]);
+    }
+    if (fml[2]>0) {
+      list.push(EnumConsonantOrder[fml[2]-1]);
+    }
+  }
+  return list;
+}
+// 1개음절의 unicode 반환
 export default function DiscomposeHangul(syllable:string):number[]{
 
   const syllableUnicode:number = syllable.charCodeAt(0);

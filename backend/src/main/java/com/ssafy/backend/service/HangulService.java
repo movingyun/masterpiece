@@ -13,6 +13,10 @@ public interface HangulService {
     List<Hangul> pickRandomConstant(User user, int drawQuantity);
     List<Hangul> pickRandomVowel(User user, int drawQuantity);
 
+    List<Integer> getFirstConsonantList(String wallet_address);
+    List<Integer> getMiddleVowelList(String wallet_address);
+    List<Integer> getLastConsonantList(String wallet_address);
+    List<Integer> getConsonantList(String wallet_address);
     Map<String, Integer> getFirstConsonantMap(String wallet_address);
     Map<String, Integer> getMiddleVowelMap(String wallet_address);
     Map<String, Integer> getLastConsonantMap(String wallet_address);

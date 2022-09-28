@@ -80,10 +80,10 @@ export const elementIndexAction = elementIndex.actions;
 // 제작된 음절
 export const areaSyllable = createSlice({
   name: 'areaSyllable',	// key
-  initialState:{value: ["space", "enter"]},	// 초기값
+  initialState:{value: [" ", "\n"]},	// 초기값
   reducers:{
     reset:(state, action) =>{
-      state.value = ["space", "enter"];
+      state.value = [" ", "\n"];
     },
     push:(state, action) =>{
       state.value.push(action.payload);
@@ -149,7 +149,6 @@ export const consonantCount = createSlice({
   },
   extraReducers: {
     [getConsonant.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.value = action.payload;
     },
     [getConsonant.rejected]: state => {
