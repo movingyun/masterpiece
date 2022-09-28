@@ -1,7 +1,6 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import HangulReducer from '../_slice/HangulSlice';
 import UserReducer from '../_slice/UserSlice';
-import DecoReducer from '../_slice/DecorateHangulSlice';
 import { selectTab, selectFirst, selectMiddle, selectLast } from '../_slice/HangulMakerSlice';
 import {
   dragValue,
@@ -12,6 +11,8 @@ import {
   consonantCount,
   vowelCount,
 } from '../_slice/ComposeHangulSlice';
+import DecoReducer from '../_slice/DecorateHangulSlice';
+import CreateNFTReducer from '../_slice/CreateNFTSlice';
 
 // 초성중성종성 리스트
 export const hangulFirst: string[] = [
@@ -178,6 +179,7 @@ const store = configureStore({
   reducer: {
     user: UserReducer,
     deco: DecoReducer,
+    createNFT: CreateNFTReducer,
     hangul: HangulReducer,
 
     tab: selectTab.reducer, // 한글제작 초/중/종성 선택
