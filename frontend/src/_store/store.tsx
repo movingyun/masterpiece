@@ -188,8 +188,8 @@ const store = configureStore({
     dragValue: dragValue.reducer, // 드래그중인 값
     areaIndex: areaIndex.reducer, // 드래그중인 값
     elementIndex: elementIndex.reducer, // 드래그중인 값
-    areaSyllable: areaSyllable.reducer, // 한글합성
-    areaSentence: areaSentence.reducer, // 한글합성
+    areaSyllable: areaSyllable.reducer, // 한글합성 음절목록
+    areaSentence: areaSentence.reducer, // 한글합성 문장목록
 
     consonantCount: consonantCount.reducer, // 자음보유개수
     vowelCount: vowelCount.reducer, // 모음보유개수
