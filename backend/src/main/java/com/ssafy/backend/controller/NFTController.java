@@ -58,6 +58,17 @@ public class NFTController {
         }
     }
 
+    @Operation(summary = "NFT 상세 조회 API", description = "해당 주소의 NFT 정보 반환")
+    @GetMapping("/detail")
+    public ResponseEntity getNFTInfo(@RequestParam(value = "nft-address") String nft_address) {
+        try{
+            return new ResponseEntity(nftService.getNFTDto(nft_address), HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @Operation(summary = "NFT 전체 조회 API", description = "모든 NFT의 목록 반환")
     @GetMapping
     public ResponseEntity getAllNFTs() {
