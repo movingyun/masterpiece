@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface NFTService {
     Nft findById(int id);
-    Nft findBycontractAddress(String contractAddress);
+    List<Nft> findBycontractAddress(String contractAddress);
     void modifyNftOwner(SaleResultDto saleResultDto);
 
     List<NFTDto> getCollectedNft(String wallet_address);
@@ -18,6 +18,9 @@ public interface NFTService {
     void postNFT(NFTCreateDto dto);
     void updatePossessed(int nftId);
     void updateOnSale(int nftId, String price);
+    NFTDto getNFTDto(String nft_address);
     List<NFTDto> getAllNFT();
     List<NFTDto> searchByCategory(String category, String keyword);
+
+    Nft findByNFTHash(String nftHash);
 }

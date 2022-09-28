@@ -39,8 +39,8 @@ public class SaleServiceImpl implements SaleServcie {
     }
 
     @Override
-    public List<SalelogDto> getSaleLog(String nftAddress) {
-        int nftId = nftService.findBycontractAddress(nftAddress).getId();
+    public List<SalelogDto> getSaleLog(String nftHash) {
+        int nftId = nftService.findByNFTHash(nftHash).getId();
         List<Salelog> saleLogs = saleRepository.findAllByNftId(nftId);
         List<SalelogDto> salelogDtos = new ArrayList<>();
         for(Salelog salelog : saleLogs){
