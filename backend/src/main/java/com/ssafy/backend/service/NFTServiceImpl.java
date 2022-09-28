@@ -243,4 +243,9 @@ public class NFTServiceImpl implements NFTService {
                 .nftLike(likes)
                 .build();
     }
+
+    @Override
+    public Nft findByNFTHash(String nftHash) {
+        return nftRepository.findByNftHash(nftHash).get(0);
+    }
 }
