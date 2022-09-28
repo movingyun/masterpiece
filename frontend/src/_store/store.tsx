@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import HangulReducer from '../_slice/HangulSlice';
 import UserReducer from '../_slice/UserSlice';
 import NFTReducer from '../_slice/NFTSlice';
+import SaleReducer from '../_slice/SaleSlice';
 import { selectTab, selectFirst, selectMiddle, selectLast } from '../_slice/HangulMakerSlice';
 import {
   dragValue,
@@ -179,6 +180,7 @@ const store = configureStore({
     user: UserReducer,
     hangul: HangulReducer,
     nft: NFTReducer,
+    sale: SaleReducer,
 
     tab: selectTab.reducer, // 한글제작 초/중/종성 선택
     first: selectFirst.reducer, // 한글제작 초성

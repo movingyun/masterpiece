@@ -20,6 +20,9 @@ const FIRST_URL = '/first';
 // NFT
 const DETAIL_URL = '/detail';
 
+// Sale
+const SALE_URL = '/sale';
+
 const api = {
   // user
   signin: () => API_BASE_URL + USER_URL + SIGNIN_URL,
@@ -37,6 +40,9 @@ const api = {
   // NFT
   fetchAllNFT: () => API_BASE_URL + NFT_URL,
   fetchNFTDetail: (nftAddress: String) => API_BASE_URL + NFT_URL + DETAIL_URL + `?nft-address=${nftAddress}`,
+
+  // Sale
+  fetchSaleHistory: (nftAddress: String) => API_BASE_URL + SALE_URL + `?nftHash=${nftAddress}`,
 };
 
 export default api;
