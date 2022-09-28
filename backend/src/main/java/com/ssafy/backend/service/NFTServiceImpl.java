@@ -112,6 +112,7 @@ public class NFTServiceImpl implements NFTService {
         Nft nft = Nft.builder()
                 .creator(user)
                 .owner(user)
+                .tokenId(dto.getTokenId())
                 .contractAddress(dto.getContractAddress())
                 .nftHash(dto.getTxHash())
                 .nftTitle(dto.getNftTitle())
@@ -234,6 +235,7 @@ public class NFTServiceImpl implements NFTService {
     private NFTDto buildNFTDto(Nft nft, List<String> tagList, String lastPrice, int likes){
         return NFTDto.builder()
                 .imgUrl(nft.getImageUrl())
+                .tokenId(nft.getTokenId())
                 .nftAddress(nft.getNftHash())
                 .nftTitle(nft.getNftTitle())
                 .nftPrice(nft.getPrice())

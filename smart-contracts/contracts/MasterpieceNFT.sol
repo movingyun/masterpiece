@@ -18,6 +18,8 @@ contract MasterpieceNFT is ERC721{
 
     mapping(uint256 => string) tokenURIs;
 
+    event createNFT (uint256 indexed _tokenId, address indexed _owner);
+
     constructor() ERC721("Masterpiece-NFT", "MPT") {}
 
     function current() public view returns (uint256) {
@@ -37,6 +39,7 @@ contract MasterpieceNFT is ERC721{
         uint256 newItemId = _tokenIds.current();
         _mint(to, newItemId);
         tokenURIs[newItemId] = _tokenURI;
+        emit createNFT(newItemId, to);
         return newItemId;
     }
 }

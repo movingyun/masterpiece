@@ -70,6 +70,31 @@ public class HangulController {
         return new ResponseEntity<>(middleHangul, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "유저 자/모음 충분한지 확인")
+    @PostMapping("/count")
+    public ResponseEntity<Boolean> hangulEnough(@RequestBody HangulUseDto hangulUse){
+        String userWalletAddress = hangulUse.getUserWalletAddress();
+        // userWalletAddress로 user정보 가져오기
+        User user = userService.findByUserWalletAddress(userWalletAddress);
+        int userId = user.getId();
+
+        //충분한지 확인
+        List<String> usedHangulList = hangulUse.getHangul();
+        Map<Integer , Integer> useHangulCnt = new HashMap<>();
+        for(String usedHangul : usedHangulList){
+            int hangulId = hangul.indexOf(usedHangul);
+            useHangulCnt.put(hangulId,useHangulCnt.getOrDefault(hangulId,0)+1);
+        }
+        for(Integer hangulId : useHangulCnt.keySet()){
+            int useCnt = useHangulCnt.get(hangulId);
+            int haveCnt = hangulOwnService.findHangulOwnByUserAndHangulId(userId, hangulId).getHangulCount();
+            if(useCnt>haveCnt){
+                return new ResponseEntity<>(false, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "유저 자/모음 사용")
     @PutMapping("")
     public ResponseEntity<String> hangulUse(@RequestBody HangulUseDto hangulUse){
