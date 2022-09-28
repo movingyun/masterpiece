@@ -1,5 +1,5 @@
-// const API_BASE_URL = 'http://localhost:8080/api';
-const API_BASE_URL = 'http://j7a508.p.ssafy.io:8081/api'
+const API_BASE_URL = 'https://j7a508.p.ssafy.io/api';
+// const API_BASE_URL = 'http://i7a508.p.ssafy.io:5000/api'
 
 
 // 경로
