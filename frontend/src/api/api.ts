@@ -4,6 +4,7 @@ const API_BASE_URL = 'http://j7a508.p.ssafy.io:8081//api';
 // 경로
 const USER_URL = '/user';
 const HANGUL_URL = '/hangul';
+const NFT_URL = '/nft';
 
 // URI
 // User
@@ -15,6 +16,8 @@ const CONSONANT_URL = '/own/consonant';
 const PICK_CONSONANT_URL = '/pick/consonant';
 const PICK_VOWEL_URL = '/pick/vowel';
 const FIRST_URL = '/first';
+
+// NFT
 
 const api = {
   // user
@@ -29,6 +32,9 @@ const api = {
   pickConsonant: () => API_BASE_URL + HANGUL_URL + PICK_CONSONANT_URL,
   pickVowel: () => API_BASE_URL + HANGUL_URL + PICK_VOWEL_URL,
   fetchFirst: () => API_BASE_URL + HANGUL_URL + FIRST_URL,
+
+  // NFT
+  fetchAllNFT: () => API_BASE_URL + NFT_URL,
 };
 
 export default api;

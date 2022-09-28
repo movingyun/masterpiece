@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import NFTCardList from '../components/NFTList/NFTCardList';
 
 export default function NFTList() {
   return (
     <>
       <div>NFTList</div>
+      <NFTCardList />
       <div>
         <Link to="/userpage">userPage</Link>
       </div>
