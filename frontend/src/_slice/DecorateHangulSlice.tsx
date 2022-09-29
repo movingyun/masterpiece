@@ -7,7 +7,6 @@ const initialState = {
   textYAxis: 0,
   textLineSpacing: 0,
   strokeWidth: 0,
-  strokeOpacity: 1,
   strokeColor: '#ffffff',
   shadowXAxis: 0,
   shadowYAxis: 0,
@@ -20,7 +19,7 @@ const initialState = {
     maxHeight: '100%',
     overflow: 'auto',
     bgcolor: 'background.paper',
-    '-ms-overflow-style': 'none',
+    msOverflowStyle: 'none',
     '&::-webkit-scrollbar': {
       display: 'none',
     },
@@ -48,9 +47,6 @@ const DecorateHangulSlice = createSlice({
     },
     strokeWidth(state, action) {
       state.strokeWidth = action.payload;
-    },
-    strokeOpacity(state, action) {
-      state.strokeOpacity = action.payload;
     },
     strokeColor(state, action) {
       state.strokeColor = action.payload;
