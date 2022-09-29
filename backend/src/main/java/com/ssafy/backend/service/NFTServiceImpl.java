@@ -244,6 +244,7 @@ public class NFTServiceImpl implements NFTService {
                 .nftOwnerNickname(nft.getOwner().getUserNickname())
                 .nftTags(tagList)
                 .nftLike(likes)
+                .nftDescription(nft.getNftDescription())
                 .build();
     }
 

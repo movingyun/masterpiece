@@ -18,4 +18,5 @@ public class NFTDto {
     String nftOwnerNickname;
     List<String> nftTags;
     int nftLike;
+    String nftDescription;
 }
