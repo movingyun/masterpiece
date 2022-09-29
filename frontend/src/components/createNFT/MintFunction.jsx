@@ -8,8 +8,7 @@ import Web3 from 'web3';
 // import Contract from 'web3-eth-contract';
 // import pinataSDK from '@pinata/sdk';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { createNFTActions, countLetter } from '../../_slice/CreateNFTSlice';
+
 
 
 import { DiscomposeSentence } from '../../commons/HangulMaker/DiscomposeHangul'
@@ -18,7 +17,7 @@ import MasterpieceNFT from '../../json/MasterpieceNFT.json'
 
 // dotenv.config();
 
-function MintFunction() {
+function MintFunction(Infos) {
   // const navigate = useNavigate();
   console.log("들어옴?")
 
