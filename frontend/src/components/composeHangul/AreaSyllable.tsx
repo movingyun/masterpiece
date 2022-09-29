@@ -42,7 +42,7 @@ export default function AreaSyllable(){
   const unit:number = 10;
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{marginBottom: 10, width:"100%", minHeight:400, backgroundColor:"#F8CECE", border:"1px dashed black"}}
+    style={{marginBottom: 10, width:"100%", minHeight:500, backgroundColor:"#F8CECE", border:"1px dashed black"}}
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}

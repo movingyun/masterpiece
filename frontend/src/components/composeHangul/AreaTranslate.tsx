@@ -1,11 +1,13 @@
 import React from "react";
-import { Box, Grid, TextField, Button } from '@mui/material';
+import { Box, Grid, TextField, Button, Select, MenuItem } from '@mui/material';
 import VolumeDownRoundedIcon from '@mui/icons-material/VolumeDownRounded';
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import api from "../../api/api";
 
 export default function AreaTranslate(){
 
+  const [sourceLanguage, setSourceLanguage] = React.useState("en");
+  const [targetLanguage, setTargetLanguage] = React.useState("ko");
   const [inputText, setInputText] = React.useState("apple I like banana");
   const [translateText, setTranslateText] = React.useState("이거 읽어봐라 멍청한 컴퓨터야 뷁");
 
@@ -15,6 +17,9 @@ export default function AreaTranslate(){
   const changeTranslateText = (event:any) => {
     setTranslateText(event.target.value);
   }
+  const changeSourceLanguage = (event:any) =>{
+    setSourceLanguage(event.target.value);
+  }
   
   const tts = (lang:string, text:string)=>{
     const msg = new SpeechSynthesisUtterance();
@@ -23,12 +28,11 @@ export default function AreaTranslate(){
     window.speechSynthesis.speak(msg);
   }
 
-  const translate = async (source:string, target:string) =>{
+  const translate = async () =>{
     const requestBody:any = {
-      source, target, text:inputText,
+      source:sourceLanguage, target:targetLanguage, text:inputText,
     }
     const data = await axios.post(api.translate(), requestBody);
-    console.log(data.data);
     setTranslateText(data.data);
   }
 
@@ -39,6 +43,33 @@ export default function AreaTranslate(){
     >
       <Grid container>
         <Grid item xs={1}/>
+        <Grid item xs={11} style={{paddingBottom:20}}>
+          <Select
+            value={sourceLanguage}
+            onChange={changeSourceLanguage}
+            displayEmpty
+            inputProps={{ 'aria-label': 'Without label' }}
+            style={{minWidth:180}}
+          >
+            <MenuItem value='en'>English</MenuItem>
+            <MenuItem value='ja'>日本語</MenuItem>
+            <MenuItem value='zh-CN'>简体中文</MenuItem>
+            <MenuItem value='zh-TW'>繁体中文</MenuItem>
+            <MenuItem value='es'>español</MenuItem>
+            <MenuItem value='fr'>Français</MenuItem>
+            <MenuItem value='de'>Deutsch</MenuItem>
+            <MenuItem value='ru'>Русский</MenuItem>
+            <MenuItem value='pt'>Português</MenuItem>
+            <MenuItem value='it'>Italiano</MenuItem>
+            <MenuItem value='vi'>Tiếng Việt</MenuItem>
+            <MenuItem value='th'>ไทย</MenuItem>
+            <MenuItem value='id'>bahasa Indonesia</MenuItem>
+            <MenuItem value='hi'>हिन्दी</MenuItem>
+            <MenuItem value='fa'>فارسی</MenuItem>
+            <MenuItem value='ar'>عربي</MenuItem>
+          </Select>
+        </Grid>
+        <Grid item xs={1}/>
         <Grid container item xs={4}>
           <Grid item xs={12} style={{margin:0}}>
             <TextField required multiline rows={3} fullWidth label="input text" defaultValue={inputText}
@@ -48,13 +79,13 @@ export default function AreaTranslate(){
             <Grid item xs={6} style={{margin:0}}>
               <Box display="flex" justifyContent="center" alignItems="center"
               style={{margin:0, padding:0, width:"100%", minHeight:50, border:"1px solid #00AA00"}}>
-                <Button onClick={()=>tts('en', inputText)} style={{color:"#00AA00"}}><VolumeDownRoundedIcon/></Button>
+                <Button onClick={()=>tts(sourceLanguage, inputText)} style={{color:"#00AA00"}}><VolumeDownRoundedIcon/></Button>
               </Box>
             </Grid>
             <Grid item xs={6} style={{margin:0}}>
               <Box display="flex" justifyContent="center" alignItems="center"
               style={{margin:0, padding:0, width:"100%", minHeight:50, backgroundColor:"#00AA00", border:"1px solid #00AA00"}}>
-                <Button onClick={()=>translate('en', 'ko')} style={{color:"#FFFFFF"}}>Translate</Button>
+                <Button onClick={()=>translate()} style={{color:"#FFFFFF"}}>Translate</Button>
               </Box>
             </Grid>
           </Grid>
