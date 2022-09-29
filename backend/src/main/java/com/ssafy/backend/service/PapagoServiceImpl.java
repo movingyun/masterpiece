@@ -39,6 +39,7 @@ public class PapagoServiceImpl implements PapagoService{
         int start = responseBody.indexOf("translatedText");
         int end = responseBody.indexOf("engineType");
         responseBody = responseBody.substring(start+17, end-3);
+        System.out.println(responseBody);
         return responseBody;
     }
 

@@ -27,6 +27,7 @@ class PapagoController {
     @ApiOperation(value = "번역하기", notes = "번역하기")
     public ResponseEntity<String> sale(@RequestBody TranslateDto translateDto) {
         String word = papagoService.translateByPapago(translateDto);
+        System.out.println(word);
         return new ResponseEntity<>(word, HttpStatus.OK);
     }
 }

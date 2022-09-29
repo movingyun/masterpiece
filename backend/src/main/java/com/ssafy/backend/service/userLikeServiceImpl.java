@@ -32,7 +32,7 @@ public class userLikeServiceImpl implements UserLikeService{
         Nft nft = nftService.findByNFTHash(nftHash);
 
         //좋아요 누르기
-        UserLike userLike = userLikeRepository.findByUserAndNftHash(userId, nftHash).orElse(null);
+        UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nft.getId()).orElse(null);
         // userLike가 null값이면 행을 만들어주고
         if(userLike == null){
             userLike = UserLike.builder()
@@ -58,9 +58,10 @@ public class userLikeServiceImpl implements UserLikeService{
 
         // nftId로 nft정보 가져오기
         String nftHash = like.getNftHash();
+        Nft nft = nftService.findByNFTHash(nftHash);
 
         //좋아요 확인하기
-        UserLike userLike = userLikeRepository.findByUserAndNftHash(userId, nftHash).orElse(null);
+        UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nft.getId()).orElse(null);
         boolean flag;
         // userLike가 null값이면 행을 만들어주고
         if(userLike == null){
