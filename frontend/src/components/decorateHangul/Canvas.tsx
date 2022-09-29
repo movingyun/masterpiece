@@ -189,10 +189,11 @@ function Canvas() {
 
       // BlobURL 생성: 통합한 스트림 데이터를 가르키는 임시 주소를 생성
       const blobURL = window.URL.createObjectURL(blob);
-      console.log('blobURL : ', blobURL);
+      // console.log('blobURL : ', blobURL);
 
-      // BlobURL store 저장
-      dispatch(createNFTActions.NFTBlob(blobURL));
+      // Blob store 저장
+      dispatch(createNFTActions.NFTBlob(blob));
+      dispatch(createNFTActions.NFTBlobURL(blobURL));
 
       // 배열 초기화
       arrVideoData.splice(0);

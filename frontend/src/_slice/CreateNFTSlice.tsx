@@ -34,7 +34,8 @@ const exhaustLetter: any = createAsyncThunk('exhaustLetter', async (payload, { r
 
 
 const initialState = {
-  NFTBlob: '',
+  NFTBlob: new Blob(),
+  NFTBlobURL: '',
   title: '하이',
   description: '그래',
   tag: ['세종대왕', '킹왕짱'],
@@ -49,6 +50,9 @@ const CreateNFTSlice = createSlice({
   reducers: {
     NFTBlob(state, action) {
       state.NFTBlob = action.payload;
+    },
+    NFTBlobURL(state, action) {
+      state.NFTBlobURL = action.payload;
     },
     title(state, action) {
       state.title = action.payload;
