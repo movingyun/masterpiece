@@ -35,7 +35,19 @@ export const SaleSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchSaleHistory.fulfilled]: (state, action) => {
-      state.saleHistoryAll = action.payload;
+      const history = action.payload;
+      for (let i = 0; i < history.length; i++) {
+        const fullDate = new Date(history[i].datetime);
+        const year = fullDate.getFullYear();
+        const month = fullDate.getMonth() + 1;
+        const date = fullDate.getDate();
+        const hour = fullDate.getHours();
+        const min = fullDate.getMinutes();
+        const sec = fullDate.getSeconds();
+        const time = date + '-' + month + '-' + year + ' ' + hour + ':' + min + ':' + sec;
+        history[i].datetime = time;
+      }
+      state.saleHistoryAll = history;
     },
   },
 });
