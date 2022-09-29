@@ -1,22 +1,26 @@
 import React from 'react';
 import dotenv from 'dotenv';
-import axios from 'axios';
+// import axios from 'axios';
 import fs from 'fs';
 import FormData from 'form-data';
 import Web3 from 'web3';
 import Contract from 'web3-eth-contract';
 import pinataSDK from '@pinata/sdk';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { createNFTActions, countLetter } from '../../_slice/CreateNFTSlice';
+
 
 dotenv.config();
 
 function Mint() {
+  const dispatch = useDispatch();
+
   // NFT webm blob
   const videoBlob = useSelector(state => state.createNFT.NFTBlob);
 
   // 한글 문장 = filename
-  // const filename = useSelector(state => state. /////////)
+  const filename = useSelector(state => state.areaSentence.value).filter(char => char !== '\n').join('');
 
   // NFTInput
   const title = useSelector(state => state.createNFT.style);
@@ -44,7 +48,7 @@ function Mint() {
   // });
 
   // 민팅된 이미지의 제목 - 받은 파일의 이름으로 설정
-  const filename = '이찬혁';
+  // const filename = '이찬혁';
   // 메타데이터의 제목 = NFT의 제목
   // let title = document.getElementById("title").value;
   // const title = 'Hip NFT';
@@ -123,16 +127,23 @@ function Mint() {
                   formData.append('nftTitle', title);
                   formData.append('nftDescription', description);
                   formData.append('nftTag', tag);
-                  axios
-                    .post('http://localhost:8080/api/nft', formData, {
-                      headers: { 'Content-Type': 'multipart/form-data' },
-                    })
-                    .then(() => {
-                      console.log('success');
-                    })
-                    .catch(() => {
-                      console.log('fail');
-                    });
+
+                  // formData store에 저장
+                  dispatch(createNFTActions.mintingData(formData));
+
+                  // countLetter -> createNFT -> exhaustNFT 순차 진행
+                  dispatch(countLetter(formData));
+
+                  // axios는 redux 에서 처리
+                  //   .post('http://localhost:8080/api/nft', formData, {
+                  //     headers: { 'Content-Type': 'multipart/form-data' },
+                  //   })
+                  //   .then(() => {
+                  //     console.log('success');
+                  //   })
+                  //   .catch(() => {
+                  //     console.log('fail');
+                  //   });
                 } else {
                   console.log('Something went wrong when submitting your transaction:', err);
                 }
