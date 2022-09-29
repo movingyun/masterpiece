@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import FormData from 'form-data';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { createNFTActions, countLetter } from '../../_slice/CreateNFTSlice';
-
 import { DiscomposeSentence } from '../../commons/HangulMaker/DiscomposeHangul';
-
 import MintFunction from './MintFunction'
+
 
 export default function Mint() {
     const NFTData: {
@@ -26,19 +27,32 @@ export default function Mint() {
       tag: useSelector((state: any) => state.createNFT.tag).join(' '),
       formData: new FormData(),
     };
+    const checkLetterAPI: {
+      walletAddress: string;
+      hangul: string[];
+    } = {
+      walletAddress: NFTData.walletAddress,
+      hangul: [''],
+    };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // 한글 문장 분해해서 store에 저장
-  dispatch(createNFTActions.decomposeHangul(DiscomposeSentence(NFTData.filename)));
+  checkLetterAPI.hangul = DiscomposeSentence(NFTData.filename);
+  dispatch(createNFTActions.checkLetterAPI(checkLetterAPI));
 
   useEffect(() => {
     // formData store에 저장
     dispatch(createNFTActions.mintingData(NFTData.formData));
 
     // countLetter -> createNFT -> exhaustNFT 순차 진행
-    dispatch(countLetter(NFTData.formData));
-  }, [NFTData.formData, dispatch])
+    try {
+        dispatch(countLetter(checkLetterAPI));
+    } finally {
+        navigate('/nftlist');
+    }
+  }, [NFTData.formData])
 
 
   return (
