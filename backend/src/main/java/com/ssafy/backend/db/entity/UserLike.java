@@ -30,7 +30,7 @@ public class UserLike {
     private User user;
 
     @ManyToOne //객체관계 생성 -> 하나의 게시글 좋아요 여러개 가능
-    @JoinColumn(name="nftId")
+    @JoinColumn(name="nftHash")
     private Nft nft;
 
     @ApiModelProperty(value = "좋아요취소 여부")
