@@ -35,9 +35,9 @@ const exhaustLetter: any = createAsyncThunk('exhaustLetter', async (payload, { r
 
 const initialState = {
   NFTBlob: '',
-  title: '',
-  description: '',
-  tag: [],
+  title: '하이',
+  description: '그래',
+  tag: ['세종대왕', '킹왕짱'],
   mintingData: new FormData(),
   decomposeHangul: [],
   mintingCompleted: false,

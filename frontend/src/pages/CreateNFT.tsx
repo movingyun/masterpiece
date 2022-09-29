@@ -15,7 +15,7 @@ function CreateNFT() {
       </div>
       <NFTVideo />
       <NFTInput />
-      <button type="button" onClick={Mint}>MINT</button>
+      <Mint />
     </Container>
   );
 }

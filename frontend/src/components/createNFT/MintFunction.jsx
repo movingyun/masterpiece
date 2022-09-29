@@ -1,5 +1,5 @@
 // import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // import dotenv from 'dotenv';
 import axios from 'axios';
 // import fs from 'fs';
@@ -18,8 +18,9 @@ import MasterpieceNFT from '../../json/MasterpieceNFT.json'
 
 // dotenv.config();
 
-function Mint() {
-  const navigate = useNavigate();
+function MintFunction() {
+  // const navigate = useNavigate();
+  console.log("들어옴?")
 
   const dispatch = useDispatch();
 
@@ -33,13 +34,13 @@ function Mint() {
   const filename = hangulSentence.filter(char => char !== '\n').join('');
 
   // 한글 문장 분해해서 store에 저장
-  dispatch(createNFTActions.decomposeHangul(DiscomposeSentence(hangulSentence)));
+  dispatch(createNFTActions.decomposeHangul(DiscomposeSentence(filename)));
 
   // NFTInput
-  const title = useSelector(state => state.createNFT.style);
-  const description = useSelector(state => state.createNFT.style);
-  const tag = useSelector(state => state.createNFT.style);
-
+  const title = useSelector(state => state.createNFT.title);
+  const description = useSelector(state => state.createNFT.description);
+  const tag = useSelector(state => state.createNFT.tag).join(' ');
+  
   /**
    * pinFileToIPFS -> pinJSONToIPFS -> NFT 민팅 -> nft생성 api 호출
    */
@@ -128,7 +129,7 @@ function Mint() {
           // countLetter -> createNFT -> exhaustNFT 순차 진행
           dispatch(countLetter(formData));
         } finally {
-          navigate('/nftlist');
+          // navigate('/nftlist');
         }
 
       })
@@ -232,4 +233,4 @@ function Mint() {
   // 전부 성공하면, mypage로 보내줌
 }
 
-export default Mint;
+export default MintFunction;
