@@ -7,7 +7,7 @@ function Canvas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const text = useSelector((state: any) => state.areaSentence.value).join('');
+  const text = useSelector((state: any) => state.areaSentence.value).join('');
   const textSize = useSelector((state: any) => state.deco.textSize);
   const textColor = useSelector((state: any) => state.deco.textColor);
   const textXAxis = useSelector((state: any) => state.deco.textXAxis);
@@ -24,7 +24,7 @@ function Canvas() {
   const fontName = useSelector((state: any) => state.deco.fontName);
 
   // 텍스트
-  const [text, setText] = useState('세종대왕만세');
+  // const [text, setText] = useState('세종대왕만세');
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const CANVAS_WIDTH = 512;
@@ -103,7 +103,7 @@ function Canvas() {
 
       if (!ctx) return;
       ctx.globalAlpha = 0.4;
-      message.forEach((letter, index) => {
+      message.forEach((letter:string, index:number) => {
         const noiseX = Math.sin(index * 10 + frameCount / 100) * 10;
         const noiseY = Math.cos(index * 10 + frameCount / 100) * 10;
 

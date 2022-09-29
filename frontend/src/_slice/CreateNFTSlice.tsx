@@ -39,6 +39,8 @@ const initialState = {
   description: '',
   tag: [],
   mintingData: new FormData(),
+  decomposeHangul: [],
+  mintingCompleted: false,
 };
 
 const CreateNFTSlice = createSlice({
@@ -60,19 +62,31 @@ const CreateNFTSlice = createSlice({
     mintingData(state, action) {
       state.mintingData = action.payload;
     },
+    decomposeHangul(state, action) {
+      state.decomposeHangul = action.payload;
+    },
+    mintingCompleted(state, action) {
+      state.mintingCompleted = action.payload;
+    },
   },
   extraReducers: {
     [countLetter.fullfiled]: (state, action) => {
-      createNFT(state.mintingData);
-
+      if (action.payload === 'true') {
+        createNFT(state.mintingData);
+      } else {
+        alert('Not enough letters');
+      }
     },
-    [countLetter.rejected]: state => {
-
-    },
+    [countLetter.rejected]: state => {},
     [createNFT.fullfiled]: (state, action) => {
-      // exhaustLetter(///풀어해친);
+      exhaustLetter(state.decomposeHangul);
     },
-    [createNFT.rejected]: state => {},
+    [createNFT.rejected]: state => {
+      alert('Cannot Mint NFT properly');
+    },
+    [exhaustLetter.fullfiled]: (state, action) => {
+      state.mintingCompleted = true;
+    },
   },
 });
 

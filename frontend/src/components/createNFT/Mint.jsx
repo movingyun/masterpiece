@@ -1,26 +1,39 @@
-import React from 'react';
-import dotenv from 'dotenv';
-// import axios from 'axios';
-import fs from 'fs';
+// import React from 'react';
+import { useNavigate } from 'react-router-dom';
+// import dotenv from 'dotenv';
+import axios from 'axios';
+// import fs from 'fs';
 import FormData from 'form-data';
 import Web3 from 'web3';
-import Contract from 'web3-eth-contract';
-import pinataSDK from '@pinata/sdk';
+// import Contract from 'web3-eth-contract';
+// import pinataSDK from '@pinata/sdk';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { createNFTActions, countLetter } from '../../_slice/CreateNFTSlice';
 
 
-dotenv.config();
+import { DiscomposeSentence } from '../../commons/HangulMaker/DiscomposeHangul'
+import MasterpieceNFT from '../../json/MasterpieceNFT.json'
+
+
+// dotenv.config();
 
 function Mint() {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+
+  const walletAddress = useSelector(state => state.user.currentUser.wallet_address);
 
   // NFT webm blob
   const videoBlob = useSelector(state => state.createNFT.NFTBlob);
 
   // 한글 문장 = filename
-  const filename = useSelector(state => state.areaSentence.value).filter(char => char !== '\n').join('');
+  const hangulSentence = useSelector(state => state.areaSentence.value);
+  const filename = hangulSentence.filter(char => char !== '\n').join('');
+
+  // 한글 문장 분해해서 store에 저장
+  dispatch(createNFTActions.decomposeHangul(DiscomposeSentence(hangulSentence)));
 
   // NFTInput
   const title = useSelector(state => state.createNFT.style);
@@ -31,21 +44,18 @@ function Mint() {
    * pinFileToIPFS -> pinJSONToIPFS -> NFT 민팅 -> nft생성 api 호출
    */
 
-  const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_API_SECRET_KEY);
+  // const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_API_SECRET_KEY);
   const CA = process.env.REACT_APP_CONTRACT_ADDRESS;
-  const privateKey = process.env.REACT_APP_PRIVATE_KEY;
-  const web3 = new Web3('ws://20.196.209.2:6174');
-  Contract.setProvider('ws://20.196.209.2:6174');
-  const ABI = JSON.parse(fs.readFileSync('../smart-contracts/build/contracts/SsafyNFT.json')).abi;
-  const contract = new Contract(ABI, CA);
+  // const privateKey = process.env.REACT_APP_PRIVATE_KEY;
+  // const web3 = new Web3('ws://20.196.209.2:6174');
+  // Contract.setProvider('ws://20.196.209.2:6174');
+  const ABI = MasterpieceNFT.abi;
+
 
   const GATEWAY_URL = 'https://ipfs.io/ipfs/';
 
-  // const file = videoBlob; // 민팅할 파일
-  const readableStreamForFile = videoBlob.stream();
-  // fetch(file).then((response) => {
-  //     readableStreamForFile = response.body;
-  // });
+  const file = videoBlob; // 민팅할 파일
+  // const readableStreamForFile = videoBlob.stream();
 
   // 민팅된 이미지의 제목 - 받은 파일의 이름으로 설정
   // const filename = '이찬혁';
@@ -58,110 +68,168 @@ function Mint() {
   // 사용자가 작성한 태그
   // let tag = document.getElementById("tags").value;
   // const tag = '힙합 동묘 쇼미';
-  const options = {
-    pinataMetadata: {
-      name: filename,
-    },
-    pinataOptions: {
-      cidVersion: 0,
-    },
-  };
-  const options2 = {
-    pinataMetadata: {
-      name: title,
-    },
-    pinataOptions: {
-      cidVersion: 0,
-    },
-  };
+  // const options = {
+  //   pinataMetadata: {
+  //     name: filename,
+  //   },
+  //   pinataOptions: {
+  //     cidVersion: 0,
+  //   },
+  // };
+  // const options2 = {
+  //   pinataMetadata: {
+  //     name: title,
+  //   },
+  //   pinataOptions: {
+  //     cidVersion: 0,
+  //   },
+  // };
 
   // IPFS 업로드
   let cid;
   let jsonCid;
-  pinata
-    .pinFileToIPFS(readableStreamForFile, options)
-    .then(result1 => {
-      console.log(result1);
-      cid = result1.IpfsHash;
 
-      const body = {
-        name: title,
-        description,
-        image: GATEWAY_URL + cid,
-        attributes: [{ trait_type: 'Unknown', value: 'Unknown' }],
-      };
+  // Minting
+  const mintNFT = async () => {
+    const userAddress = walletAddress; // 로그인한 사용자의 지갑 주소
+    const tokenURI = GATEWAY_URL + jsonCid;
 
-      pinata
-        .pinJSONToIPFS(body, options2)
-        .then(result2 => {
-          console.log(result2);
-          jsonCid = result2.IpfsHash;
-          const userAddress = '0x85e559f41A96e3bE80082c9b3bc2614BB249325F'; // 로그인한 사용자의 지갑 주소
-          const tokenURI = GATEWAY_URL + jsonCid;
+    const web3 = new Web3(window.ethereum);
+    const contract = new web3.eth.Contract(ABI, CA);
+    
+    // minting
+    await contract.methods
+      .create(userAddress, tokenURI)
+      .send({
+        from: userAddress,
+      })
+      .then(receipt => {
+        const txHash = receipt.transactionHash;
+        const { topics } = receipt.logs[0];
+        const tokenId = parseInt(topics[topics.length - 1], 16);
+        console.log(tokenId);
 
-          web3.eth.getTransactionCount(userAddress, 'latest').then(res => {
-            const nonce = res;
-            console.log('nonce:' + nonce);
+        const formData = new FormData();
+        formData.append('imgFile', file);
+        formData.append('cid', cid);
+        formData.append('contractAddress', CA);
+        formData.append('txHash', txHash);
+        formData.append('tokenId', tokenId);
+        formData.append('creatorWalletAddress', userAddress);
+        formData.append('nftTitle', title);
+        formData.append('nftDescription', description);
+        formData.append('nftTag', tag);
 
-            const tx = {
-              from: userAddress,
-              to: CA,
-              nonce,
-              gas: 1000000000,
-              data: contract.methods.create(userAddress, tokenURI).encodeABI(),
-            };
+        // 마음이 걸려요! 비동기....
+        try {
+          // formData store에 저장
+          dispatch(createNFTActions.mintingData(formData));
+  
+          // countLetter -> createNFT -> exhaustNFT 순차 진행
+          dispatch(countLetter(formData));
+        } finally {
+          navigate('/nftlist');
+        }
 
-            // NFT 민팅
-            const signPromise = web3.eth.accounts.signTransaction(tx, privateKey);
-            signPromise.then(signedTx => {
-              web3.eth.sendSignedTransaction(signedTx.rawTransaction, (err, hash) => {
-                if (!err) {
-                  console.log('The hash of your transaction is: ', hash);
-                  // nft 생성 api 호출
-                  const formData = new FormData();
-                  // formData.append("imgFile", file);
-                  formData.append('cid', cid);
-                  formData.append('contractAddress', CA);
-                  formData.append('txHash', hash);
-                  formData.append('creatorWalletAddress', userAddress);
-                  formData.append('nftTitle', title);
-                  formData.append('nftDescription', description);
-                  formData.append('nftTag', tag);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-                  // formData store에 저장
-                  dispatch(createNFTActions.mintingData(formData));
-
-                  // countLetter -> createNFT -> exhaustNFT 순차 진행
-                  dispatch(countLetter(formData));
-
-                  // axios는 redux 에서 처리
-                  //   .post('http://localhost:8080/api/nft', formData, {
-                  //     headers: { 'Content-Type': 'multipart/form-data' },
-                  //   })
-                  //   .then(() => {
-                  //     console.log('success');
-                  //   })
-                  //   .catch(() => {
-                  //     console.log('fail');
-                  //   });
-                } else {
-                  console.log('Something went wrong when submitting your transaction:', err);
-                }
-              });
-            });
-          });
-        })
-        .catch(error => {
-          console.log('pinJSONToIPFS error!');
-          console.log(error);
+    const sendJSONToIPFS = async () => {
+      try {
+        await axios({
+          method: 'post',
+          url: 'https://api.pinata.cloud/pinning/pinJsonToIPFS',
+          data: {
+            name: title,
+            description,
+            image: GATEWAY_URL + cid,
+          },
+          headers: {
+            pinata_api_key: `${process.env.REACT_APP_PINATA_API_KEY}`,
+            pinata_secret_api_key: `${process.env.REACT_APP_PINATA_API_SECRET_KEY}`,
+          },
         });
-    })
-    .catch(error => {
-      console.log('pinFileToIPFS error!');
-      console.log(error);
-    });
 
-  return <div>mint</div>;
+        // console.log('final ', `ipfs://${resJSON.data.IpfsHash}`);
+        // const tokenURI = `ipfs://${resJSON.data.IpfsHash}`;
+        // console.log('Token URI', tokenURI);
+
+        mintNFT(); // pass the winner
+      } catch (error) {
+        console.log('JSON to IPFS: ');
+        console.log(error);
+      }
+    };
+
+  const sendFileToIPFS = async () => {
+    if (videoBlob) {
+      try {
+        const formData = new FormData();
+        formData.append('file', videoBlob);
+        formData.append('name', filename);
+
+        const resFile = await axios({
+          method: 'post',
+          url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+          data: formData,
+          headers: {
+            pinata_api_key: `${process.env.REACT_APP_PINATA_API_KEY}`,
+            pinata_secret_api_key: `${process.env.REACT_APP_PINATA_API_SECRET_KEY}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        cid = resFile.IpfsHash;
+
+      sendJSONToIPFS();
+
+        // const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+        // console.log(ImgHash);
+        // Take a look at your Pinata Pinned section, you will see a new file added to you list.
+      } catch (error) {
+        console.log('Error sending File to IPFS: ');
+        console.log(error);
+      }
+    }
+  };
+
+  sendFileToIPFS();
+
+  // pinata
+  //   .pinFileToIPFS(readableStreamForFile, options)
+  //   .then(result => {
+  //     console.log(result);
+  //     cid = result.IpfsHash;
+
+  //     const body = {
+  //       name: title,
+  //       description,
+  //       image: GATEWAY_URL + cid,
+  //       attributes: [{ trait_type: 'Unknown', value: 'Unknown' }],
+  //     };
+
+  //     pinata
+  //       .pinJSONToIPFS(body, options2)
+  //       .then(result2 => {
+  //         console.log(result2);
+  //         jsonCid = result2.IpfsHash;
+  //         const userAddress = walletAddress; // 로그인한 사용자의 지갑 주소
+  //         const tokenURI = GATEWAY_URL + jsonCid;
+  //       })
+  //       .catch(error => {
+  //         console.log('pinJSONToIPFS error!');
+  //         console.log(error);
+  //       });
+  //   })
+  //   .catch(error => {
+  //     console.log('pinFileToIPFS error!');
+  //     console.log(error);
+  //   });
+
+  // 전부 성공하면, mypage로 보내줌
 }
 
 export default Mint;
