@@ -50,7 +50,7 @@ export default function Mint() {
     try {
         dispatch(countLetter(checkLetterAPI));
     } finally {
-        navigate('/nftlist');
+        // navigate('/nftlist');
     }
   }, [NFTData.formData])
 

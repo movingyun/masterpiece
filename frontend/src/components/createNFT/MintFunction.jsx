@@ -23,6 +23,7 @@ function MintFunction(NFTData) {
   const GATEWAY_URL = 'https://ipfs.io/ipfs/';
 
   const file = videoBlob; // 민팅할 파일
+  console.log(videoBlob);
   const readableStreamForFile = file.stream();
 
   // 민팅된 이미지의 제목 - 받은 파일의 이름으로 설정
@@ -53,72 +54,76 @@ function MintFunction(NFTData) {
   //   },
   // };
 
-  // IPFS 업로드
   let cid;
   let jsonCid;
-  
+
   // Minting
   const mintNFT = async () => {
     const userAddress = walletAddress; // 로그인한 사용자의 지갑 주소
     const tokenURI = GATEWAY_URL + jsonCid;
-    
+
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(ABI, CA);
-    
+
     // minting
-    await contract.methods
+    const res = await contract.methods
       .create(userAddress, tokenURI)
       .send({
         from: userAddress,
-      })
-      .then(receipt => {
-        const txHash = receipt.transactionHash;
-        const { topics } = receipt.logs[0];
-        const tokenId = parseInt(topics[topics.length - 1], 16);
-        console.log(tokenId);
-        
-        const formData = new FormData();
-        formData.append('imgFile', file);
-        formData.append('cid', cid);
-        formData.append('contractAddress', CA);
-        formData.append('txHash', txHash);
-        formData.append('tokenId', tokenId);
-        formData.append('creatorWalletAddress', userAddress);
-        formData.append('nftTitle', title);
-        formData.append('nftDescription', description);
-        formData.append('nftTag', tag);
-
-        NFTData.formData = formData;
-
-      })
-      .catch(err => {
-        console.log(err);
       });
+
+    const txHash = res.transactionHash;
+    const { topics } = res.logs[0];
+    const tokenId = parseInt(topics[topics.length - 1], 16);
+    console.log("The hash of your transaction is: ", txHash);
+    console.log("tokenId: ", tokenId);
+
+    const formData = new FormData();
+    formData.append('imgFile', file);
+    formData.append('cid', cid);
+    formData.append('tokenId', tokenId);
+    formData.append('contractAddress', CA);
+    formData.append('txHash', txHash);
+    formData.append('creatorWalletAddress', userAddress);
+    formData.append('nftTitle', title);
+    formData.append('nftDescription', description);
+    formData.append('nftTag', tag);
+
+    NFTData.formData = formData;
   };
 
+  // IPFS 업로드
   const sendJSONToIPFS = async () => {
     try {
-      await axios({
+      const data = JSON.stringify({
+        "pinataOptions": {
+          "cidVersion": 0
+        },
+        "pinataMetadata": {
+          "name": title
+        },
+        "pinataContent": {
+          "name": title,
+          description,
+          "image": GATEWAY_URL + cid,
+        }
+      });
+      const res = await axios({
         method: 'post',
         url: 'https://api.pinata.cloud/pinning/pinJsonToIPFS',
-        data: {
-          name: title,
-          description,
-          image: GATEWAY_URL + cid,
-        },
         headers: {
-          pinata_api_key: `${process.env.REACT_APP_PINATA_API_KEY}`,
-          pinata_secret_api_key: `${process.env.REACT_APP_PINATA_API_SECRET_KEY}`,
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer PINATA JWT'
         },
+        data,
       });
 
-      // console.log('final ', `ipfs://${resJSON.data.IpfsHash}`);
-      // const tokenURI = `ipfs://${resJSON.data.IpfsHash}`;
-      // console.log('Token URI', tokenURI);
+      console.log(res.data);
+      jsonCid = res.data.IpfsHash;
 
       mintNFT(); // pass the winner
     } catch (error) {
-      console.log('JSON to IPFS: ');
+      console.log('Error sending JSON to IPFS: ');
       console.log(error);
     }
   };
@@ -128,11 +133,11 @@ function MintFunction(NFTData) {
       try {
         const formData = new FormData();
         formData.append('file', readableStreamForFile);
-        formData.append('pinataOptions', {"cidVersion": 0});
-        formData.append('pinataMetadata', {"name": file.name});
+        formData.append('pinataOptions', { "cidVersion": 0 });
+        formData.append('pinataMetadata', { "name": file.name });
         // formData.append('name', filename);
 
-        const resFile = await axios({
+        const res = await axios({
           method: 'post',
           url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
           headers: {
@@ -142,14 +147,11 @@ function MintFunction(NFTData) {
           data: formData,
         });
 
-        console.log(resFile.data);
-        // cid = resFile.IpfsHash;
+        console.log(res.data);
+        cid = res.data.IpfsHash;
 
         sendJSONToIPFS();
 
-        // const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
-        // console.log(ImgHash);
-        // Take a look at your Pinata Pinned section, you will see a new file added to you list.
       } catch (error) {
         console.log('Error sending File to IPFS: ');
         console.log(error);
@@ -158,37 +160,6 @@ function MintFunction(NFTData) {
   };
 
   sendFileToIPFS();
-
-  // pinata
-  //   .pinFileToIPFS(readableStreamForFile, options)
-  //   .then(result => {
-  //     console.log(result);
-  //     cid = result.IpfsHash;
-
-  //     const body = {
-  //       name: title,
-  //       description,
-  //       image: GATEWAY_URL + cid,
-  //       attributes: [{ trait_type: 'Unknown', value: 'Unknown' }],
-  //     };
-
-  //     pinata
-  //       .pinJSONToIPFS(body, options2)
-  //       .then(result2 => {
-  //         console.log(result2);
-  //         jsonCid = result2.IpfsHash;
-  //         const userAddress = walletAddress; // 로그인한 사용자의 지갑 주소
-  //         const tokenURI = GATEWAY_URL + jsonCid;
-  //       })
-  //       .catch(error => {
-  //         console.log('pinJSONToIPFS error!');
-  //         console.log(error);
-  //       });
-  //   })
-  //   .catch(error => {
-  //     console.log('pinFileToIPFS error!');
-  //     console.log(error);
-  //   });
 
   // 전부 성공하면, mypage로 보내줌
 }
