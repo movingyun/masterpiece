@@ -63,7 +63,7 @@ export default function AreaDiscompose() {
   }
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{width:"100%", minHeight:100, backgroundColor:"#F8CECE", border:"1px dashed black"}}
+    style={{marginBottom: 10, width:"100%", minHeight:160, backgroundColor:"#F8CECE", border:"1px dashed black"}}
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}
