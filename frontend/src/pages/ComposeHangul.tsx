@@ -22,11 +22,11 @@ export default function ComposeHangul() {
   
   return (
     <Container>
-      <div style={{margin:10, fontSize:50}}>Make Your Own Word</div>
+      <div style={{margin:10, fontSize:50}}>Make Your Own Word/Sentence</div>
       <Grid container>
         <Grid container item xs={6} style={{padding:10}}>
           <Grid item xs={12}><AreaTranslate/></Grid>
-          <Grid item xs={12}><HangulMaker/></Grid>
+          <Grid item xs={12}><HangulMaker test={false}/></Grid>
         </Grid>
         <Grid container item xs={6} style={{padding:10}}>
           <Grid item xs={12}><AreaDiscompose/></Grid>
