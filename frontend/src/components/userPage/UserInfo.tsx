@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUser } from '../../_slice/UserSlice';
 
-interface UserInfoType {
+export interface UserInfoType {
   walletAddress: String;
 }
 export default function UserInfo({ walletAddress }: UserInfoType) {
