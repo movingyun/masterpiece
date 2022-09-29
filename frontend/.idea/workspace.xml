@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2fefd580-f7da-4f96-9b94-aaeba8978c5c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/S07P22A508.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/S07P22A508.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/BackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/config/AWSConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/config/AWSConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/config/SwaggerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/GamelogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/GamelogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/HangulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/HangulController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/NFTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/NFTController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/SaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/SaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/UserLikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/controller/UserLikeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/GameWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/GameWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/Gamelog.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/Gamelog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/Hangul.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/Hangul.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/HangulOwn.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/HangulOwn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/Nft.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/Nft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/Salelog.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/Salelog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/UserLike.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/entity/UserLike.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/GameWordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/GameWordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/GamelogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/GamelogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/HangulOwnRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/HangulOwnRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/HangulRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/HangulRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/NFTRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/NFTRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/SaleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/SaleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/SalelogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/SalelogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/UserLikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/UserLikeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/db/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/GameDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/GameDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/HangulInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/HangulInfoDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/HangulUseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/HangulUseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/LikeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/LikeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/NFTCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/NFTCreateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/NFTDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/NFTDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/QuestionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/QuestionDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/RandomDrawDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/RandomDrawDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/SaleResultDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/SaleResultDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/SalelogDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/SalelogDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/UserSelectDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/UserSelectDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/UserSigninDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/UserSigninDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/UserUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/dto/UserUpdateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/AwsS3Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/AwsS3Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/AwsS3ServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/AwsS3ServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/GamelogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/GamelogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/GamelogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/GamelogServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/HangulOwnService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/HangulOwnService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/HangulOwnServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/HangulOwnServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/HangulService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/HangulService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/HangulServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/HangulServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/NFTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/NFTService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/NFTServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/NFTServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/SaleServcie.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/SaleServcie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/SaleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/SaleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/UserLikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/UserLikeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/userLikeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/ssafy/backend/service/userLikeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/frontend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.prettierrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.prettierrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/babel.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/babel.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_hook/HangulMakerHook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/_hook/HangulMakerHook.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_slice/ComposeHangulSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/_slice/ComposeHangulSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_slice/HangulMakerSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/_slice/HangulMakerSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_slice/HangulSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/_slice/HangulSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_slice/UserSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/_slice/UserSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_store/store.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/_store/store.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/BarSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/BarSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/HangulMaker/ComposeHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/HangulMaker/ComposeHangul.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/HangulMaker/DiscomposeHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/HangulMaker/DiscomposeHangul.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/HangulMaker/HangulMaker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/HangulMaker/HangulMaker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/HangulMaker/HangulMakerFML.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/HangulMaker/HangulMakerFML.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/HangulMaker/HangulMakerInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/HangulMaker/HangulMakerInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/Help.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/Help.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/InputText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/InputText.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/LetterCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/LetterCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/LetterShape.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/LetterShape.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/NFTCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/NFTCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commons/Sound.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commons/Sound.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NFTDetail/NFTDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NFTDetail/NFTDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NFTList/NFTList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NFTList/NFTList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/byLot/Draw.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/byLot/Draw.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/byLot/Inventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/byLot/Inventory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/byLot/SimpleDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/byLot/SimpleDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/composeHangul/AreaDiscompose.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/composeHangul/AreaDiscompose.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/composeHangul/AreaSentence.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/composeHangul/AreaSentence.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/composeHangul/AreaSyllable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/composeHangul/AreaSyllable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/composeHangul/DragAndDrop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/composeHangul/DragAndDrop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/createNFT/createNFT.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/createNFT/createNFT.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/decorateHangul/decorateHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decorateHangul/decorateHangul.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/hangulGame/hangulGame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/hangulGame/hangulGame.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Navigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/learnSyllables/learnSyllables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/learnSyllables/learnSyllables.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/MetamaskLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/MetamaskLogin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/main/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/signup/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/signup/signup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/userPage/Collected.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/userPage/Collected.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/userPage/UserInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/userPage/UserInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/connectors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/connectors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/error.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/error.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ByLot.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ByLot.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ComposeHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ComposeHangul.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/CreateNFT.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CreateNFT.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/DecorateHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DecorateHangul.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/HangulGame.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HangulGame.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LearnSyllables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LearnSyllables.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NFTDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NFTDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NFTList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NFTList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Signup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/UserPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/UserPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shims‑png.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shims‑png.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2FNw0H0ZERNRUg126wTJhQoDmHM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2fefd580-f7da-4f96-9b94-aaeba8978c5c" name="Changes" comment="" />
+      <created>1664345624605</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1664345624605</updated>
+      <workItem from="1664345626593" duration="682000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

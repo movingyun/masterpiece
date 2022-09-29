@@ -79,6 +79,130 @@ public class HangulServiceImpl implements HangulService {
     }
 
     @Override
+    public List<Integer> getFirstConsonantList(String wallet_address) {
+        User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
+        if(user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        List<Integer> list = new ArrayList<>();
+        List<String> firstList = hangulRepository.findAllFirstConsonant();
+        System.out.println("==============firstList===============");
+        for(String s : firstList) {
+            System.out.print(s+" ");
+        }
+        System.out.println();
+
+        List<Object[]> ownList = hangulRepository.findFirstOwnedByUser(user);
+        int i=0, j=0;
+        for(; i<firstList.size(); i++){
+            if(firstList.get(i).equals(((Hangul)ownList.get(j)[0]).getLetter())) {
+                list.add((Integer)ownList.get(j)[1]);
+                j++;
+            } else {
+                list.add(0);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Integer> getMiddleVowelList(String wallet_address) {
+        User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
+        if(user == null) {
+            throw new IllegalArgumentException();
+        }
+        List<Integer> list = new ArrayList<>();
+        List<String> middleList = hangulRepository.findAllMiddleVowel();
+        System.out.println("==============middleList===============");
+        for(String s : middleList) {
+            System.out.print(s+" ");
+        }
+        System.out.println();
+
+        List<Object[]> ownList = hangulRepository.findMiddleOwnedByUser(user);
+        int i=0, j=0;
+        for(; i<middleList.size(); i++){
+            if(middleList.get(i).equals(((Hangul)ownList.get(j)[0]).getLetter())) {
+                list.add((Integer)ownList.get(j)[1]);
+                j++;
+            } else {
+                list.add(0);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Integer> getLastConsonantList(String wallet_address) {
+        User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
+        if(user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        List<Integer> list = new ArrayList<>();
+        List<String> LastList = hangulRepository.findAllLastConsonant();
+        System.out.println("==============LastList===============");
+        for(String s : LastList) {
+            System.out.print(s+" ");
+        }
+        System.out.println();
+
+        List<Object[]> ownList = hangulRepository.findLastOwnedByUser(user);
+        int i=0, j=0;
+        for(; i<LastList.size(); i++){
+            if(LastList.get(i).equals(((Hangul)ownList.get(j)[0]).getLetter())) {
+                list.add((Integer)ownList.get(j)[1]);
+                j++;
+            } else {
+                list.add(0);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Integer> getConsonantList(String wallet_address) {
+        User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
+        if(user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        List<Integer> list = new ArrayList<>();
+        List<String> consonantList = hangulRepository.findAllConsonant();
+//        consonantList.remove("ㄸ"); //ㄸ
+//        consonantList.remove("ㅃ"); //ㅃ
+//        consonantList.remove("ㅉ"); //ㅉ
+//        consonantList.add( "ㄸ");
+//        consonantList.add( "ㅃ");
+//        consonantList.add( "ㅉ");
+        System.out.println("==============consonantList===============");
+        for(String s : consonantList) {
+            System.out.print(s+" ");
+        }
+        System.out.println();
+
+        List<Object[]> ownList = hangulRepository.findConsonantsOwnedByUser(user);
+        int i=0, j=0;
+        for(; i<consonantList.size(); i++){
+            if(consonantList.get(i).equals(((Hangul)ownList.get(j)[0]).getLetter())) {
+                list.add((Integer)ownList.get(j)[1]);
+                j++;
+            } else {
+                list.add(0);
+            }
+        }
+        int cnt1 = list.get(7), cnt2 = list.get(19), cnt3 = list.get(24);
+        list.remove(7);
+        list.remove(18);
+        list.remove(22);
+        list.add(cnt1);
+        list.add(cnt2);
+        list.add(cnt3);
+        return list;
+    }
+
+    @Override
     public Map<String, Integer> getFirstConsonantMap(String wallet_address) {
         User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
         if(user == null) {

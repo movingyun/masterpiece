@@ -108,24 +108,34 @@ export default function HangulMakerFML(){
       const middleOrderIndex = VowelOrder[middleList[middle] as keyof typeof VowelOrder];
       const lastOrderIndex = ConsonantOrder[lastList[last] as keyof typeof ConsonantOrder];
       
-      if(consonantCount[firstOrderIndex]<=0 || vowelCount[middleOrderIndex]<=0 || consonantCount[lastOrderIndex]<=0 ){
+      const firstCount = (firstOrderIndex===undefined) ? 2 : consonantCount[firstOrderIndex];
+      const middleCount = (middleOrderIndex===undefined) ? 2 : consonantCount[middleOrderIndex];
+      const lastCount = (lastOrderIndex === undefined) ? 2 : consonantCount[lastOrderIndex];
+      
+      if(firstCount<=0 || middleCount<=0 || lastCount<=0
+        || (firstOrderIndex===lastOrderIndex && firstCount<2)){
         console.log("alert 보유개수 부족");
         alert("보유개수 부족");
         return;
       }
 
+      let payload: any = {};
       // 초성 count--
-      let payload:any = {
-        index: firstOrderIndex,
-      };
-      dispatch(consonantCountAction.compose(payload));
+      if (firstOrderIndex !== undefined) {
+        payload = {
+          index: firstOrderIndex,
+        };
+        dispatch(consonantCountAction.compose(payload));
+      }
       // 중성 count--
-      payload = {
-        index: middleOrderIndex,
-      };
-      dispatch(vowelCountAction.compose(payload));
+      if (middleOrderIndex !== undefined) {
+        payload = {
+          index: middleOrderIndex,
+        };
+        dispatch(vowelCountAction.compose(payload));
+      }
       // 종성 count--
-      if((first>=0 && middle >=0) || (first<0 && middle <0)){
+      if(((first>=0 && middle >=0) || (first<0 && middle <0)) && (lastOrderIndex !== undefined)){
         payload = {
           index: lastOrderIndex,
         };
