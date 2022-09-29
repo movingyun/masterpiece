@@ -20,6 +20,7 @@
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "axios": "^0.27.2",
+    "express": "^4.18.1",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
@@ -59,6 +60,7 @@
     "@babel/eslint-parser": "^7.18.9",
     "@babel/preset-env": "^7.19.0",
     "@types/react-color": "^3.0.6",
+    "@types/request": "^2.48.8",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/parser": "^5.37.0",
     "eslint": "^8.23.1",
@@ -67,6 +69,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-import": "^2.26.0",
+    "react-app-rewired": "^2.2.1",
     "typescript": "^4.8.3"
   }
 }

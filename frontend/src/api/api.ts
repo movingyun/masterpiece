@@ -22,6 +22,9 @@ const GET_MIDDLECOUNT_URL= '/own/middle';
 const GET_LASTCOUNT_URL = '/own/last';
 const GET_CONSONANTCOUNT_URL = '/own/consonant';
 
+// translate
+const TRANSLATE = '/papago'
+
 const api = {
   // user
   signin: () => API_BASE_URL + USER_URL + SIGNIN_URL,
@@ -41,6 +44,9 @@ const api = {
   getMiddle: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_MIDDLECOUNT_URL + `?wallet-address=${walletAddress}`,
   getLast: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_LASTCOUNT_URL + `?wallet-address=${walletAddress}`,
   getConsonant: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_CONSONANTCOUNT_URL + `?wallet-address=${walletAddress}`,
+
+  // trnaslate
+  translate: () => API_BASE_URL + TRANSLATE,
 };
 
 export default api;

@@ -67,11 +67,11 @@ export default function AreaSentence(){
           onDragOver={event => dragOverFunction(event, 'dragOver')}
           />
           {sentenceList.map((syllable:string, index:number)=>(
-            (index===0) ? (<div key={`$AreaSyllable${syllable}`}/>)
+            (index===0) ? (<div key={`$AreaSentence${sentenceList[index]}`}/>)
             : ((syllable===" ") ? (
               <>                
-                <DragAndDrop key={`$AreaSyllable${syllable}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
-                <Box display="flex" justifyContent="center" alignItems="center"
+                <DragAndDrop key={`$AreaSentence${sentenceList[index]}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+                <Box key={`$AreaSentenceSpace${sentenceList[index]}`} display="flex" justifyContent="center" alignItems="center"
                 style={{width:unit*2, minHeight:unit*5, backgroundColor:"#FFFFFF", border:"1px dashed black"}}
                 className="area"
                 onDrop={event => dropFunction(event, index)}
@@ -80,9 +80,9 @@ export default function AreaSentence(){
               </>
               )
               : (
-                (syllable==="\n") ? (<><DragAndDrop key={`$AreaSyllable${syllable}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
-                <Grid item xs={12}><div/></Grid>
-                <Box display="flex" justifyContent="center" alignItems="center"
+                (syllable==="\n") ? (<><DragAndDrop key={`$AreaSentence${sentenceList[index]}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+                <Grid key={`$AreaSentenceDiv${sentenceList[index]}`} item xs={12}><div/></Grid>
+                <Box key={`$AreaSentenceSpace${sentenceList[index]}`} display="flex" justifyContent="center" alignItems="center"
                 style={{marginLeft:unit, width:unit*2, minHeight:unit*5, backgroundColor:"#FFFFFF", border:"1px dashed black"}}
                 className="area"
                 onDrop={event => dropFunction(event, index)}
@@ -91,8 +91,8 @@ export default function AreaSentence(){
                 </>)
                 : (
                 <>                
-                  <DragAndDrop key={`$AreaSyllable${syllable}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
-                  <Box display="flex" justifyContent="center" alignItems="center"
+                  <DragAndDrop key={`$AreaSentence${sentenceList[index]}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+                  <Box key={`$AreaSentenceSpace${sentenceList[index]}`} display="flex" justifyContent="center" alignItems="center"
                   style={{width:unit*2, minHeight:unit*5, backgroundColor:"#FFFFFF", border:"1px dashed black"}}
                   className="area"
                   onDrop={event => dropFunction(event, index)}
