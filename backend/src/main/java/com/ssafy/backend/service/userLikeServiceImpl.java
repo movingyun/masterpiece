@@ -28,11 +28,11 @@ public class userLikeServiceImpl implements UserLikeService{
         int userId = user.getId();
 
         // nftId로 nft정보 가져오기
-        int nftId = like.getNftId();
-        Nft nft = nftService.findById(nftId);
+        String nftHash = like.getNftHash();
+        Nft nft = nftService.findByNFTHash(nftHash);
 
         //좋아요 누르기
-        UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nftId).orElse(null);
+        UserLike userLike = userLikeRepository.findByUserAndNftHash(userId, nftHash).orElse(null);
         // userLike가 null값이면 행을 만들어주고
         if(userLike == null){
             userLike = UserLike.builder()

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class NFTCreateDto {
     MultipartFile imgFile;
     String cid;
+    Integer tokenId;
     String contractAddress;
     String txHash;
     String creatorWalletAddress;

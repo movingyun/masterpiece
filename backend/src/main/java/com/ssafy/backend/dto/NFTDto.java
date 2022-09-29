@@ -9,6 +9,8 @@ import java.util.List;
 @Builder
 public class NFTDto {
     String imgUrl;
+    Integer tokenId;
+    String nftAddress;
     String nftTitle;
     String nftPrice;
     String nftCreatorNickname;
@@ -16,4 +18,5 @@ public class NFTDto {
     String nftOwnerNickname;
     List<String> nftTags;
     int nftLike;
+    String nftDescription;
 }

@@ -9,7 +9,8 @@ import java.util.Optional;
 
 public interface NFTRepository extends JpaRepository<Nft, Integer> {
     Nft findById(int id);
-    Nft findByContractAddress(String contract_address);
+    List<Nft> findByContractAddress(String contract_address);
+    List<Nft> findByNftHash(String nftHash);
     @Query("select n from Nft n where n.owner = :user")
     List<Nft> findOwnedNfts(User user);
     @Query("select n from Nft n where n.creator = :user")

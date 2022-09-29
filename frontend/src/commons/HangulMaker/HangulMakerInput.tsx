@@ -29,13 +29,28 @@ export default function HangulMakerInput(){
   const colorList:string[] = ['#FFD8E3', '#FFEBCD', '#FFFFE0', '#F0FFF0', '#E0FFFF', '#FFD7FF'];
 
   if(select === FML.FIRST || select === FML.LAST){
-    letterList[select].map((letter:string)=>{
-      count.push(consonantCount[ConsonantOrder[letter as keyof typeof ConsonantOrder]]);
+    // letterList[select].map((letter:string)=>{
+    //   count.push(consonantCount[ConsonantOrder[letter as keyof typeof ConsonantOrder]]);
+    // });
+    if (select === FML.LAST) {
+      count.push(0);
+    }
+    letterList[select].map((letter: string) => {
+      const index = ConsonantOrder[letter as keyof typeof ConsonantOrder];
+      if (index !== undefined) {
+        count.push(consonantCount[index]);
+      }
     });
   }
   else if(select === FML.MIDDLE){
-    letterList[select].map((letter:string)=>{
-      count.push(vowelCount[VowelOrder[letter as keyof typeof VowelOrder]]);
+    // letterList[select].map((letter:string)=>{
+    //   count.push(vowelCount[VowelOrder[letter as keyof typeof VowelOrder]]);
+    // });
+    letterList[select].map((letter: string) => {
+      const index = VowelOrder[letter as keyof typeof VowelOrder];
+      if (index !== undefined) {
+        count.push(vowelCount[index]);
+      }
     });
   }
   return(
@@ -46,7 +61,7 @@ export default function HangulMakerInput(){
           return;
         }
         const color:string = (count[index]>0) ? colorList[index%6] : "#CCCCCC";
-
+        // console.log(letter, index, count[index]);
         return (
           <Button key={`${letter}middleButton`} 
             onClick={() => {letterChange(index)}}
@@ -66,7 +81,7 @@ export default function HangulMakerInput(){
               borderRadius: "100%",
               border: "2px solid black"
             }}>
-              {count[index].toString()}
+              {(count[index]<100) ? count[index].toString() : "99+"}
             </Box>
             {letter}
           </Button>

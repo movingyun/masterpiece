@@ -31,7 +31,7 @@ export default function AreaSyllable(){
     const dropObject:HTMLDivElement = (e.target as HTMLDivElement);
     console.log(type);
     if(dragStartArea===HangulComposeArea.SENTENCE){
-      if(dragValueState != "space" && dragValueState != "enter"){
+      if(dragValueState != " " && dragValueState != "\n"){
         dispatch(areaSyllableAction.push(dragValueState));
       }
       dispatch(areaSentenceAction.delete({index:dragStartElement}));
@@ -49,9 +49,9 @@ export default function AreaSyllable(){
     >
       <Container>
         {syllableList.map((syllable:string, index:number)=>(
-          (syllable==="space") ? (<DragAndDrop key={`$AreaSyllable${syllable}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
+          (syllable===" ") ? (<DragAndDrop key={`$AreaSyllable${syllable}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
           : (
-            (syllable==="enter") ? (<DragAndDrop key={`$AreaSyllable${syllable}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
+            (syllable==="\n") ? (<DragAndDrop key={`$AreaSyllable${syllable}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
             : (
             <DragAndDrop key={`$AreaSyllable${syllable}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
           ))

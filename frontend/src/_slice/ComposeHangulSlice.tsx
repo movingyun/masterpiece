@@ -1,5 +1,45 @@
 import React from "react";
-import { createSlice, Reducer } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import api from '../api/api';
+
+const getFisrt: any = createAsyncThunk('getFisrt', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.getFisrt(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+const getMiddle: any = createAsyncThunk('getMiddle', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.getMiddle(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+const getLast: any = createAsyncThunk('getLast', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.getLast(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+const getConsonant: any = createAsyncThunk('getConsonant', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.getConsonant(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+export { getFisrt, getMiddle, getLast, getConsonant };
 
 // 드래그중인 값
 export const dragValue = createSlice({
@@ -40,10 +80,10 @@ export const elementIndexAction = elementIndex.actions;
 // 제작된 음절
 export const areaSyllable = createSlice({
   name: 'areaSyllable',	// key
-  initialState:{value: ["space", "enter"]},	// 초기값
+  initialState:{value: [" ", "\n"]},	// 초기값
   reducers:{
     reset:(state, action) =>{
-      state.value = ["space", "enter"];
+      state.value = [" ", "\n"];
     },
     push:(state, action) =>{
       state.value.push(action.payload);
@@ -97,13 +137,24 @@ export const consonantCount = createSlice({
       // backendAPI
       state.value = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10];
     },
+    // setUserCount: (state, action) => {
+    //   state.value = getConsonant(action.payload.walletAddress);
+    // },
     compose:(state, action) =>{
       state.value[action.payload.index]--;
     },
     discompose:(state, action) =>{
       state.value[action.payload.index]++;
     },
-  }
+  },
+  extraReducers: {
+    [getConsonant.fulfilled]: (state, action) => {
+      state.value = action.payload;
+    },
+    [getConsonant.rejected]: state => {
+      state.value = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10];
+    },
+  },
 });
 export const consonantCountAction = consonantCount.actions;
 
@@ -117,12 +168,24 @@ export const vowelCount = createSlice({
       // backendAPI
       state.value = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10];
     },
+    // setUserCount: (state, action) => {
+    //   // const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
+    //   state.value = getMiddle(action.payload.walletAddress);
+    // },
     compose:(state, action) =>{
       state.value[action.payload.index]--;
     },
     discompose:(state, action) =>{
       state.value[action.payload.index]++;
     },
-  }
+  },
+  extraReducers: {
+    [getMiddle.fulfilled]: (state, action) => {
+      state.value = action.payload;
+    },
+    [getMiddle.rejected]: state => {
+      state.value = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10];
+    },
+  },
 });
 export const vowelCountAction = vowelCount.actions;
