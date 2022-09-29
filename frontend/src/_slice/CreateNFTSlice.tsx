@@ -39,7 +39,7 @@ const initialState = {
   description: '그래',
   tag: ['세종대왕', '킹왕짱'],
   mintingData: new FormData(),
-  decomposeHangul: [],
+  checkLetterAPI: {},
   mintingCompleted: false,
 };
 
@@ -62,8 +62,8 @@ const CreateNFTSlice = createSlice({
     mintingData(state, action) {
       state.mintingData = action.payload;
     },
-    decomposeHangul(state, action) {
-      state.decomposeHangul = action.payload;
+    checkLetterAPI(state, action) {
+      state.checkLetterAPI = action.payload;
     },
     mintingCompleted(state, action) {
       state.mintingCompleted = action.payload;
@@ -79,7 +79,7 @@ const CreateNFTSlice = createSlice({
     },
     [countLetter.rejected]: state => {},
     [createNFT.fullfiled]: (state, action) => {
-      exhaustLetter(state.decomposeHangul);
+      exhaustLetter(state.checkLetterAPI);
     },
     [createNFT.rejected]: state => {
       alert('Cannot Mint NFT properly');
