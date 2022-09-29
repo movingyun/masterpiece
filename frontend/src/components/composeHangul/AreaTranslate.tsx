@@ -5,14 +5,15 @@ import axios, { AxiosRequestConfig } from "axios";
 import api from "../../api/api";
 
 export default function AreaTranslate(){
-  let inputText:string = "apple I like banana";
-  let translateText:string = "이거 읽어봐라 멍청한 컴퓨터야 뷁";
+
+  const [inputText, setInputText] = React.useState("apple I like banana");
+  const [translateText, setTranslateText] = React.useState("이거 읽어봐라 멍청한 컴퓨터야 뷁");
 
   const changeInputText = (event:any) => {
-    inputText = event.target.value;
+    setInputText(event.target.value);
   }
   const changeTranslateText = (event:any) => {
-    translateText = event.target.value;
+    setTranslateText(event.target.value);
   }
   
   const tts = (lang:string, text:string)=>{
@@ -22,13 +23,13 @@ export default function AreaTranslate(){
     window.speechSynthesis.speak(msg);
   }
 
-
   const translate = async (source:string, target:string) =>{
     const requestBody:any = {
-      source, target, inputText,
+      source, target, text:inputText,
     }
-    const data = await axios.get(api.translate(), requestBody);
-    console.log(data);
+    const data = await axios.post(api.translate(), requestBody);
+    console.log(data.data);
+    setTranslateText(data.data);
   }
 
   return (
@@ -61,7 +62,7 @@ export default function AreaTranslate(){
         <Grid item xs={2} display="flex" justifyContent="center" alignItems="center">{'->'}</Grid>
         <Grid container item xs={4}>
           <Grid item xs={12} style={{margin:0}}>
-            <TextField multiline rows={3} fullWidth label="translate" defaultValue={translateText}
+            <TextField multiline rows={3} fullWidth label="translate" value={translateText}
               InputProps={{
                 readOnly: true,
               }}

@@ -1,9 +1,13 @@
-import { Co2Sharp } from '@mui/icons-material';
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import './Svg.css';
+import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { createNFTActions } from '../../_slice/CreateNFTSlice';
 
-function Svg() {
+function Canvas() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const text = useSelector((state: any) => state.areaSentence.value).join('');
   const textSize = useSelector((state: any) => state.deco.textSize);
   const textColor = useSelector((state: any) => state.deco.textColor);
   const textXAxis = useSelector((state: any) => state.deco.textXAxis);
@@ -18,22 +22,21 @@ function Svg() {
   const shadowColor = useSelector((state: any) => state.deco.shadowColor);
   const backgroundColor = useSelector((state: any) => state.deco.backgroundColor);
   const fontName = useSelector((state: any) => state.deco.fontName);
-  // const [fontType, setFontType] = useState(BlackHanSans);
 
   // 텍스트
   const [text, setText] = useState('세종대왕만세');
 
-  const canvas = useRef<HTMLCanvasElement>(null);
-  const videoRecorded = useRef<HTMLVideoElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const CANVAS_WIDTH = 512;
 
+  // 글자 조작 화면
   useEffect(() => {
-    const ctx = canvas.current?.getContext('2d');
+    const ctx = canvasRef.current?.getContext('2d');
 
     if (!ctx) return;
 
     // ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
-    
+
     // ctx.font = `${textSize}px ${fontName || ''}`;
     // ctx.fillStyle = textColor;
     // ctx.lineWidth = strokeWidth;
@@ -44,9 +47,9 @@ function Svg() {
     // ctx.shadowBlur = shadowBlur;
     // ctx.shadowOffsetX = shadowXAxis;
     // ctx.shadowOffsetY = shadowYAxis;
-    
+
     // ctx.fillText(text, textXAxis, textYAxis + textSize);
-    
+
     // let requestId: number;
     // let i = 0;
     // const render = () => {
@@ -113,7 +116,7 @@ function Svg() {
         ctx.lineWidth = strokeWidth;
         ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
         ctx.font = `${textSize}px ${fontName || ''}`;
-        
+
         ctx.shadowColor = shadowColor;
         ctx.shadowBlur = shadowBlur;
         ctx.shadowOffsetX = shadowXAxis;
@@ -122,7 +125,6 @@ function Svg() {
         ctx.fillText(letter, 0, 0);
 
         ctx.restore();
-
       });
       frameCount = requestAnimationFrame(loop);
     }
@@ -137,8 +139,7 @@ function Svg() {
     init();
     return () => {
       cancelAnimationFrame(frameCount);
-    }
-
+    };
   }, [
     shadowBlur,
     shadowXAxis,
@@ -159,7 +160,8 @@ function Svg() {
 
   // Canvas 녹화
   const recordCanvas = () => {
-    const canvasRec = canvas.current;
+    const canvasRec = canvasRef.current;
+
     // MediaRecorder(녹화기) 변수 선언
     let mediaRecorder: MediaRecorder | null = null;
 
@@ -167,7 +169,8 @@ function Svg() {
     const arrVideoData: BlobPart[] | undefined = [];
 
     // 캔버스 영역 화면을 스트림으로 취득
-    const mediaStream: any = canvasRec?.captureStream();
+    if (!canvasRec) return;
+    const mediaStream = canvasRec.captureStream();
 
     // MediaRecorder(녹화기) 객체 생성
     mediaRecorder = new MediaRecorder(mediaStream);
@@ -178,7 +181,7 @@ function Svg() {
       arrVideoData.push(event.data);
     };
 
-    mediaRecorder.start(); 
+    mediaRecorder.start();
 
     mediaRecorder.onstop = () => {
       // 들어온 스트림 데이터들(Blob)을 통합한 Blob객체를 생성
@@ -186,35 +189,27 @@ function Svg() {
 
       // BlobURL 생성: 통합한 스트림 데이터를 가르키는 임시 주소를 생성
       const blobURL = window.URL.createObjectURL(blob);
+      console.log('blobURL : ', blobURL);
 
-      // 재생 구현
-      if (!videoRecorded.current) return;
-      videoRecorded.current.src = blobURL;
-      videoRecorded.current.play();
-
-      // 다운로드 구현
-      const $anchor = document.createElement('a'); // 앵커 태그 생성
-      document.body.appendChild($anchor);
-      $anchor.style.display = 'none';
-      $anchor.href = blobURL; // 다운로드 경로 설정
-      $anchor.download = 'test.webm'; // 파일명 설정
-      $anchor.click(); // 앵커 클릭
+      // BlobURL store 저장
+      dispatch(createNFTActions.NFTBlob(blobURL));
 
       // 배열 초기화
       arrVideoData.splice(0);
-    }
+      navigate('/createnft');
+    };
 
     setTimeout(() => {
       mediaRecorder?.stop();
-    }, 3000)
-  }
+    }, 3000);
+  };
 
   return (
     <>
       <div>애니메이션 원래 위치는 여기</div>
       <canvas
         id="canvas"
-        ref={canvas}
+        ref={canvasRef}
         width={CANVAS_WIDTH}
         height={CANVAS_WIDTH}
         style={{ backgroundColor, fontFamily: 'BlackHanSans' }}
@@ -222,9 +217,8 @@ function Svg() {
       <button type="button" onClick={recordCanvas}>
         recordCanvas
       </button>
-      <video id="video_recorded" loop style={{ border: '1px solid black' }} muted ref={videoRecorded} />
     </>
   );
 }
 
-export default Svg
+export default Canvas;

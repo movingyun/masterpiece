@@ -54,7 +54,7 @@ root.render(
               <Route path="hangulgame" element={<HangulGame />} />
               <Route path="learnsyllables" element={<LearnSyllables />} />
               <Route path="login" element={<Login />} />
-              <Route path="nftdetail" element={<NFTDetail />} />
+              <Route path="nftdetail/:nftAddress" element={<NFTDetail />} />
               <Route path="nftlist" element={<NFTList />} />
               <Route path="signup" element={<Signup />} />
               <Route path="userpage/:walletAddress" element={<UserPage />} />

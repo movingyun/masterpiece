@@ -4,6 +4,7 @@ const API_BASE_URL = 'http://localhost:8081/api';
 // 경로
 const USER_URL = '/user';
 const HANGUL_URL = '/hangul';
+const NFT_URL = '/nft';
 
 // URI
 // User
@@ -16,6 +17,9 @@ const PICK_CONSONANT_URL = '/pick/consonant';
 const PICK_VOWEL_URL = '/pick/vowel';
 const FIRST_URL = '/first';
 
+// createNFT
+const COUNT_LETTER = '/count';
+
 // composeHangul
 const GET_FIRSTCOUNT_URL = '/own/first';
 const GET_MIDDLECOUNT_URL= '/own/middle';
@@ -24,6 +28,12 @@ const GET_CONSONANTCOUNT_URL = '/own/consonant';
 
 // translate
 const TRANSLATE = '/papago'
+
+// NFT
+const DETAIL_URL = '/detail';
+
+// Sale
+const SALE_URL = '/sale';
 
 const api = {
   // user
@@ -39,6 +49,11 @@ const api = {
   pickVowel: () => API_BASE_URL + HANGUL_URL + PICK_VOWEL_URL,
   fetchFirst: () => API_BASE_URL + HANGUL_URL + FIRST_URL,
 
+  // createNFT
+  countLetter: () => API_BASE_URL + HANGUL_URL + COUNT_LETTER,
+  createNFT: () => API_BASE_URL + NFT_URL,
+  exhaustLetter: () => API_BASE_URL + HANGUL_URL,
+
   // composeHangul
   getFisrt: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_FIRSTCOUNT_URL + `?wallet-address=${walletAddress}`,
   getMiddle: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_MIDDLECOUNT_URL + `?wallet-address=${walletAddress}`,
@@ -47,6 +62,13 @@ const api = {
 
   // trnaslate
   translate: () => API_BASE_URL + TRANSLATE,
+
+  // NFT
+  fetchAllNFT: () => API_BASE_URL + NFT_URL,
+  fetchNFTDetail: (nftAddress: String) => API_BASE_URL + NFT_URL + DETAIL_URL + `?nft-address=${nftAddress}`,
+
+  // Sale
+  fetchSaleHistory: (nftAddress: String) => API_BASE_URL + SALE_URL + `?nftHash=${nftAddress}`,
 };
 
 export default api;

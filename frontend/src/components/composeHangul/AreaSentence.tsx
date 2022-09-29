@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { Box, Button, Container, Grid } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SpaceBarIcon from '@mui/icons-material/SpaceBar';
@@ -107,7 +108,7 @@ export default function AreaSentence(){
       </Box>
       <Box mt={1} display="flex" justifyContent="flex-end" alignItems="center">
         <Button onClick={ saveSentence } style={{ backgroundColor: "green", color: "white" }}>
-          Go to Decorate
+          <Link to="/decoratehangul" style={{color:"#FFFFFF", textDecoration: 'none'}}>Go To Decorate</Link>
         </Button>
       </Box>
     </Container>

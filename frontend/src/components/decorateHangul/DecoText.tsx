@@ -15,7 +15,6 @@ function DecoText() {
   const textYAxis = useSelector((state: any) => state.deco.textYAxis);
   const textLineSpacing = useSelector((state: any) => state.deco.textLineSpacing);
   const strokeWidth = useSelector((state: any) => state.deco.borderRadius);
-  // const strokeOpacity = useSelector((state: any) => state.deco.borderOpacity);
   const strokeColor = useSelector((state: any) => state.deco.borderColor);
 
   const textSizeHandler = (event: any, value: any) => {
@@ -36,9 +35,6 @@ function DecoText() {
   const strokeWidthHandler = (event: any, value: any) => {
     dispatch(decoActions.strokeWidth(value));
   };
-  // const strokeOpacityHandler = (event: any, value: any) => {
-  //   dispatch(decoActions.strokeOpacity(value));
-  // };
   const strokeColorHandler = (color: any) => {
     dispatch(decoActions.strokeColor(color.hex));
   };
