@@ -10,6 +10,8 @@ function NFTVideo() {
     if (!videoRecorded.current) return;
     videoRecorded.current.src = blobURL;
     videoRecorded.current.play();
+    window.URL.revokeObjectURL(blobURL);
+
   }, [])
 
   return <video id="video_recorded" loop style={{ border: '1px solid black' }} muted ref={videoRecorded} />;
