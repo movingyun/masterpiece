@@ -7,65 +7,31 @@ import MasterpieceNFT from '../../json/MasterpieceNFT.json'
 function MintFunction(NFTData) {
 
 
-  const { walletAddress, videoBlob, title, description, tag } = NFTData;
+  const { videoBlob, title, description, tag } = NFTData;
 
   /**
    * pinFileToIPFS -> pinJSONToIPFS -> NFT 민팅 -> nft생성 api 호출
    */
 
-  // const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_API_SECRET_KEY);
   const CA = process.env.REACT_APP_CONTRACT_ADDRESS;
-  // const privateKey = process.env.REACT_APP_PRIVATE_KEY;
-  // const web3 = new Web3('ws://20.196.209.2:6174');
-  // Contract.setProvider('ws://20.196.209.2:6174');
   const ABI = MasterpieceNFT.abi;
 
   const GATEWAY_URL = 'https://ipfs.io/ipfs/';
 
   const file = videoBlob; // 민팅할 파일
-  console.log(videoBlob);
-  const readableStreamForFile = file.stream();
-
-  // 민팅된 이미지의 제목 - 받은 파일의 이름으로 설정
-  // const filename = '이찬혁';
-  // 메타데이터의 제목 = NFT의 제목
-  // let title = document.getElementById("title").value;
-  // const title = 'Hip NFT';
-  // 사용자가 작성한 NFT 설명
-  // let description = document.getElementById("description").value;
-  // const description = '가나다라마바사';
-  // 사용자가 작성한 태그
-  // let tag = document.getElementById("tags").value;
-  // const tag = '힙합 동묘 쇼미';
-  // const options = {
-  //   pinataMetadata: {
-  //     name: filename,
-  //   },
-  //   pinataOptions: {
-  //     cidVersion: 0,
-  //   },
-  // };
-  // const options2 = {
-  //   pinataMetadata: {
-  //     name: title,
-  //   },
-  //   pinataOptions: {
-  //     cidVersion: 0,
-  //   },
-  // };
-
   let cid;
   let jsonCid;
 
   // Minting
   const mintNFT = async () => {
-    const userAddress = walletAddress; // 로그인한 사용자의 지갑 주소
+    const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
+    const userAddress = accounts[0];
     const tokenURI = GATEWAY_URL + jsonCid;
 
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(ABI, CA);
 
-    // minting
+    // minting - 민팅 중 화면에 대기 표시 필요
     const res = await contract.methods
       .create(userAddress, tokenURI)
       .send({
@@ -73,8 +39,7 @@ function MintFunction(NFTData) {
       });
 
     const txHash = res.transactionHash;
-    const { topics } = res.logs[0];
-    const tokenId = parseInt(topics[topics.length - 1], 16);
+    const {tokenId} = res.events.Transfer.returnValues;
     console.log("The hash of your transaction is: ", txHash);
     console.log("tokenId: ", tokenId);
 
@@ -95,27 +60,19 @@ function MintFunction(NFTData) {
   // IPFS 업로드
   const sendJSONToIPFS = async () => {
     try {
-      const data = JSON.stringify({
-        "pinataOptions": {
-          "cidVersion": 0
-        },
-        "pinataMetadata": {
-          "name": title
-        },
-        "pinataContent": {
-          "name": title,
-          description,
-          "image": GATEWAY_URL + cid,
-        }
-      });
       const res = await axios({
         method: 'post',
         url: 'https://api.pinata.cloud/pinning/pinJsonToIPFS',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer PINATA JWT'
+        data: {
+          "name": title,
+          description,
+          "image": GATEWAY_URL + cid,
         },
-        data,
+        headers: {
+          'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
+          'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET_KEY}`,
+          "Content-Type": "application/json"
+        },
       });
 
       console.log(res.data);
@@ -132,19 +89,17 @@ function MintFunction(NFTData) {
     if (videoBlob) {
       try {
         const formData = new FormData();
-        formData.append('file', readableStreamForFile);
-        formData.append('pinataOptions', { "cidVersion": 0 });
-        formData.append('pinataMetadata', { "name": file.name });
-        // formData.append('name', filename);
+        formData.append("file", videoBlob);
 
         const res = await axios({
-          method: 'post',
+          method: "post",
           url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
-          headers: {
-            'Authorization': 'Bearer PINATA JWT',
-            ...formData.getHeaders()
-          },
           data: formData,
+          headers: {
+            'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
+            'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET_KEY}`,
+            "Content-Type": "multipart/form-data"
+          },
         });
 
         console.log(res.data);
@@ -159,9 +114,9 @@ function MintFunction(NFTData) {
     }
   };
 
+  //시작 전에 ipfs 업로드 중 표시 필요
   sendFileToIPFS();
 
-  // 전부 성공하면, mypage로 보내줌
 }
 
 export default MintFunction;
