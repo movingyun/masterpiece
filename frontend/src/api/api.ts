@@ -1,5 +1,5 @@
-const API_BASE_URL = 'http://localhost:8081/api';
-// const API_BASE_URL = 'http://j7a508.p.ssafy.io:8081//api';
+// const API_BASE_URL = 'http://localhost:8081/api';
+const API_BASE_URL = 'http://j7a508.p.ssafy.io:8081//api';
 
 // 경로
 const USER_URL = '/user';
@@ -22,15 +22,21 @@ const COUNT_LETTER = '/count';
 
 // composeHangul
 const GET_FIRSTCOUNT_URL = '/own/first';
-const GET_MIDDLECOUNT_URL= '/own/middle';
+const GET_MIDDLECOUNT_URL = '/own/middle';
 const GET_LASTCOUNT_URL = '/own/last';
 const GET_CONSONANTCOUNT_URL = '/own/consonant';
+
+// translate
+const TRANSLATE = '/papago'
 
 // NFT
 const DETAIL_URL = '/detail';
 
 // Sale
 const SALE_URL = '/sale';
+
+// Like
+const LIKE_URL = '/like';
 
 const api = {
   // user
@@ -52,10 +58,17 @@ const api = {
   exhaustLetter: () => API_BASE_URL + HANGUL_URL,
 
   // composeHangul
-  getFisrt: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_FIRSTCOUNT_URL + `?wallet-address=${walletAddress}`,
-  getMiddle: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_MIDDLECOUNT_URL + `?wallet-address=${walletAddress}`,
-  getLast: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_LASTCOUNT_URL + `?wallet-address=${walletAddress}`,
-  getConsonant: (walletAddress: String) => API_BASE_URL + HANGUL_URL + GET_CONSONANTCOUNT_URL + `?wallet-address=${walletAddress}`,
+  getFisrt: (walletAddress: String) =>
+    API_BASE_URL + HANGUL_URL + GET_FIRSTCOUNT_URL + `?wallet-address=${walletAddress}`,
+  getMiddle: (walletAddress: String) =>
+    API_BASE_URL + HANGUL_URL + GET_MIDDLECOUNT_URL + `?wallet-address=${walletAddress}`,
+  getLast: (walletAddress: String) =>
+    API_BASE_URL + HANGUL_URL + GET_LASTCOUNT_URL + `?wallet-address=${walletAddress}`,
+  getConsonant: (walletAddress: String) =>
+    API_BASE_URL + HANGUL_URL + GET_CONSONANTCOUNT_URL + `?wallet-address=${walletAddress}`,
+
+  // trnaslate
+  translate: () => API_BASE_URL + TRANSLATE,
 
   // NFT
   fetchAllNFT: () => API_BASE_URL + NFT_URL,
@@ -63,6 +76,9 @@ const api = {
 
   // Sale
   fetchSaleHistory: (nftAddress: String) => API_BASE_URL + SALE_URL + `?nftHash=${nftAddress}`,
+
+  // Like
+  toggleLike: () => API_BASE_URL + LIKE_URL,
 };
 
 export default api;

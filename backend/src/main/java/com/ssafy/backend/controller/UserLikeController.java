@@ -29,4 +29,11 @@ public class UserLikeController {
         return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
 
+    @PostMapping("")
+    @ApiOperation(value = "좋아요눌렀는지 확인", notes = "좋아요눌렀는지 확인")
+    public ResponseEntity<Boolean> nftIsLike(@RequestBody LikeDto like) {
+        boolean flag = userLikeService.isLike(like);
+        return new ResponseEntity<>(flag, HttpStatus.OK);
+    }
+
 }

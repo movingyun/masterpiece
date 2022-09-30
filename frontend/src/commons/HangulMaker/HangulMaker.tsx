@@ -1,8 +1,11 @@
 import React from "react";
 import HangulMakerFML from "./HangulMakerFML";
 
-export default function HangulMaker(){
+interface TestType {
+  test: boolean;
+}
+export default function HangulMaker({ test }:TestType){
   return (
-    <HangulMakerFML/>
+    <HangulMakerFML test={test}/>
   );
 }
