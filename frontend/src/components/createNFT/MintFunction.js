@@ -49,7 +49,7 @@ async function MintFunction(NFTData, checkLetterAPI) {
 
     console.log(blobToFile(file, title));
 
-    formData.append('imgFile', blobToFile(file, title));
+    formData.append('imgFile', blobToFile(file, title+".webm"));
     formData.append('cid', cid);
     formData.append('tokenId', tokenId);
     formData.append('contractAddress', CA);
