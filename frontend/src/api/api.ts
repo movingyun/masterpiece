@@ -30,11 +30,17 @@ const GET_MIDDLECOUNT_URL = '/own/middle';
 const GET_LASTCOUNT_URL = '/own/last';
 const GET_CONSONANTCOUNT_URL = '/own/consonant';
 
+// translate
+const TRANSLATE = '/papago'
+
 // NFT
 const DETAIL_URL = '/detail';
 
 // Sale
 const SALE_URL = '/sale';
+
+// Like
+const LIKE_URL = '/like';
 
 const api = {
   // user
@@ -70,12 +76,18 @@ const api = {
   getConsonant: (walletAddress: String) =>
     API_BASE_URL + HANGUL_URL + GET_CONSONANTCOUNT_URL + `?wallet-address=${walletAddress}`,
 
+  // trnaslate
+  translate: () => API_BASE_URL + TRANSLATE,
+
   // NFT
   fetchAllNFT: () => API_BASE_URL + NFT_URL,
   fetchNFTDetail: (nftAddress: String) => API_BASE_URL + NFT_URL + DETAIL_URL + `?nft-address=${nftAddress}`,
 
   // Sale
   fetchSaleHistory: (nftAddress: String) => API_BASE_URL + SALE_URL + `?nftHash=${nftAddress}`,
+
+  // Like
+  toggleLike: () => API_BASE_URL + LIKE_URL,
 };
 
 export default api;

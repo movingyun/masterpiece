@@ -23,9 +23,12 @@ class PapagoController {
     @Autowired
     PapagoService papagoService;
 
-    @PostMapping("")
+    @PostMapping(value="",produces = "text/plain;charset=UTF-8")
     @ApiOperation(value = "번역하기", notes = "번역하기")
     public ResponseEntity<String> sale(@RequestBody TranslateDto translateDto) {
+        if(translateDto.getTarget().equals(translateDto.getSource())){
+            return new ResponseEntity<>("같은 언어로 번역 할 수 없습니다.", HttpStatus.BAD_REQUEST);
+        }
         String word = papagoService.translateByPapago(translateDto);
         System.out.println(word);
         return new ResponseEntity<>(word, HttpStatus.OK);

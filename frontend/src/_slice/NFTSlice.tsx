@@ -2,6 +2,27 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import api from '../api/api';
 
+// like
+const toggleLike: any = createAsyncThunk('toggleLike', async (payload: any, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.put(api.toggleLike(), payload);
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+const fetchLike: any = createAsyncThunk('toggleLike', async (payload, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.post(api.toggleLike(), payload, {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+// NFT
 const fetchAllNFT: any = createAsyncThunk('fetchAllNFT', async (payload, { rejectWithValue }) => {
   try {
     const res: any = await axios.get(api.fetchAllNFT(), {});
@@ -36,6 +57,8 @@ export interface NFT {
 export interface NFTState {
   NFTAll: Array<NFT>;
   currentNFT: NFT;
+  likeState: Boolean;
+  isLoading: Boolean;
 }
 
 const initialState: NFTState = {
@@ -51,12 +74,18 @@ const initialState: NFTState = {
     nftLike: 0,
     nftAddress: '',
   },
+  likeState: false,
+  isLoading: true,
 };
 
 export const NFTSlice = createSlice({
   name: 'nft',
   initialState,
-  reducers: {},
+  reducers: {
+    toggleIsLoading: state => {
+      state.isLoading = true;
+    },
+  },
   extraReducers: {
     [fetchAllNFT.fulfilled]: (state, action) => {
       state.NFTAll = action.payload;
@@ -64,11 +93,24 @@ export const NFTSlice = createSlice({
     [fetchNFTDetail.fulfilled]: (state, action) => {
       state.currentNFT = action.payload;
     },
+    [toggleLike.fulfilled]: (state, action) => {
+      state.isLoading = false;
+    },
+    [toggleLike.reject]: (state, action) => {
+      state.isLoading = true;
+    },
+    [toggleLike.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [fetchLike.fulfilled]: (state, action) => {
+      state.likeState = action.payload;
+      state.isLoading = true;
+    },
   },
 });
 
-export { fetchAllNFT, fetchNFTDetail };
+export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike };
 
-export const {} = NFTSlice.actions;
+export const { toggleIsLoading } = NFTSlice.actions;
 
 export default NFTSlice.reducer;

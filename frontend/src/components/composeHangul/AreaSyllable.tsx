@@ -42,18 +42,18 @@ export default function AreaSyllable(){
   const unit:number = 10;
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{width:"100%", minHeight:200, backgroundColor:"#F8CECE", border:"1px dashed black"}}
+    style={{marginBottom: 10, width:"100%", minHeight:500, backgroundColor:"#F8CECE", border:"1px dashed black"}}
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}
     >
       <Container>
         {syllableList.map((syllable:string, index:number)=>(
-          (syllable===" ") ? (<DragAndDrop key={`$AreaSyllable${syllable}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
+          (syllable===" ") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
           : (
-            (syllable==="\n") ? (<DragAndDrop key={`$AreaSyllable${syllable}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
+            (syllable==="\n") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
             : (
-            <DragAndDrop key={`$AreaSyllable${syllable}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+            <DragAndDrop key={`$AreaSyllable${syllableList[index]}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
           ))
         ))}
       </Container>
