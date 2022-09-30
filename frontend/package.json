@@ -10,6 +10,7 @@
     "@mui/lab": "^5.0.0-alpha.100",
     "@mui/material": "^5.10.5",
     "@pinata/sdk": "^1.1.26",
+    "@popperjs/core": "^2.11.6",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

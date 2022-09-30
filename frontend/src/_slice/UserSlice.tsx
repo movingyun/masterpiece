@@ -15,6 +15,7 @@ const signin: any = createAsyncThunk('signin', async (payload, { rejectWithValue
 const fetchUser: any = createAsyncThunk('fetchUser', async (walletAddress: String, { rejectWithValue }) => {
   try {
     const res: any = await axios.get(api.fetchUser(walletAddress));
+    console.log(res.data);
     return res.data;
   } catch (err: any) {
     return rejectWithValue(err.response.data);
@@ -89,7 +90,7 @@ export interface UserState {
     message: String;
     joinDate: String;
     ticket_count: Number;
-    imgUrl: String;
+    profileImage: String;
   };
   searchedUser: {
     wallet_address: String;
@@ -97,7 +98,7 @@ export interface UserState {
     message: String;
     joinDate: String;
     ticket_count: Number;
-    imgUrl: String;
+    profileImage: String;
   };
   isLogin: Boolean;
   inventory: Inventory;
@@ -114,7 +115,7 @@ const initialState: UserState = {
     message: '',
     joinDate: '',
     ticket_count: 0,
-    imgUrl: '',
+    profileImage: '',
   },
   searchedUser: {
     wallet_address: '',
@@ -122,7 +123,7 @@ const initialState: UserState = {
     message: '',
     joinDate: '',
     ticket_count: 0,
-    imgUrl: '',
+    profileImage: '',
   },
   isLogin: false,
   inventory: {
@@ -160,7 +161,7 @@ export const UserSlice = createSlice({
         message: '',
         joinDate: '',
         ticket_count: 0,
-        imgUrl: '',
+        profileImage: '',
       };
       window.localStorage.removeItem('currentUser');
       state.isLogin = false;
