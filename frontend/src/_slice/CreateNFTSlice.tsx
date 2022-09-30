@@ -41,6 +41,7 @@ const initialState = {
   tag: ['세종대왕', '킹왕짱'],
   mintingData: new FormData(),
   checkLetterAPI: {},
+  countLetterChecked: false,
   mintingCompleted: false,
 };
 
@@ -69,6 +70,9 @@ const CreateNFTSlice = createSlice({
     checkLetterAPI(state, action) {
       state.checkLetterAPI = action.payload;
     },
+    countLetterChecked(state, action) {
+      state.countLetterChecked = action.payload;
+    },
     mintingCompleted(state, action) {
       state.mintingCompleted = action.payload;
     },
@@ -76,12 +80,11 @@ const CreateNFTSlice = createSlice({
   extraReducers: {
     [countLetter.fullfiled]: (state, action) => {
       if (action.payload === 'true') {
-        createNFT(state.mintingData);
+        state.countLetterChecked = true;
       } else {
         alert('Not enough letters');
       }
     },
-    [countLetter.rejected]: state => {},
     [createNFT.fullfiled]: (state, action) => {
       exhaustLetter(state.checkLetterAPI);
     },

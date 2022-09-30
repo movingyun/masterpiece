@@ -95,7 +95,7 @@ function Canvas() {
       if (!ctx) return;
       ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
       frameCount = requestAnimationFrame(loop);
-      console.log(frameCount);
+      // console.log(frameCount);
     }
 
     function loop() {
