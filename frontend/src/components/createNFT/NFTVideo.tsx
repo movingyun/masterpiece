@@ -10,7 +10,7 @@ function NFTVideo() {
     if (!videoRecorded.current) return;
     videoRecorded.current.src = blobURL;
     videoRecorded.current.play();
-    window.URL.revokeObjectURL(blobURL);
+    // window.URL.revokeObjectURL(blobURL);
 
   }, [])
 
