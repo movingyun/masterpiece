@@ -44,11 +44,9 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
   const [showArr, setShowArr] = useState<NFT[]>([]);
   const [label, setLabel] = useState<String>('collected');
 
-  const handleClick = (arr: Array<NFT> | object, Lable: String) => {
+  const handleClick = (arr: Array<NFT>, Lable: String) => {
     if (Lable !== 'inventory') {
       setShowArr(arr);
-    } else {
-      console.log(arr);
     }
     setLabel(Lable);
   };
@@ -57,7 +55,7 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
   const created = useSelector((state: any) => state.user.created);
   const onsale = useSelector((state: any) => state.user.onsale);
   const favorite = useSelector((state: any) => state.user.favorite);
-  const inventory = useSelector((state: any) => state.user.Inventory);
+  const inventory = useSelector((state: any) => state.user.inventory);
 
   useEffect(() => {
     if (walletAddress) {
@@ -80,7 +78,7 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
         <Button onClick={() => handleClick(created, 'created')}>Created</Button>
         <Button onClick={() => handleClick(onsale, 'onsale')}>Onsale</Button>
         <Button onClick={() => handleClick(favorite, 'favorite')}>Favorite</Button>
-        <Button onClick={() => handleClick(inventory, 'inventory')}>Inventory</Button>
+        <Button onClick={() => handleClick([], 'inventory')}>Inventory</Button>
       </ButtonGroup>
       {label === 'inventory' ? (
         <StyledCardList>
