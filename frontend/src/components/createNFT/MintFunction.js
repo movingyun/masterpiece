@@ -5,6 +5,10 @@ import Web3 from 'web3';
 import api from '../../api/api';
 import MasterpieceNFT from '../../json/MasterpieceNFT.json'
 
+function blobToFile(theBlob, fileName) {
+  return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: 'video/webm' });
+}
+
 async function MintFunction(NFTData, checkLetterAPI) {
   const { videoBlob, title, description, tag } = NFTData;
 
@@ -42,7 +46,10 @@ async function MintFunction(NFTData, checkLetterAPI) {
     console.log('tokenId: ', tokenId);
 
     const formData = new FormData();
-    formData.append('imgFile', new File([file], title));
+
+    console.log(blobToFile(file, title));
+
+    formData.append('imgFile', blobToFile(file, title));
     formData.append('cid', cid);
     formData.append('tokenId', tokenId);
     formData.append('contractAddress', CA);
@@ -55,7 +62,9 @@ async function MintFunction(NFTData, checkLetterAPI) {
     NFTData.formData = formData;
     
     // countLetter -> MintFunction -> createNFT -> exhaustNFT 순차 진행
-    const resCreateNFT = await axios.post(api.createNFT(), formData, {});
+    const resCreateNFT = await axios.post(api.createNFT(), formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
     
     if (resCreateNFT.status === 200) {
       const resExhaustLetter = await axios.put(api.exhaustLetter(), checkLetterAPI, {});
