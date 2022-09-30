@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Chip, Button, Card, CardContent } from '@mui/material';
 import styled from 'styled-components';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { fetchNFTDetail } from '../../_slice/NFTSlice';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { fetchLike, fetchNFTDetail, toggleLike } from '../../_slice/NFTSlice';
 import { fetchSaleHistory } from '../../_slice/SaleSlice';
 
 const StyledDetail = styled.div`
@@ -29,6 +31,15 @@ const StyledChart = styled.div`
   width: auto;
   height: 300px;
 `;
+const StyledLikeBtn = styled.button`
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+`;
 
 interface CurrentNftType {
   nftAddress: String;
@@ -36,14 +47,36 @@ interface CurrentNftType {
 
 export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchNFTDetail(nftAddress));
-    dispatch(fetchSaleHistory(nftAddress));
-  }, []);
-
   const currentNFT = useSelector((state: any) => state.nft.currentNFT);
   const saleHistoryAll = useSelector((state: any) => state.sale.saleHistoryAll);
+  const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
+  const likeState = useSelector((state: any) => state.nft.likeState);
+  const isLoading = useSelector((state: any) => state.nft.isLoading);
+
+  useEffect(() => {
+    dispatch(fetchSaleHistory(nftAddress));
+  }, []);
+  useEffect(() => {
+    dispatch(fetchNFTDetail(nftAddress));
+  }, [likeState]);
+
+  useEffect(() => {
+    if (walletAddress) {
+      const likePayload = {
+        userWalletAddress: walletAddress,
+        nftHash: nftAddress,
+      };
+      dispatch(fetchLike(likePayload));
+    }
+  }, [!isLoading, walletAddress, likeState]);
+
+  const handleClickLike = () => {
+    const likePayload = {
+      userWalletAddress: walletAddress,
+      nftHash: nftAddress,
+    };
+    dispatch(toggleLike(likePayload));
+  };
 
   return (
     <>
@@ -69,6 +102,15 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
             <StyledBtn>
               <Button>Sell</Button>
               <Button>Buy</Button>
+              {likeState ? (
+                <StyledLikeBtn onClick={handleClickLike}>
+                  <FavoriteIcon />
+                </StyledLikeBtn>
+              ) : (
+                <StyledLikeBtn onClick={handleClickLike}>
+                  <FavoriteBorderIcon />
+                </StyledLikeBtn>
+              )}
               <div>nftLike {currentNFT.nftLike}</div>
             </StyledBtn>
           </CardContent>
