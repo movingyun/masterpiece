@@ -40,7 +40,10 @@ function a11yProps(index: number) {
   };
 }
 
-export default function HangulMakerFML(){
+export default function HangulMakerFML(test:any){
+  // 음절합성 체험인경우 true
+  const isTest = test;
+
   // 초중종 버튼 단위길이
   const unit = 20;
   // 초중종 버튼 가로
@@ -176,9 +179,11 @@ export default function HangulMakerFML(){
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center"
         sx={{width: {width}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}>
-          <Button onClick={makeSyllable} style={{backgroundColor:"green", color:"white"}}>
+          {(isTest.test) ? (<div/>)
+          : (<Button onClick={makeSyllable} style={{backgroundColor:"green", color:"white"}}>
             Done
-          </Button>
+          </Button>)
+          }
         </Box>
       </Grid>
       <TabPanel value={value} index={0}>
