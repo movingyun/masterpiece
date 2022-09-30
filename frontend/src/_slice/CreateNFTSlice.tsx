@@ -34,11 +34,15 @@ const exhaustLetter: any = createAsyncThunk('exhaustLetter', async (payload, { r
 
 
 const initialState = {
-  NFTBlob: '',
-  title: '',
-  description: '',
-  tag: [],
+  NFTBlob: new Blob(),
+  NFTBlobURL: '',
+  title: '하이',
+  description: '그래',
+  tag: ['세종대왕', '킹왕짱'],
   mintingData: new FormData(),
+  checkLetterAPI: {},
+  countLetterChecked: false,
+  mintingCompleted: false,
 };
 
 const CreateNFTSlice = createSlice({
@@ -47,6 +51,9 @@ const CreateNFTSlice = createSlice({
   reducers: {
     NFTBlob(state, action) {
       state.NFTBlob = action.payload;
+    },
+    NFTBlobURL(state, action) {
+      state.NFTBlobURL = action.payload;
     },
     title(state, action) {
       state.title = action.payload;
@@ -60,19 +67,34 @@ const CreateNFTSlice = createSlice({
     mintingData(state, action) {
       state.mintingData = action.payload;
     },
+    checkLetterAPI(state, action) {
+      state.checkLetterAPI = action.payload;
+    },
+    countLetterChecked(state, action) {
+      state.countLetterChecked = action.payload;
+    },
+    mintingCompleted(state, action) {
+      state.mintingCompleted = action.payload;
+    },
   },
   extraReducers: {
     [countLetter.fullfiled]: (state, action) => {
-      createNFT(state.mintingData);
-
-    },
-    [countLetter.rejected]: state => {
-
+      if (action.payload) {
+        console.log("counterLetter 성공")
+        state.countLetterChecked = true;
+      } else {
+        alert('Not enough letters');
+      }
     },
     [createNFT.fullfiled]: (state, action) => {
-      // exhaustLetter(///풀어해친);
+      exhaustLetter(state.checkLetterAPI);
     },
-    [createNFT.rejected]: state => {},
+    [createNFT.rejected]: state => {
+      alert('Cannot Mint NFT properly');
+    },
+    [exhaustLetter.fullfiled]: (state, action) => {
+      state.mintingCompleted = true;
+    },
   },
 });
 

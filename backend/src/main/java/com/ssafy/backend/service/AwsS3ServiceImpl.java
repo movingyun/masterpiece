@@ -56,10 +56,16 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     @Override
     @Transactional
     public String uploadNFTImage(Nft nft, MultipartFile file) throws IllegalArgumentException{
-        String keyName = createKeyName(file.getOriginalFilename());
-        ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setContentLength(file.getSize());
-        objectMetadata.setContentType(file.getContentType());
+        String keyName = null;
+        ObjectMetadata objectMetadata = null;
+        try {
+            keyName = createKeyName(file.getOriginalFilename());
+            objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentLength(file.getSize());
+            objectMetadata.setContentType(file.getContentType());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
         try(InputStream inputStream = file.getInputStream()) {
             amazonS3Client.putObject(new PutObjectRequest(bucket, keyName, inputStream, objectMetadata)
