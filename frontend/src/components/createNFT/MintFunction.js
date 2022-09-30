@@ -114,7 +114,7 @@ function MintFunction(NFTData) {
     }
   };
 
-  //시작 전에 ipfs 업로드 중 표시 필요
+  // 시작 전에 ipfs 업로드 중 표시 필요
   sendFileToIPFS();
 
 }
