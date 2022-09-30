@@ -64,19 +64,23 @@ export default function Mint() {
   useEffect(() => {
     // formDataUpload가 안 되었거나 counterLetterChecked 가 안 됐으면 돌지 않음
     if (!countLetterChecked) return;
-    // if(!NFTData.formDataUploaded) return;
 
-    // // formData store에 저장
-    // dispatch(createNFTActions.mintingData(NFTData.formData));
+    if(countLetterChecked && !NFTData.formDataUploaded) {
+      MintFunction();
+    } else if (countLetterChecked && NFTData.formDataUploaded) {
+      // formData store에 저장
+      dispatch(createNFTActions.mintingData(NFTData.formData));
 
+      // createNFT 돌리고
+      createNFT(NFTData.formData);
 
-    // createNFT 돌리고
-    createNFT(NFTData.formData);
-
-  }, [NFTData.formData, NFTData.formDataUploaded, countLetterChecked, dispatch])
+      // useEffect 돌지 않게 처리
+      dispatch(createNFTActions.countLetterChecked(false));
+    }
+  }, [NFTData.formDataUploaded, countLetterChecked, dispatch])
 
   useEffect(() => {
-    // createNFT 성공한 뒤 exhaustNFT 까지 성공하면 /nftlist로 보내줌
+    // createNFT.fullfilled 이후 exhaustNFT 까지 fullfilled -> /nftlist로 보내줌
     if(mintingCompleted) {
       navigate('/nftlist')
     }
