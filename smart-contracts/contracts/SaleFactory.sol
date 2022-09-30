@@ -131,11 +131,10 @@ contract Sale {
         // TODO 
     }
     
-    //판매 중인 NFT를 철회하고 소유중으로 변경
+    // NFT 판매 중지
     function cancelSales() public onlySeller {
         // TODO
         require(msg.sender == seller || msg.sender == admin, "caller is not approved");
-
         _end();
     }
 
