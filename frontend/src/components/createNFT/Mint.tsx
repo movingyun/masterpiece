@@ -38,10 +38,10 @@ export default function Mint() {
     formDataUploaded: false,
   };
   const checkLetterAPI: {
-    walletAddress: string;
+    userWalletAddress: string;
     hangul: string[];
   } = {
-    walletAddress: NFTData.walletAddress,
+    userWalletAddress: NFTData.walletAddress,
     hangul: [''],
   };
   
@@ -53,6 +53,7 @@ export default function Mint() {
   
   // countLetter -> MintFunction -> createNFT -> exhaustNFT 순차 진행
   function countLetterHandler() {
+    console.log(checkLetterAPI);
     dispatch(countLetter(checkLetterAPI));
   }
 
