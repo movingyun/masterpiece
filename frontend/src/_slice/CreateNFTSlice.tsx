@@ -79,7 +79,8 @@ const CreateNFTSlice = createSlice({
   },
   extraReducers: {
     [countLetter.fullfiled]: (state, action) => {
-      if (action.payload === 'true') {
+      if (action.payload) {
+        console.log("counterLetter 성공")
         state.countLetterChecked = true;
       } else {
         alert('Not enough letters');
