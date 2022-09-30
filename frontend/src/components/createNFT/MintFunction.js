@@ -42,7 +42,7 @@ async function MintFunction(NFTData, checkLetterAPI) {
     console.log('tokenId: ', tokenId);
 
     const formData = new FormData();
-    formData.append('imgFile', file);
+    formData.append('imgFile', new File([file], title));
     formData.append('cid', cid);
     formData.append('tokenId', tokenId);
     formData.append('contractAddress', CA);
