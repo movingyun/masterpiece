@@ -1,5 +1,5 @@
 // const API_BASE_URL = 'http://localhost:8081/api';
-const API_BASE_URL = 'http://j7a508.p.ssafy.io:8081//api';
+const API_BASE_URL = 'https://j7a508.p.ssafy.io/api';
 
 // 경로
 const USER_URL = '/user';
@@ -10,6 +10,10 @@ const NFT_URL = '/nft';
 // User
 const SIGNIN_URL = '/signin';
 const INVENTORY_URL = '/inventory';
+const COLLECTED_URL = '/collected';
+const CREATED_URL = '/created';
+const FAVORITE_URL = '/favorite';
+const ONSALE_URL = '/onsale';
 
 // Hangul
 const CONSONANT_URL = '/own/consonant';
@@ -44,6 +48,11 @@ const api = {
   fetchUser: (walletAddress: String) => API_BASE_URL + USER_URL + `?wallet-address=${walletAddress}`,
   fetchInventory: (walletAddress: String) =>
     API_BASE_URL + USER_URL + INVENTORY_URL + `?wallet-address=${walletAddress}`,
+  fetchCollected: (walletAddress: String) =>
+    API_BASE_URL + USER_URL + COLLECTED_URL + `?wallet-address=${walletAddress}`,
+  fetchCreated: (walletAddress: String) => API_BASE_URL + USER_URL + CREATED_URL + `?wallet-address=${walletAddress}`,
+  fetchFavorite: (walletAddress: String) => API_BASE_URL + USER_URL + FAVORITE_URL + `?wallet-address=${walletAddress}`,
+  fetchOnsale: (walletAddress: String) => API_BASE_URL + USER_URL + ONSALE_URL + `?wallet-address=${walletAddress}`,
 
   // hangul
   fetchConsonant: (walletAddress: String) =>
