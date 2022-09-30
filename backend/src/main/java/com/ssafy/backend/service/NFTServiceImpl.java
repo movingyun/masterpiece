@@ -48,9 +48,9 @@ public class NFTServiceImpl implements NFTService {
 
     @Override
     public void modifyNftOwner(SaleResultDto saleResultDto) {
-        int nftId = saleResultDto.getNftId();
+        String nftHash = saleResultDto.getNftHash();
         String buyerWallerAddress = saleResultDto.getBuyerWalletAddress();
-        Nft nft = nftRepository.findById(nftId);
+        Nft nft = nftRepository.findByNftHash(nftHash).get(0);
         nft.setOwner(userService.findByUserWalletAddress(buyerWallerAddress));
         nftRepository.save(nft);
     }
