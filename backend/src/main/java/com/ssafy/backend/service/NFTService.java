@@ -21,6 +21,7 @@ public interface NFTService {
     NFTDto getNFTDto(String nft_address);
     List<NFTDto> getAllNFT();
     List<NFTDto> searchByCategory(String category, String keyword);
+    String getOwnerAddress(String nftHash);
 
     Nft findByNFTHash(String nftHash);
 }

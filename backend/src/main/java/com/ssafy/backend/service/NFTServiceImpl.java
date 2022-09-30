@@ -212,6 +212,16 @@ public class NFTServiceImpl implements NFTService {
         return makeNFTDtoList(nftList);
     }
 
+    @Override
+    public String getOwnerAddress(String nftHash) {
+        List<Nft> nftList = nftRepository.findByNftHash(nftHash);
+        if(nftList == null || nftList.isEmpty()){
+            throw new IllegalArgumentException("No such NFT");
+        }
+
+        return userRepository.findOwnerAddressByNftHash(nftList.get(0).getNftHash());
+    }
+
     private List<NFTDto> makeNFTDtoList(List<Nft> nftList){
         List<NFTDto> dtoList = new ArrayList<>();
         for(Nft nft : nftList){
