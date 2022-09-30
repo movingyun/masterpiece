@@ -153,15 +153,19 @@ export default function HangulMakerFML(test:any){
     }
   };
 
+  // barckground Color
+  const gradientStart:string = '#E0FFFF';
+  const gradientFinish:string = '#FFD4DF';
+
   return (
-    <Grid container item xs={12}>
+    <Grid container item xs={12} style={{padding:4, borderRadius:50, border:"2px solid white", background:`linear-gradient(to bottom right, ${gradientStart}, ${gradientFinish})`}}>
       <Grid item xs={9} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center">
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             {[0,1,2].map((i:number)=>(
               <Tab key={`tab${i}`} style={{maxWidth: width}} label={
                 <Typography style={{fontSize:"30px"}}>
-                  <Box sx={{width: {width}, height:{height}}} style={{position:"relative", margin:unit/2, backgroundColor:"#DDDDDD"}}>
+                  <Box sx={{width: {width}, height:{height}}} style={{position:"relative", margin:unit/2, backgroundColor:"#FFFFFF"}}>
                     {letter[i]}
                   </Box>
                   <CancelIcon style={{position:"absolute", top:0, right:0, color:"red"}}
@@ -174,7 +178,7 @@ export default function HangulMakerFML(test:any){
       </Grid>
       <Grid item xs={3} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center"
-        sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}>
+        sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#FFFFFF"}}>
           <Typography style={{fontSize:"30px"}}>{syllable}</Typography>
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center"

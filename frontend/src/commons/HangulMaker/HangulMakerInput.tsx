@@ -27,6 +27,31 @@ export default function HangulMakerInput(){
   const count:number[] = [];
   // colorList
   const colorList:string[] = ['#FFD8E3', '#FFEBCD', '#FFFFE0', '#F0FFF0', '#E0FFFF', '#FFD7FF'];
+  // color 3단계 어둡게
+  const colorDown = (color:string):string=>{
+    let r:number = parseInt(color.substring(1,3), 16);
+    let g:number = parseInt(color.substring(3,5), 16);
+    let b:number = parseInt(color.substring(5,7), 16);
+    console.log(color, r, g, b);
+    r -= 0x22;
+    g -= 0x22;
+    b -= 0x22;
+    if(r<0){
+      r = 0;
+    }
+    if(g<0){
+      g = 0;
+    }
+    if(b<0){
+      b = 0;
+    }
+    
+    console.log(r, g, b);
+    const result:string = (r*0x10000+g*0x100+b).toString();
+    console.log(result);
+    // if(result<0x1)
+    return result;
+  };
 
   if(select === FML.FIRST || select === FML.LAST){
     // letterList[select].map((letter:string)=>{
@@ -54,7 +79,7 @@ export default function HangulMakerInput(){
     });
   }
   return(
-    <Container>
+    <Container style={{padding:4, borderRadius:50, background:"#FFFFFF"}}>
       {letterList[select].map((letter:string, index:number)=>{
         // 종성 0번째 빈값
         if(select === FML.LAST && index===0){
@@ -68,9 +93,11 @@ export default function HangulMakerInput(){
             sx={{minWidth: unit, minHeight: unit, width: unit*5, height:unit*5}} type="button"
             style={{ margin:"10px", position:"relative",
             fontSize:unit*2.5,
-            backgroundColor:color, color:"black",
+            backgroundColor:`radial-gradient(${colorDown(color)}, ${color})`,
+            color:"black",
             borderRadius: "100%",
-            border: "2px solid black"
+            border: "2px solid black",
+            transition: "all 0.1s"
           }}>
             <Box key={`${letter}countButton`}
             sx={{minWidth: unit, minHeight: unit, width: unit*2, height:unit*2,}}

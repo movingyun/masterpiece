@@ -20,8 +20,11 @@ export default function ComposeHangul() {
     }
   }, [walletAddress]);
   
+  // barckground Color
+  const gradientStart:string = '#E0FFFF';
+  const gradientFinish:string = '#FFD4DF';
   return (
-    <Container>
+    <Container style={{background:`linear-gradient(to bottom right, ${gradientStart}, ${gradientFinish})`}}>
       <div style={{margin:10, fontSize:50}}>Make Your Own Word/Sentence</div>
       <Grid container>
         <Grid container item xs={6} style={{padding:10}}>
