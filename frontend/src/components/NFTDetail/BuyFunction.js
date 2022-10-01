@@ -26,7 +26,7 @@ async function BuyFunction(price, tokenId, nftAddress) {
         return SaleContract;
     };
 
-    // sale컨트랙트 주소 받아서 생성
+    // sale컨트랙트 주소로 해당 컨트랙트 가져오기
     const saleCA = await saleFactoryContract.methods
         .getSaleContractAddress(tokenId)
         .call();

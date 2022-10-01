@@ -1,12 +1,10 @@
 import axios from 'axios';
 import Web3 from 'web3';
+import api from '../../api/api';
 import MasterpieceNFT from '../../json/MasterpieceNFT.json';
 import SaleFactory from '../../json/SaleFactory.json';
 
 async function SellFunction(price, tokenId, nftAddress) {
-  console.log(price);
-  console.log(tokenId);
-  console.log(nftAddress);
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
   const userAddress = accounts[0];
   const web3 = new Web3(window.ethereum);
@@ -28,7 +26,7 @@ async function SellFunction(price, tokenId, nftAddress) {
 
   // API 호출 - NFT를 판매 중으로 변경
   axios
-    .put('http://localhost:8080/api/nft/sale', { nftAddress, price })
+    .put(api.listNFTOnSale(), { nftAddress, price })
     .then(() => {
       console.log('success');
     })
