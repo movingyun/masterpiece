@@ -255,6 +255,7 @@ public class NFTServiceImpl implements NFTService {
                 .nftTags(tagList)
                 .nftLike(likes)
                 .nftDescription(nft.getNftDescription())
+                .isSale(nft.isSale())
                 .build();
     }
 
