@@ -8,6 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { fetchLike, fetchNFTDetail, toggleLike } from '../../_slice/NFTSlice';
 import { fetchSaleHistory } from '../../_slice/SaleSlice';
+import SellModal from './SellModal';
 
 const StyledDetail = styled.div`
   display: flex;
@@ -89,18 +90,21 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
         </Card>
         <Card sx={{ width: '70%' }}>
           <CardContent>
-            <div>Creator {currentNFT.nftCreatorNickname}</div>
-            <div>Title {currentNFT.nftTitle}</div>
-            <div>Owner {currentNFT.nftOwnerNickname}</div>
-            <div>Price {currentNFT.nftPrice}</div>
-            <div>lastPrice {currentNFT.lastPrice}</div>
+            <div>Creator : {currentNFT.nftCreatorNickname}</div>
+            <div>Title : {currentNFT.nftTitle}</div>
+            <div>Owner : {currentNFT.nftOwnerNickname}</div>
+            <div>Price : {currentNFT.nftPrice}</div>
+            <div>lastPrice : {currentNFT.lastPrice}</div>
             <StyledChip>
               {currentNFT.nftTags.map((tag: String, idx: Number) => (
                 <Chip key={`${idx}` + `${currentNFT.imgUrl}`} label={tag} size="small" color="primary" />
               ))}
             </StyledChip>
             <StyledBtn>
-              <Button>Sell</Button>
+              <div>S: {currentNFT.wallet_address}</div>
+              <div>C: {walletAddress}</div>
+              {currentNFT.wallet_address === walletAddress ? <SellModal /> : null}
+              <SellModal />
               <Button>Buy</Button>
               {likeState ? (
                 <StyledLikeBtn onClick={handleClickLike}>
@@ -119,7 +123,9 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
 
       {/* 설명 */}
       <Card>
-        <CardContent>Description</CardContent>
+        <CardContent>
+          Description<div>{currentNFT.nftDescription}</div>
+        </CardContent>
       </Card>
 
       {/* 가격 차트 */}
