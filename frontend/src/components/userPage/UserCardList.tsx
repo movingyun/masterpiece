@@ -120,6 +120,7 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
                 nftTags={NFTInfo.nftTags}
                 nftLike={NFTInfo.nftLike}
                 nftAddress={NFTInfo.nftAddress}
+                nftDescription={NFTInfo.nftDescription}
               />
             </Link>
           ))}

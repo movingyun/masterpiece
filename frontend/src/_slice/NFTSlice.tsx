@@ -52,6 +52,7 @@ export interface NFT {
   nftTags: Array<String>;
   nftLike: Number;
   nftAddress: String;
+  nftDescription: String;
 }
 
 export interface NFTState {
@@ -73,6 +74,7 @@ const initialState: NFTState = {
     nftTags: [],
     nftLike: 0,
     nftAddress: '',
+    nftDescription: '',
   },
   likeState: false,
   isLoading: true,
