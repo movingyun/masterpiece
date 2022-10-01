@@ -1,5 +1,5 @@
-// const API_BASE_URL = 'http://localhost:8081/api';
-const API_BASE_URL = 'https://j7a508.p.ssafy.io/api';
+const API_BASE_URL = 'http://localhost:8081/api';
+// const API_BASE_URL = 'https://j7a508.p.ssafy.io/api';
 
 // 경로
 const USER_URL = '/user';
@@ -31,10 +31,11 @@ const GET_LASTCOUNT_URL = '/own/last';
 const GET_CONSONANTCOUNT_URL = '/own/consonant';
 
 // translate
-const TRANSLATE = '/papago'
+const TRANSLATE = '/papago';
 
 // NFT
 const DETAIL_URL = '/detail';
+const OWNER_URL = '/owner';
 
 // Sale
 const SALE_URL = '/sale';
@@ -82,6 +83,7 @@ const api = {
   // NFT
   fetchAllNFT: () => API_BASE_URL + NFT_URL,
   fetchNFTDetail: (nftAddress: String) => API_BASE_URL + NFT_URL + DETAIL_URL + `?nft-address=${nftAddress}`,
+  fetchNFTOwner: (nftAddress: String) => API_BASE_URL + NFT_URL + OWNER_URL + `?nftHash=${nftAddress}`,
 
   // Sale
   fetchSaleHistory: (nftAddress: String) => API_BASE_URL + SALE_URL + `?nftHash=${nftAddress}`,

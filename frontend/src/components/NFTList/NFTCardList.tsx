@@ -39,6 +39,8 @@ export default function NFTCardList() {
             nftTags={NFTInfo.nftTags}
             nftLike={NFTInfo.nftLike}
             nftAddress={NFTInfo.nftAddress}
+            nftDescription={NFTInfo.nftDescription}
+            nftOwnerWallet={NFTInfo.nftOwnerWallet}
           />
         </Link>
       ))}
