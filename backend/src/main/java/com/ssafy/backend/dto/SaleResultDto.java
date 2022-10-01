@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class SaleResultDto {
-    private int nftId;
+    private String nftHash;
     private String buyerWalletAddress;
     private String saleContractAddress;
 }

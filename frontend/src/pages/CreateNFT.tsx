@@ -4,6 +4,7 @@ import { Container } from '@mui/material';
  
 import NFTVideo from '../components/createNFT/NFTVideo';
 import NFTInput from '../components/createNFT/NFTInput';
+import Mint from '../components/createNFT/Mint';
 
 function CreateNFT() {
   return (
@@ -14,6 +15,7 @@ function CreateNFT() {
       </div>
       <NFTVideo />
       <NFTInput />
+      <Mint />
     </Container>
   );
 }

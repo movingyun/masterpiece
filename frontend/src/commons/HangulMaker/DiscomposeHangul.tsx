@@ -3,6 +3,7 @@ import { EnumConsonantOrder, EnumVowelOrder, EnumFtoL } from '../../_hook/Hangul
 
 // 문장 분리 후 자모음 반환
 export function DiscomposeSentence(sentence:string):string[] {
+  console.log(sentence);
   const list: string[] = [];
   for (let i = 0; i < sentence.length;i++){
     const fml: number[] = DiscomposeHangul(sentence.charAt(i));

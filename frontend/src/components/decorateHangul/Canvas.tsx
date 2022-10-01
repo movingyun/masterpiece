@@ -7,7 +7,7 @@ function Canvas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const text = useSelector((state: any) => state.areaSentence.value).join('');
+  const text = useSelector((state: any) => state.areaSentence.value).join('');
   const textSize = useSelector((state: any) => state.deco.textSize);
   const textColor = useSelector((state: any) => state.deco.textColor);
   const textXAxis = useSelector((state: any) => state.deco.textXAxis);
@@ -24,7 +24,7 @@ function Canvas() {
   const fontName = useSelector((state: any) => state.deco.fontName);
 
   // 텍스트
-  const [text, setText] = useState('세종대왕만세');
+  // const [text, setText] = useState('세종대왕만세');
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const CANVAS_WIDTH = 512;
@@ -95,7 +95,7 @@ function Canvas() {
       if (!ctx) return;
       ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
       frameCount = requestAnimationFrame(loop);
-      console.log(frameCount);
+      // console.log(frameCount);
     }
 
     function loop() {
@@ -103,7 +103,7 @@ function Canvas() {
 
       if (!ctx) return;
       ctx.globalAlpha = 0.4;
-      message.forEach((letter, index) => {
+      message.forEach((letter:string, index:number) => {
         const noiseX = Math.sin(index * 10 + frameCount / 100) * 10;
         const noiseY = Math.cos(index * 10 + frameCount / 100) * 10;
 
@@ -189,10 +189,11 @@ function Canvas() {
 
       // BlobURL 생성: 통합한 스트림 데이터를 가르키는 임시 주소를 생성
       const blobURL = window.URL.createObjectURL(blob);
-      console.log('blobURL : ', blobURL);
+      // console.log('blobURL : ', blobURL);
 
-      // BlobURL store 저장
-      dispatch(createNFTActions.NFTBlob(blobURL));
+      // Blob store 저장
+      dispatch(createNFTActions.NFTBlob(blob));
+      dispatch(createNFTActions.NFTBlobURL(blobURL));
 
       // 배열 초기화
       arrVideoData.splice(0);

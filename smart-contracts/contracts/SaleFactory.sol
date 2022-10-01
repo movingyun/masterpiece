@@ -122,7 +122,7 @@ contract Sale {
         require(SsafyTokenContract.allowance(msg.sender, address(this)) >= price, "caller approve less amount of token");
         buyer = msg.sender;
         SsafyTokenContract.transferFrom(buyer, seller, price);
-        MasterpieceNFTContract.transferFrom(address(this), buyer, tokenId);
+        MasterpieceNFTContract.transferFrom(seller, buyer, tokenId);
         emit SaleEnded(buyer, price);
         _end();
     }
@@ -131,8 +131,11 @@ contract Sale {
         // TODO 
     }
     
+    // NFT 판매 중지
     function cancelSales() public onlySeller {
         // TODO
+        require(msg.sender == seller || msg.sender == admin, "caller is not approved");
+        _end();
     }
 
     // function getTimeLeft() public view returns (int256) {
