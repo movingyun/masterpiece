@@ -51,7 +51,9 @@ export default function SellModal() {
   };
 
   const handleListing = () => {
-    if (parseInt(price, 10) > 0 && tokenId && nftAddress) SellFunction(price, tokenId, nftAddress);
+    if (parseInt(price, 10) > 0 && tokenId && nftAddress) {
+      SellFunction(price, tokenId, nftAddress);
+    }
   };
 
   return (

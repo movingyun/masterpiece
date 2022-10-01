@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { fetchLike, fetchNFTDetail, toggleLike } from '../../_slice/NFTSlice';
+import { fetchLike, fetchNFTDetail, fetchNFTOwner, toggleLike } from '../../_slice/NFTSlice';
 import { fetchSaleHistory } from '../../_slice/SaleSlice';
 import SellModal from './SellModal';
 
@@ -49,6 +49,7 @@ interface CurrentNftType {
 export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
   const dispatch = useDispatch();
   const currentNFT = useSelector((state: any) => state.nft.currentNFT);
+  const nftOwnerWallet = useSelector((state: any) => state.nft.nftOwnerWallet);
   const saleHistoryAll = useSelector((state: any) => state.sale.saleHistoryAll);
   const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
   const likeState = useSelector((state: any) => state.nft.likeState);
@@ -56,6 +57,7 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
 
   useEffect(() => {
     dispatch(fetchSaleHistory(nftAddress));
+    dispatch(fetchNFTOwner(nftAddress));
   }, []);
   useEffect(() => {
     dispatch(fetchNFTDetail(nftAddress));
@@ -101,9 +103,7 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
               ))}
             </StyledChip>
             <StyledBtn>
-              <div>S: {currentNFT.nftOwnerWallet}</div>
-              <div>C: {walletAddress}</div>
-              {currentNFT.nftOwnerWallet === walletAddress ? <SellModal /> : null}
+              {nftOwnerWallet === walletAddress ? <SellModal /> : null}
               <Button>Buy</Button>
               {likeState ? (
                 <StyledLikeBtn onClick={handleClickLike}>
