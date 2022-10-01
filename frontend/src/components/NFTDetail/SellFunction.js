@@ -4,6 +4,9 @@ import MasterpieceNFT from '../../json/MasterpieceNFT.json';
 import SaleFactory from '../../json/SaleFactory.json';
 
 async function SellFunction(price, tokenId, nftAddress) {
+  console.log(price);
+  console.log(tokenId);
+  console.log(nftAddress);
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
   const userAddress = accounts[0];
   const web3 = new Web3(window.ethereum);
