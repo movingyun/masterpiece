@@ -16,6 +16,8 @@ import {
 } from '@mui/material';
 import SellIcon from '@mui/icons-material/Sell';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useSelector } from 'react-redux';
+import SellFunction from './SellFunction';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -33,6 +35,8 @@ export default function SellModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const tokenId = useSelector((state: any) => state.nft.currentNFT.tokenId);
+  const nftAddress = useSelector((state: any) => state.nft.currentNFT.nftAddress);
 
   const [coin, setCoin] = useState('');
 
@@ -46,7 +50,9 @@ export default function SellModal() {
     setPrice(e.target.value.replace(/[^0-9]/g, ''));
   };
 
-  const handleListing = (e: any) => {};
+  const handleListing = () => {
+    if (parseInt(price, 10) > 0 && tokenId && nftAddress) SellFunction(price, tokenId, nftAddress);
+  };
 
   return (
     <>

@@ -123,7 +123,8 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
       {/* 설명 */}
       <Card>
         <CardContent>
-          Description<div>{currentNFT.nftDescription}</div>
+          <div>Description</div>
+          <div>{currentNFT.nftDescription}</div>
         </CardContent>
       </Card>
 
