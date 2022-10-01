@@ -101,10 +101,9 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
               ))}
             </StyledChip>
             <StyledBtn>
-              <div>S: {currentNFT.wallet_address}</div>
+              <div>S: {currentNFT.nftOwnerWallet}</div>
               <div>C: {walletAddress}</div>
-              {currentNFT.wallet_address === walletAddress ? <SellModal /> : null}
-              <SellModal />
+              {currentNFT.nftOwnerWallet === walletAddress ? <SellModal /> : null}
               <Button>Buy</Button>
               {likeState ? (
                 <StyledLikeBtn onClick={handleClickLike}>

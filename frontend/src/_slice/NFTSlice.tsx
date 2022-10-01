@@ -32,9 +32,20 @@ const fetchAllNFT: any = createAsyncThunk('fetchAllNFT', async (payload, { rejec
     return rejectWithValue(err.response.data);
   }
 });
+
 const fetchNFTDetail: any = createAsyncThunk('fetchNFTDetail', async (nftAddress: String, { rejectWithValue }) => {
   try {
     const res: any = await axios.get(api.fetchNFTDetail(nftAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+const fetchNFTOwner: any = createAsyncThunk('fetchNFTOwner', async (nftAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchNFTOwner(nftAddress), {});
     console.log(res.data);
     return res.data;
   } catch (err: any) {
@@ -53,6 +64,7 @@ export interface NFT {
   nftLike: Number;
   nftAddress: String;
   nftDescription: String;
+  nftOwnerWallet: String;
 }
 
 export interface NFTState {
@@ -75,6 +87,7 @@ const initialState: NFTState = {
     nftLike: 0,
     nftAddress: '',
     nftDescription: '',
+    nftOwnerWallet: '',
   },
   likeState: false,
   isLoading: true,
@@ -108,10 +121,13 @@ export const NFTSlice = createSlice({
       state.likeState = action.payload;
       state.isLoading = true;
     },
+    [fetchNFTOwner]: (state, action) => {
+      state.currentNFT.nftOwnerWallet = action.payload;
+    },
   },
 });
 
-export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike };
+export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner };
 
 export const { toggleIsLoading } = NFTSlice.actions;
 

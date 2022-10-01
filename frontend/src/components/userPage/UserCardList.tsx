@@ -121,6 +121,7 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
                 nftLike={NFTInfo.nftLike}
                 nftAddress={NFTInfo.nftAddress}
                 nftDescription={NFTInfo.nftDescription}
+                nftOwnerWallet={NFTInfo.nftOwnerWallet}
               />
             </Link>
           ))}
