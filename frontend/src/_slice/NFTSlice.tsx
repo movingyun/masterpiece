@@ -121,6 +121,9 @@ export const NFTSlice = createSlice({
     setKeyword: (state, action) => {
       state.keyword = action.payload;
     },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
     setIsSearch: (state, action) => {
       state.isSearch = action.payload;
     },
@@ -156,6 +159,6 @@ export const NFTSlice = createSlice({
 
 export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner, searchNFT };
 
-export const { toggleIsLoading, setIsSearch, setKeyword } = NFTSlice.actions;
+export const { toggleIsLoading, setIsSearch, setKeyword, setCategory } = NFTSlice.actions;
 
 export default NFTSlice.reducer;
