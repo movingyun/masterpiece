@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import NFTCardList from '../components/NFTList/NFTCardList';
+import SearchBar from '../components/NFTList/SearchBar';
 
 export default function NFTList() {
+  const keyword = useSelector((state: any) => state.nft.keyword);
+
   return (
     <>
       <div>NFTList</div>
-      <NFTCardList />
+      <SearchBar />
+      {keyword ? null : <NFTCardList />}
       <div>
         <Link to="/userpage">userPage</Link>
       </div>

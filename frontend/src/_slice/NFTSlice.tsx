@@ -69,6 +69,9 @@ export interface NFT {
 
 export interface NFTState {
   NFTAll: Array<NFT>;
+  searchedNFT: Array<NFT>;
+  keyword: String;
+  isSearch: Boolean;
   currentNFT: NFT;
   likeState: Boolean;
   isLoading: Boolean;
@@ -76,6 +79,9 @@ export interface NFTState {
 
 const initialState: NFTState = {
   NFTAll: [],
+  searchedNFT: [],
+  keyword: '',
+  isSearch: false,
   currentNFT: {
     imgUrl: '',
     nftTitle: '',
@@ -99,6 +105,12 @@ export const NFTSlice = createSlice({
   reducers: {
     toggleIsLoading: state => {
       state.isLoading = true;
+    },
+    setKeyword: (state, action) => {
+      state.keyword = action.payload;
+    },
+    setIsSearch: (state, action) => {
+      state.isSearch = action.payload;
     },
   },
   extraReducers: {
@@ -129,6 +141,6 @@ export const NFTSlice = createSlice({
 
 export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner };
 
-export const { toggleIsLoading } = NFTSlice.actions;
+export const { toggleIsLoading, setIsSearch, setKeyword } = NFTSlice.actions;
 
 export default NFTSlice.reducer;
