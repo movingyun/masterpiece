@@ -4353,63 +4353,25 @@
   "ast": {
     "absolutePath": "project:/contracts/SaleFactory.sol",
     "exportedSymbols": {
-      "Address": [
-        2626
-      ],
-      "Context": [
-        2648
-      ],
-      "Counters": [
-        2722
-      ],
-      "ERC165": [
-        2949
-      ],
-      "ERC20": [
-        1270
-      ],
-      "ERC721": [
-        2168
-      ],
-      "IERC165": [
-        2961
-      ],
-      "IERC20": [
-        1348
-      ],
-      "IERC20Metadata": [
-        1373
-      ],
-      "IERC721": [
-        2284
-      ],
-      "IERC721Metadata": [
-        2329
-      ],
-      "IERC721Receiver": [
-        2302
-      ],
-      "MasterpieceNFT": [
-        102
-      ],
-      "Ownable": [
-        716
-      ],
-      "SafeMath": [
-        3273
-      ],
-      "Sale": [
-        554
-      ],
-      "SaleFactory": [
-        272
-      ],
-      "SsafyToken": [
-        611
-      ],
-      "Strings": [
-        2925
-      ]
+      "Address": [2626],
+      "Context": [2648],
+      "Counters": [2722],
+      "ERC165": [2949],
+      "ERC20": [1270],
+      "ERC721": [2168],
+      "IERC165": [2961],
+      "IERC20": [1348],
+      "IERC20Metadata": [1373],
+      "IERC721": [2284],
+      "IERC721Metadata": [2329],
+      "IERC721Receiver": [2302],
+      "MasterpieceNFT": [102],
+      "Ownable": [716],
+      "SafeMath": [3273],
+      "Sale": [554],
+      "SaleFactory": [272],
+      "SsafyToken": [611],
+      "Strings": [2925]
     },
     "id": 555,
     "license": "MIT",
@@ -4417,12 +4379,7 @@
     "nodes": [
       {
         "id": 137,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".4"
-        ],
+        "literals": ["solidity", "^", "0.8", ".4"],
         "nodeType": "PragmaDirective",
         "src": "33:23:2"
       },
@@ -4503,9 +4460,7 @@
           }
         ],
         "canonicalName": "SaleFactory",
-        "contractDependencies": [
-          554
-        ],
+        "contractDependencies": [554],
         "contractKind": "contract",
         "documentation": {
           "id": 143,
@@ -4515,11 +4470,7 @@
         },
         "fullyImplemented": true,
         "id": 272,
-        "linearizedBaseContracts": [
-          272,
-          716,
-          2648
-        ],
+        "linearizedBaseContracts": [272, 716, 2648],
         "name": "SaleFactory",
         "nameLocation": "391:11:2",
         "nodeType": "ContractDefinition",
@@ -4836,9 +4787,7 @@
               "src": "1148:360:2",
               "statements": [
                 {
-                  "assignments": [
-                    186
-                  ],
+                  "assignments": [186],
                   "declarations": [
                     {
                       "constant": false,
@@ -4900,9 +4849,7 @@
                   "src": "1176:27:2"
                 },
                 {
-                  "assignments": [
-                    192
-                  ],
+                  "assignments": [192],
                   "declarations": [
                     {
                       "constant": false,
@@ -5936,10 +5883,7 @@
                       "id": 254,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "1704:7:2",
                       "typeDescriptions": {
@@ -6113,9 +6057,7 @@
         },
         "fullyImplemented": true,
         "id": 554,
-        "linearizedBaseContracts": [
-          554
-        ],
+        "linearizedBaseContracts": [554],
         "name": "Sale",
         "nameLocation": "1902:4:2",
         "nodeType": "ContractDefinition",
@@ -7439,10 +7381,7 @@
                       "id": 378,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3664:7:2",
                       "typeDescriptions": {
@@ -7549,10 +7488,7 @@
                       "id": 386,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3739:7:2",
                       "typeDescriptions": {
@@ -7720,10 +7656,7 @@
                       "id": 393,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3788:7:2",
                       "typeDescriptions": {
@@ -7955,10 +7888,7 @@
                       "id": 404,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3892:7:2",
                       "typeDescriptions": {
@@ -8186,10 +8116,7 @@
                       "id": 419,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4011:7:2",
                       "typeDescriptions": {
@@ -8836,10 +8763,7 @@
                       "id": 473,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4521:7:2",
                       "typeDescriptions": {
@@ -9632,10 +9556,7 @@
                       "id": 538,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "5625:7:2",
                       "typeDescriptions": {
@@ -9744,12 +9665,12 @@
         }
       },
       "links": {},
-      "address": "0x27e76C734c737c59840F651D6e0fd952ED89127e",
-      "transactionHash": "0x14f022eea1924fde4eafe201300644296a08cdeeb209d159b2008a8405eb644b"
+      "address": "0x093E15A4141e394653a0b00d6A9f971cae295202",
+      "transactionHash": "0x39317f0a2d467ab03072350a2f735719352e5f0895dc27c6e44d978a13215e7d"
     }
   },
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-09-30T04:16:02.560Z",
+  "updatedAt": "2022-10-02T05:58:06.452Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
