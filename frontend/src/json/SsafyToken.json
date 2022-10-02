@@ -10626,7 +10626,6 @@
   "ast": {
     "absolutePath": "project:/contracts/SsafyToken.sol",
     "exportedSymbols": {
-<<<<<<< HEAD
       "Context": [
         2648
       ],
@@ -10645,14 +10644,6 @@
       "SsafyToken": [
         611
       ]
-=======
-      "Context": [2648],
-      "ERC20": [1270],
-      "IERC20": [1348],
-      "IERC20Metadata": [1373],
-      "Ownable": [716],
-      "SsafyToken": [611]
->>>>>>> 3476d3d356b767b7d5399338104e5459fd4f97c9
     },
     "id": 612,
     "license": "MIT",
@@ -10660,16 +10651,12 @@
     "nodes": [
       {
         "id": 556,
-<<<<<<< HEAD
         "literals": [
           "solidity",
           "^",
           "0.8",
           ".0"
         ],
-=======
-        "literals": ["solidity", "^", "0.8", ".0"],
->>>>>>> 3476d3d356b767b7d5399338104e5459fd4f97c9
         "nodeType": "PragmaDirective",
         "src": "33:23:3"
       },
@@ -10736,7 +10723,6 @@
         },
         "fullyImplemented": true,
         "id": 611,
-<<<<<<< HEAD
         "linearizedBaseContracts": [
           611,
           716,
@@ -10745,9 +10731,6 @@
           1348,
           2648
         ],
-=======
-        "linearizedBaseContracts": [611, 716, 1270, 1373, 1348, 2648],
->>>>>>> 3476d3d356b767b7d5399338104e5459fd4f97c9
         "name": "SsafyToken",
         "nameLocation": "278:10:3",
         "nodeType": "ContractDefinition",
