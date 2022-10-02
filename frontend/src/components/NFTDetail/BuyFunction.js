@@ -5,6 +5,9 @@ import SaleFactory from '../../json/SaleFactory.json';
 import Sale from '../../json/Sale.json';
 
 async function BuyFunction(price, tokenId, nftAddress) {
+  console.log(price);
+  console.log(tokenId);
+  console.log(nftAddress);
   const tokenCA = process.env.REACT_APP_TOKEN_CONTRACT_ADDRESS;
   const saleFactoryCA = process.env.REACT_APP_SALE_CONTRACT_ADDRESS;
 
@@ -17,6 +20,7 @@ async function BuyFunction(price, tokenId, nftAddress) {
 
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
   const userAddress = accounts[0]; // 사용자의 지갑 주소
+  console.log(userAddress);
 
   const getSaleContract = saleAddress => {
     const SaleContract = new web3.eth.Contract(saleABI, saleAddress);
@@ -25,7 +29,9 @@ async function BuyFunction(price, tokenId, nftAddress) {
 
   // sale컨트랙트 주소로 해당 컨트랙트 가져오기
   const saleCA = await saleFactoryContract.methods.getSaleContractAddress(tokenId).call();
-  const saleContract = await getSaleContract(saleCA);
+  console.log(saleCA);
+  const saleContract = getSaleContract(saleCA);
+  console.log(saleContract);
 
   // sale컨트랙트로 erc20토큰 전송권한 허용
   await tokenContract.methods.approve(saleCA, price).send({ from: userAddress });

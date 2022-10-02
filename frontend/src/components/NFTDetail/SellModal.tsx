@@ -17,7 +17,7 @@ import {
 import SellIcon from '@mui/icons-material/Sell';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useSelector } from 'react-redux';
-import BuyFunction from './BuyFunction';
+import SellFunction from './SellFunction';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -55,7 +55,7 @@ export default function SellModal() {
 
   const handleListing = () => {
     if (parseInt(price, 10) > 0 && tokenId && nftAddress) {
-      BuyFunction(price, tokenId, nftAddress);
+      SellFunction(price, tokenId, nftAddress);
     }
   };
 
