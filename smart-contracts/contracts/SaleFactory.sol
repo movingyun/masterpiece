@@ -4,8 +4,8 @@ pragma solidity ^0.8.4;
 import "./access/Ownable.sol";
 import "./token/ERC20/ERC20.sol";
 import "./token/ERC721/ERC721.sol";
+import "./token/ERC20/IERC20.sol";
 import "./MasterpieceNFT.sol";
-import "./SsafyToken.sol";
 
 /**
  * PJT Ⅲ - Req.1-SC1 SaleFactory 구현
@@ -75,7 +75,7 @@ contract Sale {
     address public highestBidder;
     uint256 public highestBid;
 
-    SsafyToken public SsafyTokenContract;
+    IERC20 public SsafyTokenContract;
     MasterpieceNFT public MasterpieceNFTContract;
 
     event HighestBidIncereased(address bidder, uint256 amount);
@@ -105,7 +105,7 @@ contract Sale {
         ended = false;
         // erc20Contract = IERC20(_currencyAddress);
         // erc721Constract = IERC721(_nftAddress);
-        SsafyTokenContract = SsafyToken(_currencyAddress);
+        SsafyTokenContract = IERC20(_currencyAddress);
         MasterpieceNFTContract = MasterpieceNFT(_nftAddress);
     }
 
