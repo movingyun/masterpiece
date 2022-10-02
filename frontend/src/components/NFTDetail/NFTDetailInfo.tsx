@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { Chip, Button, Card, CardContent } from '@mui/material';
+import { Chip, Card, CardContent } from '@mui/material';
 import styled from 'styled-components';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -9,6 +8,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { fetchLike, fetchNFTDetail, fetchNFTOwner, toggleLike } from '../../_slice/NFTSlice';
 import { fetchSaleHistory } from '../../_slice/SaleSlice';
 import SellModal from './SellModal';
+import BuyModal from './BuyModal';
+import NFTPreview from '../../commons/NFTPreview';
 
 const StyledDetail = styled.div`
   display: flex;
@@ -85,10 +86,7 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
     <>
       <StyledDetail>
         <Card sx={{ width: '30%', minWidth: 200 }}>
-          <CardContent>
-            <div>imgUrl {currentNFT.imgUrl}</div>
-            <img src={currentNFT.imgUrl} alt="NFT IMG" />
-          </CardContent>
+          <NFTPreview url={`${currentNFT.imgUrl}`} />
         </Card>
         <Card sx={{ width: '70%' }}>
           <CardContent>
@@ -103,8 +101,7 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
               ))}
             </StyledChip>
             <StyledBtn>
-              {nftOwnerWallet === walletAddress ? <SellModal /> : null}
-              <Button>Buy</Button>
+              {nftOwnerWallet === walletAddress ? <SellModal /> : <BuyModal />}
               {likeState ? (
                 <StyledLikeBtn onClick={handleClickLike}>
                   <FavoriteIcon />

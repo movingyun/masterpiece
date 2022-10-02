@@ -17,7 +17,7 @@ import {
 import SellIcon from '@mui/icons-material/Sell';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useSelector } from 'react-redux';
-import SellFunction from './SellFunction';
+import BuyFunction from './BuyFunction';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -29,6 +29,9 @@ const style = {
   borderRadius: '15px',
   boxShadow: 24,
   p: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 };
 
 export default function SellModal() {
@@ -52,7 +55,7 @@ export default function SellModal() {
 
   const handleListing = () => {
     if (parseInt(price, 10) > 0 && tokenId && nftAddress) {
-      SellFunction(price, tokenId, nftAddress);
+      BuyFunction(price, tokenId, nftAddress);
     }
   };
 
@@ -105,7 +108,7 @@ export default function SellModal() {
             </AccordionDetails>
           </Accordion>
           <Button variant="contained" onClick={handleListing}>
-            Complete listring
+            Complete listing
           </Button>
         </Box>
       </Modal>
