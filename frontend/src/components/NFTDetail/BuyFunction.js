@@ -25,13 +25,13 @@ async function BuyFunction(price, tokenId, nftAddress) {
 
   // sale컨트랙트 주소로 해당 컨트랙트 가져오기
   const saleCA = await saleFactoryContract.methods.getSaleContractAddress(tokenId).call();
-  const saleContract = getSaleContract(saleCA);
+  const saleContract = await getSaleContract(saleCA);
 
   // sale컨트랙트로 erc20토큰 전송권한 허용
-  await tokenContract.methods.approve(saleCA, price).send({ userAddress });
+  await tokenContract.methods.approve(saleCA, price).send({ from: userAddress });
 
   // 구매 요청
-  await saleContract.methods.purchase(price).send({ userAddress });
+  await saleContract.methods.purchase(price).send({ from: userAddress });
 
   // 판매 기록 API 호출
   // api/sale  post: {nftId, buyerWalletAddress, saleContractAddress}
