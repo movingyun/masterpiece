@@ -87,6 +87,7 @@ const api = {
   listNFTOnSale: () => API_BASE_URL + NFT_URL + SALE_URL,
 
   // Sale
+  buyNFTFromList: () => API_BASE_URL + SALE_URL,
   fetchSaleHistory: (nftAddress: String) => API_BASE_URL + SALE_URL + `?nftHash=${nftAddress}`,
 
   // Like

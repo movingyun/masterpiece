@@ -3,6 +3,7 @@ import Web3 from 'web3';
 import SaleFactory from '../../json/SaleFactory.json';
 import Sale from '../../json/Sale.json';
 import IERC20 from '../../json/IERC20.json';
+import api from '../../api/api';
 
 async function BuyFunction(price, tokenId, nftAddress) {
   const tokenCA = process.env.REACT_APP_SSF_CONTRACT_ADDRESS;
@@ -34,8 +35,8 @@ async function BuyFunction(price, tokenId, nftAddress) {
   await saleContract.methods.purchase(price).send({ from: userAddress });
 
   // 판매 기록 API 호출 - 수정 필요
-  axios.post('https://j7a508.p.ssafy.io/api/sale', {
-    nftAddress,
+  axios.post(api.buyNFTFromList(), {
+    nftHash: nftAddress,
     buyerWalletAddress: userAddress,
     saleContractAddress: saleCA,
   });
