@@ -53,6 +53,16 @@ const fetchNFTOwner: any = createAsyncThunk('fetchNFTOwner', async (nftAddress: 
   }
 });
 
+const searchNFT: any = createAsyncThunk('searchNFT', async (payload: any, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.searchNFT(payload.category, payload.keyword), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
 export interface NFT {
   imgUrl: String;
   nftTitle: String;
@@ -70,6 +80,7 @@ export interface NFT {
 export interface NFTState {
   NFTAll: Array<NFT>;
   searchedNFT: Array<NFT>;
+  category: String;
   keyword: String;
   isSearch: Boolean;
   currentNFT: NFT;
@@ -80,6 +91,7 @@ export interface NFTState {
 const initialState: NFTState = {
   NFTAll: [],
   searchedNFT: [],
+  category: 'titlecontent',
   keyword: '',
   isSearch: false,
   currentNFT: {
@@ -133,13 +145,16 @@ export const NFTSlice = createSlice({
       state.likeState = action.payload;
       state.isLoading = true;
     },
-    [fetchNFTOwner]: (state, action) => {
+    [fetchNFTOwner.fulfilled]: (state, action) => {
       state.currentNFT.nftOwnerWallet = action.payload;
+    },
+    [searchNFT.fulfilled]: (state, action) => {
+      state.searchedNFT = action.payload;
     },
   },
 });
 
-export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner };
+export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner, searchNFT };
 
 export const { toggleIsLoading, setIsSearch, setKeyword } = NFTSlice.actions;
 

@@ -26,6 +26,7 @@ export default function SearchBar() {
 
   const handelKeyword = (e: any) => {
     dispatch(setKeyword(e.target.value));
+    // dispatch(setCategory(e.target.value));
   };
 
   return (
