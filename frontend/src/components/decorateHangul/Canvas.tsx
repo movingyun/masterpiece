@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +8,7 @@ function Canvas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const text = useSelector((state: any) => state.areaSentence.value).join('');
+  // const text = useSelector((state: any) => state.areaSentence.value).join('');
   const textSize = useSelector((state: any) => state.deco.textSize);
   const textColor = useSelector((state: any) => state.deco.textColor);
   const textXAxis = useSelector((state: any) => state.deco.textXAxis);
@@ -24,72 +25,25 @@ function Canvas() {
   const fontName = useSelector((state: any) => state.deco.fontName);
 
   // 텍스트
-  // const [text, setText] = useState('세종대왕만세');
+  const [text, setText] = useState('세종대왕\n만세');
+  const [animationType, setAnimationType] = useState(1);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const CANVAS_WIDTH = 512;
-
+  const messageLineByLine = text.split('\n');
+  const maxWidth = Math.max(...messageLineByLine.map(item => item.length));
+  
   // 글자 조작 화면
   useEffect(() => {
     const ctx = canvasRef.current?.getContext('2d');
 
     if (!ctx) return;
 
-    // ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
-
-    // ctx.font = `${textSize}px ${fontName || ''}`;
-    // ctx.fillStyle = textColor;
-    // ctx.lineWidth = strokeWidth;
-    // ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
-    // ctx.strokeText(text, textXAxis, textYAxis + textSize);
-
-    // ctx.shadowColor = shadowColor;
-    // ctx.shadowBlur = shadowBlur;
-    // ctx.shadowOffsetX = shadowXAxis;
-    // ctx.shadowOffsetY = shadowYAxis;
-
-    // ctx.fillText(text, textXAxis, textYAxis + textSize);
-
-    // let requestId: number;
-    // let i = 0;
-    // const render = () => {
-    //   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
-
-    //   ctx.beginPath();
-    //   // context.arc(canvas.width / 4 + 2,canvas.height / 4, (canvas.width / 4) * Math.abs(Math.cos(i)),0,2*Math.PI);
-    //   const w = CANVAS_WIDTH / 2;
-    //   const h = CANVAS_WIDTH / 2;
-
-    //   const d = Math.min(w, h);
-    //   const k = Math.sin(i) * 10;
-
-    //   ctx.strokeStyle = '#fff';
-    //   ctx.shadowOffsetX = CANVAS_WIDTH / 100;
-    //   ctx.shadowOffsetY = CANVAS_WIDTH / 100;
-    //   ctx.lineWidth = CANVAS_WIDTH / 40;
-    //   ctx.fillStyle = 'rgba(254, 12, 13, 1)';
-
-    //   ctx.moveTo(d, d);
-    //   ctx.quadraticCurveTo((24 * d) / 16, (10 * d) / 16, d, (5 * d) / 4 + k);
-    //   ctx.quadraticCurveTo((8 * d) / 16, (10 * d) / 16, d, d);
-    //   ctx.stroke();
-    //   ctx.fill();
-
-    //   i += 0.05;
-    //   requestId = requestAnimationFrame(render);
-    //   console.log(requestId);
-    // };
-
-    // render();
-    // return () => {
-    //   cancelAnimationFrame(requestId);
-    // };
-
+    // animation one
     const W = CANVAS_WIDTH;
     const H = CANVAS_WIDTH;
 
     let frameCount = 0;
-    const message = text.split('');
 
     function init() {
       if (!ctx) return;
@@ -103,29 +57,45 @@ function Canvas() {
 
       if (!ctx) return;
       ctx.globalAlpha = 0.4;
-      message.forEach((letter:string, index:number) => {
-        const noiseX = Math.sin(index * 10 + frameCount / 100) * 10;
-        const noiseY = Math.cos(index * 10 + frameCount / 100) * 10;
+      messageLineByLine.forEach((line: string, idx: number) => {
+        line.split('').forEach((letter: string, index: number) => {
+          const noiseX = Math.sin(index * 10 + frameCount / 100) * 10;
+          const noiseY = Math.cos(index * 10 + frameCount / 100) * 10;
 
-        const offsetX = noiseX + (-Math.cos(index + frameCount / 20) * textSize) / 4;
-        const offsetY = noiseY + (Math.sin(index + frameCount / 60) * textSize) / 4;
+          const offsetX = noiseX + (-Math.cos(index + frameCount / 20) * textSize) / 4;
+          const offsetY = noiseY + (Math.sin(index + frameCount / 60) * textSize) / 4;
 
-        ctx.save();
-        ctx.translate(index * textSize + offsetX + textXAxis, offsetY + textYAxis + textSize);
-        ctx.fillStyle = textColor;
-        ctx.lineWidth = strokeWidth;
-        ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
-        ctx.font = `${textSize}px ${fontName || ''}`;
+          ctx.save();
+          // eslint-disable-next-line max-len
+          ctx.translate(
+            offsetX * (idx + 1) / 2 + index * textSize,
+            offsetY * (idx + 1) / 2
+          );
+          ctx.fillStyle = textColor;
+          ctx.lineWidth = strokeWidth;
+          ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
+          ctx.font = `${textSize}px ${fontName || ''}`;
 
-        ctx.shadowColor = shadowColor;
-        ctx.shadowBlur = shadowBlur;
-        ctx.shadowOffsetX = shadowXAxis;
-        ctx.shadowOffsetY = shadowYAxis;
-        ctx.strokeText(letter, 0, 0);
-        ctx.fillText(letter, 0, 0);
+          ctx.shadowColor = shadowColor;
+          ctx.shadowBlur = shadowBlur;
+          ctx.shadowOffsetX = shadowXAxis;
+          ctx.shadowOffsetY = shadowYAxis;
+          ctx.textAlign = 'center';
+          ctx.strokeText(
+            letter,
+            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
+            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+          );
+          ctx.fillText(
+            letter,
+            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
+            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+          );
 
-        ctx.restore();
+          ctx.restore();
+        });
       });
+
       frameCount = requestAnimationFrame(loop);
     }
 
@@ -136,10 +106,46 @@ function Canvas() {
       ctx.fillRect(0, 0, W, H);
     }
 
-    init();
-    return () => {
-      cancelAnimationFrame(frameCount);
-    };
+
+
+
+    // ANIMATION TYPES
+    if (animationType === 0) {
+      // animation 없을 때
+      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
+      messageLineByLine.forEach((line: string, idx: number) => {
+        ctx.save();
+        ctx.fillStyle = textColor;
+        ctx.lineWidth = strokeWidth;
+        ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
+        ctx.font = `${textSize}px ${fontName || ''}`;
+
+        ctx.shadowColor = shadowColor;
+        ctx.shadowBlur = shadowBlur;
+        ctx.shadowOffsetX = shadowXAxis;
+        ctx.shadowOffsetY = shadowYAxis;
+        ctx.textAlign = 'center';
+        ctx.strokeText(
+          line,
+          CANVAS_WIDTH / 2 + textXAxis,
+          CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+        );
+        ctx.fillText(
+          line,
+          CANVAS_WIDTH / 2 + textXAxis,
+          CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+        );
+        ctx.restore();
+      });
+    } else if (animationType === 1) {
+      init();
+      return () => {
+        cancelAnimationFrame(frameCount);
+      };
+    }
+
+
+
   }, [
     shadowBlur,
     shadowXAxis,
