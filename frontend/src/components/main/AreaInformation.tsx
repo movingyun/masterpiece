@@ -2,7 +2,10 @@ import React from "react";
 import { Container, Grid } from "@mui/material";
 import Information from "./Information";
 
-export default function AreaInformation() {
+export default function AreaInformation({ focus }: any) {
+	// scrollIntoView
+	const focuses: React.MutableRefObject<HTMLDivElement[]> = focus;
+
 	const titles: string[] = ["Learn the Principal of Hangul", "Have fun decorating Hangul words"];
 	const contents: string[] = ["Don’t be nervous! We’ll give step by step guide toward the basics on how the Hangul is assembled to become Korean word.",
 		"Manage distribution of budget, by brand,product, quarter, campaign and see time tracking."];
@@ -19,7 +22,7 @@ export default function AreaInformation() {
 					<Grid key={`Information${title}${indexArray[index]}`} item xs={6}
 					style={{position:"relative", padding:10 }}>
 						<Container style={{ paddingTop:15, paddingBottom:0, paddingLeft:15, paddingRight:0, position:"relative", background:"black"}}>
-							<Information title={title} content={contents[index]} buttonText={buttonTexts[index]} />
+							<Information title={title} content={contents[index]} buttonText={buttonTexts[index]} onClick={() => { focuses.current[index].scrollIntoView({behavior: "smooth"}); } } />
 						</Container>
 					</Grid>
 				))}
