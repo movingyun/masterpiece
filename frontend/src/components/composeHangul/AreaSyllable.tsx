@@ -18,6 +18,18 @@ export default function AreaSyllable(){
   const dragStartArea:HangulComposeArea = UseSelectorHook(state => state.areaIndex.value);
   const dragStartElement:number = UseSelectorHook(state => state.elementIndex.value);
 
+  const [indexArray, setIndexArray] = React.useState<number[]>([]);
+  React.useEffect(()=>{
+    if(syllableList.length>indexArray.length){
+      // key index 값
+      const temp:number[] = [];
+      for(let i:number=0;i<syllableList.length;i++){
+        temp.push(i);
+      }
+      setIndexArray(temp);
+    }
+  }, [syllableList]);
+
   // 드래그 후 hover
   const dragOverFunction = (e:React.DragEvent, type:string) => {
     e.preventDefault();
@@ -38,12 +50,6 @@ export default function AreaSyllable(){
       dispatch(areaSentenceAction.delete({index:dragStartElement}));
     }
   }
-
-  // key index 값
-  const temp:number[] = [];
-  for(let i:number=0;i<syllableList.length;i++){
-    temp.push(i);
-  }
   
   // 음절 버튼 단위크기
   const unit:number = 10;
@@ -63,11 +69,11 @@ export default function AreaSyllable(){
     >
       <Container>
         {syllableList.map((syllable:string, index:number)=>(
-          (syllable===" ") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}${temp[index]}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
+          (syllable===" ") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}${indexArray[index]}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
           : (
-            (syllable==="\n") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}${temp[index]}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
+            (syllable==="\n") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}${indexArray[index]}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
             : (
-            <DragAndDrop key={`$AreaSyllable${syllableList[index]}${temp[index]}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+            <DragAndDrop key={`$AreaSyllable${syllableList[index]}${indexArray[index]}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
           ))
         ))}
       </Container>
