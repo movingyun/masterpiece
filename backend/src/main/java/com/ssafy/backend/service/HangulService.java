@@ -2,7 +2,6 @@ package com.ssafy.backend.service;
 
 import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;

@@ -2,7 +2,6 @@ package com.ssafy.backend.service;
 
 import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.HangulOwn;
-import com.ssafy.backend.db.entity.Gamelog;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.db.repository.HangulRepository;
 import com.ssafy.backend.db.repository.UserRepository;
@@ -10,7 +9,6 @@ import com.ssafy.backend.dto.HangulInfoDto;
 import com.ssafy.backend.dto.UserSigninDto;
 import com.ssafy.backend.dto.UserUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

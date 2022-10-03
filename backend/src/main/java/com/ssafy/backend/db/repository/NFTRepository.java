@@ -4,8 +4,8 @@ import com.ssafy.backend.db.entity.Nft;
 import com.ssafy.backend.db.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
 import java.util.List;
-import java.util.Optional;
 
 public interface NFTRepository extends JpaRepository<Nft, Integer> {
     Nft findById(int id);

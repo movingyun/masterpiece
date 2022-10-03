@@ -1,6 +1,5 @@
 package com.ssafy.backend.controller;
 
-import com.ssafy.backend.dto.SaleResultDto;
 import com.ssafy.backend.dto.TranslateDto;
 import com.ssafy.backend.service.PapagoService;
 import io.swagger.annotations.Api;
