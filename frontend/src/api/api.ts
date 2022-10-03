@@ -37,6 +37,7 @@ const TRANSLATE = '/papago';
 const DETAIL_URL = '/detail';
 const OWNER_URL = '/owner';
 const SEARCH_URL = '/search';
+const POSESSION_URL = '/posession';
 
 // Sale
 const SALE_URL = '/sale';
@@ -88,6 +89,7 @@ const api = {
   listNFTOnSale: () => API_BASE_URL + NFT_URL + SALE_URL,
   searchNFT: (category: String, keyword: String) =>
     API_BASE_URL + NFT_URL + SEARCH_URL + `?category=${category}&keyword=${keyword}`,
+  possessionNFT: () => API_BASE_URL + NFT_URL + POSESSION_URL,
 
   // Sale
   buyNFTFromList: () => API_BASE_URL + SALE_URL,
