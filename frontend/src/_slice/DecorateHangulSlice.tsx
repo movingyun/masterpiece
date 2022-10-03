@@ -24,6 +24,7 @@ const initialState = {
       display: 'none',
     },
   },
+  animationType: 1,
 };
 
 const DecorateHangulSlice = createSlice({

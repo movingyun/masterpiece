@@ -1,95 +1,186 @@
-import React, { useEffect } from 'react';
-import FormData from 'form-data';
-
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+import FormData from 'form-data';
+import Web3 from 'web3';
 import { useNavigate } from 'react-router-dom';
+import LoadingButton from '@mui/lab/LoadingButton';
+import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 
-import { createNFTActions, countLetter, createNFT } from '../../_slice/CreateNFTSlice';
+import { createNFTActions } from '../../_slice/CreateNFTSlice';
 import { DiscomposeSentence } from '../../commons/HangulMaker/DiscomposeHangul';
-import MintFunction from './MintFunction'
+
+import api from '../../api/api';
+import MasterpieceNFT from '../../json/MasterpieceNFT.json';
+
+function blobToFile(theBlob:any, fileName:any) {
+  return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: 'video/webm' });
+}
 
 
 export default function Mint() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // countLetter가 확인되면 true로
-  const countLetterChecked = useSelector((state: any) => state.createNFT.countLetterChecked);
-  const mintingCompleted = useSelector((state: any) => state.createNFT.mintingCompleted);
+  const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
+  const videoBlob = useSelector((state: any) => state.createNFT.NFTBlob);
+  const filename = useSelector((state: any) => state.areaSentence.value).filter((char: string) => char !== '\n').join('');
+  const title = useSelector((state: any) => state.createNFT.title);
+  const description = useSelector((state: any) => state.createNFT.description);
+  const tag = useSelector((state: any) => state.createNFT.tag).join(' ');
 
-  const NFTData: {
-    walletAddress: string;
-    videoBlob: Blob;
-    filename: string;
-    title: string;
-    description: string;
-    tag: string;
-    formData: FormData;
-    formDataUploaded: boolean;
-  } = {
-    walletAddress: useSelector((state: any) => state.user.currentUser.wallet_address),
-    videoBlob: useSelector((state: any) => state.createNFT.NFTBlob),
-    filename: useSelector((state: any) => state.areaSentence.value)
-      .filter((char: string) => char !== '\n')
-      .join(''),
-    title: useSelector((state: any) => state.createNFT.title),
-    description: useSelector((state: any) => state.createNFT.description),
-    tag: useSelector((state: any) => state.createNFT.tag).join(' '),
-    formData: new FormData(),
-    formDataUploaded: false,
-  };
   const checkLetterAPI: {
     userWalletAddress: string;
     hangul: string[];
   } = {
-    userWalletAddress: NFTData.walletAddress,
+    userWalletAddress: walletAddress,
     hangul: [''],
   };
 
+  const [loading, setLoading] = useState(false);
+
   // 한글 문장 분해해서 store에 저장
-  checkLetterAPI.hangul = DiscomposeSentence(NFTData.filename);
+  checkLetterAPI.hangul = DiscomposeSentence(filename);
   dispatch(createNFTActions.checkLetterAPI(checkLetterAPI));
 
-  // // countLetter -> MintFunction -> createNFT -> exhaustNFT 순차 진행
-  // function countLetterHandler() {
-  //   console.log("들어옴?")
-  //   dispatch(countLetter(checkLetterAPI));
-  // }
 
-  // useEffect(() => {
+  // Minting Logic Starts //
 
-  // }, [countLetterChecked])
+  const CA:any = process.env.REACT_APP_CONTRACT_ADDRESS;
+  const ABI:any = MasterpieceNFT.abi;
 
-  // useEffect(() => {
-  //   // formDataUpload가 안 되었거나 counterLetterChecked 가 안 됐으면 돌지 않음
-  //   if (!countLetterChecked) return;
+  const GATEWAY_URL = 'https://ipfs.io/ipfs/';
 
-  //   if(countLetterChecked && !NFTData.formDataUploaded) {
-  //     console.log("Mintfunction")
-  //     MintFunction();
-  //   } else if (countLetterChecked && NFTData.formDataUploaded) {
-  //     console.log("createNFT")
-  //     // formData store에 저장
-  //     dispatch(createNFTActions.mintingData(NFTData.formData));
+  const file:any = videoBlob; // 민팅할 파일
+  let cid:any;
+  let jsonCid:any;
 
-  //     // createNFT 돌리고
-  //     createNFT(NFTData.formData);
+  // Minting
+  const mintNFT = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const userAddress = accounts[0];
+    const tokenURI = GATEWAY_URL + jsonCid;
 
-  //     // useEffect 돌지 않게 처리
-  //     dispatch(createNFTActions.countLetterChecked(false));
-  //   }
-  // }, [NFTData.formDataUploaded, countLetterChecked, dispatch])
+    const web3 = new Web3(window.ethereum);
+    const contract = new web3.eth.Contract(ABI, CA);
 
-  useEffect(() => {
-    // createNFT.fullfilled 이후 exhaustNFT 까지 fullfilled -> /nftlist로 보내줌
-    if(mintingCompleted) {
-      navigate('/nftlist')
+    // minting - 민팅 중 화면에 대기 표시 필요
+    const res = await contract.methods.create(userAddress, tokenURI).send({
+      from: userAddress,
+    });
+
+    const txHash = res.transactionHash;
+    const { tokenId } = res.events.Transfer.returnValues;
+    console.log('The hash of your transaction is: ', txHash);
+    console.log('tokenId: ', tokenId);
+
+    const formData = new FormData();
+
+    formData.append('imgFile', blobToFile(file, title + '.webm'));
+    formData.append('cid', cid);
+    formData.append('tokenId', tokenId);
+    formData.append('contractAddress', CA);
+    formData.append('txHash', txHash);
+    formData.append('creatorWalletAddress', userAddress);
+    formData.append('nftTitle', title);
+    formData.append('nftDescription', description);
+    formData.append('nftTag', tag);
+
+    console.log('Minting Success');
+
+    // countLetter -> MintFunction -> createNFT -> exhaustNFT 순차 진행
+    const resCreateNFT = await axios.post(api.createNFT(), formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+    if (resCreateNFT.status === 200) {
+      const resExhaustLetter = await axios.put(api.exhaustLetter(), checkLetterAPI, {});
+
+      if (resExhaustLetter.status === 200) {
+        console.log('Minting Backend Process Success');
+        navigate('/nftlist')
+      }
     }
-  }, [mintingCompleted])
+  };
+
+  // IPFS 업로드
+  const sendJSONToIPFS = async () => {
+    try {
+      const res = await axios({
+        method: 'post',
+        url: 'https://api.pinata.cloud/pinning/pinJsonToIPFS',
+        data: {
+          name: title,
+          description,
+          image: GATEWAY_URL + cid,
+        },
+        headers: {
+          pinata_api_key: `${process.env.REACT_APP_PINATA_API_KEY}`,
+          pinata_secret_api_key: `${process.env.REACT_APP_PINATA_API_SECRET_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log(res.data);
+      jsonCid = res.data.IpfsHash;
+
+      mintNFT(); // pass the winner
+    } catch (error) {
+      console.log('Error sending JSON to IPFS: ');
+      console.log(error);
+    }
+  };
+
+  const sendFileToIPFS = async () => {
+    if (videoBlob) {
+      try {
+        const formData = new FormData();
+        formData.append('file', videoBlob);
+
+        const res = await axios({
+          method: 'post',
+          url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+          data: formData,
+          headers: {
+            pinata_api_key: `${process.env.REACT_APP_PINATA_API_KEY}`,
+            pinata_secret_api_key: `${process.env.REACT_APP_PINATA_API_SECRET_KEY}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        console.log(res.data);
+        cid = res.data.IpfsHash;
+
+        sendJSONToIPFS();
+      } catch (error) {
+        console.log('Error sending File to IPFS: ');
+        console.log(error);
+      }
+    }
+  };
+
+  // countLetter -> MintFunction -> createNFT -> exhaustNFT 순차 진행
+  async function runMinting() {
+    const res = await axios.post(api.countLetter(), checkLetterAPI, {});
+    if (res.data === true) {
+      sendFileToIPFS();
+    }
+  }
+
+
 
   return (
-    <button type="button" onClick={() => MintFunction(NFTData, checkLetterAPI)}>
-      MINT
-    </button>
+    <LoadingButton
+      color="secondary"
+      onClick={() => {
+        setLoading(true);
+        runMinting();
+      }}
+      loading={loading}
+      loadingPosition="end"
+      endIcon={<CurrencyBitcoinIcon />}
+      variant="contained">
+      Confirm Minting
+    </LoadingButton>
   );
 }

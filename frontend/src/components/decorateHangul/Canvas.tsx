@@ -1,21 +1,25 @@
 /* eslint-disable max-len */
 import React, { useRef, useEffect, useState } from 'react';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { Tab } from '@mui/material';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
+import { Send } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNFTActions } from '../../_slice/CreateNFTSlice';
+import { decoActions } from '../../_slice/DecorateHangulSlice'
 
 function Canvas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const text = useSelector((state: any) => state.areaSentence.value).join('');
+  const text = useSelector((state: any) => state.areaSentence.value).join('');
   const textSize = useSelector((state: any) => state.deco.textSize);
   const textColor = useSelector((state: any) => state.deco.textColor);
   const textXAxis = useSelector((state: any) => state.deco.textXAxis);
   const textYAxis = useSelector((state: any) => state.deco.textYAxis);
   const textLineSpacing = useSelector((state: any) => state.deco.textLineSpacing);
   const strokeWidth = useSelector((state: any) => state.deco.strokeWidth);
-  const strokeOpacity = useSelector((state: any) => state.deco.strokeOpacity);
   const strokeColor = useSelector((state: any) => state.deco.strokeColor);
   const shadowXAxis = useSelector((state: any) => state.deco.shadowXAxis);
   const shadowYAxis = useSelector((state: any) => state.deco.shadowYAxis);
@@ -24,17 +28,25 @@ function Canvas() {
   const backgroundColor = useSelector((state: any) => state.deco.backgroundColor);
   const fontName = useSelector((state: any) => state.deco.fontName);
 
-  // 텍스트
-  const [text, setText] = useState('세종대왕\n만세');
+  // 애니메이션
   const [animationType, setAnimationType] = useState(1);
+  const handleAnimationType = (event: React.SyntheticEvent, newValue: number) => {
+    setAnimationType(newValue);
+    dispatch(decoActions.textSize(textSize));
+  };
+
+  // Minting button 눌렀을 때 로딩
+  const [loading, setLoading] = React.useState(false);
+
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const CANVAS_WIDTH = 512;
   const messageLineByLine = text.split('\n');
-  const maxWidth = Math.max(...messageLineByLine.map(item => item.length));
   
   // 글자 조작 화면
   useEffect(() => {
+    if(animationType === 0) return;
+
     const ctx = canvasRef.current?.getContext('2d');
 
     if (!ctx) return;
@@ -91,7 +103,6 @@ function Canvas() {
             CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
             CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
           );
-
           ctx.restore();
         });
       });
@@ -106,66 +117,54 @@ function Canvas() {
       ctx.fillRect(0, 0, W, H);
     }
 
+    init();
 
+    return () => {
+      cancelAnimationFrame(frameCount);
+    };
+    
+  });
 
+  useEffect(() => {
+    if(animationType !== 0) return;
 
-    // ANIMATION TYPES
-    if (animationType === 0) {
-      // animation 없을 때
-      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
-      messageLineByLine.forEach((line: string, idx: number) => {
-        ctx.save();
-        ctx.fillStyle = textColor;
-        ctx.lineWidth = strokeWidth;
-        ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
-        ctx.font = `${textSize}px ${fontName || ''}`;
+    // animation 없을 때
+    const ctx = canvasRef.current?.getContext('2d');
+    if (!ctx) return;
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
 
-        ctx.shadowColor = shadowColor;
-        ctx.shadowBlur = shadowBlur;
-        ctx.shadowOffsetX = shadowXAxis;
-        ctx.shadowOffsetY = shadowYAxis;
-        ctx.textAlign = 'center';
-        ctx.strokeText(
-          line,
-          CANVAS_WIDTH / 2 + textXAxis,
-          CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
-        );
-        ctx.fillText(
-          line,
-          CANVAS_WIDTH / 2 + textXAxis,
-          CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
-        );
-        ctx.restore();
-      });
-    } else if (animationType === 1) {
-      init();
-      return () => {
-        cancelAnimationFrame(frameCount);
-      };
+    ctx.fillStyle = backgroundColor;
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
+
+    messageLineByLine.forEach((line: string, idx: number) => {
+      ctx.fillStyle = textColor;
+      ctx.lineWidth = strokeWidth;
+      ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
+      ctx.font = `${textSize}px ${fontName || ''}`;
+
+      ctx.shadowColor = shadowColor;
+      ctx.shadowBlur = shadowBlur;
+      ctx.shadowOffsetX = shadowXAxis;
+      ctx.shadowOffsetY = shadowYAxis;
+      ctx.textAlign = 'center';
+      ctx.strokeText(
+        line,
+        CANVAS_WIDTH / 2 + textXAxis,
+        CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+      );
+      ctx.fillText(
+        line,
+        CANVAS_WIDTH / 2 + textXAxis,
+        CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+      );
+    });
     }
-
-
-
-  }, [
-    shadowBlur,
-    shadowXAxis,
-    shadowYAxis,
-    shadowColor,
-    fontName,
-    strokeWidth,
-    strokeColor,
-    strokeOpacity,
-    textXAxis,
-    textYAxis,
-    text,
-    textSize,
-    textColor,
-    backgroundColor,
-    textLineSpacing,
-  ]);
+  );
 
   // Canvas 녹화
   const recordCanvas = () => {
+    setLoading(true);
+
     const canvasRec = canvasRef.current;
 
     // MediaRecorder(녹화기) 변수 선언
@@ -211,20 +210,75 @@ function Canvas() {
     }, 3000);
   };
 
+  let img = '';
+  // PNG 뽑아내기
+  const pictureCanvas = () => {
+    console.log("들어옴?")
+    const ctx = canvasRef.current;
+
+    if (!ctx) return;
+    
+    img = ctx.toDataURL('image/png');
+    console.log(img);
+  }
+
   return (
-    <>
-      <div>애니메이션 원래 위치는 여기</div>
-      <canvas
-        id="canvas"
-        ref={canvasRef}
-        width={CANVAS_WIDTH}
-        height={CANVAS_WIDTH}
-        style={{ backgroundColor, fontFamily: 'BlackHanSans' }}
-      />
-      <button type="button" onClick={recordCanvas}>
-        recordCanvas
-      </button>
-    </>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+      {/* <div>애니메이션 원래 위치는 여기</div> */}
+      <Tabs
+        value={animationType}
+        onChange={handleAnimationType}
+        variant="scrollable"
+        scrollButtons
+        aria-label="visible arrows tabs example"
+        sx={{
+          [`& .${tabsClasses.scrollButtons}`]: {
+            '&.Mui-disabled': { opacity: 0.3 },
+          },
+          marginBottom: 3,
+        }}>
+        <Tab label="Default" />
+        <Tab label="No. 1" />
+        <Tab label="No. 2" />
+        <Tab label="No. 3" />
+        <Tab label="No. 4" />
+        <Tab label="No. 5" />
+      </Tabs>
+      {animationType === 0 && (
+        <canvas
+          id="canvas"
+          ref={canvasRef}
+          width={CANVAS_WIDTH}
+          height={CANVAS_WIDTH}
+          style={{ backgroundColor, fontFamily: 'BlackHanSans', width: CANVAS_WIDTH, height: CANVAS_WIDTH }}
+        />
+      )}
+      {animationType !== 0 && (
+        <canvas
+          id="canvas"
+          ref={canvasRef}
+          width={CANVAS_WIDTH}
+          height={CANVAS_WIDTH}
+          style={{ backgroundColor, fontFamily: 'BlackHanSans', width: CANVAS_WIDTH, height: CANVAS_WIDTH }}
+        />
+      )}
+      <br />
+      <LoadingButton
+        color="secondary"
+        onClick={() => {
+          if (animationType === -1) {
+            pictureCanvas();
+          } else {
+            recordCanvas();
+          }
+        }}
+        loading={loading}
+        loadingPosition="end"
+        endIcon={<Send />}
+        variant="contained">
+        Let&apos;s Mint!
+      </LoadingButton>
+    </div>
   );
 }
 
