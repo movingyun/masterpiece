@@ -44,6 +44,9 @@ const SALE_URL = '/sale';
 // Like
 const LIKE_URL = '/like';
 
+// Game
+const GAME_URL = '/game';
+
 const api = {
   // user
   signin: () => API_BASE_URL + USER_URL + SIGNIN_URL,
@@ -93,6 +96,10 @@ const api = {
 
   // Like
   toggleLike: () => API_BASE_URL + LIKE_URL,
+
+  // Game
+  fetchGameData: () => API_BASE_URL + GAME_URL,
+  putGameLog: () => API_BASE_URL + GAME_URL,
 };
 
 export default api;
