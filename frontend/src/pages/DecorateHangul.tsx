@@ -9,21 +9,20 @@ export default function DecorateHangul() {
   
 
   return (
-    <Container>
-      <div>DecorateHangul</div>
-      <Grid container spacing={2}>
-        <Grid item xs={7.5}>
+    <Container sx={{ marginTop: 5 }}>
+      {/* <div>
+        <Link to="/">home</Link>
+      </div>
+      <div>
+        <Link to="/createnft">createNFT</Link>
+      </div> */}
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={7.5} justifyContent="center">
           <Canvas />
         </Grid>
         <Grid item xs={4.5}>
           <Deco />
         </Grid>
-        <div>
-          <Link to="/">home</Link>
-        </div>
-        <div>
-          <Link to="/createnft">createNFT</Link>
-        </div>
       </Grid>
     </Container>
   );

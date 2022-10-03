@@ -5,8 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import { useDispatch, useSelector } from 'react-redux';
 import tmpImg from '../../img/tmpImg.PNG';
-import consonantImg from '../../img/발성기관.PNG'
-import vowelImg from '../../img/천지인.PNG'
+import consonantImg from '../../img/발성기관.PNG';
+import vowelImg from '../../img/천지인.PNG';
 import { pickConsonant, pickVowel } from '../../_slice/HangulSlice';
 import SimpleDialog from './SimpleDialog';
 
@@ -77,7 +77,7 @@ export default function Draw() {
               <div>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Consonant
+                    Consonants
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     Based on five basic consonants modeled after the shape of the pronunciation organ 
@@ -109,7 +109,7 @@ export default function Draw() {
               <div>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Vowel
+                    Vowels
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     Vowel letters are based on sky, earth and man.
