@@ -7,6 +7,7 @@ import { areaSyllableAction, consonantCountAction, vowelCountAction  } from '../
 import HangulMakerInput from "./HangulMakerInput";
 import composeHangul from "./ComposeHangul";
 import { ConsonantOrder, VowelOrder } from "../../_store/store";
+import { GradientBlueToPink } from "../../_css/ReactCSSProperties";
 
 interface TabPanelProps {
   children: React.ReactNode;
@@ -153,15 +154,13 @@ export default function HangulMakerFML(test:any){
     }
   };
 
-  // barckground Color
-  const gradientStart:string = '#E0FFFF';
-  const gradientFinish:string = '#FFD4DF';
-
   return (
-    <Grid container item xs={12} style={{padding:4, borderRadius:50, border:"2px solid white", background:`linear-gradient(to bottom right, ${gradientStart}, ${gradientFinish})`}}>
+    <Grid container item xs={12} style={GradientBlueToPink}>
       <Grid item xs={9} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center">
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
+          style={{background:"none"}}
+          TabIndicatorProps={{style:{backgroundColor:"red"}}}>
             {[0,1,2].map((i:number)=>(
               <Tab key={`tab${i}`} style={{maxWidth: width}} label={
                 <Typography style={{fontSize:"30px"}}>
