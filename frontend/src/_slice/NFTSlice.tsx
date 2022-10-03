@@ -54,6 +54,16 @@ const fetchNFTOwner: any = createAsyncThunk('fetchNFTOwner', async (nftAddress: 
   }
 });
 
+const searchNFT: any = createAsyncThunk('searchNFT', async (payload: any, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.searchNFT(payload.category, payload.keyword), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
 export interface NFT {
   imgUrl: String;
   nftTitle: String;
@@ -70,6 +80,10 @@ export interface NFT {
 
 export interface NFTState {
   NFTAll: Array<NFT>;
+  searchedNFT: Array<NFT>;
+  category: String;
+  keyword: String;
+  isSearch: Boolean;
   currentNFT: NFT;
   nftOwnerWallet: String;
   likeState: Boolean;
@@ -78,6 +92,10 @@ export interface NFTState {
 
 const initialState: NFTState = {
   NFTAll: [],
+  searchedNFT: [],
+  category: 'titlecontent',
+  keyword: '',
+  isSearch: false,
   currentNFT: {
     imgUrl: '',
     nftTitle: '',
@@ -103,6 +121,15 @@ export const NFTSlice = createSlice({
     toggleIsLoading: state => {
       state.isLoading = true;
     },
+    setKeyword: (state, action) => {
+      state.keyword = action.payload;
+    },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
+    setIsSearch: (state, action) => {
+      state.isSearch = action.payload;
+    },
   },
   extraReducers: {
     [fetchAllNFT.fulfilled]: (state, action) => {
@@ -127,11 +154,14 @@ export const NFTSlice = createSlice({
     [fetchNFTOwner.fulfilled]: (state, action) => {
       state.nftOwnerWallet = action.payload.walletAddress;
     },
+    [searchNFT.fulfilled]: (state, action) => {
+      state.searchedNFT = action.payload;
+    },
   },
 });
 
-export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner };
+export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner, searchNFT };
 
-export const { toggleIsLoading } = NFTSlice.actions;
+export const { toggleIsLoading, setIsSearch, setKeyword, setCategory } = NFTSlice.actions;
 
 export default NFTSlice.reducer;

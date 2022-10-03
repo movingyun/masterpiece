@@ -42,7 +42,6 @@ export default function Menu() {
         <Link to="/">Logo</Link>
         <Link to="/">Name</Link>
       </div>
-      <div>Search</div>
       {isLogin ? (
         <div>
           <Link to={`/userpage/${walletAddress}`}>Mypage</Link>
