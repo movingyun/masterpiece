@@ -35,11 +35,28 @@ async function BuyFunction(price, tokenId, nftAddress) {
   await saleContract.methods.purchase(price).send({ from: userAddress });
 
   // 판매 기록 API 호출 - 수정 필요
-  axios.post(api.buyNFTFromList(), {
-    nftHash: nftAddress,
-    buyerWalletAddress: userAddress,
-    saleContractAddress: saleCA,
-  });
+  axios
+    .post(api.buyNFTFromList(), {
+      nftHash: nftAddress,
+      buyerWalletAddress: userAddress,
+      saleContractAddress: saleCA,
+    })
+    .then(() => {
+      console.log('success');
+      axios
+        .put(api.possessionNFT(), {
+          nftAddress,
+        })
+        .then(() => {
+          console.log('possession success');
+        })
+        .catcj(() => {
+          console.log('possession fail');
+        });
+    })
+    .catch(() => {
+      console.log('fail');
+    });
 }
 
 export default BuyFunction;
