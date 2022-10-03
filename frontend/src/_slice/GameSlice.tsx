@@ -28,14 +28,22 @@ export interface QuestionType {
 
 export interface GameType {
   gameId: Number;
-  questionOption: Array<QuestionType>;
+  questionOption: object;
   questionAnswer: Array<Number>;
+  gameLogSuccess: Boolean;
 }
 
 const initialState: GameType = {
   gameId: 0,
-  questionOption: [],
-  questionAnswer: [],
+  questionOption: {
+    question1: ['호랑이', '토끼', '사자', '강아지'],
+    question2: ['바다', '산', '계곡', '평원'],
+    question3: ['바다', '산', '계곡', '평원'],
+    question4: ['바다', '산', '계곡', '평원'],
+    question5: ['바다', '산', '계곡', '평원'],
+  },
+  questionAnswer: [0, 1, 1, 1, 1],
+  gameLogSuccess: false,
 };
 
 export const GameSlice = createSlice({
@@ -47,6 +55,9 @@ export const GameSlice = createSlice({
       state.gameId = action.gameId;
       state.questionOption = action.questionOption;
       state.questionAnswer = action.questionAnswer;
+    },
+    [putGameLog.fulfilled]: (state, action) => {
+      state.gameLogSuccess = true;
     },
   },
 });
