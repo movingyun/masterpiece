@@ -28,7 +28,7 @@ export default function NFTCard({
   nftTags,
   nftLike,
   nftAddress,
-  nftOwnerWallet,
+  tokenId,
 }: NFT) {
   return (
     <Card sx={{ maxWidth: 345 }}>

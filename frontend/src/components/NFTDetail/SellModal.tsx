@@ -29,6 +29,9 @@ const style = {
   borderRadius: '15px',
   boxShadow: 24,
   p: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 };
 
 export default function SellModal() {
@@ -51,7 +54,9 @@ export default function SellModal() {
   };
 
   const handleListing = () => {
-    if (parseInt(price, 10) > 0 && tokenId && nftAddress) SellFunction(price, tokenId, nftAddress);
+    if (parseInt(price, 10) > 0 && tokenId && nftAddress) {
+      SellFunction(price, tokenId, nftAddress);
+    }
   };
 
   return (
@@ -103,7 +108,7 @@ export default function SellModal() {
             </AccordionDetails>
           </Accordion>
           <Button variant="contained" onClick={handleListing}>
-            Complete listring
+            Complete listing
           </Button>
         </Box>
       </Modal>
