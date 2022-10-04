@@ -40,9 +40,40 @@ export default function StartedGame() {
     flex-wrap: wrap;
     justify-content: center;
   `;
+
   const StyledInterfaceWrap = styled.div`
     display: flex;
     justify-content: space-between;
+  `;
+
+  const StyledWordWrap = styled.div`
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `;
+
+  const StyledInterface = styled.div`
+    font-size: 20px;
+    font-weight: 600;
+  `;
+
+  const StyledWord = styled.div`
+    font-size: 50px;
+    font-weight: 600;
+  `;
+
+  const StyledCorrect = styled.div`
+    font-size: 50px;
+    font-weight: 600;
+    color: #00b700;
+  `;
+
+  const StyledOops = styled.div`
+    font-size: 50px;
+    font-weight: 600;
+    color: red;
   `;
 
   useEffect(() => {
@@ -119,12 +150,14 @@ export default function StartedGame() {
     <div>
       {qNum < 5 ? (
         <>
-          <div>{qNum + 1}/5</div>
+          <StyledInterface>{qNum + 1}/5</StyledInterface>
           {showAns ? (
             <>
-              {correct ? <div>correct</div> : <div>Oops!</div>}
-              <div>The answer is</div>
-              <div>{Object.values<Array<string>>(questionOption[qNum])[0][questionAnswer[qNum]]}</div>
+              <StyledWordWrap>
+                {correct ? <StyledCorrect>CORRECT</StyledCorrect> : <StyledOops>Oops!</StyledOops>}
+                <StyledWord>The answer is</StyledWord>
+                <StyledWord>{Object.values<Array<string>>(questionOption[qNum])[0][questionAnswer[qNum]]}</StyledWord>
+              </StyledWordWrap>
               <StyledBtnWrap>
                 {Object.values<Array<string>>(questionOption[qNum])[0].map((one: string, idx: Number) => (
                   <>
@@ -202,11 +235,15 @@ export default function StartedGame() {
           )}
         </>
       ) : (
-        <>
-          <div>Game End</div>
-          {count < 2 ? <div>You earned {count} ticket!</div> : <div>You earned {count} tickets!</div>}
+        <StyledWordWrap>
+          <StyledWord>Game End</StyledWord>
+          {count < 2 ? (
+            <StyledWord>You earned {count} ticket!</StyledWord>
+          ) : (
+            <StyledWord>You earned {count} tickets!</StyledWord>
+          )}
           <img src={ticket[count - 1]} />
-        </>
+        </StyledWordWrap>
       )}
     </div>
   );
