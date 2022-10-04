@@ -50,7 +50,7 @@ async function BuyFunction(price, tokenId, nftAddress) {
         .then(() => {
           console.log('possession success');
         })
-        .catcj(() => {
+        .catch(() => {
           console.log('possession fail');
         });
     })
