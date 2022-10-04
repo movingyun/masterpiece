@@ -29,34 +29,41 @@ async function BuyFunction(price, tokenId, nftAddress) {
   const saleContract = getSaleContract(saleCA);
 
   // sale컨트랙트로 erc20토큰 전송권한 허용
-  await tokenContract.methods.approve(saleCA, price).send({ from: userAddress });
+  try {
+    await tokenContract.methods.approve(saleCA, price).send({ from: userAddress });
+  } catch {
+    return false;
+  }
 
   // 구매 요청
-  await saleContract.methods.purchase(price).send({ from: userAddress });
+  try {
+    await saleContract.methods.purchase(price).send({ from: userAddress });
+  } catch {
+    return false;
+  }
 
   // 판매 기록 API 호출 - 수정 필요
-  axios
-    .post(api.buyNFTFromList(), {
+  try {
+    await axios.post(api.buyNFTFromList(), {
       nftHash: nftAddress,
       buyerWalletAddress: userAddress,
       saleContractAddress: saleCA,
-    })
-    .then(() => {
-      console.log('success');
-      axios
-        .put(api.possessionNFT(), {
-          nftAddress,
-        })
-        .then(() => {
-          console.log('possession success');
-        })
-        .catch(() => {
-          console.log('possession fail');
-        });
-    })
-    .catch(() => {
-      console.log('fail');
     });
+    console.log('success');
+    try {
+      await axios.put(api.possessionNFT(), {
+        nftAddress,
+      });
+      console.log('possession success');
+      return true;
+    } catch {
+      console.log('possession fail');
+      return false;
+    }
+  } catch {
+    console.log('fail');
+    return false;
+  }
 }
 
 export default BuyFunction;
