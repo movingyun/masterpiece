@@ -98,7 +98,7 @@ export default function Mint() {
 
       if (resExhaustLetter.status === 200) {
         console.log('Minting Backend Process Success');
-        navigate('/nftlist')
+        navigate(`/userpage/${walletAddress}`);
       }
     }
   };

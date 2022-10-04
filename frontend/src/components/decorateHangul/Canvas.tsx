@@ -31,7 +31,7 @@ function Canvas() {
   const animationSpeed = useSelector((state: any) => state.deco.animationSpeed);
 
   
-  const [text, setText] = useState("야 너네\n뭐하냐");
+  const [text, setText] = useState("야너네뭐하냐");
   // 애니메이션
   const [animationType, setAnimationType] = useState(1);
   const handleAnimationType = (event: React.SyntheticEvent, newValue: number) => {
@@ -70,6 +70,10 @@ function Canvas() {
         frameCount = requestAnimationFrame(loop2);
       } else if (animationType === 3) {
         frameCount = requestAnimationFrame(loop3);
+      } else if (animationType === 4) {
+        frameCount = requestAnimationFrame(loop4);
+      } else if (animationType === 5) {
+        frameCount = requestAnimationFrame(loop5);
       }
     }
 
@@ -163,7 +167,6 @@ function Canvas() {
           const numRadsPerLetter = -(2 * Math.PI) / line.length;
 
           ctx.save();
-          // eslint-disable-next-line max-len
           ctx.translate(
             CANVAS_WIDTH / 2,
             CANVAS_WIDTH / 2
@@ -187,6 +190,90 @@ function Canvas() {
       });
 
       frameCount = requestAnimationFrame(loop3);
+    }
+
+    function loop4() {
+      clear();
+
+      if (!ctx) return;
+      ctx.globalAlpha = 0.4;
+      messageLineByLine.forEach((line: string, idx: number) => {
+        line.split('').forEach((letter: string, index: number) => {
+
+          const offset = (index + index) % 2 === 0 ? 1 : -1;
+
+          const offsetY = offset * (Math.cos(frameCount / animationSpeed) * textSize) / 4;
+
+          ctx.save();
+          ctx.translate(
+            index * (textSize + textWidthSpacing),
+            offsetY
+          );
+          ctx.fillStyle = textColor;
+          ctx.lineWidth = strokeWidth;
+          ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
+          ctx.font = `${textSize}px ${fontName || ''}`;
+
+          ctx.shadowColor = shadowColor;
+          ctx.shadowBlur = shadowBlur;
+          ctx.shadowOffsetX = shadowXAxis;
+          ctx.shadowOffsetY = shadowYAxis;
+          ctx.textAlign = 'center';
+          ctx.strokeText(
+            letter,
+            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
+            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+          );
+          ctx.fillText(
+            letter,
+            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
+            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+          );
+          ctx.restore();
+        });
+      });
+
+      frameCount = requestAnimationFrame(loop4);
+    }
+
+    function loop5() {
+      clear();
+
+      if (!ctx) return;
+      ctx.globalAlpha = 0.4;
+      messageLineByLine.forEach((line: string, idx: number) => {
+        line.split('').forEach((letter: string, index: number) => {
+          const offset = (index + index) % 2 === 0 ? 1 : -1;
+
+          const offsetY = (offset * (Math.cos(frameCount / animationSpeed) * textSize)) / 4;
+
+          ctx.save();
+          ctx.translate(index * (textSize + textWidthSpacing), offsetY);
+          ctx.fillStyle = textColor;
+          ctx.lineWidth = strokeWidth;
+          ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
+          ctx.font = `${textSize}px ${fontName || ''}`;
+
+          ctx.shadowColor = shadowColor;
+          ctx.shadowBlur = shadowBlur;
+          ctx.shadowOffsetX = shadowXAxis;
+          ctx.shadowOffsetY = shadowYAxis;
+          ctx.textAlign = 'center';
+          ctx.strokeText(
+            letter,
+            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
+            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+          );
+          ctx.fillText(
+            letter,
+            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
+            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+          );
+          ctx.restore();
+        });
+      });
+
+      frameCount = requestAnimationFrame(loop5);
     }
 
     function clear() {
