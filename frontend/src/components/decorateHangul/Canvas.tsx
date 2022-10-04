@@ -210,18 +210,6 @@ function Canvas() {
     }, 3000);
   };
 
-  let img = '';
-  // PNG 뽑아내기
-  const pictureCanvas = () => {
-    console.log("들어옴?")
-    const ctx = canvasRef.current;
-
-    if (!ctx) return;
-    
-    img = ctx.toDataURL('image/png');
-    console.log(img);
-  }
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       {/* <div>애니메이션 원래 위치는 여기</div> */}
@@ -265,13 +253,7 @@ function Canvas() {
       <br />
       <LoadingButton
         color="secondary"
-        onClick={() => {
-          if (animationType === -1) {
-            pictureCanvas();
-          } else {
-            recordCanvas();
-          }
-        }}
+        onClick={recordCanvas}
         loading={loading}
         loadingPosition="end"
         endIcon={<Send />}
