@@ -17,7 +17,7 @@ function DecoAnimation() {
     <List sx={style} component="nav" aria-label="fontsize">
       <ListItem divider>
         <ListItemText
-          primary="Speed"
+          primary="Dependency"
           secondary={
             <Slider
               aria-label="animationSpeed"
@@ -25,6 +25,12 @@ function DecoAnimation() {
               valueLabelDisplay="auto"
               onChange={animationSpeedHandler}
               value={animationSpeed}
+              marks={[
+                {
+                  value: 0,
+                  label: '0',
+                },
+              ]}
               min={-50}
               max={50}
             />

@@ -16,7 +16,6 @@ function DecoText() {
   const textLineSpacing = useSelector((state: any) => state.deco.textLineSpacing);
 
 
-
   const textSizeHandler = (event: any, value: any) => {
     dispatch(decoActions.textSize(value));
   };

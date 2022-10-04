@@ -13,7 +13,7 @@ function Canvas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const text = useSelector((state: any) => state.areaSentence.value).join('');
+  const text = useSelector((state: any) => state.areaSentence.value).join('');
   const textSize = useSelector((state: any) => state.deco.textSize);
   const textColor = useSelector((state: any) => state.deco.textColor);
   const textXAxis = useSelector((state: any) => state.deco.textXAxis);
@@ -31,7 +31,7 @@ function Canvas() {
   const animationSpeed = useSelector((state: any) => state.deco.animationSpeed);
 
   
-  const [text, setText] = useState("야너네뭐하냐");
+  // const [text, setText] = useState("야너네\n뭐하냐");
   // 애니메이션
   const [animationType, setAnimationType] = useState(1);
   const handleAnimationType = (event: React.SyntheticEvent, newValue: number) => {
@@ -171,7 +171,7 @@ function Canvas() {
             CANVAS_WIDTH / 2,
             CANVAS_WIDTH / 2
           );
-          ctx.rotate(((index + 1) * (frameCount * Math.PI)) / animationSpeed / 30);
+          ctx.rotate(((index + 1) * (frameCount * Math.PI)) / animationSpeed / 100);
 
           ctx.fillStyle = textColor;
           ctx.lineWidth = strokeWidth;
@@ -183,6 +183,11 @@ function Canvas() {
           ctx.shadowOffsetX = shadowXAxis;
           ctx.shadowOffsetY = shadowYAxis;
           ctx.textAlign = 'center';
+          ctx.strokeText(
+            letter,
+            CANVAS_WIDTH / 3 - textSize * idx + textXAxis,
+            CANVAS_WIDTH / 3 - textSize * idx + textYAxis
+          );
           ctx.fillText(letter, CANVAS_WIDTH / 3 - (textSize) * idx + textXAxis, CANVAS_WIDTH / 3 - (textSize) * idx + textYAxis);
           ctx.restore();
           
@@ -200,7 +205,7 @@ function Canvas() {
       messageLineByLine.forEach((line: string, idx: number) => {
         line.split('').forEach((letter: string, index: number) => {
 
-          const offset = (index + index) % 2 === 0 ? 1 : -1;
+          const offset = index % 2 === 0 ? 1 : -1;
 
           const offsetY = offset * (Math.cos(frameCount / animationSpeed) * textSize) / 4;
 
@@ -241,14 +246,21 @@ function Canvas() {
 
       if (!ctx) return;
       ctx.globalAlpha = 0.4;
+
       messageLineByLine.forEach((line: string, idx: number) => {
         line.split('').forEach((letter: string, index: number) => {
-          const offset = (index + index) % 2 === 0 ? 1 : -1;
-
-          const offsetY = (offset * (Math.cos(frameCount / animationSpeed) * textSize)) / 4;
 
           ctx.save();
-          ctx.translate(index * (textSize + textWidthSpacing), offsetY);
+
+          ctx.transform(
+            1,
+            -Math.sin((frameCount / animationSpeed) / 2),
+            Math.sin((frameCount / animationSpeed) / 2),
+            1,
+            CANVAS_WIDTH / 2 + textXAxis,
+            CANVAS_WIDTH / 2 + idx * textSize * 1.5 + textYAxis + idx * textLineSpacing
+          );
+
           ctx.fillStyle = textColor;
           ctx.lineWidth = strokeWidth;
           ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
@@ -259,16 +271,8 @@ function Canvas() {
           ctx.shadowOffsetX = shadowXAxis;
           ctx.shadowOffsetY = shadowYAxis;
           ctx.textAlign = 'center';
-          ctx.strokeText(
-            letter,
-            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
-            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
-          );
-          ctx.fillText(
-            letter,
-            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width / 2,
-            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
-          );
+          ctx.strokeText(line, 0, 0);
+          ctx.fillText(line, 0, 0);
           ctx.restore();
         });
       });
@@ -292,7 +296,7 @@ function Canvas() {
   });
 
   useEffect(() => {
-    if(animationType !== 0) return;
+    if (animationType !== 0) return;
 
     // animation 없을 때
     const ctx = canvasRef.current?.getContext('2d');
@@ -324,8 +328,7 @@ function Canvas() {
         CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
       );
     });
-    }
-  );
+  });
 
   // Canvas 녹화
   const recordCanvas = () => {
