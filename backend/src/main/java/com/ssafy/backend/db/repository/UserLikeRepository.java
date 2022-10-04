@@ -5,6 +5,7 @@ import com.ssafy.backend.db.entity.Nft;
 import com.ssafy.backend.db.entity.UserLike;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
 import java.util.Optional;
 
 public interface UserLikeRepository extends JpaRepository<UserLike, Integer> {

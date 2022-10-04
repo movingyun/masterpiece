@@ -41,7 +41,7 @@ export default function SearchedList() {
             nftLike={NFTInfo.nftLike}
             nftAddress={NFTInfo.nftAddress}
             nftDescription={NFTInfo.nftDescription}
-            nftOwnerWallet={NFTInfo.nftOwnerWallet}
+            tokenId={NFTInfo.tokenId}
           />
         </Link>
       ))}

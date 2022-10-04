@@ -3,6 +3,7 @@ import { Box, Button, Container } from "@mui/material";
 import { UseDispatchHook, UseSelectorHook, firstList, middleList, lastList } from '../../_hook/HangulMakerHook';
 import { firstAction, middleAction, lastAction } from '../../_slice/HangulMakerSlice';
 import { ConsonantOrder, VowelOrder} from '../../_store/store';
+import { ColorDown } from "../../_css/ReactCSSProperties";
 
 export default function HangulMakerInput(){
   // 자모음 크기단위
@@ -54,7 +55,7 @@ export default function HangulMakerInput(){
     });
   }
   return(
-    <Container>
+    <Container style={{padding:4, borderRadius:50, background:"#FFFFFF"}}>
       {letterList[select].map((letter:string, index:number)=>{
         // 종성 0번째 빈값
         if(select === FML.LAST && index===0){
@@ -68,16 +69,18 @@ export default function HangulMakerInput(){
             sx={{minWidth: unit, minHeight: unit, width: unit*5, height:unit*5}} type="button"
             style={{ margin:"10px", position:"relative",
             fontSize:unit*2.5,
-            backgroundColor:color, color:"black",
+            background:`radial-gradient(${color}, ${ColorDown(color)})`,
+            color:"black",
             borderRadius: "100%",
-            border: "2px solid black"
+            border: "2px solid black",
+            transition: "all 0.1s"
           }}>
             <Box key={`${letter}countButton`}
             sx={{minWidth: unit, minHeight: unit, width: unit*2, height:unit*2,}}
             style={{
               position:"absolute", top:-6, right:-6,
               fontSize:unit,
-              backgroundColor:color, color:"black",
+              background:"#FFFFFF", color:"black",
               borderRadius: "100%",
               border: "2px solid black"
             }}>

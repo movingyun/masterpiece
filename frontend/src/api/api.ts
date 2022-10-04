@@ -1,3 +1,4 @@
+
 // const API_BASE_URL = 'http://localhost:8081/api';
 const API_BASE_URL = 'https://j7a508.p.ssafy.io/api';
 
@@ -38,6 +39,7 @@ const TRANSLATE = '/papago';
 const DETAIL_URL = '/detail';
 const OWNER_URL = '/owner';
 const SEARCH_URL = '/search';
+const POSESSION_URL = '/posession';
 
 // Sale
 const SALE_URL = '/sale';
@@ -89,10 +91,13 @@ const api = {
   fetchAllNFT: () => API_BASE_URL + NFT_URL,
   fetchNFTDetail: (nftAddress: String) => API_BASE_URL + NFT_URL + DETAIL_URL + `?nft-address=${nftAddress}`,
   fetchNFTOwner: (nftAddress: String) => API_BASE_URL + NFT_URL + OWNER_URL + `?nftHash=${nftAddress}`,
+  listNFTOnSale: () => API_BASE_URL + NFT_URL + SALE_URL,
   searchNFT: (category: String, keyword: String) =>
     API_BASE_URL + NFT_URL + SEARCH_URL + `?category=${category}&keyword=${keyword}`,
+  possessionNFT: () => API_BASE_URL + NFT_URL + POSESSION_URL,
 
   // Sale
+  buyNFTFromList: () => API_BASE_URL + SALE_URL,
   fetchSaleHistory: (nftAddress: String) => API_BASE_URL + SALE_URL + `?nftHash=${nftAddress}`,
 
   // Like

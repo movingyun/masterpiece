@@ -9,6 +9,7 @@ import AreaTranslate from '../components/composeHangul/AreaTranslate';
 import AreaDiscompose from '../components/composeHangul/AreaDiscompose';
 import AreaSyllable from '../components/composeHangul/AreaSyllable';
 import AreaSentence from '../components/composeHangul/AreaSentence';
+import { GradientBlueToPink } from '../_css/ReactCSSProperties';
 
 export default function ComposeHangul() {
   const walletAddress = UseSelectorHook(state => state.user.currentUser.wallet_address);
@@ -21,7 +22,7 @@ export default function ComposeHangul() {
   }, [walletAddress]);
   
   return (
-    <Container>
+    <Container style={GradientBlueToPink}>
       <div style={{margin:10, fontSize:50}}>Make Your Own Word/Sentence</div>
       <Grid container>
         <Grid container item xs={6} style={{padding:10}}>

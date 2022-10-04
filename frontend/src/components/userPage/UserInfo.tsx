@@ -5,6 +5,7 @@ import { Card, CardContent, Tooltip } from '@mui/material';
 import { Instance } from '@popperjs/core';
 import { fetchUser } from '../../_slice/UserSlice';
 import useCopyClipBoard from '../../_hook/useCopyClipBoard';
+import NFTPreview from '../../commons/NFTPreview';
 
 const StyledCardList = styled.div`
   display: flex;
@@ -12,10 +13,7 @@ const StyledCardList = styled.div`
     margin: 2px;
   }
 `;
-const StyledVideo = styled.video`
-  width: 100%;
-  height: auto;
-`;
+
 const StyledCopyWallet = styled.div`
   cursor: pointer;
 `;
@@ -59,9 +57,7 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
   return (
     <StyledCardList>
       <Card sx={{ width: '30%', minWidth: 200 }}>
-        <CardContent>
-          <StyledVideo autoPlay loop src={`${searchedUser.profileImage}`} />
-        </CardContent>
+        <NFTPreview url={`${searchedUser.profileImage}`} />
       </Card>
       <Card sx={{ width: '70%' }}>
         <CardContent>

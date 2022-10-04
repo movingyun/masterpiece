@@ -3,6 +3,7 @@ import { Box, Grid, TextField, Button, Select, MenuItem } from '@mui/material';
 import VolumeDownRoundedIcon from '@mui/icons-material/VolumeDownRounded';
 import axios from "axios";
 import api from "../../api/api";
+import { GradientBlueToPink } from "../../_css/ReactCSSProperties";
 
 export default function AreaTranslate(){
 
@@ -35,10 +36,14 @@ export default function AreaTranslate(){
     const data = await axios.post(api.translate(), requestBody);
     setTranslateText(data.data);
   }
-
+  const gradientBlueToPink:React.CSSProperties = GradientBlueToPink;
+  const thisAreaBackground:React.CSSProperties = {
+    marginBottom:20,
+    minHeight:300,
+  }
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{marginBottom:20, width:"100%", minHeight:160, backgroundColor:"#FFFFFF"}}
+    style={{...gradientBlueToPink, ...thisAreaBackground}}
     className="area"
     >
       <Grid container>

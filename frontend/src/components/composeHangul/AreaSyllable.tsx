@@ -7,6 +7,7 @@ import { UseSelectorHook, UseDispatchHook } from '../../_hook/HangulMakerHook';
 import { areaSentenceAction, areaSyllableAction } from "../../_slice/ComposeHangulSlice";
 import DragAndDrop from "./DragAndDrop";
 import { HangulComposeArea } from "../../_store/store";
+import { GradientBlueToPink } from "../../_css/ReactCSSProperties";
 
 export default function AreaSyllable(){
   const dispatch = UseDispatchHook();
@@ -16,6 +17,18 @@ export default function AreaSyllable(){
   const dragValueState:string = UseSelectorHook(state => state.dragValue.value);
   const dragStartArea:HangulComposeArea = UseSelectorHook(state => state.areaIndex.value);
   const dragStartElement:number = UseSelectorHook(state => state.elementIndex.value);
+
+  const [indexArray, setIndexArray] = React.useState<number[]>([]);
+  React.useEffect(()=>{
+    if(syllableList.length>indexArray.length){
+      // key index 값
+      const temp:number[] = [];
+      for(let i:number=0;i<syllableList.length;i++){
+        temp.push(i);
+      }
+      setIndexArray(temp);
+    }
+  }, [syllableList]);
 
   // 드래그 후 hover
   const dragOverFunction = (e:React.DragEvent, type:string) => {
@@ -40,20 +53,27 @@ export default function AreaSyllable(){
   
   // 음절 버튼 단위크기
   const unit:number = 10;
+  // barckground Color
+  const gradientBlueToPink:React.CSSProperties = GradientBlueToPink;
+  const thisAreaBackground:React.CSSProperties = {
+    border:"2px dashed white",
+    marginBottom:10,
+    minHeight:500,
+  }
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{marginBottom: 10, width:"100%", minHeight:500, backgroundColor:"#F8CECE", border:"1px dashed black"}}
+    style={{...gradientBlueToPink, ...thisAreaBackground}}
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}
     >
       <Container>
         {syllableList.map((syllable:string, index:number)=>(
-          (syllable===" ") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
+          (syllable===" ") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}${indexArray[index]}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
           : (
-            (syllable==="\n") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
+            (syllable==="\n") ? (<DragAndDrop key={`$AreaSyllable${syllableList[index]}${indexArray[index]}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>)
             : (
-            <DragAndDrop key={`$AreaSyllable${syllableList[index]}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+            <DragAndDrop key={`$AreaSyllable${syllableList[index]}${indexArray[index]}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
           ))
         ))}
       </Container>
