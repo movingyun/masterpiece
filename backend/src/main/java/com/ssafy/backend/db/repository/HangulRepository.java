@@ -2,11 +2,10 @@ package com.ssafy.backend.db.repository;
 
 import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.User;
-import org.springframework.stereotype.Repository;
-import java.util.List;
-import com.ssafy.backend.db.entity.GameWord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface HangulRepository extends JpaRepository<Hangul, Integer> {
     @Query(value = "SELECT * FROM hangul WHERE id =?", nativeQuery = true)
