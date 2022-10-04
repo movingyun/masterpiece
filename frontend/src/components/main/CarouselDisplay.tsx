@@ -4,9 +4,9 @@ import Carousel from 'react-material-ui-carousel'
 
 function CarouselItem(element:any, key:string): JSX.Element {
 	return (
-		<Paper key={ key }>
+		<Container key={ key }>
 			{element}
-		</Paper>
+		</Container>
 	);
 }
 
