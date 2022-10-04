@@ -10,7 +10,7 @@ export default function Main() {
   const focus:React.MutableRefObject<HTMLDivElement[]> = React.useRef([]);
   return (
     <Container>
-      <Grid container>
+      <Grid container alignItems="flex-end">
         <Grid item xs={6}><AreaInformation focus={focus}/></Grid>
         <Grid item xs={6}><AreaExample/></Grid>
       </Grid>
