@@ -10,18 +10,15 @@ function DecoText() {
   const dispatch = useDispatch();
   const style = useSelector((state: any) => state.deco.style);
   const textSize = useSelector((state: any) => state.deco.textSize);
-  const textColor = useSelector((state: any) => state.deco.textColor);
   const textXAxis = useSelector((state: any) => state.deco.textXAxis);
   const textYAxis = useSelector((state: any) => state.deco.textYAxis);
+  const textWidthSpacing = useSelector((state: any) => state.deco.textWidthSpacing);
   const textLineSpacing = useSelector((state: any) => state.deco.textLineSpacing);
-  const strokeWidth = useSelector((state: any) => state.deco.borderRadius);
-  const strokeColor = useSelector((state: any) => state.deco.borderColor);
+
+
 
   const textSizeHandler = (event: any, value: any) => {
     dispatch(decoActions.textSize(value));
-  };
-  const textColorHandler = (color: any) => {
-    dispatch(decoActions.textColor(color.hex));
   };
   const textXAxisHandler = (event: any, value: any) => {
     dispatch(decoActions.textXAxis(value));
@@ -29,15 +26,13 @@ function DecoText() {
   const textYAxisHandler = (event: any, value: any) => {
     dispatch(decoActions.textYAxis(value));
   };
+  const textWidthSpacingHandler = (event: any, value: any) => {
+    dispatch(decoActions.textWidthSpacing(value));
+  };
   const textLineSpacingHandler = (event: any, value: any) => {
     dispatch(decoActions.textLineSpacing(value));
   };
-  const strokeWidthHandler = (event: any, value: any) => {
-    dispatch(decoActions.strokeWidth(value));
-  };
-  const strokeColorHandler = (color: any) => {
-    dispatch(decoActions.strokeColor(color.hex));
-  };
+
 
   return (
     <List sx={style} component="nav" aria-label="fontsize">
@@ -59,13 +54,7 @@ function DecoText() {
       </ListItem>
       <ListItem divider>
         <ListItemText
-          primary="Text Color"
-          secondary={<ChromePicker disableAlpha color={textColor} onChange={textColorHandler} />}
-        />
-      </ListItem>
-      <ListItem divider>
-        <ListItemText
-          primary="Text x-axis"
+          primary="Text X Axis"
           secondary={
             <Slider
               aria-label="textXAxis"
@@ -81,7 +70,7 @@ function DecoText() {
       </ListItem>
       <ListItem divider>
         <ListItemText
-          primary="Text y-axis"
+          primary="Text Y Axis"
           secondary={
             <Slider
               aria-label="textYAxis"
@@ -97,7 +86,23 @@ function DecoText() {
       </ListItem>
       <ListItem divider>
         <ListItemText
-          primary="Text line-spacing"
+          primary="Text Width Spacing"
+          secondary={
+            <Slider
+              aria-label="textWidthSpacing"
+              defaultValue={0}
+              valueLabelDisplay="auto"
+              onChange={textWidthSpacingHandler}
+              value={textWidthSpacing}
+              min={-100}
+              max={100}
+            />
+          }
+        />
+      </ListItem>
+      <ListItem divider>
+        <ListItemText
+          primary="Text Line Spacing"
           secondary={
             <Slider
               aria-label="textLineSpacing"
@@ -109,28 +114,6 @@ function DecoText() {
               max={100}
             />
           }
-        />
-      </ListItem>
-      <ListItem divider>
-        <ListItemText
-          primary="Stroke Width"
-          secondary={
-            <Slider
-              aria-label="strokeWidth"
-              defaultValue={0}
-              valueLabelDisplay="auto"
-              onChange={strokeWidthHandler}
-              value={strokeWidth}
-              min={0}
-              max={30}
-            />
-          }
-        />
-      </ListItem>
-      <ListItem divider>
-        <ListItemText
-          primary="Stroke Color"
-          secondary={<CompactPicker color={strokeColor} onChange={strokeColorHandler} />}
         />
       </ListItem>
     </List>

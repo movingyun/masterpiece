@@ -13,11 +13,12 @@ function Canvas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const text = useSelector((state: any) => state.areaSentence.value).join('');
+  // const text = useSelector((state: any) => state.areaSentence.value).join('');
   const textSize = useSelector((state: any) => state.deco.textSize);
   const textColor = useSelector((state: any) => state.deco.textColor);
   const textXAxis = useSelector((state: any) => state.deco.textXAxis);
   const textYAxis = useSelector((state: any) => state.deco.textYAxis);
+  const textWidthSpacing = useSelector((state: any) => state.deco.textWidthSpacing);
   const textLineSpacing = useSelector((state: any) => state.deco.textLineSpacing);
   const strokeWidth = useSelector((state: any) => state.deco.strokeWidth);
   const strokeColor = useSelector((state: any) => state.deco.strokeColor);
@@ -27,7 +28,10 @@ function Canvas() {
   const shadowColor = useSelector((state: any) => state.deco.shadowColor);
   const backgroundColor = useSelector((state: any) => state.deco.backgroundColor);
   const fontName = useSelector((state: any) => state.deco.fontName);
+  const animationSpeed = useSelector((state: any) => state.deco.animationSpeed);
 
+  
+  const [text, setText] = useState("야 너네\n뭐하냐");
   // 애니메이션
   const [animationType, setAnimationType] = useState(1);
   const handleAnimationType = (event: React.SyntheticEvent, newValue: number) => {
@@ -60,27 +64,32 @@ function Canvas() {
     function init() {
       if (!ctx) return;
       ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_WIDTH);
-      frameCount = requestAnimationFrame(loop);
-      // console.log(frameCount);
+      if (animationType === 1) {
+        frameCount = requestAnimationFrame(loop1);
+      } else if (animationType === 2) {
+        frameCount = requestAnimationFrame(loop2);
+      } else if (animationType === 3) {
+        frameCount = requestAnimationFrame(loop3);
+      }
     }
 
-    function loop() {
+    function loop1() {
       clear();
 
       if (!ctx) return;
       ctx.globalAlpha = 0.4;
       messageLineByLine.forEach((line: string, idx: number) => {
         line.split('').forEach((letter: string, index: number) => {
-          const noiseX = Math.sin(index * 10 + frameCount / 100) * 10;
-          const noiseY = Math.cos(index * 10 + frameCount / 100) * 10;
+          const noiseX = (Math.sin(index * 10 + frameCount / 100) * 10);
+          const noiseY = (Math.cos(index * 10 + frameCount / 100) * 10);
 
-          const offsetX = noiseX + (-Math.cos(index + frameCount / 20) * textSize) / 4;
-          const offsetY = noiseY + (Math.sin(index + frameCount / 60) * textSize) / 4;
+          const offsetX = noiseX + (-Math.cos(index + frameCount / animationSpeed) * textSize) / 4;
+          const offsetY = noiseY + (Math.sin(index + frameCount / animationSpeed / 2) * textSize) / 4;
 
           ctx.save();
           // eslint-disable-next-line max-len
           ctx.translate(
-            offsetX * (idx + 1) / 2 + index * textSize,
+            offsetX * (idx + 1) / 2 + index * (textSize + textWidthSpacing),
             offsetY * (idx + 1) / 2
           );
           ctx.fillStyle = textColor;
@@ -107,7 +116,77 @@ function Canvas() {
         });
       });
 
-      frameCount = requestAnimationFrame(loop);
+      frameCount = requestAnimationFrame(loop1);
+    }
+
+    function loop2() {
+      clear();
+
+      if (!ctx) return;
+      ctx.globalAlpha = 0.4;
+      messageLineByLine.forEach((line: string, idx: number) => {
+        line.split('').forEach((letter: string, index: number) => {
+
+          ctx.save();
+          ctx.translate(
+            CANVAS_WIDTH / 2 + textXAxis - ctx.measureText(line).width * 2 + index * (textSize + textWidthSpacing),
+            CANVAS_WIDTH / 2 + idx * textSize + textYAxis + idx * textLineSpacing
+          );
+          ctx.rotate((frameCount * Math.PI) / - animationSpeed / 3);
+          ctx.fillStyle = textColor;
+          ctx.lineWidth = strokeWidth;
+          ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
+          ctx.font = `${textSize}px ${fontName || ''}`;
+
+          ctx.shadowColor = shadowColor;
+          ctx.shadowBlur = shadowBlur;
+          ctx.shadowOffsetX = shadowXAxis;
+          ctx.shadowOffsetY = shadowYAxis;
+          ctx.textAlign = 'center';
+          ctx.strokeText(letter, 0, 0);
+          ctx.fillText(letter, 0, 0);
+          ctx.restore();
+        });
+      });
+
+      frameCount = requestAnimationFrame(loop2);
+    }
+
+    function loop3() {
+      clear();
+
+      if (!ctx) return;
+      ctx.globalAlpha = 0.4;
+      messageLineByLine.forEach((line: string, idx: number) => {
+        line.split('').forEach((letter: string, index: number) => {
+
+          const numRadsPerLetter = -(2 * Math.PI) / line.length;
+
+          ctx.save();
+          // eslint-disable-next-line max-len
+          ctx.translate(
+            CANVAS_WIDTH / 2,
+            CANVAS_WIDTH / 2
+          );
+          ctx.rotate(((index + 1) * (frameCount * Math.PI)) / animationSpeed / 30);
+
+          ctx.fillStyle = textColor;
+          ctx.lineWidth = strokeWidth;
+          ctx.strokeStyle = strokeWidth === 0 ? textColor : strokeColor;
+          ctx.font = `${textSize}px ${fontName || ''}`;
+
+          ctx.shadowColor = shadowColor;
+          ctx.shadowBlur = shadowBlur;
+          ctx.shadowOffsetX = shadowXAxis;
+          ctx.shadowOffsetY = shadowYAxis;
+          ctx.textAlign = 'center';
+          ctx.fillText(letter, CANVAS_WIDTH / 3 - (textSize) * idx + textXAxis, CANVAS_WIDTH / 3 - (textSize) * idx + textYAxis);
+          ctx.restore();
+          
+        });
+      });
+
+      frameCount = requestAnimationFrame(loop3);
     }
 
     function clear() {

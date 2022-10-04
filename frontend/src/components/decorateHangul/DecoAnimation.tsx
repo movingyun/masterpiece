@@ -7,58 +7,30 @@ import { decoActions } from '../../_slice/DecorateHangulSlice';
 function DecoAnimation() {
   const dispatch = useDispatch();
   const style = useSelector((state: any) => state.deco.style);
-  
+  const animationSpeed = useSelector((state: any) => state.deco.animationLevel);
+
+  const animationSpeedHandler = (event: any, value: any) => {
+    dispatch(decoActions.animationSpeed(value));
+  };
 
   return (
     <List sx={style} component="nav" aria-label="fontsize">
-      {/* <ListItem divider>
+      <ListItem divider>
         <ListItemText
-          primary="Shadow x-axis"
+          primary="Speed"
           secondary={
             <Slider
-              aria-label="axis"
-              defaultValue={0}
+              aria-label="animationSpeed"
+              defaultValue={20}
               valueLabelDisplay="auto"
-              onChange={xAxisHandler}
-              value={shadowXAxis}
+              onChange={animationSpeedHandler}
+              value={animationSpeed}
               min={-50}
               max={50}
             />
           }
         />
       </ListItem>
-      <ListItem divider>
-        <ListItemText
-          primary="Shadow y-axis"
-          secondary={
-            <Slider
-              aria-label="axis"
-              defaultValue={0}
-              valueLabelDisplay="auto"
-              onChange={yAxisHandler}
-              value={shadowYAxis}
-              min={-50}
-              max={50}
-            />
-          }
-        />
-      </ListItem>
-      <ListItem divider>
-        <ListItemText
-          primary="Blur"
-          secondary={
-            <Slider
-              aria-label="blur"
-              defaultValue={0}
-              valueLabelDisplay="auto"
-              onChange={shadowBlurHandler}
-              value={shadowBlur}
-              min={0}
-              max={30}
-            />
-          }
-        />
-      </ListItem> */}
     </List>
   );
 }
