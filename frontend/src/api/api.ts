@@ -6,6 +6,7 @@ const API_BASE_URL = 'https://j7a508.p.ssafy.io/api';
 const USER_URL = '/user';
 const HANGUL_URL = '/hangul';
 const NFT_URL = '/nft';
+const GAME_URL = '/game';
 
 // URI
 // User
@@ -45,6 +46,9 @@ const SALE_URL = '/sale';
 
 // Like
 const LIKE_URL = '/like';
+
+// Game
+const LOG_URL = '/log';
 
 const api = {
   // user
@@ -98,6 +102,10 @@ const api = {
 
   // Like
   toggleLike: () => API_BASE_URL + LIKE_URL,
+
+  // Game
+  fetchGameData: () => API_BASE_URL + GAME_URL,
+  putGameLog: () => API_BASE_URL + GAME_URL + LOG_URL,
 };
 
 export default api;
