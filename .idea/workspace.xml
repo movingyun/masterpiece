@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaf34904-a205-425a-a790-3a26b2058890" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/SeleniumController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/SeleniumService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/SeleniumServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/config/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HangulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HangulController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/PapagoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/PapagoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/entity/Gamelog.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/entity/Gamelog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/GameWordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/GameWordRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/HangulOwnRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/HangulOwnRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/HangulRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/HangulRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/NFTRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/NFTRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/SaleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/SaleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/SalelogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/SalelogRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/UserLikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/UserLikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/HangulService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/HangulService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/PapagoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/PapagoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/UserServiceImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="aaf34904-a205-425a-a790-3a26b2058890" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,14 +18,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\SSAFY\\Desktop\\특화프로젝트_한글날\\S07P22A508\\frontend\\node_modules\\typescript\\lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\SSAFY\\Desktop\\특화프로젝트_한글날\\S07P22A508\\frontend\\node_modules\\typescript\\lib"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -62,6 +38,7 @@
       <workItem from="1663427947217" duration="3000" />
       <workItem from="1664261707528" duration="56000" />
       <workItem from="1664812932703" duration="6000" />
+      <workItem from="1664813334644" duration="21000" />
     </task>
     <servers />
   </component>
