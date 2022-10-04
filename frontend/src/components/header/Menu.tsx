@@ -7,6 +7,8 @@ import { checkLogin, logout, getCurrentUser, signin } from '../../_slice/UserSli
 import { injected } from '../../lib/connectors';
 import { isNoEthereumObject } from '../../lib/error';
 
+import logo from '../../img/logo.png';
+
 const Header = styled.nav`
   position: sticky;
   top: 0;
@@ -24,7 +26,7 @@ const StyledMenu = styled.div`
   height: 70px;
   line-height: 70px;
   margin: 0 30px;
-  color: #000;
+  color: #fff;
   font-family: Poppins, sans-serif;
 `;
 const StyledNav = styled.div`
@@ -128,7 +130,7 @@ export default function Menu() {
       <StyledMenu>
         <StyledNav>
           <Logo>
-            <Link to="/">Logo</Link>
+            <Link to="/"><img src={logo} alt="logo" height='70px'/></Link>
           </Logo>
           <Navigation>
             <Link to="/">Home</Link>
