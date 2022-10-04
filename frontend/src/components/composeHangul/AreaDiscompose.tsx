@@ -5,9 +5,9 @@ import { UseSelectorHook, UseDispatchHook } from "../../_hook/HangulMakerHook";
 import { areaSentenceAction, areaSyllableAction, consonantCountAction, vowelCountAction } from "../../_slice/ComposeHangulSlice";
 import { HangulComposeArea } from "../../_store/store";
 import DiscomposeHangul, {DiscomposeSentence} from "../../commons/HangulMaker/DiscomposeHangul";
+import { GradientBlueToPink } from "../../_css/ReactCSSProperties";
 
 export default function AreaDiscompose() {
-  DiscomposeSentence("ㄱㅏㄳ내뷁");
   const dispatch = UseDispatchHook();
   const thisArea = HangulComposeArea.DISCOMPOSE;
   const syllableList:string[]= UseSelectorHook(state => state.areaSyllable.value);
@@ -61,9 +61,18 @@ export default function AreaDiscompose() {
       dispatch(areaSentenceAction.delete({index:dragStartElement}));
     }
   }
+
+  // barckground Color
+  const gradientBlueToPink:React.CSSProperties = GradientBlueToPink;
+  const thisAreaBackground:React.CSSProperties = {
+    border:"2px dashed white",
+    marginBottom:10,
+    minHeight:160,
+  }
+
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{marginBottom: 10, width:"100%", minHeight:160, backgroundColor:"#F8CECE", border:"1px dashed black"}}
+    style={{...gradientBlueToPink, ...thisAreaBackground}}
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}

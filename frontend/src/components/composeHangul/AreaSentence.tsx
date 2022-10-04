@@ -13,10 +13,21 @@ export default function AreaSentence(){
   const thisArea = HangulComposeArea.SENTENCE;
   const sentenceList:string[]= UseSelectorHook(state => state.areaSentence.value);
   const [sentenceStringList, setSentenceStringList] = React.useState(['']);
+  const [indexArray, setIndexArray] = React.useState<number[]>([]);
   React.useEffect(()=>{
     const sentenceString = ComposeSyllables(sentenceList);
     setSentenceStringList(sentenceString.split('\n'));
-  }, [sentenceList])
+
+    if(sentenceList.length>indexArray.length){
+      // key index 값
+      const temp:number[] = [];
+      for(let i:number=0;i<sentenceList.length;i++){
+        temp.push(i);
+      }
+      setIndexArray(temp);
+    }
+  }, [sentenceList]);
+  
 
   const dragValueState:string = UseSelectorHook(state => state.dragValue.value);
   const dragStartArea:HangulComposeArea = UseSelectorHook(state => state.areaIndex.value);
@@ -76,38 +87,40 @@ export default function AreaSentence(){
               onDragOver={event => dragOverFunction(event, 'dragOver')}
               />
               {sentenceList.map((syllable:string, index:number)=>(
-                (index===0) ? (<div key={`$AreaSentence${sentenceList[index]}`}/>)
+                (index===0) ? (<div key={`$AreaSentence${sentenceList[index]}${indexArray[index]}`}/>)
                 : ((syllable===" ") ? (
-                  <>                
-                    <DragAndDrop key={`$AreaSentence${sentenceList[index]}`} element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
-                    <Box key={`$AreaSentenceSpace${sentenceList[index]}`} display="flex" justifyContent="center" alignItems="center"
+                  <Box key={`$AreaSentence${sentenceList[index]}${indexArray[index]}`} display="flex" justifyContent="center" alignItems="center">
+                    <DragAndDrop element={<SpaceBarIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+                    <Box display="flex" justifyContent="center" alignItems="center"
                     style={{width:unit*2, minHeight:unit*5, backgroundColor:"#FFFFFF", border:"1px dashed black"}}
                     className="area"
                     onDrop={event => dropFunction(event, index)}
                     onDragOver={event => dragOverFunction(event, 'dragOver')}
                     />
-                  </>
+                  </Box>
                   )
                   : (
-                    (syllable==="\n") ? (<><DragAndDrop key={`$AreaSentence${sentenceList[index]}`} element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
-                    <Grid key={`$AreaSentenceDiv${sentenceList[index]}`} item xs={12}><div/></Grid>
-                    <Box key={`$AreaSentenceSpace${sentenceList[index]}`} display="flex" justifyContent="center" alignItems="center"
-                    style={{marginLeft:unit, width:unit*2, minHeight:unit*5, backgroundColor:"#FFFFFF", border:"1px dashed black"}}
-                    className="area"
-                    onDrop={event => dropFunction(event, index)}
-                    onDragOver={event => dragOverFunction(event, 'dragOver')}
-                    />
+                    (syllable==="\n") ? (
+                    <>
+                      <DragAndDrop element={<KeyboardReturnIcon/>} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+                      <Grid item xs={12}><div /></Grid>
+                      <Box display="flex" justifyContent="center" alignItems="center"
+                      style={{marginLeft:unit, width:unit*2, minHeight:unit*5, backgroundColor:"#FFFFFF", border:"1px dashed black"}}
+                      className="area"
+                      onDrop={event => dropFunction(event, index)}
+                      onDragOver={event => dragOverFunction(event, 'dragOver')}
+                      />
                     </>)
                     : (
-                    <>                
-                      <DragAndDrop key={`$AreaSentence${sentenceList[index]}`} element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
-                      <Box key={`$AreaSentenceSpace${sentenceList[index]}`} display="flex" justifyContent="center" alignItems="center"
+                    <Box key={`$AreaSentence${sentenceList[index]}${indexArray[index]}`} display="flex" justifyContent="center" alignItems="center">
+                      <DragAndDrop element={syllable} value={syllable} unit={unit} areaIndex={thisArea} elementIndex={index}/>
+                      <Box display="flex" justifyContent="center" alignItems="center"
                       style={{width:unit*2, minHeight:unit*5, backgroundColor:"#FFFFFF", border:"1px dashed black"}}
                       className="area"
                       onDrop={event => dropFunction(event, index)}
                       onDragOver={event => dragOverFunction(event, 'dragOver')}
                       />
-                    </>
+                    </Box>
                     )
                   )
                 )
@@ -120,8 +133,8 @@ export default function AreaSentence(){
           style={{width:"100%", minHeight:200, backgroundColor:"#F8CECE", border:"1px solid black"}}
           >
             <div style={{fontSize:50}}>
-              {sentenceStringList.map((syllable:string)=>(
-                  <>{syllable}<br/></>
+              {sentenceStringList.map((syllable:string, index:number)=>(
+                  <Container key={`$AreaSentenceString${sentenceStringList[index]}${indexArray[index]}`}>{syllable}<br/></Container>
               ))}
             </div>
           </Box>

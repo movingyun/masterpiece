@@ -7,6 +7,7 @@ import { areaSyllableAction, consonantCountAction, vowelCountAction  } from '../
 import HangulMakerInput from "./HangulMakerInput";
 import composeHangul from "./ComposeHangul";
 import { ConsonantOrder, VowelOrder } from "../../_store/store";
+import { GradientBlueToPink } from "../../_css/ReactCSSProperties";
 
 interface TabPanelProps {
   children: React.ReactNode;
@@ -154,14 +155,16 @@ export default function HangulMakerFML(test:any){
   };
 
   return (
-    <Grid container item xs={12}>
+    <Grid container item xs={12} style={GradientBlueToPink}>
       <Grid item xs={9} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center">
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
+          style={{background:"none"}}
+          TabIndicatorProps={{style:{backgroundColor:"red"}}}>
             {[0,1,2].map((i:number)=>(
               <Tab key={`tab${i}`} style={{maxWidth: width}} label={
                 <Typography style={{fontSize:"30px"}}>
-                  <Box sx={{width: {width}, height:{height}}} style={{position:"relative", margin:unit/2, backgroundColor:"#DDDDDD"}}>
+                  <Box sx={{width: {width}, height:{height}}} style={{position:"relative", margin:unit/2, backgroundColor:"#FFFFFF"}}>
                     {letter[i]}
                   </Box>
                   <CancelIcon style={{position:"absolute", top:0, right:0, color:"red"}}
@@ -174,7 +177,7 @@ export default function HangulMakerFML(test:any){
       </Grid>
       <Grid item xs={3} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center"
-        sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}>
+        sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#FFFFFF"}}>
           <Typography style={{fontSize:"30px"}}>{syllable}</Typography>
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center"

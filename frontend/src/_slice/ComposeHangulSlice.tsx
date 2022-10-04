@@ -81,6 +81,8 @@ export const elementIndexAction = elementIndex.actions;
 export const areaSyllable = createSlice({
   name: 'areaSyllable',	// key
   initialState:{value: [" ", "\n"]},	// 초기값
+  // initialState:{value: [" ", "\n","ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ","ㄲ","ㄸ","ㅆ","ㅉ","ㅃ","ㄵ","ㄻ","ㄼ","ㄾ","ㅀ","ㄳ","ㅏ","ㅑ","ㅓ","ㅕ","ㅗ","ㅛ","ㅜ","ㅠ","ㅡ","ㅣ",
+  // "ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ","ㄲ","ㄸ","ㅆ","ㅉ","ㅃ","ㄵ","ㄻ","ㄼ","ㄾ","ㅀ","ㄳ","ㅏ","ㅑ","ㅓ","ㅕ","ㅗ","ㅛ","ㅜ","ㅠ","ㅡ","ㅣ"]},
   reducers:{
     reset:(state, action) =>{
       state.value = [" ", "\n"];
@@ -92,7 +94,10 @@ export const areaSyllable = createSlice({
       state.value.splice(action.payload.index, 0, action.payload.dragValueState);
     },
     delete:(state, action) =>{
+      console.log(action.payload.index, state.value[action.payload.index],
+        state.value[action.payload.index+1]);
       state.value.splice(action.payload.index, 1);
+      console.log(state.value[action.payload.index]);
     }
   }
 });

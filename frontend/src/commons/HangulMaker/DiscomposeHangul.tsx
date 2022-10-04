@@ -32,12 +32,12 @@ export default function DiscomposeHangul(syllable:string):number[]{
       payload = {
         index: EnumVowelOrder[syllable as keyof typeof EnumVowelOrder],
       };
-      return [-1, EnumVowelOrder[syllable as keyof typeof EnumVowelOrder], 0];  // 모음
+      return [-1, EnumVowelOrder[syllable as keyof typeof EnumVowelOrder], -1];  // 모음
     }
     payload = {
       index: EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder],
     };
-    return [EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder], -1, 0];  // 자음
+    return [EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder], -1, -1];  // 자음
   }
   // console.log('ㅏ'.charCodeAt(0), 'ㅐ'.charCodeAt(0), 'ㅑ'.charCodeAt(0), 'ㅒ'.charCodeAt(0),
   // 'ㅓ'.charCodeAt(0), 'ㅔ'.charCodeAt(0), 'ㅕ'.charCodeAt(0), 'ㅖ'.charCodeAt(0), 'ㅗ'.charCodeAt(0),
