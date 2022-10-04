@@ -2,6 +2,7 @@ import { Button, Box } from '@mui/material';
 import React, { MouseEvent, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
+import styled from 'styled-components';
 import { putGameLog } from '../../_slice/GameSlice';
 import correctMp3 from '../../audio/correct.mp3';
 import oopsMp3 from '../../audio/oops.mp3';
@@ -31,13 +32,21 @@ export default function StartedGame() {
   const endAudio = new Audio(endMp3);
   const sadendAudio = new Audio(sadendMp3);
 
+  const btnStyle = { width: 200, m: 2, p: 2, typography: 'h5' };
+
+  const StyledBtnWrap = styled.div`
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  `;
+  const StyledInterfaceWrap = styled.div`
+    display: flex;
+    justify-content: space-between;
+  `;
+
   useEffect(() => {
     if (answer.length >= 5) {
-      if (count > 0) {
-        endAudio.play();
-      } else {
-        sadendAudio.play();
-      }
       console.log('game log');
       const payload = {
         gameId,
@@ -46,6 +55,16 @@ export default function StartedGame() {
       dispatch(putGameLog(payload));
     }
   }, [answer]);
+
+  useEffect(() => {
+    if (qNum >= 5) {
+      if (count > 0) {
+        endAudio.play();
+      } else {
+        sadendAudio.play();
+      }
+    }
+  }, [qNum]);
 
   const nextHandler = (e: MouseEvent<HTMLElement>) => {
     if (answer.length < 5) {
@@ -81,6 +100,14 @@ export default function StartedGame() {
     setCorrect(false);
   };
 
+  const quitHandler = (e: MouseEvent<HTMLElement>) => {
+    setQNum(5);
+    setShowAns(false);
+    setCorrect(false);
+    setCount(0);
+    setAnswer([4, 4, 4, 4, 4]);
+  };
+
   const tts = (lang: string, text: string) => {
     const msg = new SpeechSynthesisUtterance();
     msg.lang = lang;
@@ -98,65 +125,79 @@ export default function StartedGame() {
               {correct ? <div>correct</div> : <div>Oops!</div>}
               <div>The answer is</div>
               <div>{Object.values<Array<string>>(questionOption[qNum])[0][questionAnswer[qNum]]}</div>
-              <div>
+              <StyledBtnWrap>
                 {Object.values<Array<string>>(questionOption[qNum])[0].map((one: string, idx: Number) => (
-                  <div>
+                  <>
                     {`${questionAnswer[qNum]}` === `${idx}` ? (
-                      <Button color="success" variant="contained" value={`${idx}`} key={'ans' + `${idx}` + `${qNum}`}>
+                      <Button
+                        color="success"
+                        variant="contained"
+                        value={`${idx}`}
+                        key={'ans' + `${idx}` + `${qNum}`}
+                        sx={btnStyle}>
                         {one}
                       </Button>
                     ) : `${answer[qNum]}` === `${idx}` ? (
-                      <Button color="error" variant="contained" value={`${idx}`} key={'ans' + `${idx}` + `${qNum}`}>
+                      <Button
+                        color="error"
+                        variant="contained"
+                        value={`${idx}`}
+                        key={'ans' + `${idx}` + `${qNum}`}
+                        sx={btnStyle}>
                         {one}
                       </Button>
                     ) : (
-                      <Button variant="contained" value={`${idx}`} key={'ans' + `${idx}` + `${qNum}`}>
+                      <Button variant="contained" value={`${idx}`} key={'ans' + `${idx}` + `${qNum}`} sx={btnStyle}>
                         {one}
                       </Button>
                     )}
                     <Button onClick={() => tts('ko', one)}>
                       <VolumeDownIcon />
                     </Button>
-                  </div>
+                  </>
                 ))}
-              </div>
-              <div>
+              </StyledBtnWrap>
+              <StyledInterfaceWrap>
+                <div />
                 <Button variant="contained" onClick={nextQuestion} key={'q' + `${qNum}`}>
                   Next Question
                 </Button>
-              </div>
+              </StyledInterfaceWrap>
             </>
           ) : (
             <>
-              <div>
-                <div>sound btn</div>
-                <div>
-                  <Box
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    style={{ margin: 0, padding: 0, width: '100%', minHeight: 50 }}>
-                    <Button
-                      onClick={() =>
-                        tts('ko', `${Object.values<Array<string>>(questionOption[qNum])[0][questionAnswer[qNum]]}`)
-                      }>
-                      <img src={volume} alt="sound" width={200} />
-                    </Button>
-                  </Box>
-                </div>
-              </div>
-              <div>
-                <div>options</div>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                style={{ margin: 0, padding: 0, width: '100%', minHeight: 50 }}>
+                <Button
+                  onClick={() =>
+                    tts('ko', `${Object.values<Array<string>>(questionOption[qNum])[0][questionAnswer[qNum]]}`)
+                  }>
+                  <img src={volume} alt="sound" width={200} />
+                </Button>
+              </Box>
+              <StyledBtnWrap>
                 {Object.values<Array<string>>(questionOption[qNum])[0].map((one: any, idx: any) => (
-                  <Button variant="contained" value={`${idx}`} onClick={handler} key={'option' + `${idx}` + `${qNum}`}>
+                  <Button
+                    variant="contained"
+                    value={`${idx}`}
+                    onClick={handler}
+                    key={'option' + `${idx}` + `${qNum}`}
+                    sx={btnStyle}>
                     {one}
                   </Button>
                 ))}
-              </div>
-              <div>
-                <div>interface</div>
-                <Button onClick={nextHandler}>next</Button>
-              </div>
+              </StyledBtnWrap>
+              <StyledInterfaceWrap>
+                <Button variant="contained" onClick={quitHandler}>
+                  quit
+                </Button>
+                <Button variant="contained" onClick={nextHandler}>
+                  next
+                </Button>
+              </StyledInterfaceWrap>
             </>
           )}
         </>

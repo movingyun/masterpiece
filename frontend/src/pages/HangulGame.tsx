@@ -6,12 +6,8 @@ import GameModal from '../components/hangulGame/GameModal';
 export default function HangulGame() {
   return (
     <>
-      <div>HangulGame</div>
       <GameModal />
       <GameMain />
-      <div>
-        <Link to="/">home</Link>
-      </div>
     </>
   );
 }
