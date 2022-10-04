@@ -2,42 +2,37 @@ import React from 'react'
 import { List, ListItem, ListItemText, Slider } from '@mui/material';
 import { ChromePicker, CompactPicker } from 'react-color';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { decoActions } from '../../_slice/DecorateHangulSlice';
 
 function DecoText() {
   
   const dispatch = useDispatch();
-  const style = useSelector((state: any) => state.deco.style);
-  const textSize = useSelector((state: any) => state.deco.textSize);
-  const textColor = useSelector((state: any) => state.deco.textColor);
-  const textXAxis = useSelector((state: any) => state.deco.textXAxis);
-  const textYAxis = useSelector((state: any) => state.deco.textYAxis);
-  const textLineSpacing = useSelector((state: any) => state.deco.textLineSpacing);
-  const strokeWidth = useSelector((state: any) => state.deco.borderRadius);
-  const strokeColor = useSelector((state: any) => state.deco.borderColor);
+  const style =  UseSelectorHook(state => state.deco.style);
+  const textSize =  UseSelectorHook(state => state.deco.textSize);
+  const textXAxis =  UseSelectorHook(state => state.deco.textXAxis);
+  const textYAxis =  UseSelectorHook(state => state.deco.textYAxis);
+  const textWidthSpacing =  UseSelectorHook(state => state.deco.textWidthSpacing);
+  const textLineSpacing =  UseSelectorHook(state => state.deco.textLineSpacing);
 
-  const textSizeHandler = (event: any, value: any) => {
+
+  const textSizeHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textSize(value));
   };
-  const textColorHandler = (color: any) => {
-    dispatch(decoActions.textColor(color.hex));
-  };
-  const textXAxisHandler = (event: any, value: any) => {
+  const textXAxisHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textXAxis(value));
   };
-  const textYAxisHandler = (event: any, value: any) => {
+  const textYAxisHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textYAxis(value));
   };
-  const textLineSpacingHandler = (event: any, value: any) => {
+  const textWidthSpacingHandler = (_: Event, value: number | number[]) => {
+    dispatch(decoActions.textWidthSpacing(value));
+  };
+  const textLineSpacingHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textLineSpacing(value));
   };
-  const strokeWidthHandler = (event: any, value: any) => {
-    dispatch(decoActions.strokeWidth(value));
-  };
-  const strokeColorHandler = (color: any) => {
-    dispatch(decoActions.strokeColor(color.hex));
-  };
+
 
   return (
     <List sx={style} component="nav" aria-label="fontsize">
@@ -59,13 +54,7 @@ function DecoText() {
       </ListItem>
       <ListItem divider>
         <ListItemText
-          primary="Text Color"
-          secondary={<ChromePicker disableAlpha color={textColor} onChange={textColorHandler} />}
-        />
-      </ListItem>
-      <ListItem divider>
-        <ListItemText
-          primary="Text x-axis"
+          primary="Text X Axis"
           secondary={
             <Slider
               aria-label="textXAxis"
@@ -81,7 +70,7 @@ function DecoText() {
       </ListItem>
       <ListItem divider>
         <ListItemText
-          primary="Text y-axis"
+          primary="Text Y Axis"
           secondary={
             <Slider
               aria-label="textYAxis"
@@ -97,7 +86,23 @@ function DecoText() {
       </ListItem>
       <ListItem divider>
         <ListItemText
-          primary="Text line-spacing"
+          primary="Text Width Spacing"
+          secondary={
+            <Slider
+              aria-label="textWidthSpacing"
+              defaultValue={0}
+              valueLabelDisplay="auto"
+              onChange={textWidthSpacingHandler}
+              value={textWidthSpacing}
+              min={-100}
+              max={100}
+            />
+          }
+        />
+      </ListItem>
+      <ListItem divider>
+        <ListItemText
+          primary="Text Line Spacing"
           secondary={
             <Slider
               aria-label="textLineSpacing"
@@ -109,28 +114,6 @@ function DecoText() {
               max={100}
             />
           }
-        />
-      </ListItem>
-      <ListItem divider>
-        <ListItemText
-          primary="Stroke Width"
-          secondary={
-            <Slider
-              aria-label="strokeWidth"
-              defaultValue={0}
-              valueLabelDisplay="auto"
-              onChange={strokeWidthHandler}
-              value={strokeWidth}
-              min={0}
-              max={30}
-            />
-          }
-        />
-      </ListItem>
-      <ListItem divider>
-        <ListItemText
-          primary="Stroke Color"
-          secondary={<CompactPicker color={strokeColor} onChange={strokeColorHandler} />}
         />
       </ListItem>
     </List>
