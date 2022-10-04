@@ -49,10 +49,10 @@ export default function GameModal() {
           <br />
           <Box>
             <Typography id="modal-modal-title" variant="h6" component="div" sx={styleInner}>
-              1. A random Korean word are played
+              1. A random Korean word is played
             </Typography>
             <Typography id="modal-modal-title" variant="h6" component="div" sx={styleInner}>
-              2. You will be given 4 Korean options
+              2. You will be given 4 Hangul options
             </Typography>
             <Typography id="modal-modal-title" variant="h6" component="div" sx={styleInner}>
               3. Choose the option that matches what you hear!
