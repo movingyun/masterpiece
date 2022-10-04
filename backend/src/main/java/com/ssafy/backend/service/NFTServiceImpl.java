@@ -17,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class NFTServiceImpl implements NFTService {
@@ -48,9 +50,9 @@ public class NFTServiceImpl implements NFTService {
 
     @Override
     public void modifyNftOwner(SaleResultDto saleResultDto) {
-        int nftId = saleResultDto.getNftId();
+        String nftHash = saleResultDto.getNftHash();
         String buyerWallerAddress = saleResultDto.getBuyerWalletAddress();
-        Nft nft = nftRepository.findById(nftId);
+        Nft nft = nftRepository.findByNftHash(nftHash).get(0);
         nft.setOwner(userService.findByUserWalletAddress(buyerWallerAddress));
         nftRepository.save(nft);
     }
@@ -212,6 +214,16 @@ public class NFTServiceImpl implements NFTService {
         return makeNFTDtoList(nftList);
     }
 
+    @Override
+    public String getOwnerAddress(String nftHash) {
+        List<Nft> nftList = nftRepository.findByNftHash(nftHash);
+        if(nftList == null || nftList.isEmpty()){
+            throw new IllegalArgumentException("No such NFT");
+        }
+
+        return userRepository.findOwnerAddressByNftHash(nftList.get(0).getNftHash());
+    }
+
     private List<NFTDto> makeNFTDtoList(List<Nft> nftList){
         List<NFTDto> dtoList = new ArrayList<>();
         for(Nft nft : nftList){
@@ -245,6 +257,7 @@ public class NFTServiceImpl implements NFTService {
                 .nftTags(tagList)
                 .nftLike(likes)
                 .nftDescription(nft.getNftDescription())
+                .isSale(nft.isSale())
                 .build();
     }
 

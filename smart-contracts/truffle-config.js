@@ -23,7 +23,7 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 const fs = require('fs');
 const privateKey = fs.readFileSync(".privatekey").toString().trim();
 const privateKeyProvider = new HDWalletProvider(privateKey, "http://20.196.209.2:8545");
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
   /**
@@ -51,7 +51,15 @@ module.exports = {
      besuWallet: {
       provider: privateKeyProvider,
       network_id: "*"
-     }
+     },
+    //  goerli: {
+    //   provider: () => {
+    //     return new HDWalletProvider(mnemonic, 'https://goerli.infura.io/v3/' + process.env.INFURA_API_KEY)
+    //   },
+    //   network_id: '5', // eslint-disable-line camelcase
+    //   gas: 4465030,
+    //   gasPrice: 10000000000,
+    //  },
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port

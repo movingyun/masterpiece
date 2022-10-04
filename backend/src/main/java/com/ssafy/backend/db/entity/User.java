@@ -1,8 +1,6 @@
 package com.ssafy.backend.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.ssafy.backend.dto.UserUpdateDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -10,8 +8,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-//import javax.validation.constraints.Pattern;
-//import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**

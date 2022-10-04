@@ -73,8 +73,8 @@ function DecoText() {
               valueLabelDisplay="auto"
               onChange={textXAxisHandler}
               value={textXAxis}
-              min={0}
-              max={512}
+              min={-256}
+              max={256}
             />
           }
         />
@@ -89,8 +89,8 @@ function DecoText() {
               valueLabelDisplay="auto"
               onChange={textYAxisHandler}
               value={textYAxis}
-              min={0}
-              max={512}
+              min={-256}
+              max={256}
             />
           }
         />

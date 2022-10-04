@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { Chip, Button, Card, CardContent } from '@mui/material';
+import { Chip, Card, CardContent } from '@mui/material';
 import styled from 'styled-components';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { fetchNFTDetail } from '../../_slice/NFTSlice';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { fetchLike, fetchNFTDetail, fetchNFTOwner, toggleLike } from '../../_slice/NFTSlice';
 import { fetchSaleHistory } from '../../_slice/SaleSlice';
+import SellModal from './SellModal';
+import BuyModal from './BuyModal';
+import NFTPreview from '../../commons/NFTPreview';
 
 const StyledDetail = styled.div`
   display: flex;
@@ -29,6 +33,15 @@ const StyledChart = styled.div`
   width: auto;
   height: 300px;
 `;
+const StyledLikeBtn = styled.button`
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+`;
 
 interface CurrentNftType {
   nftAddress: String;
@@ -36,39 +49,68 @@ interface CurrentNftType {
 
 export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
   const dispatch = useDispatch();
+  const currentNFT = useSelector((state: any) => state.nft.currentNFT);
+  const nftOwnerWallet = useSelector((state: any) => state.nft.nftOwnerWallet);
+  const saleHistoryAll = useSelector((state: any) => state.sale.saleHistoryAll);
+  const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
+  const likeState = useSelector((state: any) => state.nft.likeState);
+  const isLoading = useSelector((state: any) => state.nft.isLoading);
 
   useEffect(() => {
-    dispatch(fetchNFTDetail(nftAddress));
     dispatch(fetchSaleHistory(nftAddress));
+    dispatch(fetchNFTOwner(nftAddress));
   }, []);
+  useEffect(() => {
+    dispatch(fetchNFTDetail(nftAddress));
+  }, [likeState]);
 
-  const currentNFT = useSelector((state: any) => state.nft.currentNFT);
-  const saleHistoryAll = useSelector((state: any) => state.sale.saleHistoryAll);
+  useEffect(() => {
+    if (walletAddress) {
+      const likePayload = {
+        userWalletAddress: walletAddress,
+        nftHash: nftAddress,
+      };
+      dispatch(fetchLike(likePayload));
+    }
+  }, [!isLoading, walletAddress, likeState]);
+
+  const handleClickLike = () => {
+    const likePayload = {
+      userWalletAddress: walletAddress,
+      nftHash: nftAddress,
+    };
+    dispatch(toggleLike(likePayload));
+  };
 
   return (
     <>
       <StyledDetail>
         <Card sx={{ width: '30%', minWidth: 200 }}>
-          <CardContent>
-            <div>imgUrl {currentNFT.imgUrl}</div>
-            <img src={currentNFT.imgUrl} alt="NFT IMG" />
-          </CardContent>
+          <NFTPreview url={`${currentNFT.imgUrl}`} />
         </Card>
         <Card sx={{ width: '70%' }}>
           <CardContent>
-            <div>Creator {currentNFT.nftCreatorNickname}</div>
-            <div>Title {currentNFT.nftTitle}</div>
-            <div>Owner {currentNFT.nftOwnerNickname}</div>
-            <div>Price {currentNFT.nftPrice}</div>
-            <div>lastPrice {currentNFT.lastPrice}</div>
+            <div>Creator : {currentNFT.nftCreatorNickname}</div>
+            <div>Title : {currentNFT.nftTitle}</div>
+            <div>Owner : {currentNFT.nftOwnerNickname}</div>
+            <div>Price : {currentNFT.nftPrice}</div>
+            <div>lastPrice : {currentNFT.lastPrice}</div>
             <StyledChip>
               {currentNFT.nftTags.map((tag: String, idx: Number) => (
                 <Chip key={`${idx}` + `${currentNFT.imgUrl}`} label={tag} size="small" color="primary" />
               ))}
             </StyledChip>
             <StyledBtn>
-              <Button>Sell</Button>
-              <Button>Buy</Button>
+              {nftOwnerWallet === walletAddress ? <SellModal /> : <BuyModal />}
+              {likeState ? (
+                <StyledLikeBtn onClick={handleClickLike}>
+                  <FavoriteIcon />
+                </StyledLikeBtn>
+              ) : (
+                <StyledLikeBtn onClick={handleClickLike}>
+                  <FavoriteBorderIcon />
+                </StyledLikeBtn>
+              )}
               <div>nftLike {currentNFT.nftLike}</div>
             </StyledBtn>
           </CardContent>
@@ -77,7 +119,10 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
 
       {/* 설명 */}
       <Card>
-        <CardContent>Description</CardContent>
+        <CardContent>
+          <div>Description</div>
+          <div>{currentNFT.nftDescription}</div>
+        </CardContent>
       </Card>
 
       {/* 가격 차트 */}

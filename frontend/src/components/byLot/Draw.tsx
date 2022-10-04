@@ -5,6 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import { useDispatch, useSelector } from 'react-redux';
 import tmpImg from '../../img/tmpImg.PNG';
+import consonantImg from '../../img/발성기관.PNG';
+import vowelImg from '../../img/천지인.PNG';
 import { pickConsonant, pickVowel } from '../../_slice/HangulSlice';
 import SimpleDialog from './SimpleDialog';
 
@@ -68,17 +70,19 @@ export default function Draw() {
               <CardMedia
                 component="img"
                 height="150"
-                image={tmpImg}
+                image={consonantImg}
                 alt="Consonant img"
                 sx={{ padding: '1em 1em 0 1em', objectFit: 'contain' }}
               />
               <div>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Consonant
+                    Consonants
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    자음에 대한 설명을 여기에 영어로 쭉쭉쭉 써주고 무슨 자음이 있는지도 같이 알려주면 좋을 것 같아요.
+                    Based on five basic consonants modeled after the shape of the pronunciation organ 
+                    (‘ㄱ’, ‘ㄴ’, ‘ㅁ’, ‘ㅅ’, ‘ㅇ’), 
+                    these were created by adding strokes or overlapping the same consonants.
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -98,17 +102,20 @@ export default function Draw() {
               <CardMedia
                 component="img"
                 height="150"
-                image={tmpImg}
+                image={vowelImg}
                 alt="Consonant img"
                 sx={{ padding: '1em 1em 0 1em', objectFit: 'contain' }}
               />
               <div>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Vowel
+                    Vowels
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    모음에 대한 설명을 여기에 영어로 쭉쭉쭉 써주고 무슨 자음이 있는지도 같이 알려주면 좋을 것 같아요.
+                    Vowel letters are based on sky, earth and man.
+                    ‘·’ symbolizes the round shape of the sky, 
+                    ‘ㅡ’ symbolizes the flat shape of the earth, 
+                    and ‘ㅣ’ symbolizes the shape of a person standing upright.
                   </Typography>
                 </CardContent>
                 <CardActions>

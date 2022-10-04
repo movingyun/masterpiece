@@ -19,4 +19,5 @@ public class NFTDto {
     List<String> nftTags;
     int nftLike;
     String nftDescription;
+    Boolean isSale;
 }

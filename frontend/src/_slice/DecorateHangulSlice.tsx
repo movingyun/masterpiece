@@ -10,7 +10,7 @@ const initialState = {
   strokeColor: '#ffffff',
   shadowXAxis: 0,
   shadowYAxis: 0,
-  shadowBlur: 5,
+  shadowBlur: 0,
   shadowColor: '#000000',
   backgroundColor: '#ededed',
   fontName: 'BlackHanSans',
@@ -24,6 +24,7 @@ const initialState = {
       display: 'none',
     },
   },
+  animationType: 1,
 };
 
 const DecorateHangulSlice = createSlice({

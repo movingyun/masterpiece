@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,6 +87,19 @@ public class NFTController {
         try{
             List<NFTDto> dtoList = nftService.searchByCategory(category, keyword);
             return new ResponseEntity(dtoList, HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Operation(summary = "NFT 소유주 지갑 주소 조회 API", description = "nft 해시를 입력으로 받아 소유자 지갑 주소 반환")
+    @GetMapping("/owner")
+    public ResponseEntity getNFTOwner(@RequestParam String nftHash) {
+        Map<String, String> map = new HashMap<>();
+        try{
+            map.put("walletAddress", nftService.getOwnerAddress(nftHash));
+            return new ResponseEntity(map, HttpStatus.OK);
         } catch(Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

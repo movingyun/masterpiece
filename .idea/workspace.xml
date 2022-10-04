@@ -2,36 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aaf34904-a205-425a-a790-3a26b2058890" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/_slice/ComposeHangulSlice.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/_slice/HangulSlice.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/DiscomposeHangul.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/byLot/Draw.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/byLot/Inventory.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/byLot/SimpleDialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaSentence.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/img/tmpImg.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/shims‑png.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/SeleniumController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/SeleniumService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/SeleniumServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/config/SwaggerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HangulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HangulController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/PapagoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/PapagoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/entity/Gamelog.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/entity/Gamelog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/GameWordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/GameWordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/HangulOwnRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/HangulOwnRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/HangulRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/HangulRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/NFTRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/NFTRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/SaleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/SaleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/SalelogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/SalelogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/UserLikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/db/repository/UserLikeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/HangulService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/HangulService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/NFTServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/_hook/HangulMakerHook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/_hook/HangulMakerHook.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/_slice/HangulMakerSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/_slice/HangulMakerSlice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/_slice/UserSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/_slice/UserSlice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/_store/HangulMakerStore.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/_store/store.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/_store/store.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/ComposeHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/ComposeHangul.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMaker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMaker.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMakerFML.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMakerFML.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMakerInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/HangulMaker/HangulMakerInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/commons/LetterCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/commons/LetterCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/byLot/byLot.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaCompose.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaDiscompose.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaDiscompose.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaSyllable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/composeHangul/AreaSyllable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/composeHangul/DragAndDrop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/composeHangul/DragAndDrop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ByLot.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ByLot.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ComposeHangul.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ComposeHangul.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/PapagoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/PapagoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ssafy/backend/service/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,14 +43,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ts.external.directory.path": "C:\\Users\\SSAFY\\Desktop\\특화프로젝트_한글날\\S07P22A508\\frontend\\node_modules\\typescript\\lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\SSAFY\\Desktop\\특화프로젝트_한글날\\S07P22A508\\frontend\\node_modules\\typescript\\lib&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -67,6 +61,7 @@
       <updated>1663427941925</updated>
       <workItem from="1663427947217" duration="3000" />
       <workItem from="1664261707528" duration="56000" />
+      <workItem from="1664812932703" duration="6000" />
     </task>
     <servers />
   </component>

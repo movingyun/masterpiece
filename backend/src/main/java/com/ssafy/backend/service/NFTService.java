@@ -1,9 +1,10 @@
 package com.ssafy.backend.service;
 
+import com.ssafy.backend.db.entity.Nft;
 import com.ssafy.backend.dto.NFTCreateDto;
 import com.ssafy.backend.dto.NFTDto;
-import com.ssafy.backend.db.entity.Nft;
 import com.ssafy.backend.dto.SaleResultDto;
+
 import java.util.List;
 
 public interface NFTService {
@@ -21,6 +22,7 @@ public interface NFTService {
     NFTDto getNFTDto(String nft_address);
     List<NFTDto> getAllNFT();
     List<NFTDto> searchByCategory(String category, String keyword);
+    String getOwnerAddress(String nftHash);
 
     Nft findByNFTHash(String nftHash);
 }

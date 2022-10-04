@@ -4,7 +4,9 @@ import com.ssafy.backend.db.entity.Hangul;
 import com.ssafy.backend.db.entity.User;
 import com.ssafy.backend.dto.HangulUseDto;
 import com.ssafy.backend.dto.RandomDrawDto;
-import com.ssafy.backend.service.*;
+import com.ssafy.backend.service.HangulOwnService;
+import com.ssafy.backend.service.HangulService;
+import com.ssafy.backend.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

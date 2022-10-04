@@ -4,8 +4,8 @@ pragma solidity ^0.8.4;
 import "./access/Ownable.sol";
 import "./token/ERC20/ERC20.sol";
 import "./token/ERC721/ERC721.sol";
+import "./token/ERC20/IERC20.sol";
 import "./MasterpieceNFT.sol";
-import "./SsafyToken.sol";
 
 /**
  * PJT Ⅲ - Req.1-SC1 SaleFactory 구현
@@ -75,7 +75,7 @@ contract Sale {
     address public highestBidder;
     uint256 public highestBid;
 
-    SsafyToken public SsafyTokenContract;
+    IERC20 public SsafyTokenContract;
     MasterpieceNFT public MasterpieceNFTContract;
 
     event HighestBidIncereased(address bidder, uint256 amount);
@@ -105,7 +105,7 @@ contract Sale {
         ended = false;
         // erc20Contract = IERC20(_currencyAddress);
         // erc721Constract = IERC721(_nftAddress);
-        SsafyTokenContract = SsafyToken(_currencyAddress);
+        SsafyTokenContract = IERC20(_currencyAddress);
         MasterpieceNFTContract = MasterpieceNFT(_nftAddress);
     }
 
@@ -122,7 +122,7 @@ contract Sale {
         require(SsafyTokenContract.allowance(msg.sender, address(this)) >= price, "caller approve less amount of token");
         buyer = msg.sender;
         SsafyTokenContract.transferFrom(buyer, seller, price);
-        MasterpieceNFTContract.transferFrom(address(this), buyer, tokenId);
+        MasterpieceNFTContract.transferFrom(seller, buyer, tokenId);
         emit SaleEnded(buyer, price);
         _end();
     }
@@ -131,8 +131,11 @@ contract Sale {
         // TODO 
     }
     
+    // NFT 판매 중지
     function cancelSales() public onlySeller {
         // TODO
+        require(msg.sender == seller || msg.sender == admin, "caller is not approved");
+        _end();
     }
 
     // function getTimeLeft() public view returns (int256) {
