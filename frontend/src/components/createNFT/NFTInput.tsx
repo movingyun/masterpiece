@@ -1,26 +1,27 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { Box, TextField, Autocomplete, Chip } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { createNFTActions } from '../../_slice/CreateNFTSlice';
 
 
 
 function NFTInfo() {
   const dispatch = useDispatch();
-  const title = useSelector((state: any) => state.createNFT.title);
-  const description = useSelector((state: any) => state.createNFT.description);
-  const tags = useSelector((state: any) => state.createNFT.tag);
-  const hangulSentence = useSelector((state: any) => state.areaSentence.value)
+  const title = UseSelectorHook(state => state.createNFT.title);
+  const description = UseSelectorHook(state => state.createNFT.description);
+  const tags = UseSelectorHook(state => state.createNFT.tag);
+  const hangulSentence = UseSelectorHook(state => state.areaSentence.value)
                               .filter((char: string) => char !== '\n')
                               .join('');
   const fixedOptions = [hangulSentence];
 
 
-  const titleHandler = (event: any) => {
+  const titleHandler = (event: React.ChangeEvent<{ name?: string | undefined; value: unknown }>) => {
     dispatch(createNFTActions.title(event.target.value));
-  }
-  const descriptionHandler = (event: any) => {
+  };
+  const descriptionHandler = (event: React.ChangeEvent<{ name?: string | undefined; value: unknown }>) => {
     dispatch(createNFTActions.description(event.target.value));
   };
   const tagHandler = (word: string[]) => {

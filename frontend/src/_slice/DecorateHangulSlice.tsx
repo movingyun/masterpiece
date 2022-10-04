@@ -1,6 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface InterState {
+  textSize: number,
+  textColor: string,
+  textXAxis: number,
+  textYAxis: number,
+  textWidthSpacing: number,
+  textLineSpacing: number,
+  strokeWidth: number,
+  strokeColor: string,
+  shadowXAxis: number,
+  shadowYAxis: number,
+  shadowBlur: number,
+  shadowColor: string,
+  backgroundColor: string,
+  fontName: string,
+  animationSpeed: number,
+  style: {},
+}
+
+const initialState: InterState = {
   textSize: 50,
   textColor: '#000000',
   textXAxis: 0,

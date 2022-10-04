@@ -5,7 +5,8 @@ import { Tab } from '@mui/material';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import { Send } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
+import { UseSelectorHook } from "../../_hook/HangulMakerHook";
 import { createNFTActions } from '../../_slice/CreateNFTSlice';
 import { decoActions } from '../../_slice/DecorateHangulSlice'
 
@@ -13,22 +14,22 @@ function Canvas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const text = useSelector((state: any) => state.areaSentence.value).join('');
-  const textSize = useSelector((state: any) => state.deco.textSize);
-  const textColor = useSelector((state: any) => state.deco.textColor);
-  const textXAxis = useSelector((state: any) => state.deco.textXAxis);
-  const textYAxis = useSelector((state: any) => state.deco.textYAxis);
-  const textWidthSpacing = useSelector((state: any) => state.deco.textWidthSpacing);
-  const textLineSpacing = useSelector((state: any) => state.deco.textLineSpacing);
-  const strokeWidth = useSelector((state: any) => state.deco.strokeWidth);
-  const strokeColor = useSelector((state: any) => state.deco.strokeColor);
-  const shadowXAxis = useSelector((state: any) => state.deco.shadowXAxis);
-  const shadowYAxis = useSelector((state: any) => state.deco.shadowYAxis);
-  const shadowBlur = useSelector((state: any) => state.deco.shadowBlur);
-  const shadowColor = useSelector((state: any) => state.deco.shadowColor);
-  const backgroundColor = useSelector((state: any) => state.deco.backgroundColor);
-  const fontName = useSelector((state: any) => state.deco.fontName);
-  const animationSpeed = useSelector((state: any) => state.deco.animationSpeed);
+  const text = UseSelectorHook(state => state.areaSentence.value).join('');
+  const textSize = UseSelectorHook(state => state.deco.textSize);
+  const textColor =  UseSelectorHook(state => state.deco.textColor);
+  const textXAxis =  UseSelectorHook(state => state.deco.textXAxis);
+  const textYAxis =  UseSelectorHook(state => state.deco.textYAxis);
+  const textWidthSpacing =  UseSelectorHook(state => state.deco.textWidthSpacing);
+  const textLineSpacing =  UseSelectorHook(state => state.deco.textLineSpacing);
+  const strokeWidth =  UseSelectorHook(state => state.deco.strokeWidth);
+  const strokeColor =  UseSelectorHook(state => state.deco.strokeColor);
+  const shadowXAxis =  UseSelectorHook(state => state.deco.shadowXAxis);
+  const shadowYAxis =  UseSelectorHook(state => state.deco.shadowYAxis);
+  const shadowBlur =  UseSelectorHook(state => state.deco.shadowBlur);
+  const shadowColor =  UseSelectorHook(state => state.deco.shadowColor);
+  const backgroundColor =  UseSelectorHook(state => state.deco.backgroundColor);
+  const fontName =  UseSelectorHook(state => state.deco.fontName);
+  const animationSpeed =  UseSelectorHook(state => state.deco.animationSpeed);
 
   
   // const [text, setText] = useState("야너네\n뭐하냐");

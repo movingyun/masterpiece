@@ -1,8 +1,8 @@
 import React, { useEffect, useRef as UseRef } from 'react';
-import { useSelector } from 'react-redux';
+import { UseSelectorHook } from '../../_hook/HangulMakerHook';
 
 function NFTVideo() {
-  const blobURL = useSelector((state: any) => state.createNFT.NFTBlobURL);
+  const blobURL = UseSelectorHook(state => state.createNFT.NFTBlobURL);
   const videoRecorded = UseRef<HTMLVideoElement>(null);
 
   useEffect(() => {

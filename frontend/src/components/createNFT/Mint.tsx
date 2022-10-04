@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Web3 from 'web3';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import FormData from 'form-data';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 
+import { UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { createNFTActions } from '../../_slice/CreateNFTSlice';
 import { DiscomposeSentence } from '../../commons/HangulMaker/DiscomposeHangul';
 
@@ -22,15 +23,15 @@ export default function Mint() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
-  const videoBlob = useSelector((state: any) => state.createNFT.NFTBlob);
-  const filename = useSelector((state: any) => state.areaSentence.value).filter((char: string) => char !== '\n').join('');
-  const title = useSelector((state: any) => state.createNFT.title);
-  const description = useSelector((state: any) => state.createNFT.description);
-  const tag = useSelector((state: any) => state.createNFT.tag).join(' ');
+  const walletAddress = UseSelectorHook(state => state.user.currentUser.wallet_address);
+  const videoBlob = UseSelectorHook(state => state.createNFT.NFTBlob);
+  const filename = UseSelectorHook(state => state.areaSentence.value).filter((char: string) => char !== '\n').join('');
+  const title = UseSelectorHook(state => state.createNFT.title);
+  const description = UseSelectorHook(state => state.createNFT.description);
+  const tag = UseSelectorHook(state => state.createNFT.tag).join(' ');
 
   const checkLetterAPI: {
-    userWalletAddress: string;
+    userWalletAddress: String;
     hangul: string[];
   } = {
     userWalletAddress: walletAddress,

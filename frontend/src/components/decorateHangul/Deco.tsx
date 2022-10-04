@@ -1,10 +1,8 @@
 import React from 'react'
-import { Container, Grid, Box, Tab } from '@mui/material';
+import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { FontDownload, BlurOnSharp, Radar, ColorLens, Animation } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
 
-// import DecorateHangul from '../components/decorateHangul/DecorateHangul';
 import DecoSizeNPosition from './DecoSizeNPosition';
 import DecoEffect from './DecoEffect';
 import DecoColor from './DecoColor'

@@ -2,33 +2,34 @@ import React from 'react'
 import { List, ListItem, ListItemText, Slider } from '@mui/material';
 import { ChromePicker, CompactPicker } from 'react-color';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { decoActions } from '../../_slice/DecorateHangulSlice';
 
 function DecoText() {
   
   const dispatch = useDispatch();
-  const style = useSelector((state: any) => state.deco.style);
-  const textSize = useSelector((state: any) => state.deco.textSize);
-  const textXAxis = useSelector((state: any) => state.deco.textXAxis);
-  const textYAxis = useSelector((state: any) => state.deco.textYAxis);
-  const textWidthSpacing = useSelector((state: any) => state.deco.textWidthSpacing);
-  const textLineSpacing = useSelector((state: any) => state.deco.textLineSpacing);
+  const style =  UseSelectorHook(state => state.deco.style);
+  const textSize =  UseSelectorHook(state => state.deco.textSize);
+  const textXAxis =  UseSelectorHook(state => state.deco.textXAxis);
+  const textYAxis =  UseSelectorHook(state => state.deco.textYAxis);
+  const textWidthSpacing =  UseSelectorHook(state => state.deco.textWidthSpacing);
+  const textLineSpacing =  UseSelectorHook(state => state.deco.textLineSpacing);
 
 
-  const textSizeHandler = (event: any, value: any) => {
+  const textSizeHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textSize(value));
   };
-  const textXAxisHandler = (event: any, value: any) => {
+  const textXAxisHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textXAxis(value));
   };
-  const textYAxisHandler = (event: any, value: any) => {
+  const textYAxisHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textYAxis(value));
   };
-  const textWidthSpacingHandler = (event: any, value: any) => {
+  const textWidthSpacingHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textWidthSpacing(value));
   };
-  const textLineSpacingHandler = (event: any, value: any) => {
+  const textLineSpacingHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.textLineSpacing(value));
   };
 
