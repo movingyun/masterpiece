@@ -18,7 +18,7 @@ export default function Information({ title, content, buttonText, onClick, backg
 	
 	return (
 		<Box sx={{ boxShadow: 8, padding: 2 }} style={{ position:"relative", height:thisHeight, background:thisBackground }}>
-			<div style={{ marginBottom:10, fontSize: 30 }}>{title}</div><br/>
+			<div style={{ marginBottom:40, fontSize: 30 }}>{title}</div><br/>
 			<div style={{ marginBottom:10, fontSize: 15 }}>{content}</div>
 			<Button onClick={onClick} style={{ position:"absolute", bottom:10, right:10, padding:10, background:"black", color:"white"}}>{buttonText}</Button>
 		</Box>
