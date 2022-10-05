@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Card, CardContent, Tooltip, Button, TextField, FormControl } from '@mui/material';
 import { Instance } from '@popperjs/core';
-import { editUser, fetchUser } from '../../_slice/UserSlice';
+import { editUser, fetchTicket, fetchUser } from '../../_slice/UserSlice';
 import useCopyClipBoard from '../../_hook/useCopyClipBoard';
 import NFTPreview from '../../commons/NFTPreview';
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
 
 // import font
@@ -19,11 +18,8 @@ const Resolution = styled.div`
 `;
 
 function App() {
-  const isLogin = useSelector((state: any) => state.user.isLogin);
-
   return (
     <div>
-      {!isLogin && <Navigate to="/" replace />}
       <Header />
       <Resolution>
         <div>

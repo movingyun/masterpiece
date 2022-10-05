@@ -62,7 +62,7 @@ const api = {
   fetchFavorite: (walletAddress: String) => API_BASE_URL + USER_URL + FAVORITE_URL + `?wallet-address=${walletAddress}`,
   fetchOnsale: (walletAddress: String) => API_BASE_URL + USER_URL + ONSALE_URL + `?wallet-address=${walletAddress}`,
   editUser: () => API_BASE_URL + USER_URL,
-  fetchTicket: (walletAddress: String) => API_BASE_URL + USER_URL + `?wallet-address=${walletAddress}`,
+  fetchTicket: (walletAddress: String) => API_BASE_URL + USER_URL + TICKET_URL + `?wallet-address=${walletAddress}`,
 
   // hangul
   fetchConsonant: (walletAddress: String) =>
