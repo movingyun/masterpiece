@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
 
 // import font
@@ -18,14 +19,22 @@ const Resolution = styled.div`
 `;
 
 function App() {
+  const isMain = useSelector((state: any) => state.sale.isMain);
+
   return (
     <div>
       <Header />
-      <Resolution>
+      {isMain ? (
         <div>
           <Outlet />
         </div>
-      </Resolution>
+      ) : (
+        <Resolution>
+          <div>
+            <Outlet />
+          </div>
+        </Resolution>
+      )}
     </div>
   );
 }

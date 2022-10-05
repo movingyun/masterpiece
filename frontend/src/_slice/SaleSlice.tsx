@@ -23,16 +23,22 @@ export interface SaleHistoryType {
 
 export interface SaleHistoryAllState {
   saleHistoryAll: Array<SaleHistoryType>;
+  isMain: Boolean;
 }
 
 const initialState: SaleHistoryAllState = {
   saleHistoryAll: [],
+  isMain: false,
 };
 
 export const SaleSlice = createSlice({
   name: 'sale',
   initialState,
-  reducers: {},
+  reducers: {
+    setIsMain: state => {
+      state.isMain = !state.isMain;
+    },
+  },
   extraReducers: {
     [fetchSaleHistory.fulfilled]: (state, action) => {
       const history = action.payload;
@@ -54,6 +60,6 @@ export const SaleSlice = createSlice({
 
 export { fetchSaleHistory };
 
-export const {} = SaleSlice.actions;
+export const { setIsMain } = SaleSlice.actions;
 
 export default SaleSlice.reducer;
