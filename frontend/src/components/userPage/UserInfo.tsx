@@ -5,12 +5,14 @@ import { Card, CardContent, Tooltip, Button, TextField, FormControl } from '@mui
 import { Instance } from '@popperjs/core';
 import { editUser, fetchUser } from '../../_slice/UserSlice';
 import useCopyClipBoard from '../../_hook/useCopyClipBoard';
+// eslint-disable-next-line import/no-named-as-default
 import NFTPreview from '../../commons/NFTPreview';
 
 const ALLOW_FILE_EXTENSION = 'jpg,jpeg,png';
 const FILE_SIZE_MAX_LIMIT = 5 * 1024 * 1024;
 
 const StyledCardList = styled.div`
+  margin: 20px 0 10px;
   display: flex;
   > * {
     margin: 2px;
@@ -22,8 +24,7 @@ const StyledWord = styled.div`
   font-weight: 500;
 `;
 const StyledName = styled.h1`
-  margin-bottom: 20px;
-  margin-top: 0px;
+  margin: 0 0 20px 20px;
 `;
 
 const StyledBtn = styled.div`
@@ -244,10 +245,14 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
                   role="button"
                   ref={areaRef}
                   onMouseMove={handleMouseMove}>
+                  <strong>Wallet Address : </strong>
                   {searchedUser.wallet_address}
                 </StyledCopyWallet>
               </Tooltip>
-              <StyledWord>Joined : {searchedUser.joinDate}</StyledWord>
+              <StyledWord>
+                <strong>Joined : </strong>
+                {searchedUser.joinDate}
+              </StyledWord>
               <StyledWord>{searchedUser.message}</StyledWord>
             </CardContent>
           </Card>

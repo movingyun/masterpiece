@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useWeb3React } from '@web3-react/core';
 import { checkLogin, logout, getCurrentUser, signin } from '../../_slice/UserSlice';
@@ -42,7 +42,7 @@ const StyledNav = styled.div`
     > a {
       display: inline-block;
       height: 65px;
-      margin-right: 15px;
+      margin-right: 25px;
       text-decoration: none;
       font-weight: 700;
       font-size: 18px;
@@ -74,6 +74,7 @@ export default function Menu() {
   const { chainId, account, active, activate, deactivate } = useWeb3React();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const isLogin = useSelector((state: any) => state.user.isLogin);
   const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
@@ -112,6 +113,7 @@ export default function Menu() {
     if (isLogin) {
       deactivate();
       dispatch(logout());
+      navigate('/')
     }
   };
 
@@ -137,7 +139,7 @@ export default function Menu() {
             <Link to="/nftlist">NFT List</Link>
             <Link to="/learnsyllables">Learn Syllables</Link>
             <Link to="/composehangul">Compose Hangul</Link>
-            <Link to="/bylot">By Lot</Link>
+            <Link to="/bylot">Random Draw</Link>
             <Link to="/hangulgame">Game</Link>
           </Navigation>
         </StyledNav>

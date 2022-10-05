@@ -111,7 +111,9 @@ export default function SellModal() {
 
   return (
     <>
-      <Button onClick={handleOpen}>Sell</Button>
+      <Button size='large' sx={{ width: '70px'}} onClick={handleOpen}>
+        Sell
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

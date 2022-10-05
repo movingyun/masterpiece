@@ -208,7 +208,7 @@ function Canvas() {
 
           const offset = index % 2 === 0 ? 1 : -1;
 
-          const offsetY = offset * (Math.cos(frameCount / animationSpeed) * textSize) / 4;
+          const offsetY = 2 * offset * (Math.cos(frameCount / animationSpeed) * textSize) / 4;
 
           ctx.save();
           ctx.translate(

@@ -6,16 +6,18 @@ export default function NFTDetail() {
   const params = useParams();
   const currentNftAddress = params.nftAddress;
 
-  return (
-    <>
-      <div>NFTDetail</div>
-      <NftDetailInfo nftAddress={`${currentNftAddress}`} />
-      <div>
-        <Link to="/nftlist">NFTList</Link>
-      </div>
-      <div>
-        <Link to="/">home</Link>
-      </div>
-    </>
-  );
+  return <NftDetailInfo nftAddress={`${currentNftAddress}`} />;
+
+  // return (
+  //   <>
+  //     <div>NFTDetail</div>
+  //     <NftDetailInfo nftAddress={`${currentNftAddress}`} />
+  //     <div>
+  //       <Link to="/nftlist">NFTList</Link>
+  //     </div>
+  //     <div>
+  //       <Link to="/">home</Link>
+  //     </div>
+  //   </>
+  // );
 }
