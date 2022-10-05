@@ -47,6 +47,9 @@ const SALE_URL = '/sale';
 // Like
 const LIKE_URL = '/like';
 
+// 한글표기변환
+const CONVERT_URL = '/convert';
+
 // Game
 const LOG_URL = '/log';
 
@@ -104,6 +107,9 @@ const api = {
 
   // Like
   toggleLike: () => API_BASE_URL + LIKE_URL,
+
+  // 한글표기변환
+  getConvertHangul: (text:string) => API_BASE_URL + CONVERT_URL + `?englishname=${text}`,
 
   // Game
   fetchGameData: () => API_BASE_URL + GAME_URL,

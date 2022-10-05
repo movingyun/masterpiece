@@ -9,7 +9,8 @@ import AreaTranslate from '../components/composeHangul/AreaTranslate';
 import AreaDiscompose from '../components/composeHangul/AreaDiscompose';
 import AreaSyllable from '../components/composeHangul/AreaSyllable';
 import AreaSentence from '../components/composeHangul/AreaSentence';
-import { GradientBlueToPink } from '../_css/ReactCSSProperties';
+import { BlackWhite, GradientBlueToPink } from '../_css/ReactCSSProperties';
+import HangulName from '../commons/HangulName';
 
 export default function ComposeHangul() {
   const walletAddress = UseSelectorHook(state => state.user.currentUser.wallet_address);
@@ -22,26 +23,18 @@ export default function ComposeHangul() {
   }, [walletAddress]);
   
   return (
-    <Container style={GradientBlueToPink}>
-      <div style={{margin:10, fontSize:50}}>Make Your Own Word/Sentence</div>
-      <Grid container>
-        <Grid container item xs={6} style={{padding:10}}>
+    <Container style={{ ...BlackWhite, padding:0, borderRadius:10, border:"none" }}>
+      <div style={{margin:30, fontSize:50}}>Make Your Own Word/Sentence</div>
+      <Grid container alignItems="flex-end">
+        <Grid container item xs={6} style={{ minWidth:580, padding: 10 }}>
           <Grid item xs={12}><AreaTranslate/></Grid>
+          <Grid item xs={12}><AreaDiscompose/></Grid>
+        </Grid>
+        <Grid container item xs={6} style={{ minWidth:580, minHeight:570 ,padding : 10}}>
           <Grid item xs={12}><HangulMaker test={false}/></Grid>
         </Grid>
-        <Grid container item xs={6} style={{padding:10}}>
-          <Grid item xs={12}><AreaDiscompose/></Grid>
-          <Grid item xs={12}><AreaSyllable/></Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <AreaSentence/>
-        </Grid>
-        <div>
-          <Link to="/decoratehangul">decorateHangul</Link>
-        </div>
-        <div>
-          <Link to="/">home</Link>
-        </div>
+        <Grid item xs={12}><AreaSyllable/></Grid>
+        <Grid item xs={12}><AreaSentence/></Grid>
       </Grid>
     </Container>
   );

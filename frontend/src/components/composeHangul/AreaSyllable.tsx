@@ -7,7 +7,7 @@ import { UseSelectorHook, UseDispatchHook } from '../../_hook/HangulMakerHook';
 import { areaSentenceAction, areaSyllableAction } from "../../_slice/ComposeHangulSlice";
 import DragAndDrop from "./DragAndDrop";
 import { HangulComposeArea } from "../../_store/store";
-import { GradientBlueToPink } from "../../_css/ReactCSSProperties";
+import { black, BlackWhite, GradientBlueToPink } from "../../_css/ReactCSSProperties";
 
 export default function AreaSyllable(){
   const dispatch = UseDispatchHook();
@@ -54,15 +54,15 @@ export default function AreaSyllable(){
   // 음절 버튼 단위크기
   const unit:number = 10;
   // barckground Color
-  const gradientBlueToPink:React.CSSProperties = GradientBlueToPink;
+  const currentBlackWhite:React.CSSProperties = BlackWhite;
   const thisAreaBackground:React.CSSProperties = {
-    border:"2px dashed white",
+    border:`2px dashed ${black.toString()}`,
     marginBottom:10,
-    minHeight:500,
+    // minHeight:500,
   }
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{...gradientBlueToPink, ...thisAreaBackground}}
+    style={{...currentBlackWhite, ...thisAreaBackground, borderRadius:10}}
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}

@@ -2,7 +2,10 @@ import react from 'react';
 import { Color } from 'react-color';
 
 const pastelBlue:Color = '#E0FFFF';
-const pastelPink:Color = '#FFD4DF';
+const pastelPink: Color = '#FFD4DF';
+export const yellow: Color = '#F3E900';
+export const black: Color = '#000000';
+export const white: Color = '#FFFFFF';
 
 export default function ReactCSSProperties(){
 
@@ -41,4 +44,11 @@ export const GradientBlueToPink:React.CSSProperties = {
   borderRadius:50,
   border:"2px solid white",
   background:`linear-gradient(to bottom right, ${pastelBlue}, ${pastelPink})`
+}
+
+export const BlackWhite:React.CSSProperties = {
+  padding:10,
+  borderRadius:50,
+  border:`2px solid ${black.toString()}`,
+  background:white,
 }

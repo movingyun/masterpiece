@@ -28,12 +28,10 @@ const StyledCardList = styled.div`
 `;
 
 const StyledNFTList = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(277px, auto));
   > * {
-    margin: 10px;
-    min-width: 277px;
     text-decoration: none;
   }
 `;
@@ -72,8 +70,8 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
   }, [collected]);
   return (
     <>
-      <div>collected</div>
-      <ButtonGroup variant="contained" aria-label="outlined primary button group">
+      {/* <div>collected</div> */}
+      <ButtonGroup variant="contained" aria-label="text primary button group" fullWidth sx={{margin: '10px 0'}}> 
         <Button onClick={() => handleClick(collected, 'collected')}>Collected</Button>
         <Button onClick={() => handleClick(created, 'created')}>Created</Button>
         <Button onClick={() => handleClick(onsale, 'onsale')}>Onsale</Button>

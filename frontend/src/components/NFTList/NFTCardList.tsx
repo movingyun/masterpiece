@@ -6,12 +6,10 @@ import { fetchAllNFT, NFT } from '../../_slice/NFTSlice';
 import NFTCard from '../../commons/NFTCard';
 
 const StyledCardList = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(277px, auto));
   > * {
-    margin: 10px;
-    min-width: 277px;
     text-decoration: none;
   }
 `;

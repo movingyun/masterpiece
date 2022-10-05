@@ -65,7 +65,7 @@ const searchNFT: any = createAsyncThunk('searchNFT', async (payload: any, { reje
 });
 
 export interface NFT {
-  imgUrl: String;
+  imgUrl: string;
   nftTitle: String;
   nftPrice: String;
   nftCreatorNickname: String;
