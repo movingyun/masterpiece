@@ -6,14 +6,8 @@ import Inventory from '../components/byLot/Inventory';
 export default function ByLot() {
   return (
     <>
-      <div>byLot</div>
-      <div>
-        <Draw />
-        <Inventory />
-      </div>
-      <div>
-        <Link to="/">home</Link>
-      </div>
+      <Draw />
+      <Inventory />
     </>
   );
 }

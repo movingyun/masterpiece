@@ -44,26 +44,51 @@ export default function NFTCard({
             ))}
           </StyledChip>
           <StyledCard>
-            <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 800 }} noWrap>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{ fontWeight: 600, fontFamily: '"Poppins", san-serif' }}
+              noWrap>
               {nftTitle}
             </Typography>
             <StyledCardDescription>
               <div>
-                <Typography variant="body1" color="text.secondary" component="div">
+                <Typography
+                  variant="body1"
+                  color="text.secondary"
+                  component="div"
+                  sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
                   Price : {nftPrice}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" component="div">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  component="div"
+                  sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
                   Last sale : {lastPrice}
                 </Typography>
               </div>
               <div>
-                <Typography variant="body2" color="text.secondary" component="div">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  component="div"
+                  sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
                   Creator : {nftCreatorNickname}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" component="div">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  component="div"
+                  sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
                   Owner : {nftOwnerNickname}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" component="div">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  component="div"
+                  sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
                   Like : {`${nftLike}`}
                 </Typography>
               </div>
