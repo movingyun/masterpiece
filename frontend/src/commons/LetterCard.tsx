@@ -31,18 +31,18 @@ LetterCard.defaultProps = {
 
 export default function LetterCard({ description, title, letter, quantity }: LetterCardType) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 290 }}>
       {/* 이미지 링크 수정필요함 */}
       <StyledWrapper>
         <CardMedia component="img" height="150" image={tmpImg} alt="green iguana" />
         <StyledLetter>{letter}</StyledLetter>
       </StyledWrapper>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
           {title}
         </Typography>
         {quantity ? (
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Poppins, san-serif' }}>
             Quantity : {`${quantity}`}
             <br />
             Letter: {`${letter}`}
@@ -50,7 +50,7 @@ export default function LetterCard({ description, title, letter, quantity }: Let
             {description}
           </Typography>
         ) : (
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Poppins, san-serif' }}>
             {description}
           </Typography>
         )}

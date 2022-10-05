@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
+import CelebrationIcon from '@mui/icons-material/Celebration';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LetterCard from '../../commons/LetterCard';
@@ -46,7 +47,10 @@ export default function SimpleDialog(props: PickType) {
     <div>
       {pickSuccess ? (
         <Dialog onClose={handleClose} open={open}>
-          <DialogTitle>Congratulations</DialogTitle>
+          <DialogTitle sx={{fontWeight: 800}}>
+            <CelebrationIcon />
+            <span style={{marginLeft: '5px'}}>Congratulations!</span>
+          </DialogTitle>
           {pickResult.map((one: any, idx: number) => (
             <LetterCard
               description={one.description}
