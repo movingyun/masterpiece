@@ -21,11 +21,9 @@ public class SeleniumController {
 
     @GetMapping(value="",produces = "text/plain;charset=UTF-8")
     @ApiOperation(value = "이름 만들기", notes = "이름 만들기")
-    public ResponseEntity<String> makeName(@RequestParam(value = "englishName") String englishName) {
+    public ResponseEntity<String> makeName(@RequestParam(value = "englishname") String englishName) {
         String hangulName = seleniumService.makeName(englishName);
         System.out.println(hangulName);
         return new ResponseEntity<>(hangulName, HttpStatus.OK);
     }
-
-
 }

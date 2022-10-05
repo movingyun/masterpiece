@@ -35,6 +35,8 @@ public class SeleniumServiceImpl implements SeleniumService{
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
         options.addArguments("--start-maximized");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-popup-blocking");
         driver = new ChromeDriver(options);
         base_url = "https://transliterator.herokuapp.com/#"+englishName;

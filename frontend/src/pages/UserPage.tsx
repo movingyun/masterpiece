@@ -16,12 +16,12 @@ export default function UserPage() {
 
   return (
     <>
-      <div>UserPage</div>
+      {/* <div>UserPage</div> */}
       <UserInfo walletAddress={`${userAddress}`} />
       <UserCardList walletAddress={`${userAddress}`} />
-      <div>
+      {/* <div>
         <Link to="/">home</Link>
-      </div>
+      </div> */}
     </>
   );
 }
