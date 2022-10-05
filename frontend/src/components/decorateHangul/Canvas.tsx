@@ -395,12 +395,12 @@ function Canvas() {
           },
           marginBottom: 3,
         }}>
-        <Tab label="Default" />
-        <Tab label="No. 1" />
-        <Tab label="No. 2" />
-        <Tab label="No. 3" />
-        <Tab label="No. 4" />
-        <Tab label="No. 5" />
+        <Tab label="Default" sx={{ fontWeight: 700, fontSize: '18px' }} />
+        <Tab label="No. 1" sx={{ fontWeight: 700, fontSize: '18px' }} />
+        <Tab label="No. 2" sx={{ fontWeight: 700, fontSize: '18px' }} />
+        <Tab label="No. 3" sx={{ fontWeight: 700, fontSize: '18px' }} />
+        <Tab label="No. 4" sx={{ fontWeight: 700, fontSize: '18px' }} />
+        <Tab label="No. 5" sx={{ fontWeight: 700, fontSize: '18px' }} />
       </Tabs>
       {animationType === 0 && (
         <canvas

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
@@ -19,17 +19,22 @@ const Resolution = styled.div`
 `;
 
 function App() {
-  const isLogin = useSelector((state: any) => state.user.isLogin);
+  const isMain = useSelector((state: any) => state.sale.isMain);
 
   return (
     <div>
-      {!isLogin && <Navigate to="/" replace />}
       <Header />
-      <Resolution>
+      {isMain ? (
         <div>
           <Outlet />
         </div>
-      </Resolution>
+      ) : (
+        <Resolution>
+          <div>
+            <Outlet />
+          </div>
+        </Resolution>
+      )}
     </div>
   );
 }

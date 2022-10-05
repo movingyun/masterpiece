@@ -83,6 +83,16 @@ const editUser: any = createAsyncThunk('editUser', async (payload, { rejectWithV
   }
 });
 
+const fetchTicket: any = createAsyncThunk('fetchTicket', async (walletAddress: string, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchTicket(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
 export interface Hangul {
   hangulId: Number;
   quantity: Number;
@@ -117,6 +127,7 @@ export interface UserState {
   created: Array<NFT>;
   favorite: Array<NFT>;
   onsale: Array<NFT>;
+  ticket: Number;
 }
 
 const initialState: UserState = {
@@ -145,6 +156,7 @@ const initialState: UserState = {
   created: [],
   favorite: [],
   onsale: [],
+  ticket: 0,
 };
 
 export const UserSlice = createSlice({
@@ -205,10 +217,23 @@ export const UserSlice = createSlice({
     [fetchOnsale.fulfilled]: (state, action) => {
       state.onsale = action.payload;
     },
+    [fetchTicket.fulfilled]: (state, action) => {
+      state.ticket = action.payload.quantity;
+    },
   },
 });
 
-export { signin, fetchUser, fetchInventory, fetchCollected, fetchCreated, fetchFavorite, fetchOnsale, editUser };
+export {
+  signin,
+  fetchUser,
+  fetchInventory,
+  fetchCollected,
+  fetchCreated,
+  fetchFavorite,
+  fetchOnsale,
+  editUser,
+  fetchTicket,
+};
 
 export const { getCurrentUser, checkLogin, logout } = UserSlice.actions;
 

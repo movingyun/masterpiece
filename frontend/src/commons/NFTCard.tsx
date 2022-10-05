@@ -34,7 +34,7 @@ export default function NFTCard({
   tokenId,
 }: NFT) {
   return (
-    <Card sx={{ maxWidth: 290 }}>
+    <Card sx={{ maxWidth: 290, paddingTop: '16px', borderRadius: '15px' }}>
       <CardActionArea>
         <CardMedia component="video" height="140" image={imgUrl} autoPlay loop />
         <CardContent>

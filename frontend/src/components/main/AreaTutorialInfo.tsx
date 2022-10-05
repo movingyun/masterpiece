@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Container, Grid } from "@mui/material";
 import AreaExample from "./AreaExample";
+import { defaultBackground } from "../../_css/ReactCSSProperties";
 
 export default function AreaTutorialInfo({ focus }:any) {
 	const [height, setHeight] = React.useState<any>(window.innerHeight);
@@ -41,7 +42,7 @@ export default function AreaTutorialInfo({ focus }:any) {
 		</>,
 		<AreaExample height={height} />
 	]];
-	const backgroundColor: string[] = ["white", "#f2e4d8"];
+	const backgroundColor: string[] = ["white", defaultBackground.toString()];
 	const indexArray: number[] = [];
 	for (let i = 0; i < elements.length;i++){
 		indexArray.push(i);

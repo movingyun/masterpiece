@@ -7,6 +7,8 @@ export const yellow: Color = '#F3E900';
 export const black: Color = '#000000';
 export const white: Color = '#FFFFFF';
 
+export const defaultBackground: Color = '#F2E4D8';
+
 export default function ReactCSSProperties(){
 
 }
