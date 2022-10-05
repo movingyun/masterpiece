@@ -24,7 +24,6 @@ export default function AreaExample({ height }: any) {
 	React.useEffect(() => {
 		if (height) {
 			const tempMargin = (height > 600) ? height / 2 - 300 : 5;
-			console.log(tempMargin);
 			setTopMargin(tempMargin);
 		}
 	}, [height]);
@@ -44,7 +43,6 @@ export default function AreaExample({ height }: any) {
 		async function fetchNFTData() {
 			const response: any = await axios.get(api.fetchAllNFT(), {});
 			const randomElements: JSX.Element[] = [];
-			console.log(response.data);
 
 			// temp color
 			const colors: string[] = ["lightblue", "red", "green", "cyan", "pink"];

@@ -35,7 +35,7 @@ export default function HangulName() {
 		const currentToggle = convertToggle;
 		if (!currentToggle) {
 			setLoading(true);
-			const response: any = await axios.get(api.getConvertHangul(nameEnglish), {});
+      const response: any = await axios.get(api.getConvertHangul(nameEnglish.replaceAll(' ', '')), {});
 			setNameHangul(response.data);
 			setLoading(false);
 		}
@@ -77,9 +77,9 @@ export default function HangulName() {
             backgroundColor="white"
             content={
               <>
-                <Container style={{ color: 'blue', fontSize: 70 }}>{nameHangul}</Container>
+                <Container style={{ color: 'blue', fontSize: 40, marginBottom:50, lineHeight:1 }}>{nameHangul}</Container>
                 <Button onClick={() => tts(nameHangul)} style={{ color: black.toString() }}>
-                  <VolumeDownRoundedIcon />
+                  <VolumeDownRoundedIcon fontSize="large"/>
                 </Button>
               </>
             }
