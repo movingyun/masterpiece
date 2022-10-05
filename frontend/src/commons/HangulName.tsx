@@ -72,7 +72,7 @@ export default function HangulName() {
         flexDirection="column">
         {convertToggle ? (
           <Information
-            title={title[1]}
+            title={title[1]} height={ 305 }
             buttonText={buttonText[1]}
             backgroundColor="white"
             content={
@@ -89,7 +89,7 @@ export default function HangulName() {
           <CircularProgress color="inherit" />
         ) : (
           <Information
-            title={title[0]}
+            title={title[0]} height={ 305 }
             buttonText={buttonText[0]}
             backgroundColor="white"
             content={
