@@ -8,6 +8,7 @@ import useCopyClipBoard from '../../_hook/useCopyClipBoard';
 import NFTPreview from '../../commons/NFTPreview';
 
 const StyledCardList = styled.div`
+  margin: 20px 0 10px;
   display: flex;
   > * {
     margin: 2px;
@@ -56,7 +57,7 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
 
   return (
     <StyledCardList>
-      <Card sx={{ width: '30%', minWidth: 200 }}>
+      <Card sx={{ width: '30%', minWidth: 200, marginRight: '5px'}}>
         <NFTPreview url={`${searchedUser.profileImage}`} />
       </Card>
       <Card sx={{ width: '70%' }}>
@@ -82,10 +83,14 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
               role="button"
               ref={areaRef}
               onMouseMove={handleMouseMove}>
+              <strong>Wallet Address : </strong>
               {searchedUser.wallet_address}
             </StyledCopyWallet>
           </Tooltip>
-          <div>Joined : {searchedUser.joinDate}</div>
+          <div style={{margin: '7px 0'}}>
+            <strong>Joined : </strong>
+            {searchedUser.joinDate}
+          </div>
           <div>{searchedUser.message}</div>
         </CardContent>
       </Card>

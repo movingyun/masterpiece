@@ -154,7 +154,7 @@ export default function BuyModal() {
 
   return (
     <>
-      <Button onClick={handleOpen}>Buy</Button>
+      <Button size='large' sx={{width: '70px'}} onClick={handleOpen}>Buy</Button>
       <Modal
         open={open}
         onClose={handleClose}

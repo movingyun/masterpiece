@@ -9,7 +9,8 @@ const Search = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin: 20px 0;
 `;
 
 const SearchIconWrapper = styled.div`
@@ -53,7 +54,7 @@ export default function SearchBar() {
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
-      <Box sx={{ height: 40, width: '40%' }}>
+      <Box sx={{ height: 40, width: "100%" }}>
         <InputBase
           id="searchBar"
           placeholder="Search…"

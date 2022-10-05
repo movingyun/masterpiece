@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Chip, Card, CardContent } from '@mui/material';
+import { Chip, Card, CardContent, Typography } from '@mui/material';
 import styled from 'styled-components';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -12,9 +12,10 @@ import BuyModal from './BuyModal';
 import NFTPreview from '../../commons/NFTPreview';
 
 const StyledDetail = styled.div`
+  margin: 10px 0;
   display: flex;
   > * {
-    margin: 2px;
+    margin: 0 5px;
   }
 `;
 const StyledChip = styled.div`
@@ -22,9 +23,16 @@ const StyledChip = styled.div`
   > * {
     margin: 2px;
   }
+  strong {
+    font-weight: 700;
+  }
 `;
+
+
 const StyledBtn = styled.div`
   display: flex;
+  position: absolute;
+  bottom: 20px;
   > * {
     margin: 2px;
   }
@@ -41,6 +49,17 @@ const StyledLikeBtn = styled.button`
   padding: 0;
   overflow: visible;
   cursor: pointer;
+  margin-left: 20px;
+`;
+const StyledInfo = styled.div`
+  margin: 10px 0;
+  > span {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  strong {
+    font-weight: 700;
+  }
 `;
 
 interface CurrentNftType {
@@ -85,19 +104,46 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
   return (
     <>
       <StyledDetail>
-        <Card sx={{ width: '30%', minWidth: 200 }}>
+        <Card sx={{ width: '30%', minWidth: 200 }} variant="outlined">
           <NFTPreview url={`${currentNFT.imgUrl}`} />
         </Card>
-        <Card sx={{ width: '70%' }}>
-          <CardContent>
-            <div>Creator : {currentNFT.nftCreatorNickname}</div>
-            <div>Title : {currentNFT.nftTitle}</div>
-            <div>Owner : {currentNFT.nftOwnerNickname}</div>
-            <div>Price : {currentNFT.nftPrice}</div>
-            <div>lastPrice : {currentNFT.lastPrice}</div>
+        <Card sx={{ width: '70%', padding: '0 10px' }} variant="outlined">
+          <CardContent sx={{ height: 'calc(100% - 32px)', position: 'relative' }}>
+            <Typography gutterBottom variant="h4" component="div" sx={{ fontWeight: 900 }}>
+              {currentNFT.nftTitle}
+            </Typography>
+            <StyledInfo>
+              <span>
+                <strong>Creator : </strong>
+                {currentNFT.nftCreatorNickname}
+              </span>
+              <span>
+                <strong>Owner : </strong>
+                {currentNFT.nftOwnerNickname}
+              </span>
+            </StyledInfo>
+            <StyledInfo>
+              <span>
+                <strong>Price : </strong>
+                {currentNFT.nftPrice}
+              </span>
+              <span>
+                <strong>Last Price : </strong>
+                {currentNFT.lastPrice}
+              </span>
+            </StyledInfo>
             <StyledChip>
+              <span>
+                <strong>Tags : </strong>
+              </span>
               {currentNFT.nftTags.map((tag: String, idx: Number) => (
-                <Chip key={`${idx}` + `${currentNFT.imgUrl}`} label={tag} size="small" color="primary" />
+                <Chip
+                  key={`${idx}` + `${currentNFT.imgUrl}`}
+                  label={tag}
+                  size="small"
+                  variant="outlined"
+                  color="primary"
+                />
               ))}
             </StyledChip>
             <StyledBtn>
@@ -111,24 +157,28 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
                   <FavoriteBorderIcon />
                 </StyledLikeBtn>
               )}
-              <div>nftLike {currentNFT.nftLike}</div>
+              <div style={{ lineHeight: '33px' }}> {currentNFT.nftLike}</div>
             </StyledBtn>
           </CardContent>
         </Card>
       </StyledDetail>
 
       {/* 설명 */}
-      <Card>
+      <Card sx={{ margin: 1 }} variant="outlined">
         <CardContent>
-          <div>Description</div>
+          <Typography gutterBottom variant="h6" component="div">
+            Description
+          </Typography>
           <div>{currentNFT.nftDescription}</div>
         </CardContent>
       </Card>
 
       {/* 가격 차트 */}
-      <Card>
+      <Card sx={{ margin: 1 }} variant="outlined">
         <CardContent>
-          <div>Price</div>
+          <Typography gutterBottom variant="h6" component="div">
+            Price
+          </Typography>
           <StyledChart>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
@@ -146,7 +196,7 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="Price" stroke="#8884d8" activeDot={{ r: 8 }} />
               </LineChart>
             </ResponsiveContainer>
           </StyledChart>

@@ -12,6 +12,9 @@ const StyledChip = styled.div`
   }
 `;
 
+const StyledCard = styled.div`
+
+`;
 const StyledCardDescription = styled.div`
   display: flex;
   justify-content: space-between;
@@ -31,39 +34,41 @@ export default function NFTCard({
   tokenId,
 }: NFT) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 290 }}>
       <CardActionArea>
-        <CardMedia component="img" height="140" image={NFTimage} alt="NFT image" />
+        <CardMedia component="video" height="140" image={imgUrl} autoPlay loop />
         <CardContent>
           <StyledChip>
             {nftTags.map((tag, idx) => (
               <Chip key={`${idx}` + `${imgUrl}`} label={tag} size="small" color="primary" />
             ))}
           </StyledChip>
-          <StyledCardDescription>
-            <div>
-              <Typography gutterBottom variant="h5" component="div">
-                {nftTitle}
-              </Typography>
-              <Typography variant="body1" color="text.secondary" component="div">
-                Price : {nftPrice}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" component="div">
-                Last sale : {lastPrice}
-              </Typography>
-            </div>
-            <div>
-              <Typography variant="body2" color="text.secondary" component="div">
-                Creator : {nftCreatorNickname}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" component="div">
-                Owner : {nftOwnerNickname}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" component="div">
-                Like : {`${nftLike}`}
-              </Typography>
-            </div>
-          </StyledCardDescription>
+          <StyledCard>
+            <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 800 }} noWrap>
+              {nftTitle}
+            </Typography>
+            <StyledCardDescription>
+              <div>
+                <Typography variant="body1" color="text.secondary" component="div">
+                  Price : {nftPrice}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" component="div">
+                  Last sale : {lastPrice}
+                </Typography>
+              </div>
+              <div>
+                <Typography variant="body2" color="text.secondary" component="div">
+                  Creator : {nftCreatorNickname}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" component="div">
+                  Owner : {nftOwnerNickname}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" component="div">
+                  Like : {`${nftLike}`}
+                </Typography>
+              </div>
+            </StyledCardDescription>
+          </StyledCard>
         </CardContent>
       </CardActionArea>
     </Card>

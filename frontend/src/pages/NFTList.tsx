@@ -10,10 +10,10 @@ export default function NFTList() {
 
   return (
     <>
-      <div>NFTList</div>
+      {/* <div>NFTList</div> */}
       <SearchBar />
       {keyword ? <SearchedList /> : <NFTCardList />}
-      <div>
+      {/* <div>
         <Link to="/userpage">userPage</Link>
       </div>
       <div>
@@ -21,7 +21,7 @@ export default function NFTList() {
       </div>
       <div>
         <Link to="/">home</Link>
-      </div>
+      </div> */}
     </>
   );
 }
