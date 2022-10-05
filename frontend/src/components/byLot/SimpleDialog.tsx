@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -26,6 +26,20 @@ export default function SimpleDialog(props: PickType) {
 
   const handleClose = () => {
     onClose('');
+  };
+
+  useEffect(() => {
+    if (pickResult.length > 0 && open) {
+      console.log(pickResult);
+      tts('ko', pickResult[0].letter);
+    }
+  }, [pickResult]);
+
+  const tts = (lang: string, text: string) => {
+    const msg = new SpeechSynthesisUtterance();
+    msg.lang = lang;
+    msg.text = text;
+    window.speechSynthesis.speak(msg);
   };
 
   return (
