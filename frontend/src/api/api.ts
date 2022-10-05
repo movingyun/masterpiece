@@ -1,4 +1,3 @@
-
 // const API_BASE_URL = 'http://localhost:8081/api';
 const API_BASE_URL = 'https://j7a508.p.ssafy.io/api';
 
@@ -61,6 +60,7 @@ const api = {
   fetchCreated: (walletAddress: String) => API_BASE_URL + USER_URL + CREATED_URL + `?wallet-address=${walletAddress}`,
   fetchFavorite: (walletAddress: String) => API_BASE_URL + USER_URL + FAVORITE_URL + `?wallet-address=${walletAddress}`,
   fetchOnsale: (walletAddress: String) => API_BASE_URL + USER_URL + ONSALE_URL + `?wallet-address=${walletAddress}`,
+  editUser: () => API_BASE_URL + USER_URL,
 
   // hangul
   fetchConsonant: (walletAddress: String) =>
