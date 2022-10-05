@@ -71,7 +71,7 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
   return (
     <>
       {/* <div>collected</div> */}
-      <ButtonGroup variant="contained" aria-label="text primary button group" fullWidth sx={{margin: '10px 0'}}> 
+      <ButtonGroup variant="contained" aria-label="text primary button group" fullWidth sx={{ margin: '10px 0' }}>
         <Button onClick={() => handleClick(collected, 'collected')}>Collected</Button>
         <Button onClick={() => handleClick(created, 'created')}>Created</Button>
         <Button onClick={() => handleClick(onsale, 'onsale')}>Onsale</Button>
@@ -120,6 +120,7 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
                 nftAddress={NFTInfo.nftAddress}
                 nftDescription={NFTInfo.nftDescription}
                 tokenId={NFTInfo.tokenId}
+                isSale={NFTInfo.isSale}
               />
             </Link>
           ))}

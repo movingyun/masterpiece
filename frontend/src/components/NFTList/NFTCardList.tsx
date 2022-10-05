@@ -39,6 +39,7 @@ export default function NFTCardList() {
             nftAddress={NFTInfo.nftAddress}
             nftDescription={NFTInfo.nftDescription}
             tokenId={NFTInfo.tokenId}
+            isSale={NFTInfo.isSale}
           />
         </Link>
       ))}

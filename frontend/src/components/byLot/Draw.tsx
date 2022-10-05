@@ -14,7 +14,7 @@ import { fetchTicket } from '../../_slice/UserSlice';
 
 const StyledContainer = styled.div`
   margin: 20px 0 40px;
-`
+`;
 const StyledTicket = styled.div`
   display: flex;
   justify-content: space-between;
@@ -35,7 +35,7 @@ export default function Draw() {
 
   useEffect(() => {
     if (walletAddress) dispatch(fetchTicket(walletAddress));
-  }, [walletAddress]);
+  }, [walletAddress, open]);
 
   useEffect(() => {
     if (pickSuccess) console.log(pickResult);

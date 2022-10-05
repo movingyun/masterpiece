@@ -12,9 +12,7 @@ const StyledChip = styled.div`
   }
 `;
 
-const StyledCard = styled.div`
-
-`;
+const StyledCard = styled.div``;
 const StyledCardDescription = styled.div`
   display: flex;
   justify-content: space-between;
@@ -32,6 +30,7 @@ export default function NFTCard({
   nftLike,
   nftAddress,
   tokenId,
+  isSale,
 }: NFT) {
   return (
     <Card sx={{ maxWidth: 290, paddingTop: '16px', borderRadius: '15px' }}>
