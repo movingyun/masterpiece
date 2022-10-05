@@ -26,6 +26,4 @@ public class SeleniumController {
         System.out.println(hangulName);
         return new ResponseEntity<>(hangulName, HttpStatus.OK);
     }
-
-
 }

@@ -13,7 +13,7 @@ public class SeleniumServiceImpl implements SeleniumService{
     private static WebDriver driver;
     // Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static final String WEB_DRIVER_PATH = "chromedriver";
+    public static final String WEB_DRIVER_PATH = "chromedriver.exe";
     // 크롤링 할 URL
     private static String base_url;
     private static String englishName;
