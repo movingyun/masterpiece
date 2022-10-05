@@ -31,20 +31,17 @@ export default function AreaTutorialInfo({ focus }:any) {
 		<>
 			<div style={{ height: height / 3 }} />
 			<div style={{ height: height / 2 }} >
-			<div style={{ marginBottom: 50, fontSize: 50 }}>
+			<div style={{ marginBottom: 50, marginRight: 10, fontSize: 50 }}>
 					| The Most Scientific
 				</div>
-				<div style={{ marginBottom: 10, fontSize: 30 }}>
+				<div style={{ marginBottom: 10, marginRight: 10, fontSize: 30 }}>
 					Consonants and vowels are assembled in a box to form an word
 				</div>
 			</div>
 		</>,
-		<>
-		<div style={{ height: height / 3 }} />
-		<div style={{ height: height / 2 , padding: 30 }}>두번째 이미지</div>
-	</>
-		]];
-	const backgroundColor: string[] = ["white", "gray"];
+		<AreaExample height={height} />
+	]];
+	const backgroundColor: string[] = ["white", "#f2e4d8"];
 	const indexArray: number[] = [];
 	for (let i = 0; i < elements.length;i++){
 		indexArray.push(i);
@@ -52,16 +49,16 @@ export default function AreaTutorialInfo({ focus }:any) {
 	return (
 		<>
 			{elements.map((element:JSX.Element[], index:number) => (
-				<Grid key={`tutorialInfo${indexArray[index]}`} container
+				<Grid key={`tutorialInfo${indexArray[index]}`} container columns={40}
 				ref={(thisElement:HTMLDivElement) => { focuses.current[index] = thisElement }}
 				justifyContent="center" alignItems="center"
-				style={{minHeight:600}}>
-					<Grid item xs={5} style={{ minHeight:600, minWidth:400, padding:15, height, textAlign:"left" }}
+				style={{minHeight:600, background:backgroundColor[index]}}>
+					<Grid item xs={20} style={{ minHeight:600, minWidth:530, padding:15, height, textAlign:"left" }}
 					justifyContent="center" alignItems="center">
 						{element[index % 2]}
 					</Grid>
 					<Grid item xs={1}/>
-					<Grid item xs={6} style={{ minHeight:600, minWidth:500, padding:15, height, textAlign:"right" }}
+					<Grid item xs={19} style={{ minHeight:600, minWidth:530, padding:15, height, textAlign:"right" }}
 					justifyContent="center" alignItems="center">
 						{element[(index + 1) % 2]}
 					</Grid>

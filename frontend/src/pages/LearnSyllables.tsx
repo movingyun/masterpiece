@@ -7,7 +7,7 @@ import { black, white } from '../_css/ReactCSSProperties';
 export default function LearnSyllables() {
   return (
     <Container>
-      <div style={{margin:50, fontSize:50}}>Practice to make a syllable</div>
+      <div style={{marginTop:50, marginBottom:50, marginLeft:20, fontSize:50}}>Practice to make a syllable</div>
       <HangulMaker test/>
       <div style={{textAlign:"right"}}>
         <Button style={{ marginTop:20, background: black.toString(), color: white.toString() }}>

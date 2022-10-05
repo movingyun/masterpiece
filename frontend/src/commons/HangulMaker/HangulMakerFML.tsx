@@ -61,6 +61,7 @@ export default function HangulMakerFML(test: any) {
     if (setting) {
       return;
     }
+    dispatch(tabAction.change(0));
     dispatch(firstAction.change(-1));
     dispatch(middleAction.change(-1));
     dispatch(lastAction.change(0));

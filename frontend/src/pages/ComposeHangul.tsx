@@ -24,16 +24,16 @@ export default function ComposeHangul() {
   
   return (
     <Container style={{ ...BlackWhite, padding:0, borderRadius:10, border:"none" }}>
-      <div style={{margin:30, fontSize:50}}>Make Your Own Word/Sentence</div>
+      <div style={{margin:30, fontSize:50}}>Make Your Own Words</div>
       <Grid container alignItems="flex-end">
-        <Grid container item xs={6} style={{ minWidth:580, padding: 10 }}>
+        <Grid container item xs={6} style={{ minWidth:580, paddingTop: 20, paddingLeft: 10, paddingRight:10, paddingBottom: 20 }}>
           <Grid item xs={12}><AreaTranslate/></Grid>
           <Grid item xs={12}><AreaDiscompose/></Grid>
         </Grid>
         <Grid container item xs={6} style={{ minWidth:580, minHeight:570 ,padding : 10}}>
           <Grid item xs={12}><HangulMaker test={false}/></Grid>
         </Grid>
-        <Grid item xs={12}><AreaSyllable/></Grid>
+        <Grid item xs={12} style={{padding:10}}><AreaSyllable/></Grid>
         <Grid item xs={12}><AreaSentence/></Grid>
       </Grid>
     </Container>
