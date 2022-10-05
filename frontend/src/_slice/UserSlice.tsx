@@ -72,6 +72,17 @@ const fetchOnsale: any = createAsyncThunk('fetchOnsale', async (walletAddress: S
   }
 });
 
+const editUser: any = createAsyncThunk('editUser', async (payload, { rejectWithValue }) => {
+  try {
+    console.log(payload);
+    const res: any = await axios.put(api.editUser(), payload);
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
 export interface Hangul {
   hangulId: Number;
   quantity: Number;
@@ -197,7 +208,7 @@ export const UserSlice = createSlice({
   },
 });
 
-export { signin, fetchUser, fetchInventory, fetchCollected, fetchCreated, fetchFavorite, fetchOnsale };
+export { signin, fetchUser, fetchInventory, fetchCollected, fetchCreated, fetchFavorite, fetchOnsale, editUser };
 
 export const { getCurrentUser, checkLogin, logout } = UserSlice.actions;
 

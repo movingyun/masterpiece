@@ -6,6 +6,10 @@ const StyledVideo = styled.video`
   width: 100%;
   height: auto;
 `;
+const StyledImg = styled.img`
+  width: 100%;
+  height: auto;
+`;
 
 interface PreviewType {
   url: String;
@@ -21,7 +25,7 @@ export default function NFTPreview({ url }: PreviewType) {
   return (
     <CardContent>
       {/* url 받아서 테스트 해볼것 */}
-      {type === 'webm' ? <StyledVideo autoPlay loop src={`${url}`} /> : <img src={`${url}`} alt="img" />}
+      {type === 'webm' ? <StyledVideo autoPlay loop src={`${url}`} /> : <StyledImg src={`${url}`} alt="img" />}
     </CardContent>
   );
 }
