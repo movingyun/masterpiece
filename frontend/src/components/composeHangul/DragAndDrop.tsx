@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import { UseDispatchHook } from "../../_hook/HangulMakerHook";
 import { dragValueAction, areaIndexAction, elementIndexAction } from "../../_slice/ComposeHangulSlice";
+import { black, white } from "../../_css/ReactCSSProperties";
 
 export default function DragAndDrop({element, value, unit, areaIndex, elementIndex}:any){ // {listIndex}:number
   const dispatch = UseDispatchHook();
@@ -37,7 +38,7 @@ export default function DragAndDrop({element, value, unit, areaIndex, elementInd
       sx={{minWidth: unit*5, minHeight: unit*5, width: unit*5, height:unit*5}} type="button"
       style={{ margin:"10px", position:"relative",
       fontSize:unit*3,
-      backgroundColor:"#CCCCCC", color:"black",
+      background:black.toString(), color:white.toString(),
       borderRadius: "100%",
       border: "2px solid black"
     }}

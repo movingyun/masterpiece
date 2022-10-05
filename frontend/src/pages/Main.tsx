@@ -4,6 +4,7 @@ import { Container, Grid } from '@mui/material';
 import MainLand from '../components/main/MainLand';
 import AreaInformation from '../components/main/AreaInformation';
 import AreaTutorialInfo from '../components/main/AreaTutorialInfo';
+import HangulName from '../commons/HangulName';
 import AreaExample from '../components/main/AreaExample';
 
 export default function Main() {
@@ -11,16 +12,10 @@ export default function Main() {
   return (
     <Container>
       <Grid container alignItems="flex-end">
-        <Grid item xs={6}><AreaInformation focus={focus}/></Grid>
-        <Grid item xs={6}><AreaExample/></Grid>
+        <Grid item xs={6} minWidth={570}><AreaInformation focus={focus}/></Grid>
+        <Grid item xs={6} minWidth={570}><HangulName/></Grid>
       </Grid>
-      <Container><AreaTutorialInfo focus={focus} /></Container>
-      <div>
-        <Link to="/composehangul">create</Link>
-      </div>
-      <div>
-        <Link to="/nftlist">explore</Link>
-      </div>
+      <AreaTutorialInfo focus={focus} />
     </Container>
   );
 }

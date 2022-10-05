@@ -46,6 +46,9 @@ const SALE_URL = '/sale';
 // Like
 const LIKE_URL = '/like';
 
+// 한글표기변환
+const CONVERT_URL = '/convert';
+
 const api = {
   // user
   signin: () => API_BASE_URL + USER_URL + SIGNIN_URL,
@@ -98,6 +101,9 @@ const api = {
 
   // Like
   toggleLike: () => API_BASE_URL + LIKE_URL,
+
+  // 한글표기변환
+  getConvertHangul: (text:string) => API_BASE_URL + CONVERT_URL + `?englishname=${text}`,
 };
 
 export default api;

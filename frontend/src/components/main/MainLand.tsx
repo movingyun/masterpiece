@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Paper, Button } from "@mui/material";
 import Carousel from 'react-material-ui-carousel'
 import AreaInformation from "./AreaInformation";
-import Information from "./Information";
+import Information from "../../commons/Information";
 
 function CarouselItem(element:any, key:string): JSX.Element {
 	return (
@@ -25,12 +25,6 @@ export default function MainLand() {
 	return (
 		<Container>
 			<AreaInformation/>
-			{/* <Carousel height={800} fullHeightHover={false}
-			indicatorContainerProps={{ style: { marginTop: '50px', textAlign: 'center', verticalAlign: "middle" } }}>
-        {items.map((item: JSX.Element, index:number) => (
-					CarouselItem(item, items.toString()+indexArray[index].toString())
-				))}
-      </Carousel> */}
 		</Container>
 	);
 }

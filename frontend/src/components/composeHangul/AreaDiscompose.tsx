@@ -5,7 +5,7 @@ import { UseSelectorHook, UseDispatchHook } from "../../_hook/HangulMakerHook";
 import { areaSentenceAction, areaSyllableAction, consonantCountAction, vowelCountAction } from "../../_slice/ComposeHangulSlice";
 import { HangulComposeArea } from "../../_store/store";
 import DiscomposeHangul, {DiscomposeSentence} from "../../commons/HangulMaker/DiscomposeHangul";
-import { GradientBlueToPink } from "../../_css/ReactCSSProperties";
+import { black, BlackWhite, GradientBlueToPink } from "../../_css/ReactCSSProperties";
 
 export default function AreaDiscompose() {
   const dispatch = UseDispatchHook();
@@ -63,16 +63,16 @@ export default function AreaDiscompose() {
   }
 
   // barckground Color
-  const gradientBlueToPink:React.CSSProperties = GradientBlueToPink;
+  const currentBlackWhite:React.CSSProperties = BlackWhite;
   const thisAreaBackground:React.CSSProperties = {
-    border:"2px dashed white",
+    border:`2px dashed ${black.toString()}`,
     marginBottom:10,
     minHeight:160,
   }
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{...gradientBlueToPink, ...thisAreaBackground}}
+    style={{...currentBlackWhite, ...thisAreaBackground, borderRadius:10}}
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}
