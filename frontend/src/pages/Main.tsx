@@ -10,7 +10,7 @@ import AreaExample from '../components/main/AreaExample';
 export default function Main() {
   const focus:React.MutableRefObject<HTMLDivElement[]> = React.useRef([]);
   return (
-    <Container>
+    <Container sx={{backgroundColor: '#f2e4d8'}}>
       <Grid container alignItems="flex-end">
         <Grid item xs={6} minWidth={570}><AreaInformation focus={focus}/></Grid>
         <Grid item xs={6} minWidth={570}><HangulName/></Grid>

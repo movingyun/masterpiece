@@ -57,30 +57,54 @@ export default function HangulName() {
 	}
 	
 	return (
-		<Container style={{ marginTop: 0, marginBottom: 50 }}>
-			<Box sx={{ minHeight:300, borderRadius: 20, padding: 2, background: "white", textAlign:"center"}}
-			display="flex" justifyContent="center" alignItems="center"
-			flexDirection="column">
-				{(convertToggle) ? (
-					<Information title={title[1]} buttonText={buttonText[1]}
-					backgroundColor="white"
-						content={<>
-							<Container style={{ color: "blue", fontSize: 70 }}>{nameHangul}</Container>
-							<Button onClick={() => tts(nameHangul)} style={{ color: black.toString() }}><VolumeDownRoundedIcon /></Button>
-						</>}
-					onClick={changeToggle}
-					/>
-				)
-					: ((loading) ? (<CircularProgress color="inherit" />)
-						: (
-						<Information title={title[0]} buttonText={buttonText[0]}
-						backgroundColor="white"
-						content={<TextField placeholder="write your name" onChange={(event:any) => { inputName(event); }}/>}
-						onClick={changeToggle}
-						/>)
-				)}
-			</Box>
-			{/* <Box sx={{ borderRadius: "5%", padding: 2, background: "white", textAlign:"center"}}
+    <Container style={{ marginTop: 0, marginBottom: 50 }}>
+      <Box
+        sx={{
+          minHeight: 300,
+          borderRadius: 10,
+          padding: 2,
+          background: '#f2e4d8;',
+          textAlign: 'center',
+        }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column">
+        {convertToggle ? (
+          <Information
+            title={title[1]}
+            buttonText={buttonText[1]}
+            backgroundColor="white"
+            content={
+              <>
+                <Container style={{ color: 'blue', fontSize: 70 }}>{nameHangul}</Container>
+                <Button onClick={() => tts(nameHangul)} style={{ color: black.toString() }}>
+                  <VolumeDownRoundedIcon />
+                </Button>
+              </>
+            }
+            onClick={changeToggle}
+          />
+        ) : loading ? (
+          <CircularProgress color="inherit" />
+        ) : (
+          <Information
+            title={title[0]}
+            buttonText={buttonText[0]}
+            backgroundColor="white"
+            content={
+              <TextField
+                placeholder="Write your name"
+                onChange={(event: any) => {
+                  inputName(event);
+                }}
+              />
+            }
+            onClick={changeToggle}
+          />
+        )}
+      </Box>
+      {/* <Box sx={{ borderRadius: "5%", padding: 2, background: "white", textAlign:"center"}}
 			display="flex" justifyContent="center" alignItems="center"
 			flexDirection="column">	
 				{(!isLogin) ? (<Link to="/login" style={{ padding: 10, marginTop:50, background: "yellow", color: "black" }}>Get started</Link>)
@@ -91,6 +115,6 @@ export default function HangulName() {
 					</Grid>
 					)}
 			</Box> */}
-		</Container>
-	);
+    </Container>
+  );
 }
