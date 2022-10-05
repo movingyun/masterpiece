@@ -9,6 +9,7 @@ import consonantImg from '../../img/발성기관.PNG';
 import vowelImg from '../../img/천지인.PNG';
 import { pickConsonant, pickVowel } from '../../_slice/HangulSlice';
 import SimpleDialog from './SimpleDialog';
+import { fetchTicket } from '../../_slice/UserSlice';
 
 const StyledFlex = styled.div`
   display: flex;
@@ -20,7 +21,12 @@ export default function Draw() {
   const pickSuccess = useSelector((state: any) => state.hangul.pickSuccess);
   const pickResult = useSelector((state: any) => state.hangul.pickResult);
   const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
+  const ticket = useSelector((state: any) => state.user.ticket);
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (walletAddress) dispatch(fetchTicket(walletAddress));
+  }, [walletAddress]);
 
   useEffect(() => {
     if (pickSuccess) console.log(pickResult);
@@ -58,8 +64,7 @@ export default function Draw() {
       <StyledFlex>
         <div>Random Draw</div>
         <div>
-          <span>Tickets</span>
-          <span>(?)</span>
+          <span>Tickets : {ticket}</span>
         </div>
       </StyledFlex>
       <StyledFlex>
@@ -80,9 +85,8 @@ export default function Draw() {
                     Consonants
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Based on five basic consonants modeled after the shape of the pronunciation organ 
-                    (‘ㄱ’, ‘ㄴ’, ‘ㅁ’, ‘ㅅ’, ‘ㅇ’), 
-                    these were created by adding strokes or overlapping the same consonants.
+                    Based on five basic consonants modeled after the shape of the pronunciation organ (‘ㄱ’, ‘ㄴ’, ‘ㅁ’,
+                    ‘ㅅ’, ‘ㅇ’), these were created by adding strokes or overlapping the same consonants.
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -112,10 +116,8 @@ export default function Draw() {
                     Vowels
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Vowel letters are based on sky, earth and man.
-                    ‘·’ symbolizes the round shape of the sky, 
-                    ‘ㅡ’ symbolizes the flat shape of the earth, 
-                    and ‘ㅣ’ symbolizes the shape of a person standing upright.
+                    Vowel letters are based on sky, earth and man. ‘·’ symbolizes the round shape of the sky, ‘ㅡ’
+                    symbolizes the flat shape of the earth, and ‘ㅣ’ symbolizes the shape of a person standing upright.
                   </Typography>
                 </CardContent>
                 <CardActions>

@@ -15,6 +15,7 @@ const COLLECTED_URL = '/collected';
 const CREATED_URL = '/created';
 const FAVORITE_URL = '/favorite';
 const ONSALE_URL = '/onsale';
+const TICKET_URL = '/ticket';
 
 // Hangul
 const CONSONANT_URL = '/own/consonant';
@@ -64,6 +65,7 @@ const api = {
   fetchFavorite: (walletAddress: String) => API_BASE_URL + USER_URL + FAVORITE_URL + `?wallet-address=${walletAddress}`,
   fetchOnsale: (walletAddress: String) => API_BASE_URL + USER_URL + ONSALE_URL + `?wallet-address=${walletAddress}`,
   editUser: () => API_BASE_URL + USER_URL,
+  fetchTicket: (walletAddress: String) => API_BASE_URL + USER_URL + TICKET_URL + `?wallet-address=${walletAddress}`,
 
   // hangul
   fetchConsonant: (walletAddress: String) =>
