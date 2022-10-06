@@ -161,8 +161,12 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
                 ) : (
                   <SellModal />
                 )
-              ) : (
+              ) : isSale ? (
                 <BuyModal />
+              ) : (
+                <Button size="large" sx={{ width: '70px' }} disabled>
+                  Buy
+                </Button>
               )}
               {likeState ? (
                 <StyledLikeBtn onClick={handleClickLike}>
