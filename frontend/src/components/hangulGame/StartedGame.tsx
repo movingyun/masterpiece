@@ -15,7 +15,7 @@ import fourTicket from '../../img/ticket/four.png';
 import fiveTicket from '../../img/ticket/five.png';
 import volume from '../../img/volume.png';
 
-export default function StartedGame() {
+export default function StartedGame({ reset }: any) {
   const dispatch = useDispatch();
   const gameId = useSelector((state: any) => state.game.gameId);
   const questionOption = useSelector((state: any) => state.game.questionOption);
@@ -139,6 +139,15 @@ export default function StartedGame() {
     setAnswer([4, 4, 4, 4, 4]);
   };
 
+  const handleRestart = () => {
+    setQNum(0);
+    setAnswer([]);
+    setCount(0);
+    setShowAns(false);
+    setCorrect(false);
+    reset();
+  };
+
   const tts = (lang: string, text: string) => {
     const msg = new SpeechSynthesisUtterance();
     msg.lang = lang;
@@ -243,6 +252,9 @@ export default function StartedGame() {
             <StyledWord>You earned {count} tickets!</StyledWord>
           )}
           <img src={ticket[count - 1]} />
+          <Button variant="contained" onClick={handleRestart}>
+            Restart
+          </Button>
         </StyledWordWrap>
       )}
     </div>

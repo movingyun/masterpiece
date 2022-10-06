@@ -33,12 +33,12 @@ export default function GameMain() {
     font-size: 70px;
   `;
 
-  //   useEffect(() => {
-  //     if (walletAddress) {
-  //       const payload = { userWalletAddress: walletAddress };
-  //       dispatch(fetchGameData(payload));
-  //     }
-  //   }, [walletAddress]);
+  useEffect(() => {
+    if (walletAddress) {
+      const payload = { userWalletAddress: walletAddress };
+      dispatch(fetchGameData(payload));
+    }
+  }, [walletAddress]);
 
   useEffect(() => {
     if (start) {
@@ -64,11 +64,18 @@ export default function GameMain() {
   const startHandler = () => {
     beepAudio.play();
     if (!gameId) {
+      console.log('getData');
       const payload = { userWalletAddress: walletAddress };
       dispatch(fetchGameData(payload));
     }
-    console.log(Object.values(questionOption[0])[0]);
+    console.log(questionOption);
     setStart(true);
+  };
+
+  const reset = () => {
+    setStart(false);
+    setSeconds(3);
+    setshowGame(false);
   };
 
   return (
@@ -76,7 +83,7 @@ export default function GameMain() {
       {start ? (
         seconds <= 0 ? (
           showGame ? (
-            <StartedGame />
+            <StartedGame reset={reset} />
           ) : (
             <StyledTitle>Game Start!</StyledTitle>
           )
