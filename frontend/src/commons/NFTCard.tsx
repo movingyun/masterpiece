@@ -13,9 +13,7 @@ const StyledChip = styled.div`
   }
 `;
 
-const StyledCard = styled.div`
-
-`;
+const StyledCard = styled.div``;
 const StyledCardDescription = styled.div`
   display: flex;
   justify-content: space-between;
@@ -33,6 +31,7 @@ export default function NFTCard({
   nftLike,
   nftAddress,
   tokenId,
+  isSale,
 }: NFT) {
   const videoElement:JSX.Element = <video autoPlay loop muted width={140} height={140} src={imgUrl}
   style={{border:`4px solid ${white.toString()}`}}/>

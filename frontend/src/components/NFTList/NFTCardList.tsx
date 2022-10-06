@@ -42,27 +42,38 @@ export default function NFTCardList() {
             nftDescription={NFTInfo.nftDescription}
             tokenId={NFTInfo.tokenId}
           /> */}
-          <Container style={{
-							paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
-							marginBottom:100,
-							position: "relative", background: "black",
-							height:300
-					}}>
-          <Information content="" height={350} width={320} title={
-            <NFTCard
-            imgUrl={NFTInfo.imgUrl}
-            nftTitle={NFTInfo.nftTitle}
-            nftPrice={NFTInfo.nftPrice}
-            nftCreatorNickname={NFTInfo.nftCreatorNickname}
-            lastPrice={NFTInfo.lastPrice}
-            nftOwnerNickname={NFTInfo.nftOwnerNickname}
-            nftTags={NFTInfo.nftTags}
-            nftLike={NFTInfo.nftLike}
-            nftAddress={NFTInfo.nftAddress}
-            nftDescription={NFTInfo.nftDescription}
-            tokenId={NFTInfo.tokenId}
+          <Container
+            style={{
+              paddingTop: 15,
+              paddingBottom: 0,
+              paddingLeft: 15,
+              paddingRight: 0,
+              marginBottom: 100,
+              position: 'relative',
+              background: 'black',
+              height: 300,
+            }}>
+            <Information
+              content=""
+              height={350}
+              width={320}
+              title={
+                <NFTCard
+                  imgUrl={NFTInfo.imgUrl}
+                  nftTitle={NFTInfo.nftTitle}
+                  nftPrice={NFTInfo.nftPrice}
+                  nftCreatorNickname={NFTInfo.nftCreatorNickname}
+                  lastPrice={NFTInfo.lastPrice}
+                  nftOwnerNickname={NFTInfo.nftOwnerNickname}
+                  nftTags={NFTInfo.nftTags}
+                  nftLike={NFTInfo.nftLike}
+                  nftAddress={NFTInfo.nftAddress}
+                  nftDescription={NFTInfo.nftDescription}
+                  tokenId={NFTInfo.tokenId}
+                  isSale={NFTInfo.isSale}
+                />
+              }
             />
-          }/>
           </Container>
         </Link>
       ))}
