@@ -64,6 +64,16 @@ const searchNFT: any = createAsyncThunk('searchNFT', async (payload: any, { reje
   }
 });
 
+const possessionNFT: any = createAsyncThunk('possessionNFT', async (payload, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.put(api.possessionNFT(), payload, {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
 export interface NFT {
   imgUrl: string;
   nftTitle: String;
@@ -76,6 +86,7 @@ export interface NFT {
   nftAddress: String;
   nftDescription: String;
   tokenId: String;
+  isSale: Boolean;
 }
 
 export interface NFTState {
@@ -108,6 +119,7 @@ const initialState: NFTState = {
     nftAddress: '',
     nftDescription: '',
     tokenId: '',
+    isSale: false,
   },
   nftOwnerWallet: '',
   likeState: false,
@@ -157,10 +169,13 @@ export const NFTSlice = createSlice({
     [searchNFT.fulfilled]: (state, action) => {
       state.searchedNFT = action.payload;
     },
+    [possessionNFT.fulfilled]: (state, action) => {
+      state.currentNFT.isSale = false;
+    },
   },
 });
 
-export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner, searchNFT };
+export { fetchAllNFT, fetchNFTDetail, toggleLike, fetchLike, fetchNFTOwner, searchNFT, possessionNFT };
 
 export const { toggleIsLoading, setIsSearch, setKeyword, setCategory } = NFTSlice.actions;
 

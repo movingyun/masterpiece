@@ -14,7 +14,7 @@ import { fetchTicket } from '../../_slice/UserSlice';
 
 const StyledContainer = styled.div`
   margin: 20px 0 40px;
-`
+`;
 const StyledTicket = styled.div`
   display: flex;
   justify-content: space-between;
@@ -35,31 +35,31 @@ export default function Draw() {
 
   useEffect(() => {
     if (walletAddress) dispatch(fetchTicket(walletAddress));
-  }, [walletAddress]);
+  }, [walletAddress, open]);
 
   useEffect(() => {
     if (pickSuccess) console.log(pickResult);
     else console.log('NO TICKETS');
   }, [pickSuccess]);
 
-  const handlePickConsonant = () => {
+  const handlePickConsonant = async () => {
     const payload = {
       quantity: 1,
       userWalletAddress: walletAddress,
     };
     if (walletAddress) {
-      dispatch(pickConsonant(payload));
+      await dispatch(pickConsonant(payload));
     }
     setOpen(true);
   };
 
-  const handlePickVowel = () => {
+  const handlePickVowel = async () => {
     const payload = {
       quantity: 1,
       userWalletAddress: walletAddress,
     };
     if (walletAddress) {
-      dispatch(pickVowel(payload));
+      await dispatch(pickVowel(payload));
     }
     setOpen(true);
   };

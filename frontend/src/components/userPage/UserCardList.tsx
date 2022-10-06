@@ -70,88 +70,140 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
   useEffect(() => {
     setShowArr(collected);
   }, [collected]);
-  
+
   return (
     <>
       {/* <div>collected</div> */}
-      <ButtonGroup variant="contained" aria-label="text primary button group" fullWidth sx={{margin: '10px 0'}}> 
-        <Button style={(label === 'collected') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick(collected, 'collected')}>Collected</Button>
-        <Button style={(label === 'created') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick(created, 'created')}>Created</Button>
-        <Button style={(label === 'onsale') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick(onsale, 'onsale')}>Onsale</Button>
-        <Button style={(label === 'favorite') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick(favorite, 'favorite')}>Favorite</Button>
-        <Button style={(label === 'inventory') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick([], 'inventory')}>Inventory</Button>
+      <ButtonGroup variant="contained" aria-label="text primary button group" fullWidth sx={{ margin: '10px 0' }}>
+        <Button
+          style={label === 'collected' ? { ...seletTabButtonStyle } : { ...tabButtonStyle }}
+          onClick={() => handleClick(collected, 'collected')}>
+          Collected
+        </Button>
+        <Button
+          style={label === 'created' ? { ...seletTabButtonStyle } : { ...tabButtonStyle }}
+          onClick={() => handleClick(created, 'created')}>
+          Created
+        </Button>
+        <Button
+          style={label === 'onsale' ? { ...seletTabButtonStyle } : { ...tabButtonStyle }}
+          onClick={() => handleClick(onsale, 'onsale')}>
+          Onsale
+        </Button>
+        <Button
+          style={label === 'favorite' ? { ...seletTabButtonStyle } : { ...tabButtonStyle }}
+          onClick={() => handleClick(favorite, 'favorite')}>
+          Favorite
+        </Button>
+        <Button
+          style={label === 'inventory' ? { ...seletTabButtonStyle } : { ...tabButtonStyle }}
+          onClick={() => handleClick([], 'inventory')}>
+          Inventory
+        </Button>
       </ButtonGroup>
       {label === 'inventory' ? (
         <StyledCardList>
           {Object.values<Array<Hangul>>(inventory).map((one: Array<Hangul>, idx: Number) =>
-          one.map((hangul: Hangul, index) =>
-            hangul.quantity > 0 ? (
-              hangul.hangulId <= 30 ? (
-                <Container style={{
-                  paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
-                  marginBottom:100,
-                  position: "relative", background: "black",
-                  height:330, width:280
-                }}
-                key={'inventory' + `${idx}` + `${index}`}>
-                  <Information content="" height={380} lineHeight={1} title={
-                    <LetterCard
-                        margin
-                        description={hangul.description}
-                        title={hangul.title}
-                        letter={`${ConsonantOrder[index]}`}
-                        quantity={hangul.quantity}
+            one.map((hangul: Hangul, index) =>
+              hangul.quantity > 0 ? (
+                hangul.hangulId <= 30 ? (
+                  <Container
+                    style={{
+                      paddingTop: 15,
+                      paddingBottom: 0,
+                      paddingLeft: 15,
+                      paddingRight: 0,
+                      marginBottom: 100,
+                      position: 'relative',
+                      background: 'black',
+                      height: 330,
+                      width: 280,
+                    }}
+                    key={'inventory' + `${idx}` + `${index}`}>
+                    <Information
+                      content=""
+                      height={380}
+                      lineHeight={1}
+                      title={
+                        <LetterCard
+                          margin
+                          description={hangul.description}
+                          title={hangul.title}
+                          letter={`${ConsonantOrder[index]}`}
+                          quantity={hangul.quantity}
+                        />
+                      }
                     />
-                  }/>
-                </Container>
-              ) : (
-                <Container style={{
-                  paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
-                  marginBottom:100,
-                  position: "relative", background: "black",
-                  height:330, width:280
-                }}
-                key={'inventory' + `${idx}` + `${index}`}>
-                  <Information content="" height={380} lineHeight={1} title={
-                    <LetterCard
-                      margin
-                      description={hangul.description}
-                      title={hangul.title}
-                      letter={VowelOrder[index]}
-                      quantity={hangul.quantity}
+                  </Container>
+                ) : (
+                  <Container
+                    style={{
+                      paddingTop: 15,
+                      paddingBottom: 0,
+                      paddingLeft: 15,
+                      paddingRight: 0,
+                      marginBottom: 100,
+                      position: 'relative',
+                      background: 'black',
+                      height: 330,
+                      width: 280,
+                    }}
+                    key={'inventory' + `${idx}` + `${index}`}>
+                    <Information
+                      content=""
+                      height={380}
+                      lineHeight={1}
+                      title={
+                        <LetterCard
+                          margin
+                          description={hangul.description}
+                          title={hangul.title}
+                          letter={VowelOrder[index]}
+                          quantity={hangul.quantity}
+                        />
+                      }
                     />
-                  }/>
-                </Container>
-              )
-            ) : null
-          )
-        )}
+                  </Container>
+                )
+              ) : null
+            )
+          )}
         </StyledCardList>
       ) : (
         <StyledNFTList>
           {showArr.map((NFTInfo: NFT, idx: Number) => (
             <Link to={`/nftdetail/${NFTInfo.nftAddress}`} key={`${idx}` + NFTInfo.imgUrl}>
-              <Container style={{
-							paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
-							marginBottom:100,
-							position: "relative", background: "black",
-							height:300,
-					    }}>
-              <Information content="" height={350} title={
-              <NFTCard
-                imgUrl={NFTInfo.imgUrl}
-                nftTitle={NFTInfo.nftTitle}
-                nftPrice={NFTInfo.nftPrice}
-                nftCreatorNickname={NFTInfo.nftCreatorNickname}
-                lastPrice={NFTInfo.lastPrice}
-                nftOwnerNickname={NFTInfo.nftOwnerNickname}
-                nftTags={NFTInfo.nftTags}
-                nftLike={NFTInfo.nftLike}
-                nftAddress={NFTInfo.nftAddress}
-                nftDescription={NFTInfo.nftDescription}
-                tokenId={NFTInfo.tokenId}
-              />
-              }/>
+              <Container
+                style={{
+                  paddingTop: 15,
+                  paddingBottom: 0,
+                  paddingLeft: 15,
+                  paddingRight: 0,
+                  marginBottom: 100,
+                  position: 'relative',
+                  background: 'black',
+                  height: 300,
+                }}>
+                <Information
+                  content=""
+                  height={350}
+                  title={
+                    <NFTCard
+                      imgUrl={NFTInfo.imgUrl}
+                      nftTitle={NFTInfo.nftTitle}
+                      nftPrice={NFTInfo.nftPrice}
+                      nftCreatorNickname={NFTInfo.nftCreatorNickname}
+                      lastPrice={NFTInfo.lastPrice}
+                      nftOwnerNickname={NFTInfo.nftOwnerNickname}
+                      nftTags={NFTInfo.nftTags}
+                      nftLike={NFTInfo.nftLike}
+                      nftAddress={NFTInfo.nftAddress}
+                      nftDescription={NFTInfo.nftDescription}
+                      tokenId={NFTInfo.tokenId}
+                      isSale={NFTInfo.isSale}
+                    />
+                  }
+                />
               </Container>
             </Link>
           ))}

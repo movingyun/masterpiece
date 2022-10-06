@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Chip, Card, CardContent, Typography } from '@mui/material';
+import { Chip, Card, CardContent, Typography, Button } from '@mui/material';
 import styled from 'styled-components';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { fetchLike, fetchNFTDetail, fetchNFTOwner, toggleLike } from '../../_slice/NFTSlice';
+import { fetchLike, fetchNFTDetail, fetchNFTOwner, possessionNFT, toggleLike } from '../../_slice/NFTSlice';
 import { fetchSaleHistory } from '../../_slice/SaleSlice';
 import SellModal from './SellModal';
 import BuyModal from './BuyModal';
@@ -27,7 +27,6 @@ const StyledChip = styled.div`
     font-weight: 700;
   }
 `;
-
 
 const StyledBtn = styled.div`
   display: flex;
@@ -69,6 +68,7 @@ interface CurrentNftType {
 export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
   const dispatch = useDispatch();
   const currentNFT = useSelector((state: any) => state.nft.currentNFT);
+  const isSale = useSelector((state: any) => state.nft.currentNFT.isSale);
   const nftOwnerWallet = useSelector((state: any) => state.nft.nftOwnerWallet);
   const saleHistoryAll = useSelector((state: any) => state.sale.saleHistoryAll);
   const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
@@ -99,6 +99,13 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
       nftHash: nftAddress,
     };
     dispatch(toggleLike(likePayload));
+  };
+
+  const handleNotSale = () => {
+    const payload = {
+      nftAddress,
+    };
+    dispatch(possessionNFT(payload));
   };
 
   return (
@@ -147,7 +154,20 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
               ))}
             </StyledChip>
             <StyledBtn>
-              {nftOwnerWallet === walletAddress ? <SellModal /> : <BuyModal />}
+              {/* 구매/판매 버튼 */}
+              {nftOwnerWallet === walletAddress ? (
+                isSale ? (
+                  <Button onClick={handleNotSale}>Cancel the sale</Button>
+                ) : (
+                  <SellModal />
+                )
+              ) : isSale ? (
+                <BuyModal />
+              ) : (
+                <Button size="large" sx={{ width: '70px' }} disabled>
+                  Buy
+                </Button>
+              )}
               {likeState ? (
                 <StyledLikeBtn onClick={handleClickLike}>
                   <FavoriteIcon />

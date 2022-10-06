@@ -40,6 +40,7 @@ export default function SearchedList() {
             nftAddress={NFTInfo.nftAddress}
             nftDescription={NFTInfo.nftDescription}
             tokenId={NFTInfo.tokenId}
+            isSale={NFTInfo.isSale}
           />
         </Link>
       ))}
