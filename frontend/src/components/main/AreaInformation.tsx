@@ -8,7 +8,7 @@ export default function AreaInformation({ focus }: any) {
 
 	const titles: string[] = ["Learn the Principal of Hangul", "Have fun decorating Hangul words"];
 	const contents: string[] = ["Don’t be nervous! We’ll give step by step guide toward the basics on how the Hangul is assembled to become Korean word.",
-		"Manage distribution of budget, by brand,product, quarter, campaign and see time tracking."];
+		"We provide various effects to decorate your Hangul."];
 	const buttonTexts: string[] = ["More Info >>", "More Info >>"];
 	const indexArray: number[] = [];
 	for (let i = 0; i < titles.length; i++){

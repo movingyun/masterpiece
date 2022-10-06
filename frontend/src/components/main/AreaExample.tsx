@@ -67,7 +67,7 @@ export default function AreaExample() {
 				{(!isLogin) ? (<Link to="/login" style={{ padding: 10, background: "yellow", color: "black" }}>Get started</Link>)
 					:
 					(<Grid container>
-						<Grid item xs={6}><Link to="/composehangul" style={{ padding: 10, background: "yellow", color: "black" }}>Created</Link></Grid>
+						<Grid item xs={6}><Link to="/composehangul" style={{ padding: 10, background: "yellow", color: "black" }}>Create</Link></Grid>
 						<Grid item xs={6}><Link to="/learnsyllables" style={{padding:10, background:"yellow", color:"black"}}>Explore</Link></Grid>
 					</Grid>
 					)}
