@@ -1,4 +1,3 @@
-
 // const API_BASE_URL = 'http://localhost:8081/api';
 const API_BASE_URL = 'https://j7a508.p.ssafy.io/api';
 
@@ -16,6 +15,7 @@ const COLLECTED_URL = '/collected';
 const CREATED_URL = '/created';
 const FAVORITE_URL = '/favorite';
 const ONSALE_URL = '/onsale';
+const TICKET_URL = '/ticket';
 
 // Hangul
 const CONSONANT_URL = '/own/consonant';
@@ -47,6 +47,9 @@ const SALE_URL = '/sale';
 // Like
 const LIKE_URL = '/like';
 
+// 한글표기변환
+const CONVERT_URL = '/convert';
+
 // Game
 const LOG_URL = '/log';
 
@@ -61,6 +64,8 @@ const api = {
   fetchCreated: (walletAddress: String) => API_BASE_URL + USER_URL + CREATED_URL + `?wallet-address=${walletAddress}`,
   fetchFavorite: (walletAddress: String) => API_BASE_URL + USER_URL + FAVORITE_URL + `?wallet-address=${walletAddress}`,
   fetchOnsale: (walletAddress: String) => API_BASE_URL + USER_URL + ONSALE_URL + `?wallet-address=${walletAddress}`,
+  editUser: () => API_BASE_URL + USER_URL,
+  fetchTicket: (walletAddress: String) => API_BASE_URL + USER_URL + TICKET_URL + `?wallet-address=${walletAddress}`,
 
   // hangul
   fetchConsonant: (walletAddress: String) =>
@@ -102,6 +107,9 @@ const api = {
 
   // Like
   toggleLike: () => API_BASE_URL + LIKE_URL,
+
+  // 한글표기변환
+  getConvertHangul: (text:string) => API_BASE_URL + CONVERT_URL + `?englishname=${text}`,
 
   // Game
   fetchGameData: () => API_BASE_URL + GAME_URL,

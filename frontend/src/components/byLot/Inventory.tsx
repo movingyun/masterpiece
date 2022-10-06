@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Typography } from '@mui/material';
+
 import styled from 'styled-components';
 import LetterCard from '../../commons/LetterCard';
 import { fetchInventory, Hangul } from '../../_slice/UserSlice';
 import { ConsonantOrder, VowelOrder } from '../../_store/store';
 
 const StyledCardList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(277px, auto));
   > * {
-    width: 290px;
-    margin: 2px;
+    text-decoration: none;
   }
 `;
 
@@ -28,7 +29,9 @@ export default function Inventory() {
 
   return (
     <>
-      <div>inventory</div>
+      <Typography gutterBottom variant="h4" component="div" sx={{ fontFamily: 'Poppins, san-serif' }}>
+        Inventory
+      </Typography>
       <StyledCardList>
         {Object.values<Array<Hangul>>(inventory).map((one: Array<Hangul>, idx: Number) =>
           one.map((hangul: Hangul, index) =>

@@ -1,10 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface InterState {
+  textSize: number,
+  textColor: string,
+  textXAxis: number,
+  textYAxis: number,
+  textWidthSpacing: number,
+  textLineSpacing: number,
+  strokeWidth: number,
+  strokeColor: string,
+  shadowXAxis: number,
+  shadowYAxis: number,
+  shadowBlur: number,
+  shadowColor: string,
+  backgroundColor: string,
+  fontName: string,
+  animationSpeed: number,
+  style: {},
+}
+
+const initialState: InterState = {
   textSize: 50,
   textColor: '#000000',
   textXAxis: 0,
   textYAxis: 0,
+  textWidthSpacing: 0,
   textLineSpacing: 0,
   strokeWidth: 0,
   strokeColor: '#ffffff',
@@ -14,6 +34,7 @@ const initialState = {
   shadowColor: '#000000',
   backgroundColor: '#ededed',
   fontName: 'BlackHanSans',
+  animationSpeed: 20,
   style: {
     width: '100%',
     maxHeight: '100%',
@@ -24,7 +45,6 @@ const initialState = {
       display: 'none',
     },
   },
-  animationType: 1,
 };
 
 const DecorateHangulSlice = createSlice({
@@ -42,6 +62,9 @@ const DecorateHangulSlice = createSlice({
     },
     textYAxis(state, action) {
       state.textYAxis = action.payload;
+    },
+    textWidthSpacing(state, action) {
+      state.textWidthSpacing = action.payload;
     },
     textLineSpacing(state, action) {
       state.textLineSpacing = action.payload;
@@ -69,6 +92,9 @@ const DecorateHangulSlice = createSlice({
     },
     fontName(state, action) {
       state.fontName = action.payload;
+    },
+    animationSpeed(state, action) {
+      state.animationSpeed = action.payload;
     },
   },
 });

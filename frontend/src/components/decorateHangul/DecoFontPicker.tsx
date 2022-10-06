@@ -2,7 +2,8 @@ import React from 'react'
 import {List, ListItem, Divider } from '@mui/material';
 import styled from 'styled-components';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { decoActions } from '../../_slice/DecorateHangulSlice';
 
 const FONT_SIZE = 40;
@@ -91,34 +92,11 @@ const FontGoheung = styled.div`
 
 function FontPicker() {
   const dispatch = useDispatch();
-  const style = useSelector((state: any) => state.deco.style);
+  const style =  UseSelectorHook(state => state.deco.style);
 
   const fontNameHandler = (type: string) => {
     dispatch(decoActions.fontName(type));
   };
-
-  // const fontName:any[] = [
-  //   ['검은고딕체', 'BlackHanSans', 1],
-  //   ['배민 을지로체', 'BMEuljiro', 1],
-  //   ['가비아봄바람체', 'GabiaBombaram', 1],
-  //   ['HS봄바람체 3.0', 'HSBombaram', 1],
-  //   ['HS굴토끼체', 'HSGooltokki', 1],
-  //   ['Mapo 홍대프리덤', 'MapoHongdaeFreedom', 0.9],
-  //   ['상주곶감체', 'SangjuGotgam', 1],
-  //   ['수성바탕체', 'SuseongBatang', 1],
-  //   ['클래식체 B', 'ClassicB', 1],
-  //   ['문화재돌봄체B', 'DolBomB', 1],
-  //   ['빛고을광주체 B', 'GwangJu', 1],
-  //   ['서울남산체 EB', 'Namsan', 1],
-  //   ['서울한강체 EB', 'Hangang', 1],
-  //   ['야놀자 야체', 'Yanolja', 1.2],
-  //   ['정선아리랑 뿌리체', 'JSArirangPPURI', 1],
-  //   ['KCC 안중근체', 'KCCAhnjunggeun', 1],
-  //   ['창원단감아삭체', 'DanGam', 1],
-  //   ['충북대 직지체', 'Jikji', 1],
-  //   ['한수원 한돋움체', 'HanDoetEum', 1],
-  //   ['행복고흥체 B', 'Goheung', 1.5],
-  // ];
 
   return (
     <List sx={style} component="nav" aria-label="mailbox folders">

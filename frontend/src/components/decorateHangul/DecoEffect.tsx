@@ -1,34 +1,66 @@
 import React, { useState } from 'react';
 import { List, ListItem, ListItemText, Slider } from '@mui/material';
-import { CompactPicker } from 'react-color';
+import { CompactPicker, ColorResult } from 'react-color';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { decoActions } from '../../_slice/DecorateHangulSlice';
 
 function DecoShadow() {
   
   const dispatch = useDispatch();
-  const style = useSelector((state: any) => state.deco.style);
-  const shadowXAxis = useSelector((state: any) => state.deco.shadowXAxis);
-  const shadowYAxis = useSelector((state: any) => state.deco.shadowYAxis);
-  const shadowBlur = useSelector((state: any) => state.deco.shadowBlur);
-  const shadowColor = useSelector((state: any) => state.deco.shadowColor);
+  const style =  UseSelectorHook(state => state.deco.style);
+  const strokeWidth = UseSelectorHook(state => state.deco.strokeWidth);
+  const strokeColor = UseSelectorHook(state => state.deco.strokeColor);
+  const shadowXAxis =  UseSelectorHook(state => state.deco.shadowXAxis);
+  const shadowYAxis =  UseSelectorHook(state => state.deco.shadowYAxis);
+  const shadowBlur =  UseSelectorHook(state => state.deco.shadowBlur);
+  const shadowColor =  UseSelectorHook(state => state.deco.shadowColor);
 
-  const xAxisHandler = (event: any, value: any) => {
+
+  const strokeWidthHandler = (_: Event, value: number | number[]) => {
+    dispatch(decoActions.strokeWidth(value));
+  };
+  const strokeColorHandler = (color: ColorResult) => {
+    dispatch(decoActions.strokeColor(color.hex));
+  };
+  const xAxisHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.shadowXAxis(value));
   };
-  const yAxisHandler = (event: any, value: any) => {
+  const yAxisHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.shadowYAxis(value));
   };
-  const shadowBlurHandler = (event: any, value: any) => {
+  const shadowBlurHandler = (_: Event, value: number | number[]) => {
     dispatch(decoActions.shadowBlur(value));
   };
-  const shadowColorHandler = (color: any) => {
+  const shadowColorHandler = (color: ColorResult) => {
     dispatch(decoActions.shadowColor(color.hex));
   };
 
   return (
     <List sx={style} component="nav" aria-label="fontsize">
+      <ListItem divider>
+        <ListItemText
+          primary="Stroke Width"
+          secondary={
+            <Slider
+              aria-label="strokeWidth"
+              defaultValue={0}
+              valueLabelDisplay="auto"
+              onChange={strokeWidthHandler}
+              value={strokeWidth}
+              min={0}
+              max={30}
+            />
+          }
+        />
+      </ListItem>
+      <ListItem divider>
+        <ListItemText
+          primary="Stroke Color"
+          secondary={<CompactPicker color={strokeColor} onChange={strokeColorHandler} />}
+        />
+      </ListItem>
       <ListItem divider>
         <ListItemText
           primary="Shadow x-axis"
@@ -63,7 +95,7 @@ function DecoShadow() {
       </ListItem>
       <ListItem divider>
         <ListItemText
-          primary="Blur"
+          primary="Shadow Bluriness"
           secondary={
             <Slider
               aria-label="blur"

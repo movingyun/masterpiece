@@ -10,6 +10,7 @@ const Search = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin: 20px 0;
 `;
 
 const SearchIconWrapper = styled.div`
@@ -35,7 +36,7 @@ export default function SearchBar() {
 
   return (
     <Search>
-      <FormControl sx={{ minWidth: 160 }}>
+      <FormControl sx={{ minWidth: 160, marginRight: '10px' }}>
         <InputLabel id="demo-simple-select-label">Category</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -50,10 +51,7 @@ export default function SearchBar() {
           <MenuItem value="creator">Creator</MenuItem>
         </Select>
       </FormControl>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <Box sx={{ height: 40, width: '40%' }}>
+      <Box sx={{ height: 40, width: "30%"}}>
         <InputBase
           id="searchBar"
           placeholder="Search…"
@@ -64,6 +62,9 @@ export default function SearchBar() {
           sx={{ height: '100%', border: 1, borderColor: 'rgba(185, 184, 184, 0.87)', borderRadius: 1, padding: 1 }}
         />
       </Box>
+      <SearchIconWrapper>
+        <SearchIcon />
+      </SearchIconWrapper>
     </Search>
   );
 }

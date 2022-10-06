@@ -1,10 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
 
 // import font
-import './App.css'
+import './App.css';
 
 // 뷰포트 크기를 지정, flex 이용해서 중앙 정렬
 const Resolution = styled.div`
@@ -18,14 +19,22 @@ const Resolution = styled.div`
 `;
 
 function App() {
+  const isMain = useSelector((state: any) => state.sale.isMain);
+
   return (
     <div>
       <Header />
-      <Resolution>
+      {isMain ? (
         <div>
           <Outlet />
         </div>
-      </Resolution>
+      ) : (
+        <Resolution>
+          <div>
+            <Outlet />
+          </div>
+        </Resolution>
+      )}
     </div>
   );
 }

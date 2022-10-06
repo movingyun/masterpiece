@@ -7,11 +7,38 @@ import { UseSelectorHook } from "../../_hook/HangulMakerHook";
 import CarouselDisplay from "./CarouselDisplay";
 import { fetchAllNFT } from "../../_slice/NFTSlice";
 
-export default function AreaExample() {
+export default function AreaExample({ height }: any) {
+	// login 판단
 	const walletAddress = UseSelectorHook(state => state.user.currentUser.wallet_address);
 	const [isLogin, setIsLogin] = React.useState(false);
+	React.useEffect(() => {
+		if (walletAddress.charAt(0) === '0') {
+			setIsLogin(true);
+		}
+		else {
+			setIsLogin(false);
+		}
+	}, [walletAddress]);
+
+	const [topMargin, setTopMargin] = React.useState(0);
+	React.useEffect(() => {
+		if (height) {
+			const tempMargin = (height > 600) ? height / 2 - 300 : 5;
+			setTopMargin(tempMargin);
+		}
+	}, [height]);
 	const [NFTList, setNFTList] = React.useState();
-	const [CarouselElements, setCarouselElements] = React.useState<JSX.Element[]>([]);
+	const [CarouselElements, setCarouselElements] = React.useState<JSX.Element[]>([
+		<Container style={{ width: 300, height: 300, background: "red", textAlign: "center" }}>
+						<img src="abc" alt="abc"/>
+		</Container>,
+		<Container style={{ width: 300, height: 300, background: "blue", textAlign: "center" }}>
+		<img src="abc" alt="abc"/>
+		</Container>,
+		<Container style={{ width: 300, height: 300, background: "green", textAlign: "center" }}>
+		<img src="abc" alt="abc"/>
+	</Container>
+	]);
 	React.useEffect(() => {
 		async function fetchNFTData() {
 			const response: any = await axios.get(api.fetchAllNFT(), {});
@@ -22,9 +49,8 @@ export default function AreaExample() {
 			for (let i = 0; i < 5; i++){
 				const randomIndex = Math.floor(Math.random() * (response.data.length));
 				randomElements.push(
-					<Container style={{ width: 300, height: 300, background: colors[i], textAlign: "center" }}>
-						<img src={response.data[randomIndex].imgUrl} alt={response.data[randomIndex].imgUrl}/>
-					</Container>
+					<video autoPlay loop muted src={response.data[randomIndex].imgUrl}
+					width={300} height={300}/>
 				);
 			}
 			setCarouselElements(randomElements);
@@ -32,35 +58,10 @@ export default function AreaExample() {
 		}
 		fetchNFTData();
 	}, []);
-	React.useEffect(() => {
-		if (walletAddress.charAt(0) === '0') {
-			setIsLogin(true);
-		}
-		else {
-			setIsLogin(false);
-		}
-	}, [walletAddress]);
 	
-	// carousel elements
-	// const CarouselDispalyElements:JSX.Element[] = [
-	// 	<Box sx={{ width: 200, height: 200, background: "red", textAlign: "center" }}
-	// 	display="flex" justifyContent="center" alignItems="center">
-	// 		{NFTIndex.map((index: number) => (
-	// 			<Chip key={`img${NFTList[index].imgUrl}`} size="small" color="primary" />
-	// 		))}
-	// 	</Box>,
-	// 	<Box sx={{ width: 200, height: 200, background: "green", textAlign: "center" }}
-	// 	display="flex" justifyContent="center" alignItems="center">
-	// 		NFT예시2
-	// 	</Box>,
-	// 	<Box sx={{ width: 200, height: 200, background: "blue", textAlign: "center" }}
-	// 	display="flex" justifyContent="center" alignItems="center">
-	// 		NFT예시3
-	// 	</Box>,
-	// ];
 	return (
-		<Container style={{marginTop:"50%"}}>
-			<Box sx={{ minHeight:300, boxShadow: 8, borderRadius: "10%", padding: 2, background: "white", textAlign:"center"}}
+		<Container style={{ marginTop: topMargin }}>
+			<Box sx={{ minHeight:300, boxShadow: 8, borderRadius: "5%", padding: 2, background: "white", textAlign:"center"}}
 			display="flex" justifyContent="center" alignItems="center"
 			flexDirection="column">
 				<Container style={{ marginBottom: 50, fontSize: 30 }}>It Takes Only 5-minutes.<br/>Give it a try!</Container>
