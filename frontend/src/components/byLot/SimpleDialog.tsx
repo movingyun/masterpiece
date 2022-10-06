@@ -77,7 +77,6 @@ export default function SimpleDialog(props: PickType) {
       const timer = setTimeout(() => {
         setAlert(false);
         console.log(`close`);
-        pickAudio.play();
       }, 7000);
     }
   }, [open]);
