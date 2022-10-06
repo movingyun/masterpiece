@@ -54,7 +54,7 @@ export default function AreaTranslate(){
   
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{...currentBlackWhite, ...thisAreaBackground, borderRadius:10}}
+    style={{...currentBlackWhite, ...thisAreaBackground, borderRadius:10, marginTop:-10}}
     className="area"
     >
       <Grid container>

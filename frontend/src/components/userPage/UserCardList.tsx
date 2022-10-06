@@ -17,6 +17,7 @@ import { UserInfoType } from './UserInfo';
 import LetterCard from '../../commons/LetterCard';
 import { ConsonantOrder, VowelOrder } from '../../_store/store';
 import Information from '../../commons/Information';
+import { tabButtonStyle, seletTabButtonStyle } from '../../_css/ReactCSSProperties';
 
 const StyledCardList = styled.div`
   display: flex;
@@ -74,11 +75,11 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
     <>
       {/* <div>collected</div> */}
       <ButtonGroup variant="contained" aria-label="text primary button group" fullWidth sx={{margin: '10px 0'}}> 
-        <Button onClick={() => handleClick(collected, 'collected')}>Collected</Button>
-        <Button onClick={() => handleClick(created, 'created')}>Created</Button>
-        <Button onClick={() => handleClick(onsale, 'onsale')}>Onsale</Button>
-        <Button onClick={() => handleClick(favorite, 'favorite')}>Favorite</Button>
-        <Button onClick={() => handleClick([], 'inventory')}>Inventory</Button>
+        <Button style={(label === 'collected') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick(collected, 'collected')}>Collected</Button>
+        <Button style={(label === 'created') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick(created, 'created')}>Created</Button>
+        <Button style={(label === 'onsale') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick(onsale, 'onsale')}>Onsale</Button>
+        <Button style={(label === 'favorite') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick(favorite, 'favorite')}>Favorite</Button>
+        <Button style={(label === 'inventory') ? {...seletTabButtonStyle} : {...tabButtonStyle}} onClick={() => handleClick([], 'inventory')}>Inventory</Button>
       </ButtonGroup>
       {label === 'inventory' ? (
         <StyledCardList>
