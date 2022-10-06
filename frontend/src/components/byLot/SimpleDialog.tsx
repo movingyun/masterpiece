@@ -5,6 +5,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import LetterCard from '../../commons/LetterCard';
 
 const StyledBox = styled.div`
@@ -29,12 +30,12 @@ export default function SimpleDialog(props: PickType) {
     onClose('');
   };
 
-  useEffect(() => {
+  const ttsBtn = () => {
     if (pickResult.length > 0 && open) {
-      console.log(pickResult);
-      tts('ko', pickResult[0].letter);
+      const result = pickResult[0].title.split('[');
+      tts('ko', result[0]);
     }
-  }, [pickResult]);
+  };
 
   const tts = (lang: string, text: string) => {
     const msg = new SpeechSynthesisUtterance();
@@ -47,10 +48,11 @@ export default function SimpleDialog(props: PickType) {
     <div>
       {pickSuccess ? (
         <Dialog onClose={handleClose} open={open}>
-          <DialogTitle sx={{fontWeight: 800}}>
+          <DialogTitle sx={{ fontWeight: 800 }}>
             <CelebrationIcon />
-            <span style={{marginLeft: '5px'}}>Congratulations!</span>
+            <span style={{ marginLeft: '5px' }}>Congratulations!</span>
           </DialogTitle>
+          <VolumeUpIcon onClick={ttsBtn} />
           {pickResult.map((one: any, idx: number) => (
             <LetterCard
               description={one.description}
