@@ -253,7 +253,7 @@ export default function StartedGame({ reset }: any) {
             <StyledWord>You earned {count} tickets!</StyledWord>
           )}
           <img src={ticket[count - 1]} />
-          <Button variant="contained" onClick={handleRestart}>
+          <Button variant="contained" onClick={handleRestart} style={{...selectTabButtonStyle, marginTop:20}}>
             Restart
           </Button>
         </StyledWordWrap>
