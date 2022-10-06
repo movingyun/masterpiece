@@ -42,24 +42,24 @@ export default function Draw() {
     else console.log('NO TICKETS');
   }, [pickSuccess]);
 
-  const handlePickConsonant = () => {
+  const handlePickConsonant = async () => {
     const payload = {
       quantity: 1,
       userWalletAddress: walletAddress,
     };
     if (walletAddress) {
-      dispatch(pickConsonant(payload));
+      await dispatch(pickConsonant(payload));
     }
     setOpen(true);
   };
 
-  const handlePickVowel = () => {
+  const handlePickVowel = async () => {
     const payload = {
       quantity: 1,
       userWalletAddress: walletAddress,
     };
     if (walletAddress) {
-      dispatch(pickVowel(payload));
+      await dispatch(pickVowel(payload));
     }
     setOpen(true);
   };

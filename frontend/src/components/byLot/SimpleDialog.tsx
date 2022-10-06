@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, CardContent, CardMedia, Typography } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -10,6 +10,8 @@ import Card from '@mui/material/Card';
 import { hover } from '@testing-library/user-event/dist/hover';
 import LetterCard from '../../commons/LetterCard';
 import tmpImg from '../../img/한지.jpg';
+import pick from '../../audio/pick.mp3';
+import hangul from '../../audio/hangul.mp4';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -46,6 +48,7 @@ export default function SimpleDialog(props: PickType) {
 
   const handleClose = () => {
     onClose('');
+    setAlert(true);
   };
 
   const ttsBtn = () => {
@@ -62,46 +65,64 @@ export default function SimpleDialog(props: PickType) {
     window.speechSynthesis.speak(msg);
   };
 
+  // 뽑기 소리, 영상
+  const [alert, setAlert] = useState(true);
+  const pickAudio = new Audio(pick);
+
+  useEffect(() => {
+    console.log(pickResult.length);
+    console.log(`${open}`);
+    if (open && pickResult.length > 0) {
+      pickAudio.play();
+      const timer = setTimeout(() => {
+        setAlert(false);
+        console.log(`close`);
+        pickAudio.play();
+      }, 7000);
+    }
+  }, [open]);
+
   return (
     <div>
       {pickSuccess ? (
-        <Dialog onClose={handleClose} open={open}>
-          <DialogTitle sx={{ fontWeight: 800 }}>
-            <CelebrationIcon />
-            <span style={{ marginLeft: '5px' }}>Congratulations!</span>
-          </DialogTitle>
-          {pickResult.map((one: any, idx: number) => (
-            <Card sx={{ maxWidth: 290, height: 380 }}>
-              {/* 이미지 링크 수정필요함 */}
-              <CardMedia component="img" height="150" image={tmpImg} alt="green iguana" />
-              <StyledLetter>{one.letter}</StyledLetter>
-              <CardContent>
-                <StyledWrapper>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
-                    {one.title}
+        <>
+          <Dialog open={open}>
+            <DialogTitle sx={{ fontWeight: 800 }}>
+              <CelebrationIcon />
+              <span style={{ marginLeft: '5px' }}>Congratulations!</span>
+            </DialogTitle>
+            {pickResult.map((one: any, idx: number) => (
+              <Card sx={{ maxWidth: 290, height: 380 }}>
+                {/* 이미지 링크 수정필요함 */}
+                <CardMedia component="img" height="150" image={tmpImg} alt="green iguana" />
+                <StyledLetter>{one.letter}</StyledLetter>
+                <CardContent>
+                  <StyledWrapper>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
+                      {one.title}
+                    </Typography>
+                    <VolumeUpIcon onClick={ttsBtn} style={{ cursor: 'pointer' }} />
+                  </StyledWrapper>
+                  <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Poppins, san-serif' }}>
+                    {one.description}
                   </Typography>
-                  <VolumeUpIcon onClick={ttsBtn} style={{ cursor: 'pointer' }} />
-                </StyledWrapper>
-                <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Poppins, san-serif' }}>
-                  {one.description}
-                </Typography>
-              </CardContent>
-            </Card>
-            // <LetterCard
-            //   description={one.description}
-            //   title={one.title}
-            //   letter={one.letter}
-            //   key={'pickConsonant' + `${idx}`}
-            // />
-          ))}
-          <Button onClick={handleClose}>Close</Button>
-        </Dialog>
+                </CardContent>
+              </Card>
+            ))}
+            <Button onClick={handleClose}>Close</Button>
+          </Dialog>
+          {alert ? (
+            <Dialog open={open} maxWidth="lg">
+              <video muted autoPlay width="100%" src={hangul} style={{ zIndex: 2 }} />
+            </Dialog>
+          ) : null}
+        </>
       ) : (
-        <Dialog onClose={handleClose} open={open}>
+        <Dialog open={open}>
           <DialogTitle>No Ticket</DialogTitle>
           <StyledBox>
             <div>If you want to do more draws, get a ticket.</div>
