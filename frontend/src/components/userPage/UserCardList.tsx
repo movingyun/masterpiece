@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ButtonGroup, Button } from '@mui/material';
+import { ButtonGroup, Button, Container } from '@mui/material';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import {
@@ -16,6 +16,7 @@ import NFTCard from '../../commons/NFTCard';
 import { UserInfoType } from './UserInfo';
 import LetterCard from '../../commons/LetterCard';
 import { ConsonantOrder, VowelOrder } from '../../_store/store';
+import Information from '../../commons/Information';
 
 const StyledCardList = styled.div`
   display: flex;
@@ -81,33 +82,72 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
       {label === 'inventory' ? (
         <StyledCardList>
           {Object.values<Array<Hangul>>(inventory).map((one: Array<Hangul>, idx: Number) =>
-            one.map((hangul: Hangul, index) =>
-              hangul.quantity > 0 ? (
-                hangul.hangulId <= 30 ? (
-                  <LetterCard
-                    description={hangul.description}
-                    title={hangul.title}
-                    letter={`${ConsonantOrder[index]}`}
-                    quantity={hangul.quantity}
-                    key={'inventory' + `${idx}` + `${index}`}
-                  />
-                ) : (
-                  <LetterCard
-                    description={hangul.description}
-                    title={hangul.title}
-                    letter={VowelOrder[index]}
-                    quantity={hangul.quantity}
-                    key={'inventory' + `${idx}` + `${index}`}
-                  />
-                )
-              ) : null
-            )
-          )}
+          one.map((hangul: Hangul, index) =>
+            hangul.quantity > 0 ? (
+              hangul.hangulId <= 30 ? (
+                <Container style={{
+                  paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
+                  marginBottom:100,
+                  position: "relative", background: "black",
+                  height:330, width:280
+                }}>
+                  <Information content="" height={380} lineHeight={1} title={
+                    <LetterCard
+                        description={hangul.description}
+                        title={hangul.title}
+                        letter={`${ConsonantOrder[index]}`}
+                        quantity={hangul.quantity}
+                        key={'inventory' + `${idx}` + `${index}`}
+                    />
+                  }/>
+                </Container>
+              // <LetterCard
+              // description={hangul.description}
+              // title={hangul.title}
+              // letter={`${ConsonantOrder[index]}`}
+              // quantity={hangul.quantity}
+              // key={'inventory' + `${idx}` + `${index}`}
+              // />
+              ) : (
+                <Container style={{
+                  paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
+                  marginBottom:100,
+                  position: "relative", background: "black",
+                  height:330, width:280
+                }}>
+                  <Information content="" height={380} lineHeight={1} title={
+                    <LetterCard
+                      description={hangul.description}
+                      title={hangul.title}
+                      letter={VowelOrder[index]}
+                      quantity={hangul.quantity}
+                      key={'inventory' + `${idx}` + `${index}`}
+                    />
+                  }/>
+                </Container>
+                // <LetterCard
+                //   description={hangul.description}
+                //   title={hangul.title}
+                //   letter={VowelOrder[index]}
+                //   quantity={hangul.quantity}
+                //   key={'inventory' + `${idx}` + `${index}`}
+                // />
+              )
+            ) : null
+          )
+        )}
         </StyledCardList>
       ) : (
         <StyledNFTList>
           {showArr.map((NFTInfo: NFT, idx: Number) => (
             <Link to={`/nftdetail/${NFTInfo.nftAddress}`} key={`${idx}` + NFTInfo.imgUrl}>
+              <Container style={{
+							paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
+							marginBottom:100,
+							position: "relative", background: "black",
+							height:300,
+					    }}>
+              <Information content="" height={350} title={
               <NFTCard
                 imgUrl={NFTInfo.imgUrl}
                 nftTitle={NFTInfo.nftTitle}
@@ -121,6 +161,8 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
                 nftDescription={NFTInfo.nftDescription}
                 tokenId={NFTInfo.tokenId}
               />
+              }/>
+              </Container>
             </Link>
           ))}
         </StyledNFTList>
