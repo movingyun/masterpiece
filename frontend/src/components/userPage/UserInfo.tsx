@@ -60,6 +60,11 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
   const [file, setFile] = useState<any>();
   const [imageSrc, setImageSrc] = useState('');
 
+  useEffect(() => {
+    setNickname(searchedUser.nickname);
+    setMessage(searchedUser.message);
+  }, [searchedUser]);
+
   // 파일 업로드
   const fileUploadValidHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
@@ -151,6 +156,10 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
 
   const editHander = async () => {
     if (isEdit) {
+      console.log(walletAddress);
+      console.log(nickname);
+      console.log(message);
+
       const formData = new FormData();
       formData.append('wallet_address', walletAddress);
       formData.append('profileImage', file);
@@ -158,8 +167,8 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
       formData.append('message', message);
 
       await dispatch(editUser(formData));
+      await dispatch(fetchUser(walletAddress));
       setIsEdit(false);
-      dispatch(fetchUser(walletAddress));
     } else {
       setIsEdit(true);
     }
@@ -195,7 +204,6 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
                 label="Nickname"
                 variant="outlined"
                 defaultValue={searchedUser.nickname}
-                value={nickname}
                 onChange={onChangeNickname}
               />
               <StyledWord>Wallet Address : {searchedUser.wallet_address} </StyledWord>
@@ -205,7 +213,6 @@ export default function UserInfo({ walletAddress }: UserInfoType) {
                 label="Message"
                 variant="outlined"
                 defaultValue={searchedUser.message}
-                value={message}
                 onChange={onChangeMessage}
               />
             </CardContent>
