@@ -202,4 +202,16 @@ public class HangulController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @Operation(summary = "보유한 자음 개수 조회 API", description = "해당 유저가 보유하고 있는 자음 목록 반환")
+    @GetMapping("/own/consonant2")
+    public ResponseEntity getAllOwnedConsonant2(@RequestParam(value = "wallet-address") String wallet_address) {
+        try{
+            List<Integer> list = hangulService.getConsonantList2(wallet_address);
+            return new ResponseEntity(list, HttpStatus.OK);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
