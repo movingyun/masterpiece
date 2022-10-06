@@ -1,12 +1,30 @@
 import React, { useEffect } from 'react';
-import { Button } from '@mui/material';
+import { Button, CardContent, CardMedia, Typography } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import Card from '@mui/material/Card';
+import { hover } from '@testing-library/user-event/dist/hover';
 import LetterCard from '../../commons/LetterCard';
+import tmpImg from '../../img/한지.jpg';
+
+const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledLetter = styled.span`
+  position: absolute;
+  top: 20%;
+  left: 32%;
+  z-index: 1;
+  color: black;
+  font-size: 100px;
+  font-weight: bold;
+`;
 
 const StyledBox = styled.div`
   padding: 10px 20px;
@@ -52,14 +70,33 @@ export default function SimpleDialog(props: PickType) {
             <CelebrationIcon />
             <span style={{ marginLeft: '5px' }}>Congratulations!</span>
           </DialogTitle>
-          <VolumeUpIcon onClick={ttsBtn} />
           {pickResult.map((one: any, idx: number) => (
-            <LetterCard
-              description={one.description}
-              title={one.title}
-              letter={one.letter}
-              key={'pickConsonant' + `${idx}`}
-            />
+            <Card sx={{ maxWidth: 290, height: 380 }}>
+              {/* 이미지 링크 수정필요함 */}
+              <CardMedia component="img" height="150" image={tmpImg} alt="green iguana" />
+              <StyledLetter>{one.letter}</StyledLetter>
+              <CardContent>
+                <StyledWrapper>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
+                    {one.title}
+                  </Typography>
+                  <VolumeUpIcon onClick={ttsBtn} style={{ cursor: 'pointer' }} />
+                </StyledWrapper>
+                <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Poppins, san-serif' }}>
+                  {one.description}
+                </Typography>
+              </CardContent>
+            </Card>
+            // <LetterCard
+            //   description={one.description}
+            //   title={one.title}
+            //   letter={one.letter}
+            //   key={'pickConsonant' + `${idx}`}
+            // />
           ))}
           <Button onClick={handleClose}>Close</Button>
         </Dialog>
