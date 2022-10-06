@@ -78,7 +78,8 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
   useEffect(() => {
     dispatch(fetchSaleHistory(nftAddress));
     dispatch(fetchNFTOwner(nftAddress));
-  }, []);
+    dispatch(fetchNFTDetail(nftAddress));
+  }, [isSale]);
   useEffect(() => {
     dispatch(fetchNFTDetail(nftAddress));
   }, [likeState]);
@@ -216,7 +217,7 @@ export default function NftDetailInfo({ nftAddress }: CurrentNftType) {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="Price" stroke="#8884d8" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
               </LineChart>
             </ResponsiveContainer>
           </StyledChart>
