@@ -3,6 +3,7 @@ import React, { MouseEvent, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { putGameLog } from '../../_slice/GameSlice';
 import correctMp3 from '../../audio/correct.mp3';
 import oopsMp3 from '../../audio/oops.mp3';
@@ -202,7 +203,11 @@ export default function StartedGame({ reset }: any) {
               </StyledBtnWrap>
               <StyledInterfaceWrap>
                 <div />
-                <Button variant="contained" onClick={nextQuestion} key={'q' + `${qNum}`} style={{...selectTabButtonStyle}}>
+                <Button
+                  variant="contained"
+                  onClick={nextQuestion}
+                  key={'q' + `${qNum}`}
+                  style={{ ...selectTabButtonStyle }}>
                   Next Question
                 </Button>
               </StyledInterfaceWrap>
@@ -234,10 +239,10 @@ export default function StartedGame({ reset }: any) {
                 ))}
               </StyledBtnWrap>
               <StyledInterfaceWrap>
-                <Button variant="contained" onClick={quitHandler} style={{...selectTabButtonStyle}}>
+                <Button variant="contained" onClick={quitHandler} style={{ ...selectTabButtonStyle }}>
                   quit
                 </Button>
-                <Button variant="contained" onClick={nextHandler} style={{...selectTabButtonStyle}}>
+                <Button variant="contained" onClick={nextHandler} style={{ ...selectTabButtonStyle }}>
                   next
                 </Button>
               </StyledInterfaceWrap>
@@ -253,9 +258,23 @@ export default function StartedGame({ reset }: any) {
             <StyledWord>You earned {count} tickets!</StyledWord>
           )}
           <img src={ticket[count - 1]} />
-          <Button variant="contained" onClick={handleRestart} style={{...selectTabButtonStyle, marginTop:20}}>
-            Restart
-          </Button>
+          <div>
+            <Button
+              variant="contained"
+              onClick={handleRestart}
+              sx={{ width: 200, height: 50, fontSize: 20 }}
+              style={{ ...selectTabButtonStyle, margin: 20 }}>
+              Restart
+            </Button>
+            <Link to="/bylot">
+              <Button
+                variant="contained"
+                sx={{ width: 200, height: 50, fontSize: 20 }}
+                style={{ ...selectTabButtonStyle, margin: 20 }}>
+                Random Draw
+              </Button>
+            </Link>
+          </div>
         </StyledWordWrap>
       )}
     </div>

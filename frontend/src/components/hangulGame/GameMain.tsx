@@ -35,13 +35,6 @@ export default function GameMain() {
   `;
 
   useEffect(() => {
-    if (walletAddress) {
-      const payload = { userWalletAddress: walletAddress };
-      dispatch(fetchGameData(payload));
-    }
-  }, [walletAddress]);
-
-  useEffect(() => {
     if (start) {
       const countdown = setInterval(() => {
         if (seconds > 1) {
@@ -64,12 +57,8 @@ export default function GameMain() {
 
   const startHandler = () => {
     beepAudio.play();
-    if (!gameId) {
-      console.log('getData');
-      const payload = { userWalletAddress: walletAddress };
-      dispatch(fetchGameData(payload));
-    }
-    console.log(questionOption);
+    const payload = { userWalletAddress: walletAddress };
+    dispatch(fetchGameData(payload));
     setStart(true);
   };
 
@@ -94,7 +83,11 @@ export default function GameMain() {
       ) : (
         <>
           <StyledTitle>Hangul Game</StyledTitle>
-          <Button onClick={startHandler} variant="contained" sx={{ width: 200, height: 50, fontSize: 20 }} style={{...selectTabButtonStyle}}>
+          <Button
+            onClick={startHandler}
+            variant="contained"
+            sx={{ width: 200, height: 50, fontSize: 20 }}
+            style={{ ...selectTabButtonStyle }}>
             Game Start
           </Button>
         </>
