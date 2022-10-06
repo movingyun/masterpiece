@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CardContent } from '@mui/material';
-import logo from '../img/logo.png'
-
+import logo from '../img/logo.png';
 
 const StyledVideo = styled.video`
   width: 100%;
@@ -25,7 +24,13 @@ export default function NFTPreview({ url }: PreviewType) {
 
   return (
     <CardContent>
-      {url === 'null' ? <StyledImg src={logo} alt="img" /> : type === 'webm' ? <StyledVideo autoPlay loop src={`${url}`} /> : <img src={`${url}`} alt="img" />}
+      {url === 'null' ? (
+        <StyledImg src={logo} alt="img" />
+      ) : type === 'webm' ? (
+        <StyledVideo autoPlay loop src={`${url}`} />
+      ) : (
+        <StyledImg src={`${url}`} alt="img" />
+      )}
     </CardContent>
   );
 }

@@ -170,12 +170,6 @@ public class HangulServiceImpl implements HangulService {
 
         List<Integer> list = new ArrayList<>();
         List<String> consonantList = hangulRepository.findAllConsonant();
-//        consonantList.remove("ㄸ"); //ㄸ
-//        consonantList.remove("ㅃ"); //ㅃ
-//        consonantList.remove("ㅉ"); //ㅉ
-//        consonantList.add( "ㄸ");
-//        consonantList.add( "ㅃ");
-//        consonantList.add( "ㅉ");
         System.out.println("==============consonantList===============");
         for(String s : consonantList) {
             System.out.print(s+" ");
@@ -199,6 +193,34 @@ public class HangulServiceImpl implements HangulService {
         list.add(cnt1);
         list.add(cnt2);
         list.add(cnt3);
+        return list;
+    }
+
+    @Override
+    public List<Integer> getConsonantList2(String wallet_address) {
+        User user = userRepository.findByWalletAddress(wallet_address).orElse(null);
+        if(user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        List<Integer> list = new ArrayList<>();
+        List<String> consonantList = hangulRepository.findAllConsonant();
+        System.out.println("==============consonantList===============");
+        for(String s : consonantList) {
+            System.out.print(s+" ");
+        }
+        System.out.println();
+
+        List<Object[]> ownList = hangulRepository.findConsonantsOwnedByUser(user);
+        int i=0, j=0;
+        for(; i<consonantList.size(); i++){
+            if(consonantList.get(i).equals(((Hangul)ownList.get(j)[0]).getLetter())) {
+                list.add((Integer)ownList.get(j)[1]);
+                j++;
+            } else {
+                list.add(0);
+            }
+        }
         return list;
     }
 

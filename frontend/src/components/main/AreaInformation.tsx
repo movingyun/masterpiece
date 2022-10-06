@@ -1,37 +1,71 @@
 import React from "react";
-import { Container, Grid } from "@mui/material";
-import Information from "../../commons/Information";
+import { Box, Container, Grid } from "@mui/material";
+import { defaultBackground } from "../../_css/ReactCSSProperties";
+import AreaExample from "./AreaExample";
+import AreaTutorial from "./AreaTutorial";
 
-export default function AreaInformation({ focus }: any) {
+export default function AreaInformation({ focus }:any) {
+	const [height, setHeight] = React.useState<any>(window.innerHeight);
+	const handleHeight = () => {
+		setHeight(window.innerHeight);
+	}
+	React.useEffect(() => {
+		window.addEventListener("resize", handleHeight);
+	}, [window.innerHeight]);
+
 	// scrollIntoView
 	const focuses: React.MutableRefObject<HTMLDivElement[]> = focus;
 
-	const titles: string[] = ["Learn the Principal of Hangul", "Have fun decorating Hangul words"];
-	const contents: string[] = ["Don’t be nervous! We’ll give step by step guide toward the basics on how the Hangul is assembled to become Korean word.",
-		"Manage distribution of budget, by brand,product, quarter, campaign and see time tracking."];
-	const buttonTexts: string[] = ["More Info >>", "More Info >>"];
+	const elements: JSX.Element[][] = [[
+		<>
+			<div style={{ height: height / 3 }} />
+			<div style={{ height: height / 2 }} >
+				<div style={{ marginBottom: 50, fontSize: 50 }}>
+					| The Most Beautiful
+				</div>
+				<div style={{ marginBottom: 10, fontSize: 28, lineHeight:"50px" }}>
+					We provide multiple properties to decorate your own word. 50+ fonts, text animations, and more!
+				</div>
+			</div>
+		</>,
+		<AreaExample height={height} />
+	], [
+		<>
+			<div style={{ height: height / 3 }} />
+			<div style={{ height: height / 2 }} >
+			<div style={{ marginBottom: 50, marginRight: 10, fontSize: 50 }}>
+					| The Most Scientific
+				</div>
+				<div style={{ marginBottom: 10, marginRight: 10, fontSize: 28, lineHeight:"50px" }}>
+					Consonants and vowels are assembled in a box to form an word
+				</div>
+			</div>
+		</>,
+		<AreaTutorial height={height} />
+	]];
+	const backgroundColor: string[] = ["white", defaultBackground.toString()];
 	const indexArray: number[] = [];
-	for (let i = 0; i < titles.length; i++){
+	for (let i = 0; i < elements.length;i++){
 		indexArray.push(i);
 	}
 	return (
-		<Container>
-			<div style={{ margin: 30, fontSize: 50 }}>Hangul is the most scientfic, beautiful language on Earth</div>
-			<Grid container>
-				{titles.map((title: string, index: number) => (
-					<Grid key={`Information${title}${indexArray[index]}`} item xs={6}
-					style={{position:"relative", padding:10 }}>
-						<Container style={{
-							paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
-							marginBottom:100,
-							position: "relative", background: "black",
-							height:300,
-						}}>
-							<Information title={title} content={contents[index]} buttonText={buttonTexts[index]} onClick={() => { focuses.current[index].scrollIntoView({ behavior: "smooth" }); }} height={ 305 } />
-						</Container>
+		<>
+			{elements.map((element:JSX.Element[], index:number) => (
+				<Grid key={`tutorialInfo${indexArray[index]}`} container columns={40}
+				ref={(thisElement:HTMLDivElement) => { focuses.current[index] = thisElement }}
+				justifyContent="center" alignItems="center"
+				style={{minHeight:600, background:backgroundColor[index]}}>
+					<Grid item xs={20} style={{ minHeight:600, minWidth:530, padding:15, height, textAlign:"left" }}
+					justifyContent="center" alignItems="center">
+						{element[index % 2]}
 					</Grid>
-				))}
-			</Grid>
-		</Container>
+					<Grid item xs={1}/>
+					<Grid item xs={19} style={{ minHeight:600, minWidth:530, padding:15, height, textAlign:"left" }}
+					justifyContent="center" alignItems="center">
+						{element[(index + 1) % 2]}
+					</Grid>
+				</Grid>
+			))}
+		</>
 	);
 }

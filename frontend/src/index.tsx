@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Web3Provider } from '@ethersproject/providers';
 import { Web3ReactProvider } from '@web3-react/core';
 import App from './App';
+import ScrollToTop from "./ScrollToTop";
 import store from './_store/store';
 import Main from './pages/Main';
 import ByLot from './pages/ByLot';
@@ -41,6 +42,7 @@ const theme = createTheme({
 });
 root.render(
   <BrowserRouter>
+    <ScrollToTop />
     <Web3ReactProvider getLibrary={getLibrary}>
       <Provider store={store}>
         <ThemeProvider theme={theme}>

@@ -24,7 +24,6 @@ export default function AreaExample({ height }: any) {
 	React.useEffect(() => {
 		if (height) {
 			const tempMargin = (height > 600) ? height / 2 - 300 : 5;
-			console.log(tempMargin);
 			setTopMargin(tempMargin);
 		}
 	}, [height]);
@@ -44,7 +43,6 @@ export default function AreaExample({ height }: any) {
 		async function fetchNFTData() {
 			const response: any = await axios.get(api.fetchAllNFT(), {});
 			const randomElements: JSX.Element[] = [];
-			console.log(response.data);
 
 			// temp color
 			const colors: string[] = ["lightblue", "red", "green", "cyan", "pink"];
@@ -70,8 +68,8 @@ export default function AreaExample({ height }: any) {
 				{(!isLogin) ? (<Link to="/login" style={{ padding: 10, background: "yellow", color: "black" }}>Get started</Link>)
 					:
 					(<Grid container>
-						<Grid item xs={6}><Link to="/composehangul" style={{ textDecoration: 'none', padding: 10, background: "yellow", color: "black" }}>Created</Link></Grid>
-						<Grid item xs={6}><Link to="/nftlist" style={{ textDecoration: 'none', padding:10, background:"yellow", color:"black"}}>Explore</Link></Grid>
+						<Grid item xs={6}><Link to="/composehangul" style={{ padding: 10, background: "yellow", color: "black" }}>Create</Link></Grid>
+						<Grid item xs={6}><Link to="/learnsyllables" style={{padding:10, background:"yellow", color:"black"}}>Explore</Link></Grid>
 					</Grid>
 					)}
 				<Grid container justifyContent="center" alignItems="center">

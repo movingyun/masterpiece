@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 
 import styled from 'styled-components';
 import LetterCard from '../../commons/LetterCard';
 import { fetchInventory, Hangul } from '../../_slice/UserSlice';
-import { ConsonantOrder, VowelOrder } from '../../_store/store';
+import { ConsonantOrder2, VowelOrder } from '../../_store/store';
+import Information from '../../commons/Information';
 
 const StyledCardList = styled.div`
   display: grid;
@@ -37,21 +38,73 @@ export default function Inventory() {
           one.map((hangul: Hangul, index) =>
             hangul.quantity > 0 ? (
               hangul.hangulId <= 30 ? (
-                <LetterCard
-                  description={hangul.description}
-                  title={hangul.title}
-                  letter={`${ConsonantOrder[index]}`}
-                  quantity={hangul.quantity}
-                  key={'inventory' + `${idx}` + `${index}`}
-                />
+                <Container
+                  style={{
+                    paddingTop: 15,
+                    paddingBottom: 0,
+                    paddingLeft: 15,
+                    paddingRight: 0,
+                    marginBottom: 100,
+                    position: 'relative',
+                    background: 'black',
+                    height: 330,
+                  }}>
+                  <Information
+                    content=""
+                    height={380}
+                    lineHeight={1}
+                    title={
+                      <LetterCard
+                        description={hangul.description}
+                        title={hangul.title}
+                        letter={`${ConsonantOrder2[index]}`}
+                        quantity={hangul.quantity}
+                        key={'inventory' + `${idx}` + `${index}`}
+                      />
+                    }
+                  />
+                </Container>
               ) : (
-                <LetterCard
-                  description={hangul.description}
-                  title={hangul.title}
-                  letter={VowelOrder[index]}
-                  quantity={hangul.quantity}
-                  key={'inventory' + `${idx}` + `${index}`}
-                />
+                // <LetterCard
+                // description={hangul.description}
+                // title={hangul.title}
+                // letter={`${ConsonantOrder[index]}`}
+                // quantity={hangul.quantity}
+                // key={'inventory' + `${idx}` + `${index}`}
+                // />
+                <Container
+                  style={{
+                    paddingTop: 15,
+                    paddingBottom: 0,
+                    paddingLeft: 15,
+                    paddingRight: 0,
+                    marginBottom: 100,
+                    position: 'relative',
+                    background: 'black',
+                    height: 330,
+                  }}>
+                  <Information
+                    content=""
+                    height={380}
+                    lineHeight={1}
+                    title={
+                      <LetterCard
+                        description={hangul.description}
+                        title={hangul.title}
+                        letter={VowelOrder[index]}
+                        quantity={hangul.quantity}
+                        key={'inventory' + `${idx}` + `${index}`}
+                      />
+                    }
+                  />
+                </Container>
+                // <LetterCard
+                //   description={hangul.description}
+                //   title={hangul.title}
+                //   letter={VowelOrder[index]}
+                //   quantity={hangul.quantity}
+                //   key={'inventory' + `${idx}` + `${index}`}
+                // />
               )
             ) : null
           )

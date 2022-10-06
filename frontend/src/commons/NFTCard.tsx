@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, CardActionArea, CardContent, Typography, Chip } from '@mui/material';
+import { Card, CardActionArea, CardContent, Typography, Chip, Container } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import styled from 'styled-components';
 import NFTimage from '../img/tmpImg.PNG';
 import { NFT } from '../_slice/NFTSlice';
+import { black, yellow, white } from '../_css/ReactCSSProperties';
 
 const StyledChip = styled.div`
   display: flex;
@@ -32,14 +33,20 @@ export default function NFTCard({
   tokenId,
   isSale,
 }: NFT) {
+  const videoElement:JSX.Element = <video autoPlay loop muted width={140} height={140} src={imgUrl}
+  style={{border:`4px solid ${white.toString()}`}}/>
   return (
-    <Card sx={{ maxWidth: 290, paddingTop: '16px', borderRadius: '15px' }}>
+    <Card sx={{ maxWidth: 280, paddingTop: '16px', borderRadius: '15px', background: yellow.toString()
+    // }}>
+    , boxShadow:'none', }}>
+    {/* border:`2px solid ${black.toString()}`, }}> */}
       <CardActionArea>
-        <CardMedia component="video" height="140" image={imgUrl} autoPlay loop />
+        {/* <CardMedia component="video" height="140" image={imgUrl} autoPlay loop */}
+        <Container style={{textAlign:"center"}}>{videoElement}</Container>
         <CardContent>
           <StyledChip>
             {nftTags.map((tag, idx) => (
-              <Chip key={`${idx}` + `${imgUrl}`} label={tag} size="small" color="primary" />
+              <Chip key={`${idx}` + `${imgUrl}`} label={tag} size="small" style={{background:black.toString(), color:white.toString()}} />
             ))}
           </StyledChip>
           <StyledCard>
@@ -47,7 +54,7 @@ export default function NFTCard({
               gutterBottom
               variant="h5"
               component="div"
-              sx={{ fontWeight: 600, fontFamily: '"Poppins", san-serif' }}
+              sx={{ marginTop:2, fontWeight: 600, fontFamily: '"Poppins", san-serif' }}
               noWrap>
               {nftTitle}
             </Typography>

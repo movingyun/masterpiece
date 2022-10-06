@@ -30,10 +30,10 @@ export default function ComposeHangul() {
           <Grid item xs={12}><AreaTranslate/></Grid>
           <Grid item xs={12}><AreaDiscompose/></Grid>
         </Grid>
-        <Grid container item xs={6} style={{ minWidth:580, minHeight:570 ,padding : 10}}>
+        <Grid container item xs={6} style={{ minWidth:580, minHeight:560, padding : 10}}>
           <Grid item xs={12}><HangulMaker test={false}/></Grid>
         </Grid>
-        <Grid item xs={12} style={{padding:10}}><AreaSyllable/></Grid>
+        <Container style={{padding:10}}><Grid item xs={12}><AreaSyllable/></Grid></Container>
         <Grid item xs={12}><AreaSentence/></Grid>
       </Grid>
     </Container>

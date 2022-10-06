@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Grid, TextField, Button, Select, MenuItem } from '@mui/material';
 import VolumeDownRoundedIcon from '@mui/icons-material/VolumeDownRounded';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import axios from "axios";
 import api from "../../api/api";
 import { black, BlackWhite, GradientBlueToPink, white, yellow } from "../../_css/ReactCSSProperties";
@@ -109,7 +110,7 @@ export default function AreaTranslate(){
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={2} display="flex" justifyContent="center" alignItems="center">{'->'}</Grid>
+        <Grid item xs={2} display="flex" justifyContent="center" alignItems="center"><DoubleArrowIcon/></Grid>
         <Grid container item xs={4}>
           <Grid item xs={12} style={{margin:0}}>
             <TextField multiline rows={3} fullWidth label="translate" value={translateText}
