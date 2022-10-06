@@ -11,6 +11,7 @@ import vowelImg from '../../img/천지인.PNG';
 import { pickConsonant, pickVowel } from '../../_slice/HangulSlice';
 import SimpleDialog from './SimpleDialog';
 import { fetchTicket } from '../../_slice/UserSlice';
+import { defaultBackground, selectTabButtonStyle, yellow } from '../../_css/ReactCSSProperties';
 
 const StyledContainer = styled.div`
   margin: 20px 0 40px;
@@ -69,7 +70,7 @@ export default function Draw() {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer style={{marginTop:20, padding:20}}>
       <StyledFlex>
         <Typography gutterBottom variant="h4" component="div" sx={{ fontFamily: 'Poppins, san-serif' }}>
           Random Draw
@@ -102,7 +103,7 @@ export default function Draw() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" onClick={handlePickConsonant}>
+                  <Button size="small" onClick={handlePickConsonant} style={{...selectTabButtonStyle, border:"none"}}>
                     Draw
                   </Button>
                 </CardActions>
@@ -132,7 +133,7 @@ export default function Draw() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" onClick={handlePickVowel}>
+                  <Button size="small" onClick={handlePickVowel} style={{...selectTabButtonStyle, border:"none"}}>
                     Draw
                   </Button>
                 </CardActions>

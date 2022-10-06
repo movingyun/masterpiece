@@ -14,6 +14,7 @@ import threeTicket from '../../img/ticket/three.png';
 import fourTicket from '../../img/ticket/four.png';
 import fiveTicket from '../../img/ticket/five.png';
 import volume from '../../img/volume.png';
+import { black, yellow, white, selectTabButtonStyle } from '../../_css/ReactCSSProperties';
 
 export default function StartedGame() {
   const dispatch = useDispatch();
@@ -192,7 +193,7 @@ export default function StartedGame() {
               </StyledBtnWrap>
               <StyledInterfaceWrap>
                 <div />
-                <Button variant="contained" onClick={nextQuestion} key={'q' + `${qNum}`}>
+                <Button variant="contained" onClick={nextQuestion} key={'q' + `${qNum}`} style={{...selectTabButtonStyle}}>
                   Next Question
                 </Button>
               </StyledInterfaceWrap>
@@ -224,10 +225,10 @@ export default function StartedGame() {
                 ))}
               </StyledBtnWrap>
               <StyledInterfaceWrap>
-                <Button variant="contained" onClick={quitHandler}>
+                <Button variant="contained" onClick={quitHandler} style={{...selectTabButtonStyle}}>
                   quit
                 </Button>
-                <Button variant="contained" onClick={nextHandler}>
+                <Button variant="contained" onClick={nextHandler} style={{...selectTabButtonStyle}}>
                   next
                 </Button>
               </StyledInterfaceWrap>

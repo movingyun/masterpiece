@@ -60,7 +60,7 @@ export const tabButtonStyle: React.CSSProperties = {
   color: black.toString(),
   border: `1px solid ${black.toString()}`,
 }
-export const seletTabButtonStyle: React.CSSProperties = {
+export const selectTabButtonStyle: React.CSSProperties = {
   background: black.toString(),
   color: white.toString(),
   border: `1px solid ${white.toString()}`,

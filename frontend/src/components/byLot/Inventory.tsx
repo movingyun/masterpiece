@@ -7,6 +7,7 @@ import LetterCard from '../../commons/LetterCard';
 import { fetchInventory, Hangul } from '../../_slice/UserSlice';
 import { ConsonantOrder2, VowelOrder } from '../../_store/store';
 import Information from '../../commons/Information';
+import { black, defaultBackground, white } from '../../_css/ReactCSSProperties';
 
 const StyledCardList = styled.div`
   display: grid;
@@ -30,10 +31,11 @@ export default function Inventory() {
 
   return (
     <>
-      <Typography gutterBottom variant="h4" component="div" sx={{ fontFamily: 'Poppins, san-serif' }}>
+      <Typography gutterBottom variant="h4" component="div" sx={{ fontFamily: 'Poppins, san-serif' }}
+      style={{padding:20, background:black.toString(), color:white.toString()}}>
         Inventory
       </Typography>
-      <StyledCardList>
+      <StyledCardList style={{padding:20, background:defaultBackground.toString()}}>
         {Object.values<Array<Hangul>>(inventory).map((one: Array<Hangul>, idx: Number) =>
           one.map((hangul: Hangul, index) =>
             hangul.quantity > 0 ? (

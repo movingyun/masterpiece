@@ -6,6 +6,7 @@ import { fetchGameData } from '../../_slice/GameSlice';
 import StartedGame from './StartedGame';
 import beepWav from '../../audio/beep.wav';
 import startMp3 from '../../audio/start.mp3';
+import { selectTabButtonStyle } from '../../_css/ReactCSSProperties';
 
 export default function GameMain() {
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ export default function GameMain() {
       ) : (
         <>
           <StyledTitle>Hangul Game</StyledTitle>
-          <Button onClick={startHandler} variant="contained" sx={{ width: 200, height: 50, fontSize: 20 }}>
+          <Button onClick={startHandler} variant="contained" sx={{ width: 200, height: 50, fontSize: 20 }} style={{...selectTabButtonStyle}}>
             Game Start
           </Button>
         </>

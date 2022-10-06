@@ -13,6 +13,7 @@ import { DiscomposeSentence } from '../../commons/HangulMaker/DiscomposeHangul';
 
 import api from '../../api/api';
 import MasterpieceNFT from '../../json/MasterpieceNFT.json';
+import { black, white } from '../../_css/ReactCSSProperties';
 
 function blobToFile(theBlob:any, fileName:any) {
   return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: 'video/webm' });
@@ -172,7 +173,6 @@ export default function Mint() {
 
   return (
     <LoadingButton
-      color="secondary"
       onClick={() => {
         setLoading(true);
         runMinting();
@@ -180,7 +180,9 @@ export default function Mint() {
       loading={loading}
       loadingPosition="end"
       endIcon={<CurrencyBitcoinIcon />}
-      variant="contained">
+      variant="contained"
+      style={{background:black.toString(), color:white.toString()}}
+    >
       Confirm Minting
     </LoadingButton>
   );

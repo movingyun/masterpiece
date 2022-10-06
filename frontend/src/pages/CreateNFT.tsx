@@ -9,10 +9,7 @@ import Mint from '../components/createNFT/Mint';
 function CreateNFT() {
   return (
     <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-      <h1 style={{ margin: '10px 0' }}>Create New Item</h1>
-      <div>
-        <Link to="/">home</Link>
-      </div>
+      <div style={{ margin: 20, fontSize: 50 }}>Create New Item</div>
       <NFTVideo />
       <NFTInput />
       <Mint />

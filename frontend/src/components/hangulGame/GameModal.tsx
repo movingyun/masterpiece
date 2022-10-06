@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, IconButton, Modal, Typography } from '@mui/material';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { selectTabButtonStyle } from '../../_css/ReactCSSProperties';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -64,7 +65,7 @@ export default function GameModal() {
               5. It consists of 5 consecutive questions.
             </Typography>
           </Box>
-          <Button variant="contained" onClick={handleClose}>
+          <Button variant="contained" onClick={handleClose} style={{...selectTabButtonStyle}}>
             Let&apos;s Play
           </Button>
         </Box>
