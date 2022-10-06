@@ -10,7 +10,7 @@ import DragAndDrop from "./DragAndDrop";
 import { ComposeSyllables } from "../../commons/HangulMaker/ComposeHangul";
 import { black, white, yellow } from "../../_css/ReactCSSProperties";
 
-export default function AreaSentence(){
+export default function AreaSentence({ gridxs }: any) {
   const thisArea = HangulComposeArea.SENTENCE;
   const sentenceList:string[]= UseSelectorHook(state => state.areaSentence.value);
   const [sentenceStringList, setSentenceStringList] = React.useState(['']);
@@ -87,7 +87,7 @@ export default function AreaSentence(){
   return (
     <Container style={{position:"relative", padding:0}}>
       <Grid container>
-        <Grid item xs={6} style={{padding:10}}>
+        <Grid item xs={gridxs} style={{padding:10, paddingRight:20}}>
           <Box display="flex" justifyContent="center" alignItems="center"
           style={{width:"100%", minHeight:200, paddingLeft:10, background:white.toString(), border:"1px solid black", borderRadius:10}}
           >
@@ -124,7 +124,7 @@ export default function AreaSentence(){
             </Grid>
           </Box>
         </Grid>
-        <Grid item xs={6} style={{padding:10}}>
+        <Grid item xs={gridxs} style={{padding:10}}>
           <Box display="flex" justifyContent="center" alignItems="center"
           style={{width:"100%", minHeight:200, background:black.toString(), border:"1px solid black", borderRadius:10}}
           >

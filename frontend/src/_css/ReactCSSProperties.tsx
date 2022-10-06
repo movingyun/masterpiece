@@ -54,3 +54,14 @@ export const BlackWhite:React.CSSProperties = {
   border:`2px solid ${black.toString()}`,
   background:white,
 }
+
+export const tabButtonStyle: React.CSSProperties = {
+  background: white.toString(),
+  color: black.toString(),
+  border: `1px solid ${black.toString()}`,
+}
+export const seletTabButtonStyle: React.CSSProperties = {
+  background: black.toString(),
+  color: white.toString(),
+  border: `1px solid ${white.toString()}`,
+}

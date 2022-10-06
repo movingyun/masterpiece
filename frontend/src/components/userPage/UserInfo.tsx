@@ -23,8 +23,10 @@ const StyledWord = styled.div`
   font-size: 20px;
   font-weight: 500;
 `;
-const StyledName = styled.h1`
+const StyledName = styled.div`
   margin: 0 0 20px 20px;
+  font-weight: 800;
+  font-size: 24px;
 `;
 
 const StyledBtn = styled.div`
