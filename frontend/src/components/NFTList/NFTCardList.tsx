@@ -10,7 +10,7 @@ import Information from '../../commons/Information';
 const StyledCardList = styled.div`
   display: grid;
   gap: 50px;
-  grid-template-columns: repeat(4, minmax(277px, auto));
+  grid-template-columns: repeat(3, minmax(277px, auto));
   > * {
     text-decoration: none;
   }
@@ -56,6 +56,7 @@ export default function NFTCardList() {
             <Information
               content=""
               height={350}
+              width={320}
               title={
                 <NFTCard
                   imgUrl={NFTInfo.imgUrl}
@@ -69,7 +70,6 @@ export default function NFTCardList() {
                   nftAddress={NFTInfo.nftAddress}
                   nftDescription={NFTInfo.nftDescription}
                   tokenId={NFTInfo.tokenId}
-                  isSale={NFTInfo.isSale}
                 />
               }
             />

@@ -36,7 +36,7 @@ export default function NFTCard({
   const videoElement:JSX.Element = <video autoPlay loop muted width={140} height={140} src={imgUrl}
   style={{border:`4px solid ${white.toString()}`}}/>
   return (
-    <Card sx={{ maxWidth: 280, paddingTop: '16px', borderRadius: '15px', background: yellow.toString()
+    <Card sx={{ maxWidth: 400, paddingTop: '16px', borderRadius: '15px', background: yellow.toString()
     // }}>
     , boxShadow:'none', }}>
     {/* border:`2px solid ${black.toString()}`, }}> */}

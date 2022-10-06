@@ -23,19 +23,20 @@ interface LetterCardType {
   title: String;
   letter: String;
   quantity?: Number;
+  margin?: boolean;
 }
 
 LetterCard.defaultProps = {
   quantity: null,
 };
 
-export default function LetterCard({ description, title, letter, quantity }: LetterCardType) {
+export default function LetterCard({ description, title, letter, quantity, margin }: LetterCardType) {
   return (
     <Card sx={{ maxWidth: 290, height:380 }}>
       {/* 이미지 링크 수정필요함 */}
       <StyledWrapper>
         <CardMedia component="img" height="150" image={tmpImg} alt="green iguana" />
-        <StyledLetter style={{marginTop:40}}>{letter}</StyledLetter>
+        <StyledLetter style={{marginTop:(margin) ? 40 : 0}}>{letter}</StyledLetter>
       </StyledWrapper>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: '"Poppins", "Namsan", san-serif' }}>
@@ -57,4 +58,7 @@ export default function LetterCard({ description, title, letter, quantity }: Let
       </CardContent>
     </Card>
   );
+}
+LetterCard.defaultProps = {
+  margin: false,
 }

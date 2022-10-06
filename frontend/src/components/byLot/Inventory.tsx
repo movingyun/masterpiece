@@ -38,73 +38,41 @@ export default function Inventory() {
           one.map((hangul: Hangul, index) =>
             hangul.quantity > 0 ? (
               hangul.hangulId <= 30 ? (
-                <Container
-                  style={{
-                    paddingTop: 15,
-                    paddingBottom: 0,
-                    paddingLeft: 15,
-                    paddingRight: 0,
-                    marginBottom: 100,
-                    position: 'relative',
-                    background: 'black',
-                    height: 330,
-                  }}>
-                  <Information
-                    content=""
-                    height={380}
-                    lineHeight={1}
-                    title={
-                      <LetterCard
+                <Container style={{
+                  paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
+                  marginBottom:100,
+                  position: "relative", background: "black",
+                  height:330,
+                }}
+                key={'inventory' + `${idx}` + `${index}`}>
+                  <Information content="" height={380} lineHeight={1} title={
+                    <LetterCard
+                        margin
                         description={hangul.description}
                         title={hangul.title}
                         letter={`${ConsonantOrder2[index]}`}
                         quantity={hangul.quantity}
-                        key={'inventory' + `${idx}` + `${index}`}
-                      />
-                    }
-                  />
+                    />
+                  }/>
                 </Container>
               ) : (
-                // <LetterCard
-                // description={hangul.description}
-                // title={hangul.title}
-                // letter={`${ConsonantOrder[index]}`}
-                // quantity={hangul.quantity}
-                // key={'inventory' + `${idx}` + `${index}`}
-                // />
-                <Container
-                  style={{
-                    paddingTop: 15,
-                    paddingBottom: 0,
-                    paddingLeft: 15,
-                    paddingRight: 0,
-                    marginBottom: 100,
-                    position: 'relative',
-                    background: 'black',
-                    height: 330,
-                  }}>
-                  <Information
-                    content=""
-                    height={380}
-                    lineHeight={1}
-                    title={
-                      <LetterCard
-                        description={hangul.description}
-                        title={hangul.title}
-                        letter={VowelOrder[index]}
-                        quantity={hangul.quantity}
-                        key={'inventory' + `${idx}` + `${index}`}
-                      />
-                    }
-                  />
+                <Container style={{
+                  paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
+                  marginBottom:100,
+                  position: "relative", background: "black",
+                  height:330,
+                }}
+                key={'inventory' + `${idx}` + `${index}`}>
+                  <Information content="" height={380} lineHeight={1} title={
+                    <LetterCard
+                      margin
+                      description={hangul.description}
+                      title={hangul.title}
+                      letter={VowelOrder[index]}
+                      quantity={hangul.quantity}
+                    />
+                  }/>
                 </Container>
-                // <LetterCard
-                //   description={hangul.description}
-                //   title={hangul.title}
-                //   letter={VowelOrder[index]}
-                //   quantity={hangul.quantity}
-                //   key={'inventory' + `${idx}` + `${index}`}
-                // />
               )
             ) : null
           )
