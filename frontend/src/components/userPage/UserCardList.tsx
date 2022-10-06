@@ -69,6 +69,8 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
   useEffect(() => {
     setShowArr(collected);
   }, [collected]);
+
+  console.log('시발');
   return (
     <>
       {/* <div>collected</div> */}
@@ -90,48 +92,36 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
                   marginBottom:100,
                   position: "relative", background: "black",
                   height:330, width:280
-                }}>
+                }}
+                key={'inventory' + `${idx}` + `${index}`}>
                   <Information content="" height={380} lineHeight={1} title={
                     <LetterCard
+                        margin
                         description={hangul.description}
                         title={hangul.title}
                         letter={`${ConsonantOrder[index]}`}
                         quantity={hangul.quantity}
-                        key={'inventory' + `${idx}` + `${index}`}
                     />
                   }/>
                 </Container>
-              // <LetterCard
-              // description={hangul.description}
-              // title={hangul.title}
-              // letter={`${ConsonantOrder[index]}`}
-              // quantity={hangul.quantity}
-              // key={'inventory' + `${idx}` + `${index}`}
-              // />
               ) : (
                 <Container style={{
                   paddingTop: 15, paddingBottom: 0, paddingLeft: 15, paddingRight: 0,
                   marginBottom:100,
                   position: "relative", background: "black",
                   height:330, width:280
-                }}>
+                }}
+                key={'inventory' + `${idx}` + `${index}`}>
                   <Information content="" height={380} lineHeight={1} title={
                     <LetterCard
+                      margin
                       description={hangul.description}
                       title={hangul.title}
                       letter={VowelOrder[index]}
                       quantity={hangul.quantity}
-                      key={'inventory' + `${idx}` + `${index}`}
                     />
                   }/>
                 </Container>
-                // <LetterCard
-                //   description={hangul.description}
-                //   title={hangul.title}
-                //   letter={VowelOrder[index]}
-                //   quantity={hangul.quantity}
-                //   key={'inventory' + `${idx}` + `${index}`}
-                // />
               )
             ) : null
           )

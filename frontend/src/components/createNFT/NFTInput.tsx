@@ -4,6 +4,7 @@ import { Box, TextField, Autocomplete, Chip } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { createNFTActions } from '../../_slice/CreateNFTSlice';
+import TagComponent from './TagComponent';
 
 
 
@@ -24,8 +25,8 @@ function NFTInfo() {
   const descriptionHandler = (event: React.ChangeEvent<{ name?: string | undefined; value: unknown }>) => {
     dispatch(createNFTActions.description(event.target.value));
   };
-  const tagHandler = (word: string[]) => {
-    dispatch(createNFTActions.tag(word));
+  const tagHandler = (tagWords: string[]) => {
+    dispatch(createNFTActions.tag(tagWords));
   };
 
   return (
@@ -72,6 +73,7 @@ function NFTInfo() {
         style={{ margin: '10px 0' }}
         renderInput={params => <TextField {...params} label="Tags" placeholder="Press enter" />}
       />
+      {/* <TagComponent defaultTag={hangulSentence} tagHandler ={tagHandler} /> */}
     </Box>
   );
 }
