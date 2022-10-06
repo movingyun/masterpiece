@@ -75,7 +75,7 @@ const fetchOnsale: any = createAsyncThunk('fetchOnsale', async (walletAddress: S
 const editUser: any = createAsyncThunk('editUser', async (payload, { rejectWithValue }) => {
   try {
     console.log(payload);
-    const res: any = await axios.put(api.editUser(), payload);
+    const res: any = await axios.put(api.editUser(), payload, { headers: { 'Content-Type': 'multipart/form-data' } });
     console.log(res.data);
     return res.data;
   } catch (err: any) {
