@@ -69,8 +69,7 @@ export default function UserCardList({ walletAddress }: UserInfoType) {
   useEffect(() => {
     setShowArr(collected);
   }, [collected]);
-
-  console.log('시발');
+  
   return (
     <>
       {/* <div>collected</div> */}

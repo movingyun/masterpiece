@@ -5,7 +5,7 @@ import { Container, Typography } from '@mui/material';
 import styled from 'styled-components';
 import LetterCard from '../../commons/LetterCard';
 import { fetchInventory, Hangul } from '../../_slice/UserSlice';
-import { ConsonantOrder, VowelOrder } from '../../_store/store';
+import { ConsonantOrder2, VowelOrder } from '../../_store/store';
 import Information from '../../commons/Information';
 
 const StyledCardList = styled.div`
@@ -50,7 +50,7 @@ export default function Inventory() {
                         margin
                         description={hangul.description}
                         title={hangul.title}
-                        letter={`${ConsonantOrder[index]}`}
+                        letter={`${ConsonantOrder2[index]}`}
                         quantity={hangul.quantity}
                     />
                   }/>

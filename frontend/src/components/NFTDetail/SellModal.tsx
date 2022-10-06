@@ -111,7 +111,7 @@ export default function SellModal() {
 
   return (
     <>
-      <Button size='large' sx={{ width: '70px'}} onClick={handleOpen}>
+      <Button size="large" sx={{ width: '70px' }} onClick={handleOpen}>
         Sell
       </Button>
       <Modal
@@ -170,23 +170,23 @@ export default function SellModal() {
           {end ? (
             contract ? (
               <>
-                <StyledWord>거래 완료</StyledWord>
+                <StyledWord>Contract Success</StyledWord>
                 <Button onClick={handleCloseLoading} style={PriceTitle}>
-                  창 닫기
+                  Close
                 </Button>
               </>
             ) : (
               <>
-                <StyledWord>거래 실패</StyledWord>
+                <StyledWord>Contract Fail</StyledWord>
                 <Button onClick={handleCloseLoading} style={PriceTitle}>
-                  창 닫기
+                  Close
                 </Button>
               </>
             )
           ) : (
             <>
-              <StyledWord>거래를 불러오는 중</StyledWord>
-              <StyledWord>잠시만 기다려 주십시오</StyledWord>
+              <StyledWord>Loading Contract</StyledWord>
+              <StyledWord>Wait a minute</StyledWord>
               <img src={spinner} alt="스피너" />
             </>
           )}

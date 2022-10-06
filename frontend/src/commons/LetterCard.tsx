@@ -31,7 +31,6 @@ LetterCard.defaultProps = {
 };
 
 export default function LetterCard({ description, title, letter, quantity, margin }: LetterCardType) {
-  console.log(margin);
   return (
     <Card sx={{ maxWidth: 290, height:380 }}>
       {/* 이미지 링크 수정필요함 */}

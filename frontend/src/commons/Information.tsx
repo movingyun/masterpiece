@@ -30,8 +30,6 @@ lineHeight }: any) {
 		}
 	}, [lineHeight]);
 	React.useEffect(() => {
-		console.log(thisButtonText==="");
-		console.log(thisButtonText);
 		if (buttonText!==undefined) {
 			setThisButtonText(buttonText);
 		}
