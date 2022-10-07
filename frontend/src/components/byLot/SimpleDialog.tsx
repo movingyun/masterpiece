@@ -72,7 +72,7 @@ export default function SimpleDialog(props: PickType) {
   useEffect(() => {
     console.log(pickResult.length);
     console.log(`${open}`);
-    if (open && pickResult.length > 0) {
+    if (open && pickSuccess) {
       pickAudio.play();
       const timer = setTimeout(() => {
         setAlert(false);
