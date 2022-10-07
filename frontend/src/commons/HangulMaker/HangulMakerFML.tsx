@@ -1,12 +1,14 @@
 import React from "react";
 import { Grid, Tab, Tabs, Typography, Box, Button, } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
+import VolumeDownRoundedIcon from '@mui/icons-material/VolumeDownRounded';
 import { firstList, middleList, lastList, UseDispatchHook, UseSelectorHook } from '../../_hook/HangulMakerHook';
 import { tabAction, firstAction, middleAction, lastAction } from '../../_slice/HangulMakerSlice';
 import { areaSyllableAction, consonantCountAction, vowelCountAction  } from '../../_slice/ComposeHangulSlice';
 import HangulMakerInput from "./HangulMakerInput";
 import composeHangul from "./ComposeHangul";
 import { ConsonantOrder, VowelOrder } from "../../_store/store";
+import { BlackWhite, yellow, black, white } from "../../_css/ReactCSSProperties";
 
 interface TabPanelProps {
   children: React.ReactNode;
@@ -40,22 +42,26 @@ function a11yProps(index: number) {
   };
 }
 
-export default function HangulMakerFML(){
+export default function HangulMakerFML(test: any) {
+  // 음절합성 체험인경우 true
+  const isTest = test;
+
   // 초중종 버튼 단위길이
   const unit = 20;
   // 초중종 버튼 가로
-  const width = unit*3;
+  const width = unit * 3;
   // 초중종 버튼 세로
-  const height = unit*4;
+  const height = unit * 4;
 
   const dispatch = UseDispatchHook();
 
   // 초기화
-  const[setting, setSetting] = React.useState(false);
-  React.useEffect(()=>{
-    if(setting){
+  const [setting, setSetting] = React.useState(false);
+  React.useEffect(() => {
+    if (setting) {
       return;
     }
+    dispatch(tabAction.change(0));
     dispatch(firstAction.change(-1));
     dispatch(middleAction.change(-1));
     dispatch(lastAction.change(0));
@@ -63,16 +69,16 @@ export default function HangulMakerFML(){
   }, []);
 
   // 초성 중성 종성 index
-  const first:number = UseSelectorHook(state => state.first.value);
-  const middle:number = UseSelectorHook(state => state.middle.value);
-  const last:number = UseSelectorHook(state => state.last.value);
+  const first: number = UseSelectorHook(state => state.first.value);
+  const middle: number = UseSelectorHook(state => state.middle.value);
+  const last: number = UseSelectorHook(state => state.last.value);
 
   // 초성 중성 중성 string
-  const letter:string[] = [composeHangul(first, -1, 0), composeHangul(-1, middle, 0), composeHangul(-1, -1, last)];
+  const letter: string[] = [composeHangul(first, -1, 0), composeHangul(-1, middle, 0), composeHangul(-1, -1, last)];
 
   // 음절 미리보기
-  const[syllable, setSyllable] = React.useState("");
-  React.useEffect(()=>{
+  const [syllable, setSyllable] = React.useState("");
+  React.useEffect(() => {
     setSyllable(composeHangul(first, middle, last));
   }, [first, middle, last]);
 
@@ -86,21 +92,21 @@ export default function HangulMakerFML(){
   };
 
   // 자모음 할당취소
-  const cancelButton = [() =>{
+  const cancelButton = [() => {
     dispatch(firstAction.change(-1));
-  }, () =>{
+  }, () => {
     dispatch(middleAction.change(-1));
-  }, () =>{
+  }, () => {
     dispatch(lastAction.change(0));
   }];
 
   // 자음, 모음 보유개수
-  const consonantCount:number[]=UseSelectorHook(state => state.consonantCount.value);
-  const vowelCount:number[]=UseSelectorHook(state => state.vowelCount.value);
+  const consonantCount: number[] = UseSelectorHook(state => state.consonantCount.value);
+  const vowelCount: number[] = UseSelectorHook(state => state.vowelCount.value);
   // 음절 제작
-  const makeSyllable = ()=>{
+  const makeSyllable = () => {
     console.log("MakeSyllable");
-    if(first>=0 || middle>=0 || last>0){
+    if (first >= 0 || middle >= 0 || last > 0) {
       // console.log(ConsonantOrder[firstList[first] as keyof typeof ConsonantOrder],
       //   VowelOrder[middleList[middle] as keyof typeof VowelOrder],
       //   ConsonantOrder[lastList[last] as keyof typeof ConsonantOrder]);
@@ -108,24 +114,34 @@ export default function HangulMakerFML(){
       const middleOrderIndex = VowelOrder[middleList[middle] as keyof typeof VowelOrder];
       const lastOrderIndex = ConsonantOrder[lastList[last] as keyof typeof ConsonantOrder];
       
-      if(consonantCount[firstOrderIndex]<=0 || vowelCount[middleOrderIndex]<=0 || consonantCount[lastOrderIndex]<=0 ){
+      const firstCount = (firstOrderIndex === undefined) ? 2 : consonantCount[firstOrderIndex];
+      const middleCount = (middleOrderIndex === undefined) ? 2 : consonantCount[middleOrderIndex];
+      const lastCount = (lastOrderIndex === undefined) ? 2 : consonantCount[lastOrderIndex];
+      
+      if (firstCount <= 0 || middleCount <= 0 || lastCount <= 0
+        || (firstOrderIndex === lastOrderIndex && firstCount < 2)) {
         console.log("alert 보유개수 부족");
         alert("보유개수 부족");
         return;
       }
 
+      let payload: any = {};
       // 초성 count--
-      let payload:any = {
-        index: firstOrderIndex,
-      };
-      dispatch(consonantCountAction.compose(payload));
+      if (firstOrderIndex !== undefined) {
+        payload = {
+          index: firstOrderIndex,
+        };
+        dispatch(consonantCountAction.compose(payload));
+      }
       // 중성 count--
-      payload = {
-        index: middleOrderIndex,
-      };
-      dispatch(vowelCountAction.compose(payload));
+      if (middleOrderIndex !== undefined) {
+        payload = {
+          index: middleOrderIndex,
+        };
+        dispatch(vowelCountAction.compose(payload));
+      }
       // 종성 count--
-      if((first>=0 && middle >=0) || (first<0 && middle <0)){
+      if (((first >= 0 && middle >= 0) || (first < 0 && middle < 0)) && (lastOrderIndex !== undefined)) {
         payload = {
           index: lastOrderIndex,
         };
@@ -140,15 +156,25 @@ export default function HangulMakerFML(){
     }
   };
 
+  // 소리 재생
+  const tts = (text: string) => {
+    const msg = new SpeechSynthesisUtterance();
+    msg.lang = 'ko';
+    msg.text = text;
+    window.speechSynthesis.speak(msg);
+  }
+
   return (
-    <Grid container item xs={12}>
+    <Grid container item xs={12} style={{...BlackWhite, borderRadius:10}}>
       <Grid item xs={9} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center">
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
+          style={{background:"none"}}
+          TabIndicatorProps={{style:{backgroundColor:"red"}}}>
             {[0,1,2].map((i:number)=>(
               <Tab key={`tab${i}`} style={{maxWidth: width}} label={
                 <Typography style={{fontSize:"30px"}}>
-                  <Box sx={{width: {width}, height:{height}}} style={{position:"relative", margin:unit/2, backgroundColor:"#DDDDDD"}}>
+                  <Box sx={{width: {width}, height:{height}}} style={{position:"relative", margin:unit/2, paddingTop:unit, color:black.toString(), backgroundColor:white.toString(), border:`1px solid ${black.toString()}`}}>
                     {letter[i]}
                   </Box>
                   <CancelIcon style={{position:"absolute", top:0, right:0, color:"red"}}
@@ -161,14 +187,17 @@ export default function HangulMakerFML(){
       </Grid>
       <Grid item xs={3} justifyContent="center" alignItems="center">
         <Box display="flex" justifyContent="center" alignItems="center"
-        sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}>
+        sx={{width: {width}, height:{height}}} style={{margin:unit/2, marginTop:unit, paddingTop:unit, color:black.toString(), backgroundColor:white.toString(), border:`1px solid ${black.toString()}`}}>
           <Typography style={{fontSize:"30px"}}>{syllable}</Typography>
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center"
         sx={{width: {width}}} style={{margin:unit/2, marginTop:unit, backgroundColor:"#DDDDDD"}}>
-          <Button onClick={makeSyllable} style={{backgroundColor:"green", color:"white"}}>
+          <Button onClick={()=>tts(syllable)} style={{background:black.toString(), color:white.toString()}}><VolumeDownRoundedIcon/></Button>
+          {(isTest.test) ? (<div />)
+          : (<Button onClick={makeSyllable} style={{background:yellow.toString(), color:black.toString()}}>
             Done
-          </Button>
+          </Button>)
+          }
         </Box>
       </Grid>
       <TabPanel value={value} index={0}>

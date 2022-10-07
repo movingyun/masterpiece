@@ -4,9 +4,10 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import { UseSelectorHook, UseDispatchHook } from "../../_hook/HangulMakerHook";
 import { areaSentenceAction, areaSyllableAction, consonantCountAction, vowelCountAction } from "../../_slice/ComposeHangulSlice";
 import { HangulComposeArea } from "../../_store/store";
-import DiscomposeHangul from "../../commons/HangulMaker/DiscomposeHangul";
+import DiscomposeHangul, {DiscomposeSentence} from "../../commons/HangulMaker/DiscomposeHangul";
+import { black, BlackWhite, GradientBlueToPink } from "../../_css/ReactCSSProperties";
 
-export default function AreaDiscompose(){
+export default function AreaDiscompose() {
   const dispatch = UseDispatchHook();
   const thisArea = HangulComposeArea.DISCOMPOSE;
   const syllableList:string[]= UseSelectorHook(state => state.areaSyllable.value);
@@ -29,7 +30,7 @@ export default function AreaDiscompose(){
     const dropObject:HTMLDivElement = (e.target as HTMLDivElement);
     console.log(type);
     // 분해
-    if(dragValueState!="space" && dragValueState!="enter"){
+    if(dragValueState!=" " && dragValueState!="\n"){
       const letterList = DiscomposeHangul(dragValueState);
       let payload = {};
       if(letterList[0]>=0){
@@ -52,7 +53,7 @@ export default function AreaDiscompose(){
       }
     }
     if(dragStartArea===HangulComposeArea.SYLLABLES){
-      if(dragValueState!="space" && dragValueState!="enter"){
+      if(dragValueState!=" " && dragValueState!="\n"){
         dispatch(areaSyllableAction.delete({index:dragStartElement}));
       }
     }
@@ -60,9 +61,18 @@ export default function AreaDiscompose(){
       dispatch(areaSentenceAction.delete({index:dragStartElement}));
     }
   }
+
+  // barckground Color
+  const currentBlackWhite:React.CSSProperties = BlackWhite;
+  const thisAreaBackground:React.CSSProperties = {
+    border:`2px dashed ${black.toString()}`,
+    marginBottom:10,
+    minHeight:160,
+  }
+
   return (
     <Box display="flex" justifyContent="center" alignItems="center"
-    style={{width:"100%", minHeight:100, backgroundColor:"#F8CECE", border:"1px dashed black"}}
+    style={{...currentBlackWhite, ...thisAreaBackground, borderRadius:10}}
     className="area"
     onDrop={event => dropFunction(event, 'drop')}
     onDragOver={event => dragOverFunction(event, 'dragOver')}

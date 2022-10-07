@@ -17,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class NFTServiceImpl implements NFTService {
@@ -34,7 +36,7 @@ public class NFTServiceImpl implements NFTService {
     @Autowired
     private AwsS3Service awsS3Service;
 
-    private final String gatewayURL = "https://gateway.pinata.cloud/ipfs/";
+    private final String gatewayURL = "https://ipfs.io/ipfs/";
 
     @Override
     public Nft findById(int id) {
@@ -42,15 +44,15 @@ public class NFTServiceImpl implements NFTService {
     }
 
     @Override
-    public Nft findBycontractAddress(String contract_address) {
+    public List<Nft> findBycontractAddress(String contract_address) {
         return nftRepository.findByContractAddress(contract_address);
     }
 
     @Override
     public void modifyNftOwner(SaleResultDto saleResultDto) {
-        int nftId = saleResultDto.getNftId();
+        String nftHash = saleResultDto.getNftHash();
         String buyerWallerAddress = saleResultDto.getBuyerWalletAddress();
-        Nft nft = nftRepository.findById(nftId);
+        Nft nft = nftRepository.findByNftHash(nftHash).get(0);
         nft.setOwner(userService.findByUserWalletAddress(buyerWallerAddress));
         nftRepository.save(nft);
     }
@@ -112,6 +114,7 @@ public class NFTServiceImpl implements NFTService {
         Nft nft = Nft.builder()
                 .creator(user)
                 .owner(user)
+                .tokenId(dto.getTokenId())
                 .contractAddress(dto.getContractAddress())
                 .nftHash(dto.getTxHash())
                 .nftTitle(dto.getNftTitle())
@@ -128,26 +131,38 @@ public class NFTServiceImpl implements NFTService {
 
     @Override
     @Transactional
-    public void updatePossessed(int nftId) {
-        Nft nft = nftRepository.findById(nftId);
-        if(nft == null){
+    public void updatePossessed(String nftAddress) {
+        List<Nft> nft = nftRepository.findByNftHash(nftAddress);
+        if(nft == null || nft.isEmpty()){
             throw new IllegalArgumentException("No such NFT");
         }
 
-        nft.setSale(false);
-        nft.setPrice(null);
+        nft.get(0).setSale(false);
+        nft.get(0).setPrice(null);
     }
 
     @Override
     @Transactional
-    public void updateOnSale(int nftId, String price) {
-        Nft nft = nftRepository.findById(nftId);
-        if(nft == null){
+    public void updateOnSale(String nftAddress, String price) {
+        List<Nft> nft = nftRepository.findByNftHash(nftAddress);
+        if(nft == null || nft.isEmpty()){
             throw new IllegalArgumentException("No such NFT");
         }
 
-        nft.setSale(true);
-        nft.setPrice(price);
+        nft.get(0).setSale(true);
+        nft.get(0).setPrice(price);
+    }
+
+    @Override
+    public NFTDto getNFTDto(String nft_address) {
+        //결과는 하나겠지만 편의상 List로 반환 받음
+        List<Nft> nftList = nftRepository.findByNftHash(nft_address);
+        if(nftList == null || nftList.isEmpty()){
+            throw new IllegalArgumentException("No such NFT");
+        }
+
+        List<NFTDto> dtoList = makeNFTDtoList(nftList);
+        return dtoList.get(0);
     }
 
     @Override
@@ -199,6 +214,16 @@ public class NFTServiceImpl implements NFTService {
         return makeNFTDtoList(nftList);
     }
 
+    @Override
+    public String getOwnerAddress(String nftHash) {
+        List<Nft> nftList = nftRepository.findByNftHash(nftHash);
+        if(nftList == null || nftList.isEmpty()){
+            throw new IllegalArgumentException("No such NFT");
+        }
+
+        return userRepository.findOwnerAddressByNftHash(nftList.get(0).getNftHash());
+    }
+
     private List<NFTDto> makeNFTDtoList(List<Nft> nftList){
         List<NFTDto> dtoList = new ArrayList<>();
         for(Nft nft : nftList){
@@ -222,6 +247,8 @@ public class NFTServiceImpl implements NFTService {
     private NFTDto buildNFTDto(Nft nft, List<String> tagList, String lastPrice, int likes){
         return NFTDto.builder()
                 .imgUrl(nft.getImageUrl())
+                .tokenId(nft.getTokenId())
+                .nftAddress(nft.getNftHash())
                 .nftTitle(nft.getNftTitle())
                 .nftPrice(nft.getPrice())
                 .nftCreatorNickname(nft.getCreator().getUserNickname())
@@ -229,6 +256,13 @@ public class NFTServiceImpl implements NFTService {
                 .nftOwnerNickname(nft.getOwner().getUserNickname())
                 .nftTags(tagList)
                 .nftLike(likes)
+                .nftDescription(nft.getNftDescription())
+                .isSale(nft.isSale())
                 .build();
+    }
+
+    @Override
+    public Nft findByNFTHash(String nftHash) {
+        return nftRepository.findByNftHash(nftHash).get(0);
     }
 }

@@ -28,11 +28,11 @@ public class userLikeServiceImpl implements UserLikeService{
         int userId = user.getId();
 
         // nftId로 nft정보 가져오기
-        int nftId = like.getNftId();
-        Nft nft = nftService.findById(nftId);
+        String nftHash = like.getNftHash();
+        Nft nft = nftService.findByNFTHash(nftHash);
 
         //좋아요 누르기
-        UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nftId).orElse(null);
+        UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nft.getId()).orElse(null);
         // userLike가 null값이면 행을 만들어주고
         if(userLike == null){
             userLike = UserLike.builder()
@@ -46,5 +46,34 @@ public class userLikeServiceImpl implements UserLikeService{
             userLike.setCancel(!userLike.isCancel());
         }
         userLikeRepository.save(userLike);
+    }
+
+    @Transactional
+    @Override
+    public boolean isLike(LikeDto like) {
+        // userWalletAddress로 user정보 가져오기
+        String userWalletAddress = like.getUserWalletAddress();
+        User user = userService.findByUserWalletAddress(userWalletAddress);
+        int userId = user.getId();
+
+        // nftId로 nft정보 가져오기
+        String nftHash = like.getNftHash();
+        Nft nft = nftService.findByNFTHash(nftHash);
+
+        //좋아요 확인하기
+        UserLike userLike = userLikeRepository.findByUserAndNftId(userId, nft.getId()).orElse(null);
+        boolean flag;
+        // userLike가 null값이면 행을 만들어주고
+        if(userLike == null){
+            flag = false;
+        }else{
+            if(userLike.isCancel()){
+                flag = false;
+            }
+            else{
+                flag = true;
+            }
+        }
+        return flag;
     }
 }

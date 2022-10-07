@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @Api(value = "게임로그 API", tags = {"GameLog"})
 @RequiredArgsConstructor
@@ -30,7 +32,8 @@ public class GamelogController {
 
     @ApiOperation(value = "게임로그 생성 및 반환")
     @PostMapping(value = "")
-    public ResponseEntity<GameDto> create(@RequestBody String userWalletAddress){
+    public ResponseEntity<GameDto> create(@RequestBody Map<String, String> map){
+        String userWalletAddress = map.get("userWalletAddress");
         log.info("# Create game, player : " + userWalletAddress);
         int gameId = gamelogService.createGamelog(userWalletAddress);
         Gamelog thisGamelog= gamelogService.findGamelogByid(gameId);

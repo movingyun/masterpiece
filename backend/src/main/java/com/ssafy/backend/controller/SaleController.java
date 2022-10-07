@@ -39,9 +39,9 @@ public class SaleController {
 
     @ApiOperation(value = "판매log 조회", notes = "판매 기록 조회")
     @GetMapping
-    public ResponseEntity<List<SalelogDto>> getSaleLog(@RequestParam(value = "nftAddress") String nftAddress) {
+    public ResponseEntity<List<SalelogDto>> getSaleLog(@RequestParam(value = "nftHash") String nftHash) {
         //판매 기록 가져오기
-        List<SalelogDto> saleLogs = saleServcie.getSaleLog(nftAddress);
+        List<SalelogDto> saleLogs = saleServcie.getSaleLog(nftHash);
         return new ResponseEntity<>(saleLogs, HttpStatus.OK);
     }
 

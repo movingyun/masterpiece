@@ -35,6 +35,9 @@ public class Nft {
     @JoinColumn(name="ownerId")
     private User owner;
 
+    @Column(name = "tokenId")
+    private Integer tokenId;
+
     @Column(name = "contractAddress", length = 50)
     private String contractAddress;
 

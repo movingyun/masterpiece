@@ -12,5 +12,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LikeDto {
     private String userWalletAddress;
-    private int nftId;
+    private String nftHash;
 }

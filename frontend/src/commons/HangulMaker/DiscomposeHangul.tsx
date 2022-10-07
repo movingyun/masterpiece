@@ -1,6 +1,25 @@
 import React from "react";
 import { EnumConsonantOrder, EnumVowelOrder, EnumFtoL } from '../../_hook/HangulMakerHook';
 
+// 문장 분리 후 자모음 반환
+export function DiscomposeSentence(sentence:string):string[] {
+  // console.log(sentence);
+  const list: string[] = [];
+  for (let i = 0; i < sentence.length;i++){
+    const fml: number[] = DiscomposeHangul(sentence.charAt(i));
+    if (fml[0]>=0) {
+      list.push(EnumConsonantOrder[fml[0]]);
+    }
+    if (fml[1]>=0) {
+      list.push(EnumVowelOrder[fml[1]]);
+    }
+    if (fml[2]>0) {
+      list.push(EnumConsonantOrder[fml[2]-1]);
+    }
+  }
+  return list;
+}
+// 1개음절의 unicode 반환
 export default function DiscomposeHangul(syllable:string):number[]{
 
   const syllableUnicode:number = syllable.charCodeAt(0);
@@ -13,12 +32,12 @@ export default function DiscomposeHangul(syllable:string):number[]{
       payload = {
         index: EnumVowelOrder[syllable as keyof typeof EnumVowelOrder],
       };
-      return [-1, EnumVowelOrder[syllable as keyof typeof EnumVowelOrder], 0];  // 모음
+      return [-1, EnumVowelOrder[syllable as keyof typeof EnumVowelOrder], -1];  // 모음
     }
     payload = {
       index: EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder],
     };
-    return [EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder], -1, 0];  // 자음
+    return [EnumConsonantOrder[syllable as keyof typeof EnumConsonantOrder], -1, -1];  // 자음
   }
   // console.log('ㅏ'.charCodeAt(0), 'ㅐ'.charCodeAt(0), 'ㅑ'.charCodeAt(0), 'ㅒ'.charCodeAt(0),
   // 'ㅓ'.charCodeAt(0), 'ㅔ'.charCodeAt(0), 'ㅕ'.charCodeAt(0), 'ㅖ'.charCodeAt(0), 'ㅗ'.charCodeAt(0),

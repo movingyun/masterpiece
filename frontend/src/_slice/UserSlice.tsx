@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import api from '../api/api';
+import { NFT } from './NFTSlice';
 
 const signin: any = createAsyncThunk('signin', async (payload, { rejectWithValue }) => {
   try {
@@ -10,17 +11,81 @@ const signin: any = createAsyncThunk('signin', async (payload, { rejectWithValue
     return rejectWithValue(err.response.data);
   }
 });
+
 const fetchUser: any = createAsyncThunk('fetchUser', async (walletAddress: String, { rejectWithValue }) => {
   try {
     const res: any = await axios.get(api.fetchUser(walletAddress));
+    console.log(res.data);
     return res.data;
   } catch (err: any) {
     return rejectWithValue(err.response.data);
   }
 });
+
 const fetchInventory: any = createAsyncThunk('fetchInventory', async (walletAddress: String, { rejectWithValue }) => {
   try {
     const res: any = await axios.get(api.fetchInventory(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+const fetchCollected: any = createAsyncThunk('fetchCollected', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchCollected(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+const fetchCreated: any = createAsyncThunk('fetchCreated', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchCreated(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+const fetchFavorite: any = createAsyncThunk('fetchFavorite', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchFavorite(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+const fetchOnsale: any = createAsyncThunk('fetchOnsale', async (walletAddress: String, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchOnsale(walletAddress), {});
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+const editUser: any = createAsyncThunk('editUser', async (payload, { rejectWithValue }) => {
+  try {
+    console.log(payload);
+    const res: any = await axios.put(api.editUser(), payload, { headers: { 'Content-Type': 'multipart/form-data' } });
+    console.log(res.data);
+    return res.data;
+  } catch (err: any) {
+    return rejectWithValue(err.response.data);
+  }
+});
+
+const fetchTicket: any = createAsyncThunk('fetchTicket', async (walletAddress: string, { rejectWithValue }) => {
+  try {
+    const res: any = await axios.get(api.fetchTicket(walletAddress), {});
     console.log(res.data);
     return res.data;
   } catch (err: any) {
@@ -46,7 +111,7 @@ export interface UserState {
     message: String;
     joinDate: String;
     ticket_count: Number;
-    imgUrl: String;
+    profileImage: String;
   };
   searchedUser: {
     wallet_address: String;
@@ -54,10 +119,15 @@ export interface UserState {
     message: String;
     joinDate: String;
     ticket_count: Number;
-    imgUrl: String;
+    profileImage: String;
   };
   isLogin: Boolean;
   inventory: Inventory;
+  collected: Array<NFT>;
+  created: Array<NFT>;
+  favorite: Array<NFT>;
+  onsale: Array<NFT>;
+  ticket: Number;
 }
 
 const initialState: UserState = {
@@ -67,7 +137,7 @@ const initialState: UserState = {
     message: '',
     joinDate: '',
     ticket_count: 0,
-    imgUrl: '',
+    profileImage: '',
   },
   searchedUser: {
     wallet_address: '',
@@ -75,13 +145,18 @@ const initialState: UserState = {
     message: '',
     joinDate: '',
     ticket_count: 0,
-    imgUrl: '',
+    profileImage: '',
   },
   isLogin: false,
   inventory: {
     consonant: [],
     vowe: [],
   },
+  collected: [],
+  created: [],
+  favorite: [],
+  onsale: [],
+  ticket: 0,
 };
 
 export const UserSlice = createSlice({
@@ -109,7 +184,7 @@ export const UserSlice = createSlice({
         message: '',
         joinDate: '',
         ticket_count: 0,
-        imgUrl: '',
+        profileImage: '',
       };
       window.localStorage.removeItem('currentUser');
       state.isLogin = false;
@@ -130,10 +205,35 @@ export const UserSlice = createSlice({
     [fetchInventory.fulfilled]: (state, action) => {
       state.inventory = action.payload;
     },
+    [fetchCollected.fulfilled]: (state, action) => {
+      state.collected = action.payload;
+    },
+    [fetchCreated.fulfilled]: (state, action) => {
+      state.created = action.payload;
+    },
+    [fetchFavorite.fulfilled]: (state, action) => {
+      state.favorite = action.payload;
+    },
+    [fetchOnsale.fulfilled]: (state, action) => {
+      state.onsale = action.payload;
+    },
+    [fetchTicket.fulfilled]: (state, action) => {
+      state.ticket = action.payload.quantity;
+    },
   },
 });
 
-export { signin, fetchUser, fetchInventory };
+export {
+  signin,
+  fetchUser,
+  fetchInventory,
+  fetchCollected,
+  fetchCreated,
+  fetchFavorite,
+  fetchOnsale,
+  editUser,
+  fetchTicket,
+};
 
 export const { getCurrentUser, checkLogin, logout } = UserSlice.actions;
 

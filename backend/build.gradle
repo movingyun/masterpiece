@@ -29,7 +29,12 @@ dependencies {
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
-	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE' // s3
+	implementation 'org.jsoup:jsoup:1.15.3' // jsoup - 크롤링
+
+	// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+	implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.4.0'
+
 }
 
 tasks.named('test') {

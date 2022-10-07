@@ -1,6 +1,9 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import HangulReducer from '../_slice/HangulSlice';
 import UserReducer from '../_slice/UserSlice';
+import NFTReducer from '../_slice/NFTSlice';
+import SaleReducer from '../_slice/SaleSlice';
+import GameReducer from '../_slice/GameSlice';
 import { selectTab, selectFirst, selectMiddle, selectLast } from '../_slice/HangulMakerSlice';
 import {
   dragValue,
@@ -11,6 +14,8 @@ import {
   consonantCount,
   vowelCount,
 } from '../_slice/ComposeHangulSlice';
+import DecoReducer from '../_slice/DecorateHangulSlice';
+import CreateNFTReducer from '../_slice/CreateNFTSlice';
 
 // 초성중성종성 리스트
 export const hangulFirst: string[] = [
@@ -121,6 +126,38 @@ export enum ConsonantOrder {
   'ㅃ',
   'ㅉ',
 }
+export enum ConsonantOrder2 {
+  'ㄱ',
+  'ㄲ',
+  'ㄳ',
+  'ㄴ',
+  'ㄵ',
+  'ㄶ',
+  'ㄷ',
+  'ㄸ',
+  'ㄹ',
+  'ㄺ',
+  'ㄻ',
+  'ㄼ',
+  'ㄽ',
+  'ㄾ',
+  'ㄿ',
+  'ㅀ',
+  'ㅁ',
+  'ㅂ',
+  'ㅄ',
+  'ㅃ',
+  'ㅅ',
+  'ㅆ',
+  'ㅇ',
+  'ㅈ',
+  'ㅉ',
+  'ㅊ',
+  'ㅋ',
+  'ㅌ',
+  'ㅍ',
+  'ㅎ',
+}
 export enum VowelOrder {
   'ㅏ',
   'ㅐ',
@@ -176,7 +213,12 @@ export enum HangulComposeArea {
 const store = configureStore({
   reducer: {
     user: UserReducer,
+    deco: DecoReducer,
+    createNFT: CreateNFTReducer,
     hangul: HangulReducer,
+    nft: NFTReducer,
+    sale: SaleReducer,
+    game: GameReducer,
 
     tab: selectTab.reducer, // 한글제작 초/중/종성 선택
     first: selectFirst.reducer, // 한글제작 초성
@@ -186,8 +228,8 @@ const store = configureStore({
     dragValue: dragValue.reducer, // 드래그중인 값
     areaIndex: areaIndex.reducer, // 드래그중인 값
     elementIndex: elementIndex.reducer, // 드래그중인 값
-    areaSyllable: areaSyllable.reducer, // 한글합성
-    areaSentence: areaSentence.reducer, // 한글합성
+    areaSyllable: areaSyllable.reducer, // 한글합성 음절목록
+    areaSentence: areaSentence.reducer, // 한글합성 문장목록
 
     consonantCount: consonantCount.reducer, // 자음보유개수
     vowelCount: vowelCount.reducer, // 모음보유개수

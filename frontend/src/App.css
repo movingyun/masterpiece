@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600;700&family=Poppins:wght@500;600;700;800;900&display=swap');
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+@font-face {
+  font-family: 'BlackHanSans';
+  src: url('./fonts/BlackHanSans.ttf');
+}
+@font-face {
+  font-family: 'BMEuljiro';
+  src: url('./fonts/BMEuljiro.ttf');
+}
+@font-face {
+  font-family: 'GabiaBombaram';
+  src: url('./fonts/GabiaBombaram.ttf');
+}
+@font-face {
+  font-family: 'HSBombaram';
+  src: url('./fonts/HSBombaram.ttf');
+}
+@font-face {
+  font-family: 'HSGooltokki';
+  src: url('./fonts/HSGooltokki.ttf');
+}
+@font-face {
+  font-family: 'MapoHongdaeFreedom';
+  src: url('./fonts/MapoHongdaeFreedom.ttf');
+}
+@font-face {
+  font-family: 'SangjuGotgam';
+  src: url('./fonts/SangjuGotgam.ttf');
+}
+@font-face {
+  font-family: 'SuseongBatang';
+  src: url('./fonts/SuseongBatang.ttf');
+}
+@font-face {
+  font-family: 'ClassicB';
+  src: url('./fonts/국립박물관문화재단클래식.ttf');
+}
+@font-face {
+  font-family: 'DolBomB';
+  src: url('./fonts/문화재돌봄체.ttf');
+}
+@font-face {
+  font-family: 'GwangJu';
+  src: url('./fonts/빛고을광주.ttf');
+}
+@font-face {
+  font-family: 'Namsan';
+  src: url('./fonts/서울남산.ttf');
+}
+@font-face {
+  font-family: 'Hangang';
+  src: url('./fonts/서울한강.ttf');
+}
+@font-face {
+  font-family: 'Yanolja';
+  src: url('./fonts/야놀자야체.ttf');
+}
+@font-face {
+  font-family: 'JSArirangPPURI';
+  src: url('./fonts/JSArirangPPURI.ttf');
+}
+@font-face {
+  font-family: 'KCCAhnjunggeun';
+  src: url('./fonts/KCCAhnjunggeun.ttf');
+}
+@font-face {
+  font-family: 'DanGam';
+  src: url('./fonts/창원단감아삭체.ttf');
+}
+@font-face {
+  font-family: 'Jikji';
+  src: url('./fonts/충북대직지체.ttf');
+}
+@font-face {
+  font-family: 'HanDoetEum';
+  src: url('./fonts/한수원한돋움.ttf');
+}
+@font-face {
+  font-family: 'Goheung';
+  src: url('./fonts/행복고흥.ttf');
+}

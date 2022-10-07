@@ -56,10 +56,16 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     @Override
     @Transactional
     public String uploadNFTImage(Nft nft, MultipartFile file) throws IllegalArgumentException{
-        String keyName = createKeyName(file.getOriginalFilename());
-        ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setContentLength(file.getSize());
-        objectMetadata.setContentType(file.getContentType());
+        String keyName = null;
+        ObjectMetadata objectMetadata = null;
+        try {
+            keyName = createKeyName(file.getOriginalFilename());
+            objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentLength(file.getSize());
+            objectMetadata.setContentType(file.getContentType());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
         try(InputStream inputStream = file.getInputStream()) {
             amazonS3Client.putObject(new PutObjectRequest(bucket, keyName, inputStream, objectMetadata)
@@ -88,7 +94,7 @@ public class AwsS3ServiceImpl implements AwsS3Service{
         try {
             //이미지 형식의 파일이 아니면 예외 발생
             String ext = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
-            if(ext.equals(".gif") || ext.equals(".jpg") || ext.equals(".png")) {
+            if(ext.equals(".gif") || ext.equals(".jpg") || ext.equals(".png") || ext.equals(".webm")) {
                 return ext;
             }
             return null;

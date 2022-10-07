@@ -1,13 +1,26 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Card, CardContent, Typography, Button } from '@mui/material';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import { useDispatch, useSelector } from 'react-redux';
 import tmpImg from '../../img/tmpImg.PNG';
+import consonantImg from '../../img/발성기관.PNG';
+import vowelImg from '../../img/천지인.PNG';
 import { pickConsonant, pickVowel } from '../../_slice/HangulSlice';
 import SimpleDialog from './SimpleDialog';
+import { fetchTicket } from '../../_slice/UserSlice';
+import { defaultBackground, selectTabButtonStyle, yellow } from '../../_css/ReactCSSProperties';
 
+const StyledContainer = styled.div`
+  margin: 20px 0 40px;
+`;
+const StyledTicket = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 const StyledFlex = styled.div`
   display: flex;
   justify-content: space-between;
@@ -18,31 +31,36 @@ export default function Draw() {
   const pickSuccess = useSelector((state: any) => state.hangul.pickSuccess);
   const pickResult = useSelector((state: any) => state.hangul.pickResult);
   const walletAddress = useSelector((state: any) => state.user.currentUser.wallet_address);
+  const ticket = useSelector((state: any) => state.user.ticket);
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (walletAddress) dispatch(fetchTicket(walletAddress));
+  }, [walletAddress, open]);
 
   useEffect(() => {
     if (pickSuccess) console.log(pickResult);
     else console.log('NO TICKETS');
   }, [pickSuccess]);
 
-  const handlePickConsonant = () => {
+  const handlePickConsonant = async () => {
     const payload = {
       quantity: 1,
       userWalletAddress: walletAddress,
     };
     if (walletAddress) {
-      dispatch(pickConsonant(payload));
+      await dispatch(pickConsonant(payload));
     }
     setOpen(true);
   };
 
-  const handlePickVowel = () => {
+  const handlePickVowel = async () => {
     const payload = {
       quantity: 1,
       userWalletAddress: walletAddress,
     };
     if (walletAddress) {
-      dispatch(pickVowel(payload));
+      await dispatch(pickVowel(payload));
     }
     setOpen(true);
   };
@@ -52,13 +70,15 @@ export default function Draw() {
   };
 
   return (
-    <>
+    <StyledContainer style={{marginTop:20, padding:20}}>
       <StyledFlex>
-        <div>Random Draw</div>
-        <div>
-          <span>Tickets</span>
-          <span>(?)</span>
-        </div>
+        <Typography gutterBottom variant="h4" component="div" sx={{ fontFamily: 'Poppins, san-serif' }}>
+          Random Draw
+        </Typography>
+        <StyledTicket>
+          <ConfirmationNumberIcon />
+          <div style={{ marginLeft: '5px' }}>Tickets : {ticket}</div>
+        </StyledTicket>
       </StyledFlex>
       <StyledFlex>
         {/* 자음 뽑기 */}
@@ -68,24 +88,24 @@ export default function Draw() {
               <CardMedia
                 component="img"
                 height="150"
-                image={tmpImg}
+                image={consonantImg}
                 alt="Consonant img"
                 sx={{ padding: '1em 1em 0 1em', objectFit: 'contain' }}
               />
               <div>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Consonant
+                  <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'Poppins, san-serif' }}>
+                    Consonants
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    자음에 대한 설명을 여기에 영어로 쭉쭉쭉 써주고 무슨 자음이 있는지도 같이 알려주면 좋을 것 같아요.
+                  <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Poppins, san-serif' }}>
+                    Based on five basic consonants modeled after the shape of the pronunciation organ (‘ㄱ’, ‘ㄴ’, ‘ㅁ’,
+                    ‘ㅅ’, ‘ㅇ’), these were created by adding strokes or overlapping the same consonants.
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" onClick={handlePickConsonant}>
+                  <Button size="small" onClick={handlePickConsonant} style={{...selectTabButtonStyle, border:"none"}}>
                     Draw
                   </Button>
-                  <Button size="small">View List</Button>
                 </CardActions>
               </div>
             </StyledFlex>
@@ -98,24 +118,24 @@ export default function Draw() {
               <CardMedia
                 component="img"
                 height="150"
-                image={tmpImg}
+                image={vowelImg}
                 alt="Consonant img"
                 sx={{ padding: '1em 1em 0 1em', objectFit: 'contain' }}
               />
               <div>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Vowel
+                  <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'Poppins, san-serif' }}>
+                    Vowels
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    모음에 대한 설명을 여기에 영어로 쭉쭉쭉 써주고 무슨 자음이 있는지도 같이 알려주면 좋을 것 같아요.
+                  <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Poppins, san-serif' }}>
+                    Vowel letters are based on sky, earth and man. ‘·’ symbolizes the round shape of the sky, ‘ㅡ’
+                    symbolizes the flat shape of the earth, and ‘ㅣ’ the shape of a person standing upright.
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" onClick={handlePickVowel}>
+                  <Button size="small" onClick={handlePickVowel} style={{...selectTabButtonStyle, border:"none"}}>
                     Draw
                   </Button>
-                  <Button size="small">View List</Button>
                 </CardActions>
               </div>
             </StyledFlex>
@@ -124,6 +144,6 @@ export default function Draw() {
       </StyledFlex>
       {/* 카드 뽑기 결과 Dialog */}
       <SimpleDialog pickSuccess={pickSuccess} pickResult={pickResult} open={open} onClose={handleClose} />
-    </>
+    </StyledContainer>
   );
 }
