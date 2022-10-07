@@ -16,10 +16,12 @@ import {
 } from '@mui/material';
 import SellIcon from '@mui/icons-material/Sell';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import SellFunction from './SellFunction';
 import spinner from '../../img/spinner.gif';
+import { fetchSaleHistory } from '../../_slice/SaleSlice';
+import { fetchNFTDetail, fetchNFTOwner } from '../../_slice/NFTSlice';
 
 const StyledWord = styled.div`
   font-size: 20px;
@@ -65,6 +67,7 @@ const spinnerStyle = {
 };
 
 export default function SellModal() {
+  const dispatch = useDispatch();
   const [end, setEnd] = React.useState(false);
   const [contract, setContract] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -76,6 +79,9 @@ export default function SellModal() {
   const [openLoading, setOpenLoading] = React.useState(false);
   const handleOpenLoading = () => setOpenLoading(true);
   const handleCloseLoading = () => {
+    dispatch(fetchSaleHistory(nftAddress));
+    dispatch(fetchNFTOwner(nftAddress));
+    dispatch(fetchNFTDetail(nftAddress));
     setOpenLoading(false);
     setOpen(false);
   };

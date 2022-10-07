@@ -23,13 +23,15 @@ import {
   FormControlLabel,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CategoryIcon from '@mui/icons-material/Category';
 import styled from 'styled-components';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import NFTPreview from '../../commons/NFTPreview';
 import BuyFunction from './BuyFunction';
 import spinner from '../../img/spinner.gif';
+import { fetchSaleHistory } from '../../_slice/SaleSlice';
+import { fetchNFTDetail, fetchNFTOwner } from '../../_slice/NFTSlice';
 
 const StyledCard = styled.div`
   display: flex;
@@ -117,6 +119,7 @@ const AccordionTitle = {
 };
 
 export default function BuyModal() {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -126,6 +129,9 @@ export default function BuyModal() {
   const [openLoading, setOpenLoading] = React.useState(false);
   const handleOpenLoading = () => setOpenLoading(true);
   const handleCloseLoading = () => {
+    dispatch(fetchSaleHistory(nftAddress));
+    dispatch(fetchNFTOwner(nftAddress));
+    dispatch(fetchNFTDetail(nftAddress));
     setOpenLoading(false);
     setOpen(false);
   };
